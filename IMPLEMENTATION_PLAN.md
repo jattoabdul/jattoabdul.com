@@ -9,13 +9,13 @@
 - [x] Move favicon.ico to public folder
 - [x] Setup env files (.env.development.local, .env.example)
 
-## 2. Project Structure & Configuration
-- [ ] Remove default Next.js boilerplate
-  - [ ] Clean up page.tsx
-  - [ ] Remove default globals.css content
-  - [ ] Clean up layout.tsx
-  - [ ] Remove unused metadata
-- [ ] Setup folder structure
+## 2. Project Structure & Configuration ⏳
+- [x] Remove default Next.js boilerplate
+  - [x] Clean up page.tsx
+  - [x] Remove default globals.css content
+  - [x] Clean up layout.tsx
+  - [x] Remove unused metadata
+- [x] Setup folder structure
   ```
   src/
   ├── app/
@@ -100,27 +100,31 @@
   - [ ] Cursor effects
 
 ## 6. Core Sections
-### About/Experience
+### About/Experience 🚧
 - [ ] Timeline component
 - [ ] Skill presentation
 - [ ] Animated reveals
 
-### Projects/Work
+### Projects/Work 🚧
 - [ ] Project grid
 - [ ] Card components
 - [ ] Filter system
 
-### Skills/Tech Stack
+### Skills/Tech Stack 🚧
 - [ ] Icon grid
 - [ ] Category organization
 - [ ] Hover interactions
 
-### Contact
-- [ ] Form design
-- [ ] Social links
-- [ ] Animation effects
+### Contents 🚧
+- [ ] Blog posts
+- [ ] Videos - Youtube Channels (jattoabul - tech and lifestyle, jasportstalk - sports shows and  podcast, kicksandkickschannel - sports shows and talks and vlog on only football and taekwondo)
 
-## 7. Interactive Features
+### Contact 🚧
+- [ ] Form design
+- [ ] Resume
+- [ ] Social links
+
+## 7. Interactive Features 🚧
 - [ ] Command menu (cmd+k)
   - [ ] Search functionality
   - [ ] Navigation shortcuts
@@ -134,7 +138,7 @@
   - [ ] Route changes
   - [ ] Loading states
 
-## 8. Polish & Optimization
+## 8. Polish & Optimization 🚧
 - [ ] Performance optimization
   - [ ] Image optimization
   - [ ] Code splitting
@@ -149,7 +153,7 @@
   - [ ] Mobile testing
   - [ ] Performance testing
 
-## Recording Segments
+## Recording Segments 🚧
 
 1. "Project Setup & Structure" (15-20 mins)
    - Removing boilerplate
