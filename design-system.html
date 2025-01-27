@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System Preview</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css">
+    <style>
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* Base */
+        body {
+            background: #121212;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Color Swatches */
+        .color-section {
+            margin: 2rem 0;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .color-swatch {
+            padding: 1rem;
+            border-radius: 8px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Clash Display', sans-serif;
+            margin: 2rem 0 1rem;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 700; }
+        h2 { font-size: 2rem; font-weight: 500; }
+        h3 { font-size: 1.5rem; font-weight: 400; }
+
+        /* Component Preview */
+        .component-preview {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #1A1A1A;
+            border-radius: 12px;
+        }
+
+        /* Gradient Examples */
+        .gradient-box {
+            height: 100px;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #E31B54;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #FF3366;
+        }
+
+        .btn-secondary {
+            background: #1A1A1A;
+            color: white;
+            border: 1px solid #E31B54;
+        }
+
+        .btn-secondary:hover {
+            background: #242424;
+        }
+
+        /* Card Example */
+        .card {
+            background: #242424;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Code Example */
+        .code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #1A1A1A;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        /* Spacing Example */
+        .spacing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .spacing-box {
+            background: #242424;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Design System Preview</h1>
+
+        <!-- Background Colors -->
+        <section class="color-section">
+            <h2>Background Colors</h2>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: #121212;">
+                    Obsidian<br>#121212
+                </div>
+                <div class="color-swatch" style="background: #1A1A1A;">
+                    Onyx<br>#1A1A1A
+                </div>
+                <div class="color-swatch" style="background: #242424;">
+                    Slate<br>#242424
+                </div>
+            </div>
+        </section>
+
+        <!-- Accent Colors -->
+        <section class="color-section">
+            <h2>Accent Colors</h2>
+            <h3>Ruby</h3>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: #E31B54;">
+                    Primary<br>#E31B54
+                </div>
+                <div class="color-swatch" style="background: #FF3366;">
+                    Light<br>#FF3366
+                </div>
+                <div class="color-swatch" style="background: #C41648;">
+                    Dark<br>#C41648
+                </div>
+            </div>
+
+            <h3>Sapphire</h3>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: #0066FF;">
+                    Primary<br>#0066FF
+                </div>
+                <div class="color-swatch" style="background: #3385FF;">
+                    Light<br>#3385FF
+                </div>
+                <div class="color-swatch" style="background: #0052CC;">
+                    Dark<br>#0052CC
+                </div>
+            </div>
+
+            <h3>Emerald</h3>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: #00CC88;">
+                    Primary<br>#00CC88
+                </div>
+                <div class="color-swatch" style="background: #00E69D;">
+                    Light<br>#00E69D
+                </div>
+                <div class="color-swatch" style="background: #00B377;">
+                    Dark<br>#00B377
+                </div>
+            </div>
+        </section>
+
+        <!-- Text Colors -->
+        <section class="color-section">
+            <h2>Text Colors</h2>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: #FFFFFF;">
+                    Primary<br>#FFFFFF
+                </div>
+                <div class="color-swatch" style="background: #E0E0E0;">
+                    Secondary<br>#E0E0E0
+                </div>
+                <div class="color-swatch" style="background: #A0A0A0;">
+                    Tertiary<br>#A0A0A0
+                </div>
+            </div>
+        </section>
+
+        <!-- Gradients -->
+        <section class="color-section">
+            <h2>Gradients</h2>
+            <div class="gradient-box" style="background: linear-gradient(145deg, #1A1A1A, #242424);">
+                Crystal Surface
+            </div>
+            <div class="gradient-box" style="background: linear-gradient(45deg, rgba(255,51,102,0.1), rgba(0,102,255,0.1));">
+                Gem Highlight
+            </div>
+            <div class="gradient-box" style="background: linear-gradient(180deg, #121212, #1A1A1A);">
+                Layer Transition
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section class="component-preview">
+            <h2>Typography</h2>
+            <div style="font-family: 'Clash Display';">
+                <h1>Heading 1 - Clash Display Bold</h1>
+                <h2>Heading 2 - Clash Display Medium</h2>
+                <h3>Heading 3 - Clash Display Regular</h3>
+            </div>
+            <div style="font-family: 'Inter';">
+                <p style="font-weight: 400;">Body Regular - Inter 400</p>
+                <p style="font-weight: 500;">Body Medium - Inter 500</p>
+                <p style="font-weight: 300;">Body Light - Inter 300</p>
+            </div>
+            <div class="code">
+                // JetBrains Mono - Code
+                const example = "Hello World";
+            </div>
+        </section>
+
+        <!-- Components -->
+        <section class="component-preview">
+            <h2>Components</h2>
+            
+            <h3>Buttons</h3>
+            <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-secondary">Secondary Button</button>
+            </div>
+
+            <h3>Card</h3>
+            <div class="card">
+                <h3>Card Title</h3>
+                <p>Card content goes here. This is an example of our card component with hover effect.</p>
+            </div>
+        </section>
+
+        <!-- Spacing -->
+        <section class="component-preview">
+            <h2>Spacing System</h2>
+            <div class="spacing-grid">
+                <div class="spacing-box" style="height: 4px;">xs - 4px</div>
+                <div class="spacing-box" style="height: 8px;">sm - 8px</div>
+                <div class="spacing-box" style="height: 16px;">md - 16px</div>
+                <div class="spacing-box" style="height: 24px;">lg - 24px</div>
+                <div class="spacing-box" style="height: 32px;">xl - 32px</div>
+                <div class="spacing-box" style="height: 48px;">2xl - 48px</div>
+                <div class="spacing-box" style="height: 64px;">3xl - 64px</div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
