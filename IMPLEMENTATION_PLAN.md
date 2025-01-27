@@ -91,7 +91,50 @@
 - [ ] Text animations
   - [ ] Main title reveal
   - [ ] Subtitle animations
-  - [ ] Tech stack display
+- [ ] Tech Stack Crystal Showcase
+  - [ ] Crystal Container Component
+    * Distinct section with custom background
+    * Responsive grid for crystal placement
+    * Mouse tracking for section-wide effects
+  - [ ] Individual Language Crystals
+    * Ruby Crystal
+      - Gem logo centered
+      - Ruby-colored gradients
+      - Tooltip with "Ruby"
+      - Hover/drag interactions
+    * Go Crystal
+      - Go gopher logo centered
+      - Blue-tinted crystal
+      - Tooltip with "Go"
+      - Matching interactions
+    * JavaScript Crystal
+      - JS logo centered
+      - Yellow/amber crystal
+      - Tooltip with "JavaScript"
+      - Consistent animations
+    * PHP Crystal
+      - PHP logo centered
+      - Purple/blue crystal
+      - Tooltip with "PHP"
+      - Unified interaction style
+  - [ ] Crystal Effects (2D First Approach)
+    * CSS clip-path for crystal shapes
+    * Gradient overlays for shine
+    * GSAP animations for:
+      - Floating effect
+      - Rotation on hover
+      - Mouse movement reaction
+      - Smooth transitions
+    * Tooltip system
+    * Touch-friendly interactions
+  - [ ] 3D Enhancement (Future Improvement)
+    * Three.js crystal meshes
+    * Advanced lighting
+    * Real 3D rotation
+    * Performance-based fallback
+- [ ] Interactive elements
+  - [ ] Hover states
+  - [ ] Cursor effects
 - [ ] Geometric elements
   - [ ] Crystal shapes
   - [ ] Background effects
