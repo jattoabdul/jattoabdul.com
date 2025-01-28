@@ -288,7 +288,7 @@
 
 ## Next Steps:
 
-1. Add custom fonts (Clash Display, Inter, JetBrains Mono)
+1. Add custom fonts (Outfit/General Sans as main + Plus Jakarta Sans as secondary)
 2. Create base component library
-3. Implement dark mode toggle
+3. Implement setting dark mode as default theme for now
 4. Start layout implementation
