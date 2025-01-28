@@ -14,22 +14,49 @@ export default {
 
         // Gem colors
         ruby: {
+          '50': 'hsl(var(--ruby-50))',
+          '100': 'hsl(var(--ruby-100))',
+          '200': 'hsl(var(--ruby-200))',
+          '300': 'hsl(var(--ruby-300))',
+          '400': 'hsl(var(--ruby-400))',
+          '500': 'hsl(var(--ruby-500))',
+          '600': 'hsl(var(--ruby-600))',
+          '700': 'hsl(var(--ruby-700))',
+          '800': 'hsl(var(--ruby-800))',
+          '900': 'hsl(var(--ruby-900))',
+          '950': 'hsl(var(--ruby-950))',
           DEFAULT: 'hsl(var(--ruby))',
-          light: 'hsl(var(--ruby-light))',
-          dark: 'hsl(var(--ruby-dark))',
           foreground: 'hsl(var(--ruby-foreground))',
         },
         sapphire: {
+          '50': 'hsl(var(--sapphire-50))',
+          '100': 'hsl(var(--sapphire-100))',
+          '200': 'hsl(var(--sapphire-200))',
+          '300': 'hsl(var(--sapphire-300))',
+          '400': 'hsl(var(--sapphire-400))',
+          '500': 'hsl(var(--sapphire-500))',
+          '600': 'hsl(var(--sapphire-600))',
+          '700': 'hsl(var(--sapphire-700))',
+          '800': 'hsl(var(--sapphire-800))',
+          '900': 'hsl(var(--sapphire-900))',
+          '950': 'hsl(var(--sapphire-950))',
           DEFAULT: 'hsl(var(--sapphire))',
-          light: 'hsl(var(--sapphire-light))',
-          dark: 'hsl(var(--sapphire-dark))',
           foreground: 'hsl(var(--sapphire-foreground))',
         },
-        emerald: {
-          DEFAULT: 'hsl(var(--emerald))',
-          light: 'hsl(var(--emerald-light))',
-          dark: 'hsl(var(--emerald-dark))',
-          foreground: 'hsl(var(--emerald-foreground))',
+        jade: {
+          '50': 'hsl(var(--jade-50))',
+          '100': 'hsl(var(--jade-100))',
+          '200': 'hsl(var(--jade-200))',
+          '300': 'hsl(var(--jade-300))',
+          '400': 'hsl(var(--jade-400))',
+          '500': 'hsl(var(--jade-500))',
+          '600': 'hsl(var(--jade-600))',
+          '700': 'hsl(var(--jade-700))',
+          '800': 'hsl(var(--jade-800))',
+          '900': 'hsl(var(--jade-900))',
+          '950': 'hsl(var(--jade-950))',
+          DEFAULT: 'hsl(var(--jade))',
+          foreground: 'hsl(var(--jade-foreground))',
         },
 
         // UI Component colors
@@ -49,13 +76,13 @@ export default {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
         },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
@@ -66,15 +93,6 @@ export default {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-
-        // Chart colors
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))',
-        },
       },
       borderRadius: {
         lg: 'var(--radius)',

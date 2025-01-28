@@ -4,7 +4,7 @@
 
 @layer base {
     :root {
-        /* Light theme colors (for future use) */
+        /* Base Colors */
         --background: 0 0% 100%;
         --foreground: 0 0% 7%;
 
@@ -14,30 +14,57 @@
         --popover: 0 0% 96%;
         --popover-foreground: 0 0% 7%;
 
-        /* Gem Colors */
+        /* Gem Colors - Consistent across themes */
         --ruby: 344 81% 50%;
-        --ruby-light: 348 100% 60%;
-        --ruby-dark: 344 79% 43%;
+        --ruby-50: 344 81% 97%;
+        --ruby-100: 344 81% 95%;
+        --ruby-200: 344 81% 90%;
+        --ruby-300: 344 81% 85%;
+        --ruby-400: 344 81% 80%;
+        --ruby-500: 344 81% 50%;
+        --ruby-600: 344 81% 45%;
+        --ruby-700: 344 81% 40%;
+        --ruby-800: 344 81% 35%;
+        --ruby-900: 344 81% 30%;
+        --ruby-950: 344 81% 25%;
         --ruby-foreground: 0 0% 100%;
 
         --sapphire: 217 100% 50%;
-        --sapphire-light: 217 100% 60%;
-        --sapphire-dark: 217 100% 40%;
+        --sapphire-50: 217 100% 97%;
+        --sapphire-100: 217 100% 95%;
+        --sapphire-200: 217 100% 90%;
+        --sapphire-300: 217 100% 85%;
+        --sapphire-400: 217 100% 80%;
+        --sapphire-500: 217 100% 50%;
+        --sapphire-600: 217 100% 45%;
+        --sapphire-700: 217 100% 40%;
+        --sapphire-800: 217 100% 35%;
+        --sapphire-900: 217 100% 30%;
+        --sapphire-950: 217 100% 25%;
         --sapphire-foreground: 0 0% 100%;
 
-        --emerald: 160 100% 40%;
-        --emerald-light: 160 100% 45%;
-        --emerald-dark: 160 100% 35%;
-        --emerald-foreground: 0 0% 100%;
+        --jade: 160 100% 40%;
+        --jade-50: 160 100% 97%;
+        --jade-100: 160 100% 95%;
+        --jade-200: 160 100% 90%;
+        --jade-300: 160 100% 85%;
+        --jade-400: 160 100% 80%;
+        --jade-500: 160 100% 40%;
+        --jade-600: 160 100% 35%;
+        --jade-700: 160 100% 30%;
+        --jade-800: 160 100% 25%;
+        --jade-900: 160 100% 20%;
+        --jade-950: 160 100% 15%;
+        --jade-foreground: 0 0% 100%;
 
-        /* UI Colors */
-        --primary: 344 81% 50%;
+        /* Light Theme UI Colors */
+        --primary: var(--ruby);
         --primary-foreground: 0 0% 100%;
 
-        --secondary: 217 100% 50%;
+        --secondary: var(--sapphire);
         --secondary-foreground: 0 0% 100%;
 
-        --accent: 160 100% 40%;
+        --accent: var(--jade);
         --accent-foreground: 0 0% 100%;
 
         --muted: 0 0% 96%;
@@ -46,56 +73,33 @@
         --destructive: 0 84% 60%;
         --destructive-foreground: 0 0% 100%;
 
-        /* Border and Input Colors */
+        /* Light Theme Border and Input Colors */
         --border: 0 0% 89%;
         --input: 0 0% 89%;
-        --ring: 344 81% 50%;
-
-        /* Chart Colors */
-        --chart-1: 344 81% 50%;
-        --chart-2: 217 100% 50%;
-        --chart-3: 160 100% 40%;
-        --chart-4: 348 100% 60%;
-        --chart-5: 217 100% 60%;
+        --ring: var(--ruby);
 
         --radius: 0.5rem;
     }
 
     .dark {
-        /* Dark theme colors (current default) */
-        --background: 0 0% 7%; /* #121212 */
+        /* Dark Theme Base Colors */
+        --background: 0 0% 7%;
         --foreground: 0 0% 100%;
 
-        --card: 0 0% 10%; /* #1A1A1A */
+        --card: 0 0% 10%;
         --card-foreground: 0 0% 100%;
 
-        --popover: 0 0% 14%; /* #242424 */
+        --popover: 0 0% 14%;
         --popover-foreground: 0 0% 100%;
 
-        /* Gem Colors */
-        --ruby: 344 81% 50%; /* #E31B54 */
-        --ruby-light: 348 100% 60%; /* #FF3366 */
-        --ruby-dark: 344 79% 43%; /* #C41648 */
-        --ruby-foreground: 0 0% 100%;
-
-        --sapphire: 217 100% 50%; /* #0066FF */
-        --sapphire-light: 217 100% 60%; /* #3385FF */
-        --sapphire-dark: 217 100% 40%; /* #0052CC */
-        --sapphire-foreground: 0 0% 100%;
-
-        --emerald: 160 100% 40%; /* #00CC88 */
-        --emerald-light: 160 100% 45%; /* #00E69D */
-        --emerald-dark: 160 100% 35%; /* #00B377 */
-        --emerald-foreground: 0 0% 100%;
-
-        /* UI Colors */
-        --primary: 344 81% 50%;
+        /* Dark Theme UI Colors - Using same gem colors */
+        --primary: var(--ruby);
         --primary-foreground: 0 0% 100%;
 
-        --secondary: 217 100% 50%;
+        --secondary: var(--sapphire);
         --secondary-foreground: 0 0% 100%;
 
-        --accent: 160 100% 40%;
+        --accent: var(--jade);
         --accent-foreground: 0 0% 100%;
 
         --muted: 0 0% 14%;
@@ -104,17 +108,10 @@
         --destructive: 0 84% 60%;
         --destructive-foreground: 0 0% 100%;
 
-        /* Border and Input Colors */
+        /* Dark Theme Border and Input Colors */
         --border: 0 0% 14%;
         --input: 0 0% 14%;
-        --ring: 344 81% 50%;
-
-        /* Chart Colors */
-        --chart-1: 344 81% 50%; /* Ruby */
-        --chart-2: 217 100% 50%; /* Sapphire */
-        --chart-3: 160 100% 40%; /* Emerald */
-        --chart-4: 348 100% 60%; /* Ruby Light */
-        --chart-5: 217 100% 60%; /* Sapphire Light */
+        --ring: var(--ruby);
     }
 }
 
