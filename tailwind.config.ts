@@ -3,13 +3,36 @@ import animate from 'tailwindcss-animate';
 
 export default {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
-  darkMode: ['class'], // Enable dark mode by default
+  darkMode: ['class'],
   safelist: ['dark'],
   theme: {
     extend: {
       colors: {
+        // Base system colors
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        
+        // Gem colors
+        ruby: {
+          DEFAULT: 'hsl(var(--ruby))',
+          light: 'hsl(var(--ruby-light))',
+          dark: 'hsl(var(--ruby-dark))',
+          foreground: 'hsl(var(--ruby-foreground))',
+        },
+        sapphire: {
+          DEFAULT: 'hsl(var(--sapphire))',
+          light: 'hsl(var(--sapphire-light))',
+          dark: 'hsl(var(--sapphire-dark))',
+          foreground: 'hsl(var(--sapphire-foreground))',
+        },
+        emerald: {
+          DEFAULT: 'hsl(var(--emerald))',
+          light: 'hsl(var(--emerald-light))',
+          dark: 'hsl(var(--emerald-dark))',
+          foreground: 'hsl(var(--emerald-foreground))',
+        },
+
+        // UI Component colors
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
@@ -38,9 +61,13 @@ export default {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
+
+        // Utility colors
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
+
+        // Chart colors
         chart: {
           '1': 'hsl(var(--chart-1))',
           '2': 'hsl(var(--chart-2))',

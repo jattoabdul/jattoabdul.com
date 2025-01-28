@@ -4,91 +4,125 @@
 
 @layer base {
     :root {
-        /* Background Colors */
-        --background: 0 0% 100%; /* #121212 */
-        --background-elevated: 26 26 26; /* #1A1A1A */
-        --background-card: 36 36 36; /* #242424 */
-
+        /* Light theme colors (for future use) */
+        --background: 0 0% 100%;
+        --foreground: 0 0% 7%;
+        
+        --card: 0 0% 98%;
+        --card-foreground: 0 0% 7%;
+        
+        --popover: 0 0% 96%;
+        --popover-foreground: 0 0% 7%;
+        
         /* Gem Colors */
-        --ruby: 227 27 84;
-        --ruby-light: 255 51 102;
-        --ruby-dark: 196 22 72;
+        --ruby: 344 81% 50%;
+        --ruby-light: 348 100% 60%;
+        --ruby-dark: 344 79% 43%;
+        --ruby-foreground: 0 0% 100%;
 
-        --sapphire: 0 102 255;
-        --sapphire-light: 51 133 255;
-        --sapphire-dark: 0 82 204;
+        --sapphire: 217 100% 50%;
+        --sapphire-light: 217 100% 60%;
+        --sapphire-dark: 217 100% 40%;
+        --sapphire-foreground: 0 0% 100%;
 
-        --emerald: 0 204 136;
-        --emerald-light: 0 230 157;
-        --emerald-dark: 0 179 119;
+        --emerald: 160 100% 40%;
+        --emerald-light: 160 100% 45%;
+        --emerald-dark: 160 100% 35%;
+        --emerald-foreground: 0 0% 100%;
 
-        /* Text Colors */
-        --text: 255 255 255;
-        --text-secondary: 224 224 224;
-        --text-muted: 160 160 160;
-        --text-accent: 255 51 102;
-        --foreground: 222.2 84% 4.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 222.2 84% 4.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 222.2 84% 4.9%;
-        --primary: 222.2 47.4% 11.2%;
-        --primary-foreground: 210 40% 98%;
-        --secondary: 210 40% 96.1%;
-        --secondary-foreground: 222.2 47.4% 11.2%;
-        --muted: 210 40% 96.1%;
-        --muted-foreground: 215.4 16.3% 46.9%;
-        --accent: 210 40% 96.1%;
-        --accent-foreground: 222.2 47.4% 11.2%;
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 210 40% 98%;
-        --border: 214.3 31.8% 91.4%;
-        --input: 214.3 31.8% 91.4%;
-        --ring: 222.2 84% 4.9%;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
+        /* UI Colors */
+        --primary: 344 81% 50%;
+        --primary-foreground: 0 0% 100%;
+
+        --secondary: 217 100% 50%;
+        --secondary-foreground: 0 0% 100%;
+
+        --accent: 160 100% 40%;
+        --accent-foreground: 0 0% 100%;
+
+        --muted: 0 0% 96%;
+        --muted-foreground: 0 0% 45%;
+
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 100%;
+
+        /* Border and Input Colors */
+        --border: 0 0% 89%;
+        --input: 0 0% 89%;
+        --ring: 344 81% 50%;
+
+        /* Chart Colors */
+        --chart-1: 344 81% 50%;
+        --chart-2: 217 100% 50%;
+        --chart-3: 160 100% 40%;
+        --chart-4: 348 100% 60%;
+        --chart-5: 217 100% 60%;
+
         --radius: 0.5rem;
     }
-  .dark {
-        --background: 222.2 84% 4.9%;
-        --foreground: 210 40% 98%;
-        --card: 222.2 84% 4.9%;
-        --card-foreground: 210 40% 98%;
-        --popover: 222.2 84% 4.9%;
-        --popover-foreground: 210 40% 98%;
-        --primary: 210 40% 98%;
-        --primary-foreground: 222.2 47.4% 11.2%;
-        --secondary: 217.2 32.6% 17.5%;
-        --secondary-foreground: 210 40% 98%;
-        --muted: 217.2 32.6% 17.5%;
-        --muted-foreground: 215 20.2% 65.1%;
-        --accent: 217.2 32.6% 17.5%;
-        --accent-foreground: 210 40% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 210 40% 98%;
-        --border: 217.2 32.6% 17.5%;
-        --input: 217.2 32.6% 17.5%;
-        --ring: 212.7 26.8% 83.9%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
-    }
-}
 
-body {
-    @apply bg-[#121212] text-white;
+    .dark {
+        /* Dark theme colors (current default) */
+        --background: 0 0% 7%; /* #121212 */
+        --foreground: 0 0% 100%;
+        
+        --card: 0 0% 10%; /* #1A1A1A */
+        --card-foreground: 0 0% 100%;
+        
+        --popover: 0 0% 14%; /* #242424 */
+        --popover-foreground: 0 0% 100%;
+        
+        /* Gem Colors */
+        --ruby: 344 81% 50%; /* #E31B54 */
+        --ruby-light: 348 100% 60%; /* #FF3366 */
+        --ruby-dark: 344 79% 43%; /* #C41648 */
+        --ruby-foreground: 0 0% 100%;
+
+        --sapphire: 217 100% 50%; /* #0066FF */
+        --sapphire-light: 217 100% 60%; /* #3385FF */
+        --sapphire-dark: 217 100% 40%; /* #0052CC */
+        --sapphire-foreground: 0 0% 100%;
+
+        --emerald: 160 100% 40%; /* #00CC88 */
+        --emerald-light: 160 100% 45%; /* #00E69D */
+        --emerald-dark: 160 100% 35%; /* #00B377 */
+        --emerald-foreground: 0 0% 100%;
+
+        /* UI Colors */
+        --primary: 344 81% 50%;
+        --primary-foreground: 0 0% 100%;
+
+        --secondary: 217 100% 50%;
+        --secondary-foreground: 0 0% 100%;
+
+        --accent: 160 100% 40%;
+        --accent-foreground: 0 0% 100%;
+
+        --muted: 0 0% 14%;
+        --muted-foreground: 0 0% 63%;
+
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 100%;
+
+        /* Border and Input Colors */
+        --border: 0 0% 14%;
+        --input: 0 0% 14%;
+        --ring: 344 81% 50%;
+
+        /* Chart Colors */
+        --chart-1: 344 81% 50%; /* Ruby */
+        --chart-2: 217 100% 50%; /* Sapphire */
+        --chart-3: 160 100% 40%; /* Emerald */
+        --chart-4: 348 100% 60%; /* Ruby Light */
+        --chart-5: 217 100% 60%; /* Sapphire Light */
+    }
 }
 
 @layer base {
-  * {
-    @apply border-border;
+    * {
+        @apply border-border;
     }
-  body {
-    @apply bg-background text-foreground;
+    body {
+        @apply bg-background text-foreground dark;
     }
 }
