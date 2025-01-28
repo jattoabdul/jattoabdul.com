@@ -57,6 +57,13 @@
         --jade-950: 160 100% 15%;
         --jade-foreground: 0 0% 100%;
 
+        /* Chart Colors - Using gem colors for consistency */
+        --chart-1: var(--ruby);
+        --chart-2: var(--sapphire);
+        --chart-3: var(--jade);
+        --chart-4: var(--ruby-400);
+        --chart-5: var(--sapphire-400);
+
         /* Light Theme UI Colors */
         --primary: var(--ruby);
         --primary-foreground: 0 0% 100%;
@@ -78,7 +85,24 @@
         --input: 0 0% 89%;
         --ring: var(--ruby);
 
+        /* Radii */
         --radius: 0.5rem;
+
+        /* Spacing */
+        --navbar-height: 4rem;
+        --footer-height: 4rem;
+        --sidebar-width: 16rem;
+
+        /* Shadows */
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+        /* Animations */
+        --transition-slow: 700ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-medium: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .dark {
@@ -112,6 +136,12 @@
         --border: 0 0% 14%;
         --input: 0 0% 14%;
         --ring: var(--ruby);
+
+        /* Dark Theme Shadows */
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+        --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
     }
 }
 
