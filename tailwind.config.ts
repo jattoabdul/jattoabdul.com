@@ -11,7 +11,7 @@ export default {
         // Base system colors
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        
+
         // Gem colors
         ruby: {
           DEFAULT: 'hsl(var(--ruby))',
