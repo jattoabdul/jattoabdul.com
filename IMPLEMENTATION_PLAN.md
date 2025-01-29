@@ -87,7 +87,7 @@
     - [ ] Utility classes
     - [x] Animation utilities
 - [ ] Create component library
-    - [ ] Buttons
+    - [x] Buttons
     - [ ] Cards
     - [x] Icons
         - [x] Setup icon system with lucide-react

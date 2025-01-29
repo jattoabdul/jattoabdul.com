@@ -1,4 +1,10 @@
-import { Icon, LucideIconName, IconSizes, BrandIcons, ReactSimpleIconName } from '.';
+import {
+  Icon,
+  LucideIconName,
+  IconSizes,
+  BrandIcons,
+  ReactSimpleIconName,
+} from '@components/ui/Icons';
 import * as LucideIcons from 'lucide-react';
 import * as ReactSimpleIcons from '@icons-pack/react-simple-icons';
 
