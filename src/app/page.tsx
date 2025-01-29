@@ -2,8 +2,8 @@ import { HeroSection } from '@/components/sections/Hero';
 
 export default function Home() {
   return (
-    <main className="relative">
+    <div className="relative">
       <HeroSection />
-    </main>
+    </div>
   );
 }
