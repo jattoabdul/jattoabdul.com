@@ -1,8 +1,9 @@
+import { HeroSection } from '@/components/sections/Hero';
+
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      {/* Hero Section goes in here */}
-      HELLO WORLD
+    <main className="relative">
+      <HeroSection />
     </main>
   );
 }
