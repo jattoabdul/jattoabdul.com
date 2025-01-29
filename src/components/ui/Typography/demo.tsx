@@ -1,4 +1,4 @@
-export const TestComponent = () => {
+export const Typography = () => {
   return (
     <div>
       <h1>Hello World Test Component</h1>
