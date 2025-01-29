@@ -4,22 +4,12 @@ import localFont from 'next/font/local';
 
 import '@/styles/globals.css';
 
+// Fonts made by <a href="http://www.webfontfree.com" target="_blank">Web Free Fonts</a> is licensed by <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC 4.0 BY</a>
 const avantGarde = localFont({
   src: [
     {
-      path: '../../public/fonts/avant-garde/Avgard-normal.ttf',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/avant-garde/Avgard-bold.ttf',
-      weight: '700',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/avant-garde/Avgard-bold-i.ttf',
-      weight: '700',
-      style: 'italic',
+      path: '../../public/fonts/avant-garde/AvantGardeBook.woff2',
+      style: 'regular',
     },
   ],
 
