@@ -103,6 +103,10 @@ export default {
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
       },
+      fontFamily: {
+        'avant-garde': ['var(--font-avant-garde)', 'system-ui', 'sans-serif'],
+        'nunito-sans': ['var(--font-nunito-sans)', 'system-ui', 'sans-serif'],
+      },
       spacing: {
         'navbar-height': 'var(--navbar-height)',
         'footer-height': 'var(--footer-height)',

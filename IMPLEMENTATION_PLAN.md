@@ -76,13 +76,14 @@
     - [x] Add shadow system
     - [x] Add animation durations
     - [x] Setup layout constants
-- [ ] Add custom fonts
-    - [ ] Clash Display
-    - [ ] Inter
-    - [ ] JetBrains Mono
+- [x] Add custom fonts
+    - [x] Avant Garde
+    - [x] Nunito Sans
+    - [ ] General Sans
+    - [ ] Plus Jakarta Sans
 - [ ] Setup base styles
     - [x] Color system
-    - [ ] Typography classes
+    - [x] Typography classes
     - [ ] Utility classes
     - [x] Animation utilities
 - [ ] Create component library
@@ -288,7 +289,8 @@
 
 ## Next Steps:
 
-1. Add custom fonts (Outfit/General Sans as main + Plus Jakarta Sans as secondary)
+1. Add custom fonts (Avant-Garde as main + Nunito-Sans as secondary. If needed later on, add General Sans as main and
+   Plus Jakarta Sans as secondary)
 2. Create base component library
 3. Implement setting dark mode as default theme for now
 4. Start layout implementation
