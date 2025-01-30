@@ -1,6 +1,8 @@
 import Link from 'next/link';
+
 import { Button } from '@components/ui/Button';
-import { Icon, IconProps } from '@components/ui/Icons';
+import { Icon } from '@components/ui/Icons';
+import { SideNav } from '@components/layout/Navigation/side-nav';
 
 // To be used with the command k keybinding for the app command icon in the header.
 // const navItems = [
@@ -10,29 +12,11 @@ import { Icon, IconProps } from '@components/ui/Icons';
 //   { label: 'Contact', href: '/contact' },
 // ];
 
-const sideNavItems = [
-  { icon: 'User', href: '/about' },
-  { icon: 'BriefcaseBusiness', href: '/work' },
-  { icon: 'Play', href: '/contents' },
-  { icon: 'Contact', href: '/contact' },
-];
-
 export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/0 px-4 md:px-6">
       {/* Left Side Navigation Menu */}
-      <nav className="fixed left-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-8">
-        {sideNavItems.map(({ icon, href }) => (
-          <Link
-            key={href}
-            href={href}
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Icon name={icon as IconProps['name']} className="size-6" />
-            <span className="sr-only">{icon}</span>
-          </Link>
-        ))}
-      </nav>
+      <SideNav />
 
       {/* Header Content */}
       <div className="flex h-16 items-center justify-between">
