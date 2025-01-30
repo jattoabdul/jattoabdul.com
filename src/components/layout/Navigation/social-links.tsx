@@ -12,7 +12,7 @@ const socialLinks = [
 
 export function SocialLinks() {
   return (
-    <nav className="fixed right-8 bottom-8 -translate-y-1/2 flex flex-col gap-6 z-50">
+    <nav className="fixed right-8 bottom-8 -translate-y-8 flex flex-col gap-6 z-50">
       {socialLinks.map(({ icon, href }) => (
         <Link
           key={href}

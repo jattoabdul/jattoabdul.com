@@ -1,14 +1,5 @@
 import Link from 'next/link';
-import { Icon, IconProps } from '@components/ui/Icons';
-
-const socialLinks = [
-  { icon: 'Mail', href: 'mailto:jattoabdul@gmail.com' },
-  { icon: 'SiGithub', href: 'https://github.com/jattoabdul' },
-  { icon: 'Play', href: 'https://youtube.com/jattoabdul' },
-  { icon: 'SiInstagram', href: 'https://instagram.com/jattoabdul' },
-  { icon: 'Linkedin', href: 'https://linkedin.com/in/jattoabdul' },
-  { icon: 'SiX', href: 'https://x.com/jatto_abdul' },
-];
+import { SocialLinks } from '@components/layout/Navigation/social-links';
 
 export function Footer() {
   return (
@@ -33,18 +24,7 @@ export function Footer() {
       </div>
 
       {/* Right Side Social Links */}
-      <nav className="fixed right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-6">
-        {socialLinks.map(({ icon, href }) => (
-          <Link
-            key={href}
-            href={href}
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Icon name={icon as IconProps['name']} className="size-5" />
-            <span className="sr-only">{icon}</span>
-          </Link>
-        ))}
-      </nav>
+      <SocialLinks />
     </footer>
   );
 }
