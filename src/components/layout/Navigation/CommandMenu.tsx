@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -36,7 +38,7 @@ export function CommandMenu() {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setOpen((open) => !open);
+        setOpen(open => !open);
       }
     };
 
@@ -56,10 +58,7 @@ export function CommandMenu() {
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Navigation">
           {navItems.map(({ label, href, icon }) => (
-            <CommandItem
-              key={href}
-              onSelect={() => runCommand(() => router.push(href))}
-            >
+            <CommandItem key={href} onSelect={() => runCommand(() => router.push(href))}>
               <Icon name={icon} className="mr-2 size-4" />
               {label}
             </CommandItem>
@@ -70,9 +69,7 @@ export function CommandMenu() {
           {socialItems.map(({ label, href, icon }) => (
             <CommandItem
               key={href}
-              onSelect={() =>
-                runCommand(() => window.open(href, '_blank', 'noopener,noreferrer'))
-              }
+              onSelect={() => runCommand(() => window.open(href, '_blank', 'noopener,noreferrer'))}
             >
               <Icon name={icon} className="mr-2 size-4" />
               {label}
