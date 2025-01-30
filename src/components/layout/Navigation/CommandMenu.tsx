@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import {
@@ -30,29 +30,33 @@ const socialItems = [
   { label: 'X (Twitter)', href: 'https://x.com/jatto_abdul', icon: 'SiX' },
 ] as const;
 
-export function CommandMenu() {
+interface CommandMenuProps {
+  open: boolean;
+  onOpenChangeAction: (open: boolean) => void;
+}
+
+export function CommandMenu({ open, onOpenChangeAction }: CommandMenuProps) {
   const router = useRouter();
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setOpen(open => !open);
+        onOpenChangeAction(!open);
       }
     };
 
     document.addEventListener('keydown', down);
     return () => document.removeEventListener('keydown', down);
-  }, []);
+  }, [onOpenChangeAction, open]);
 
   const runCommand = (command: () => void) => {
-    setOpen(false);
+    onOpenChangeAction(false);
     command();
   };
 
   return (
-    <CommandDialog open={open} onOpenChange={setOpen}>
+    <CommandDialog open={open} onOpenChange={onOpenChangeAction}>
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
