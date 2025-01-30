@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { DialogDescription, DialogTitle } from '@components/ui/Dialog';
 import {
   CommandDialog,
   CommandEmpty,
@@ -11,6 +12,7 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
+  CommandShortcut,
 } from '@/components/ui/Command';
 import { Icon } from '@/components/ui/Icons';
 
@@ -57,6 +59,10 @@ export function CommandMenu({ open, onOpenChangeAction }: CommandMenuProps) {
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChangeAction}>
+      <DialogTitle className="sr-only">Command Menu</DialogTitle>
+      <DialogDescription className="sr-only">
+        Press <kbd>⌘</kbd> + <kbd>K</kbd> to open the command menu.
+      </DialogDescription>
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
@@ -77,6 +83,10 @@ export function CommandMenu({ open, onOpenChangeAction }: CommandMenuProps) {
             >
               <Icon name={icon} className="mr-2 size-4" />
               {label}
+              <CommandShortcut>
+                <kbd className="p-0 mr-0.5">{label[0].toUpperCase()}</kbd>
+                <kbd className="p-0">{label[1].toUpperCase()}</kbd>
+              </CommandShortcut>
             </CommandItem>
           ))}
         </CommandGroup>
