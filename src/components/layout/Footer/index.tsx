@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { SocialLinks } from '@components/layout/Navigation/social-links';
+import { SocialLinks } from '@components/layout/Navigation/SocialLinks';
 
 export function Footer() {
   return (

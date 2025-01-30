@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Button } from '@components/ui/Button';
 import { Icon } from '@components/ui/Icons';
-import { SideNav } from '@components/layout/Navigation/side-nav';
+import { SideNav } from '@components/layout/Navigation/SideNav';
 
 // To be used with the command k keybinding for the app command icon in the header.
 // const navItems = [
