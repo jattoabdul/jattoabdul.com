@@ -28,7 +28,7 @@ export function Header() {
           <Button
             variant="ghost"
             size="icon"
-            className="md:inline-flex"
+            className="md:inline-flex [&_svg]:size-8"
             onClick={() => setOpenMenu(true)}
           >
             <Icon name="Command" size="32" />
