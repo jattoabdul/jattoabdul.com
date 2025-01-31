@@ -27,7 +27,7 @@
         --cinnabar-800: 9 89% 32%;
         --cinnabar-900: 9 89% 24%;
         --cinnabar-950: 9 89% 16%;
-        --cinnabar-foreground: 0 0% 100%;
+        --cinnabar-foreground: var(--smoky-primary);
 
         --wheat: 35 67% 85%; /* Wheat Primary */
         --wheat-50: 35 67% 97%;
@@ -41,7 +41,7 @@
         --wheat-800: 35 67% 55%;
         --wheat-900: 35 67% 45%;
         --wheat-950: 35 67% 35%;
-        --wheat-foreground: 24 100% 3%;
+        --wheat-foreground: var(--smoky-primary);
 
         /* Smoky Black Colors */
         --smoky-primary: 24 100% 3%; /* Smoky Black Primary */
@@ -58,13 +58,13 @@
 
         /* Light Theme UI Colors */
         --primary: var(--cinnabar);
-        --primary-foreground: 0 0% 100%;
+        --primary-foreground: var(--smoky-primary);
 
         --secondary: var(--wheat);
-        --secondary-foreground: 24 100% 3%;
+        --secondary-foreground: var(--smoky-primary);
 
         --accent: var(--cinnabar-300);
-        --accent-foreground: 24 100% 3%;
+        --accent-foreground: var(--smoky-primary);
 
         --muted: 35 67% 95%;
         --muted-foreground: 35 67% 45%;
@@ -110,13 +110,13 @@
 
         /* Dark Theme UI Colors - Using same gem colors */
         --primary: var(--cinnabar);
-        --primary-foreground: 0 0% 100%;
+        --primary-foreground: var(--smoky-primary);
 
         --secondary: var(--wheat);
-        --secondary-foreground: 24 100% 3%;
+        --secondary-foreground: var(--smoky-primary);
 
         --accent: var(--cinnabar-300);
-        --accent-foreground: 24 100% 3%;
+        --accent-foreground: var(--smoky-primary);
 
         --muted: 22 13% 9%;
         --muted-foreground: 35 67% 65%;
