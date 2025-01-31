@@ -108,6 +108,13 @@ export default {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      height: {
+        navbar: 'var(--navbar-height)',
+        footer: 'var(--footer-height)',
+      },
+      width: {
+        sidebar: 'var(--sidebar-width)',
+      },
       boxShadow: {
         sm: 'var(--shadow-sm)',
         DEFAULT: 'var(--shadow)',

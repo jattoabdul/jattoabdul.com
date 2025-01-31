@@ -43,6 +43,12 @@
         --wheat-950: 35 67% 35%;
         --wheat-foreground: 24 100% 3%;
 
+        /* Smoky Black Colors */
+        --smoky-primary: 24 100% 3%; /* Smoky Black Primary */
+        --smoky-light: 22 13% 9%; /* For elevated surfaces */
+        --smoky-dark: 24 100% 1%; /* For shadows */
+        --smoky-faded: 24 100% 3% / 0.5; /* For overlays */
+
         /* Chart Colors - Using brand colors */
         --chart-1: var(--cinnabar);
         --chart-2: var(--wheat);
