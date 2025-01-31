@@ -3,7 +3,7 @@ import { Icon } from '@/components/ui/Icons';
 
 export function ButtonDemo() {
   return (
-    <div className="p-4 space-y-8">
+    <div className="p-16 space-y-14">
       <h2 className="text-2xl font-heading mb-4">Button System</h2>
 
       {/* Brand Color Variants */}

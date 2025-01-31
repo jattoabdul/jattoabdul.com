@@ -16,7 +16,7 @@ export function IconDemo() {
     .slice(0, 12) as ReactSimpleIconName[];
 
   return (
-    <div className="p-4 space-y-8">
+    <div className="p-16 space-y-14">
       <h2 className="text-2xl font-heading mb-4">Icon System Demo</h2>
 
       {/* Icon sizes demo */}
