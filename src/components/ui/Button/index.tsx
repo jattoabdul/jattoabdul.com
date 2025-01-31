@@ -9,11 +9,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary variants using our gem colors
+        // Primary variants using our brand colors
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        ruby: 'bg-ruby text-white hover:bg-ruby-900 active:bg-ruby-600',
-        sapphire: 'bg-sapphire text-white hover:bg-sapphire-900 active:bg-sapphire-600',
-        jade: 'bg-jade text-white hover:bg-jade-900 active:bg-jade-600',
+        cinnabar: 'bg-cinnabar text-smoky-primary hover:bg-cinnabar-600 active:bg-cinnabar-700',
 
         // Secondary variants
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
@@ -30,19 +28,14 @@ const buttonVariants = cva(
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
       },
-      // Add glass effect variant
-      glass: {
-        true: 'backdrop-blur-sm bg-opacity-20 hover:bg-opacity-30',
-      },
       // Add gradient variant
       gradient: {
-        true: 'bg-gradient-to-r from-ruby via-sapphire to-jade text-white border-0',
+        true: 'bg-gradient-to-r from-cinnabar via-wheat to-cinnabar-300 text-smoky-primary border-0',
       },
     },
     defaultVariants: {
       variant: 'default',
       size: 'default',
-      glass: false,
       gradient: false,
     },
     // Handle compound variants
@@ -52,19 +45,12 @@ const buttonVariants = cva(
         className: 'hover:shadow-lg hover:scale-[1.02] transition-all',
       },
       {
-        glass: true,
         variant: 'default',
-        className: 'bg-ruby/20 hover:bg-ruby/30',
+        className: 'bg-cinnabar/20 hover:bg-cinnabar/30',
       },
       {
-        glass: true,
-        variant: 'sapphire',
-        className: 'bg-sapphire/20 hover:bg-sapphire/30',
-      },
-      {
-        glass: true,
-        variant: 'jade',
-        className: 'bg-jade/20 hover:bg-jade/30',
+        variant: 'cinnabar',
+        className: 'bg-cinnabar/20 hover:bg-cinnabar/30',
       },
     ],
   }
@@ -77,11 +63,11 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, glass, gradient, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, gradient, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, glass, gradient, className }))}
+        className={cn(buttonVariants({ variant, size, gradient, className }))}
         ref={ref}
         {...props}
       />
