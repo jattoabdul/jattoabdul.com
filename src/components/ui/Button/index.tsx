@@ -19,7 +19,7 @@ const buttonVariants = cva(
 
         // Special variants
         outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
+        link: 'text-secondary underline underline-offset-4 hover:no-underline hover:text-primary',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
       },
       size: {
@@ -30,7 +30,7 @@ const buttonVariants = cva(
       },
       // Add gradient variant
       gradient: {
-        true: 'bg-gradient-to-r from-cinnabar via-wheat to-cinnabar-300 text-smoky-primary border-0',
+        true: 'bg-gradient-to-r from-cinnabar-700 via-cinnabar-500 to-cinnabar-500 text-smoky-primary border-0',
       },
     },
     defaultVariants: {
@@ -43,14 +43,6 @@ const buttonVariants = cva(
       {
         gradient: true,
         className: 'hover:shadow-lg hover:scale-[1.02] transition-all',
-      },
-      {
-        variant: 'default',
-        className: 'bg-cinnabar/20 hover:bg-cinnabar/30',
-      },
-      {
-        variant: 'cinnabar',
-        className: 'bg-cinnabar/20 hover:bg-cinnabar/30',
       },
     ],
   }
