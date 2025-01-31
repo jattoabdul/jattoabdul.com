@@ -1,7 +1,7 @@
 export const Typography = () => {
   return (
-    <div>
-      <h1>Hello World Test Component</h1>
+    <div className={`p-14 space-y-14`}>
+      <h1 className="font-avant-garde text-center">Typography Demo</h1>
       <h1 className="flex flex-col items-center text-9xl text-center uppercase font-avant-garde font-bold">
         <div className="line flex">
           <div className="char">M</div>
