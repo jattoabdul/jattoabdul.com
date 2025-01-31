@@ -39,7 +39,7 @@ export function IconDemo() {
           {lucideIconNames.map(name => (
             <div
               key={name}
-              className="flex flex-col items-center gap-2 p-4 rounded-lg border border-border hover:bg-accent transition-colors"
+              className="flex flex-col items-center gap-2 p-4 rounded-lg border border-border hover:bg-accent hover:text-primary-foreground transition-colors"
             >
               <Icon name={name} size={IconSizes.md} />
               <span className="text-xs text-center">{name}</span>
@@ -85,8 +85,7 @@ export function IconDemo() {
           <Icon name="SiGithub" className="text-secondary" />
           <Icon name="SiGithub" className="text-accent" />
           <Icon name="SiGithub" className="text-muted-foreground" />
-          <Icon name="SiGithub" className="text-ruby" />
-          <Icon name="SiGithub" className="text-sapphire" />
+          <Icon name="SiGithub" className="text-cinnabar" />
         </div>
       </div>
     </div>
