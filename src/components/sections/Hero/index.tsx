@@ -5,7 +5,7 @@ export function HeroSection() {
   return (
     <section className="min-h-screen hero-section">
       {/* Main Hero Content */}
-      <div className="px-4 md:px-6">
+      <div className="px-4 md:px-6 py-16 md:py-24 lg:py-32 max-w-3xl mx-auto">
         <div className="flex flex-col items-center text-center gap-4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading tracking-tight">
             Jatto Abdul
