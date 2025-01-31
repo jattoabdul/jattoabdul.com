@@ -63,7 +63,7 @@
         --secondary: var(--wheat);
         --secondary-foreground: var(--smoky-primary);
 
-        --accent: var(--cinnabar-300);
+        --accent: var(--cinnabar-500);
         --accent-foreground: var(--smoky-primary);
 
         --muted: 35 67% 95%;
@@ -115,7 +115,7 @@
         --secondary: var(--wheat);
         --secondary-foreground: var(--smoky-primary);
 
-        --accent: var(--cinnabar-300);
+        --accent: var(--cinnabar-500);
         --accent-foreground: var(--smoky-primary);
 
         --muted: 22 13% 9%;
