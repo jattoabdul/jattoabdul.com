@@ -5,85 +5,71 @@
 @layer base {
     :root {
         /* Base Colors */
-        --background: 0 0% 100%;
-        --foreground: 0 0% 7%;
+        --background: 24 100% 3%; /* Smoky Black */
+        --foreground: 35 67% 85%; /* Wheat */
 
-        --card: 0 0% 98%;
-        --card-foreground: 0 0% 7%;
+        --card: 22 13% 9%; /* Smoky Light */
+        --card-foreground: 35 67% 85%;
 
-        --popover: 0 0% 96%;
-        --popover-foreground: 0 0% 7%;
+        --popover: 22 13% 9%;
+        --popover-foreground: 35 67% 85%;
 
-        /* Gem Colors - Consistent across themes */
-        --ruby: 344 81% 50%;
-        --ruby-50: 344 81% 97%;
-        --ruby-100: 344 81% 95%;
-        --ruby-200: 344 81% 90%;
-        --ruby-300: 344 81% 85%;
-        --ruby-400: 344 81% 80%;
-        --ruby-500: 344 81% 50%;
-        --ruby-600: 344 81% 45%;
-        --ruby-700: 344 81% 40%;
-        --ruby-800: 344 81% 35%;
-        --ruby-900: 344 81% 30%;
-        --ruby-950: 344 81% 25%;
-        --ruby-foreground: 0 0% 100%;
+        /* Brand Colors - Consistent across themes */
+        --cinnabar: 9 89% 56%; /* Cinnabar Primary */
+        --cinnabar-50: 9 89% 97%;
+        --cinnabar-100: 9 89% 95%;
+        --cinnabar-200: 9 89% 90%;
+        --cinnabar-300: 9 89% 85%;
+        --cinnabar-400: 9 89% 80%;
+        --cinnabar-500: 9 89% 56%;
+        --cinnabar-600: 9 89% 48%;
+        --cinnabar-700: 9 89% 40%;
+        --cinnabar-800: 9 89% 32%;
+        --cinnabar-900: 9 89% 24%;
+        --cinnabar-950: 9 89% 16%;
+        --cinnabar-foreground: 0 0% 100%;
 
-        --sapphire: 217 100% 50%;
-        --sapphire-50: 217 100% 97%;
-        --sapphire-100: 217 100% 95%;
-        --sapphire-200: 217 100% 90%;
-        --sapphire-300: 217 100% 85%;
-        --sapphire-400: 217 100% 80%;
-        --sapphire-500: 217 100% 50%;
-        --sapphire-600: 217 100% 45%;
-        --sapphire-700: 217 100% 40%;
-        --sapphire-800: 217 100% 35%;
-        --sapphire-900: 217 100% 30%;
-        --sapphire-950: 217 100% 25%;
-        --sapphire-foreground: 0 0% 100%;
+        --wheat: 35 67% 85%; /* Wheat Primary */
+        --wheat-50: 35 67% 97%;
+        --wheat-100: 35 67% 95%;
+        --wheat-200: 35 67% 90%;
+        --wheat-300: 35 67% 85%;
+        --wheat-400: 35 67% 80%;
+        --wheat-500: 35 67% 85%;
+        --wheat-600: 35 67% 75%;
+        --wheat-700: 35 67% 65%;
+        --wheat-800: 35 67% 55%;
+        --wheat-900: 35 67% 45%;
+        --wheat-950: 35 67% 35%;
+        --wheat-foreground: 24 100% 3%;
 
-        --jade: 160 100% 40%;
-        --jade-50: 160 100% 97%;
-        --jade-100: 160 100% 95%;
-        --jade-200: 160 100% 90%;
-        --jade-300: 160 100% 85%;
-        --jade-400: 160 100% 80%;
-        --jade-500: 160 100% 40%;
-        --jade-600: 160 100% 35%;
-        --jade-700: 160 100% 30%;
-        --jade-800: 160 100% 25%;
-        --jade-900: 160 100% 20%;
-        --jade-950: 160 100% 15%;
-        --jade-foreground: 0 0% 100%;
-
-        /* Chart Colors - Using gem colors for consistency */
-        --chart-1: var(--ruby);
-        --chart-2: var(--sapphire);
-        --chart-3: var(--jade);
-        --chart-4: var(--ruby-400);
-        --chart-5: var(--sapphire-400);
+        /* Chart Colors - Using brand colors */
+        --chart-1: var(--cinnabar);
+        --chart-2: var(--wheat);
+        --chart-3: var(--cinnabar-300);
+        --chart-4: var(--wheat-300);
+        --chart-5: var(--cinnabar-600);
 
         /* Light Theme UI Colors */
-        --primary: var(--ruby);
+        --primary: var(--cinnabar);
         --primary-foreground: 0 0% 100%;
 
-        --secondary: var(--sapphire);
-        --secondary-foreground: 0 0% 100%;
+        --secondary: var(--wheat);
+        --secondary-foreground: 24 100% 3%;
 
-        --accent: var(--jade);
-        --accent-foreground: 0 0% 100%;
+        --accent: var(--cinnabar-300);
+        --accent-foreground: 24 100% 3%;
 
-        --muted: 0 0% 96%;
-        --muted-foreground: 0 0% 45%;
+        --muted: 35 67% 95%;
+        --muted-foreground: 35 67% 45%;
 
         --destructive: 0 84% 60%;
         --destructive-foreground: 0 0% 100%;
 
         /* Light Theme Border and Input Colors */
-        --border: 0 0% 89%;
-        --input: 0 0% 89%;
-        --ring: var(--ruby);
+        --border: 35 67% 85%;
+        --input: 35 67% 85%;
+        --ring: var(--cinnabar);
 
         /* Radii */
         --radius: 0.5rem;
@@ -94,10 +80,10 @@
         --sidebar-width: 16rem;
 
         /* Shadows */
-        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-        --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        --shadow-sm: 0 1px 2px 0 rgb(11 5 0 / 0.05);
+        --shadow: 0 1px 3px 0 rgb(11 5 0 / 0.1), 0 1px 2px -1px rgb(11 5 0 / 0.1);
+        --shadow-md: 0 4px 6px -1px rgb(11 5 0 / 0.1), 0 2px 4px -2px rgb(11 5 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(11 5 0 / 0.1), 0 4px 6px -4px rgb(11 5 0 / 0.1);
 
         /* Animations */
         --transition-slow: 700ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -107,41 +93,41 @@
 
     .dark {
         /* Dark Theme Base Colors */
-        --background: 0 0% 7%;
-        --foreground: 0 0% 100%;
+        --background: 24 100% 3%; /* Smoky Black */
+        --foreground: 35 67% 85%; /* Wheat */
 
-        --card: 0 0% 10%;
-        --card-foreground: 0 0% 100%;
+        --card: 22 13% 9%; /* Smoky Light */
+        --card-foreground: 35 67% 85%;
 
-        --popover: 0 0% 14%;
-        --popover-foreground: 0 0% 100%;
+        --popover: 22 13% 9%;
+        --popover-foreground: 35 67% 85%;
 
         /* Dark Theme UI Colors - Using same gem colors */
-        --primary: var(--ruby);
+        --primary: var(--cinnabar);
         --primary-foreground: 0 0% 100%;
 
-        --secondary: var(--sapphire);
-        --secondary-foreground: 0 0% 100%;
+        --secondary: var(--wheat);
+        --secondary-foreground: 24 100% 3%;
 
-        --accent: var(--jade);
-        --accent-foreground: 0 0% 100%;
+        --accent: var(--cinnabar-300);
+        --accent-foreground: 24 100% 3%;
 
-        --muted: 0 0% 14%;
-        --muted-foreground: 0 0% 63%;
+        --muted: 22 13% 9%;
+        --muted-foreground: 35 67% 65%;
 
         --destructive: 0 84% 60%;
         --destructive-foreground: 0 0% 100%;
 
         /* Dark Theme Border and Input Colors */
-        --border: 0 0% 14%;
-        --input: 0 0% 14%;
-        --ring: var(--ruby);
+        --border: 35 67% 25%;
+        --input: 35 67% 25%;
+        --ring: var(--cinnabar);
 
         /* Dark Theme Shadows */
-        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-        --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
-        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+        --shadow-sm: 0 1px 2px 0 rgb(6 3 0 / 0.3);
+        --shadow: 0 1px 3px 0 rgb(6 3 0 / 0.4), 0 1px 2px -1px rgb(6 3 0 / 0.4);
+        --shadow-md: 0 4px 6px -1px rgb(6 3 0 / 0.4), 0 2px 4px -2px rgb(6 3 0 / 0.4);
+        --shadow-lg: 0 10px 15px -3px rgb(6 3 0 / 0.4), 0 4px 6px -4px rgb(6 3 0 / 0.4);
     }
 }
 
