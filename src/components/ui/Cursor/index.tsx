@@ -1,7 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, HTMLMotionProps, useMotionValue, useSpring } from 'framer-motion';
+
+type DivProps = HTMLMotionProps<'div'>;
+
+const MotionDiv = motion.div;
 
 export function Cursor() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,7 +15,7 @@ export function Cursor() {
   // Mouse position with spring physics
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  
+
   // Add spring physics to cursor movement
   const springConfig = { damping: 25, stiffness: 300 };
   const springX = useSpring(cursorX, springConfig);
@@ -32,7 +36,7 @@ export function Cursor() {
       const y = e.clientY / window.innerHeight;
       setExitDirection({
         x: x < 0.3 ? -1 : x > 0.7 ? 1 : 0,
-        y: y < 0.3 ? -1 : y > 0.7 ? 1 : 0
+        y: y < 0.3 ? -1 : y > 0.7 ? 1 : 0,
       });
     };
 
@@ -52,30 +56,35 @@ export function Cursor() {
     };
   }, [cursorX, cursorY]);
 
+  const containerProps: DivProps = {
+    className: 'pointer-events-none fixed left-0 top-0 z-[999] mix-blend-difference',
+    style: {
+      x: springX,
+      y: springY,
+    },
+    initial: false,
+  };
+
+  const cursorProps: DivProps = {
+    className: 'relative h-8 w-8',
+    animate: {
+      scale: isVisible ? 1 : 0,
+      x: isLeaving ? exitDirection.x * 100 : 0,
+      y: isLeaving ? exitDirection.y * 100 : 0,
+    },
+    transition: {
+      type: 'spring',
+      damping: 20,
+      stiffness: 300,
+    },
+  };
+
   return (
-    <motion.div
-      className="pointer-events-none fixed left-0 top-0 z-[999] mix-blend-difference"
-      style={{
-        x: springX,
-        y: springY,
-      }}
-    >
-      <motion.div
-        className="relative h-8 w-8"
-        animate={{
-          scale: isVisible ? 1 : 0,
-          x: isLeaving ? exitDirection.x * 100 : 0,
-          y: isLeaving ? exitDirection.y * 100 : 0,
-        }}
-        transition={{
-          type: "spring",
-          damping: 20,
-          stiffness: 300,
-        }}
-      >
+    <MotionDiv {...containerProps}>
+      <MotionDiv {...cursorProps}>
         <div className="absolute inset-0 rounded-full bg-cinnabar opacity-80" />
         <div className="absolute inset-0 rounded-full bg-cinnabar blur-sm" />
-      </motion.div>
-    </motion.div>
+      </MotionDiv>
+    </MotionDiv>
   );
 }
