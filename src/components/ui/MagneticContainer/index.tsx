@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -24,8 +24,8 @@ interface MagneticContainerProps extends HTMLMotionProps<'div'> {
 
 const MotionDiv = motion.div;
 
-export function MagneticContainer({ 
-  children, 
+export function MagneticContainer({
+  children,
   padding = 100,
   magneticStrength = 2,
   disabled = false,
@@ -34,7 +34,7 @@ export function MagneticContainer({
   wrapperClassName = '',
   innerClassName = '',
   className = '',
-  ...props 
+  ...props
 }: MagneticContainerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
@@ -78,6 +78,7 @@ export function MagneticContainer({
       ref={ref}
       className={wrapperClassName}
       style={{ position: 'relative', display: 'inline-block' }}
+      data-magnetic="true"
     >
       <MotionDiv
         className={cn(innerClassName, className)}

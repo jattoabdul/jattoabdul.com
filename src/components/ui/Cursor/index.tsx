@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, HTMLMotionProps, useMotionValue, useSpring } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 type DivProps = HTMLMotionProps<'div'>;
 
@@ -10,6 +11,7 @@ const MotionDiv = motion.div;
 export function Cursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
+  const [isOverInteractive, setIsOverInteractive] = useState(false);
   const [exitDirection, setExitDirection] = useState({ x: 0, y: 0 });
 
   // Mouse position with spring physics
@@ -27,10 +29,16 @@ export function Cursor() {
       cursorY.set(e.clientY - 16);
       setIsVisible(true);
       setIsLeaving(false);
+
+      // Check if we're over an interactive element
+      const target = e.target as HTMLElement;
+      const isInteractive = target.closest('[data-magnetic]') !== null;
+      setIsOverInteractive(isInteractive);
     };
 
     const handleMouseLeave = (e: MouseEvent) => {
       setIsLeaving(true);
+      setIsOverInteractive(false);
       // Calculate exit direction
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
@@ -57,7 +65,10 @@ export function Cursor() {
   }, [cursorX, cursorY]);
 
   const containerProps: DivProps = {
-    className: 'pointer-events-none fixed left-0 top-0 z-[999] mix-blend-difference',
+    className: cn(
+      'pointer-events-none fixed left-0 top-0 z-[999]',
+      !isOverInteractive && 'mix-blend-difference'
+    ),
     style: {
       x: springX,
       y: springY,
@@ -82,8 +93,14 @@ export function Cursor() {
   return (
     <MotionDiv {...containerProps}>
       <MotionDiv {...cursorProps}>
-        <div className="absolute inset-0 rounded-full bg-cinnabar opacity-80" />
-        <div className="absolute inset-0 rounded-full bg-cinnabar blur-sm" />
+        <div className={cn(
+          "absolute inset-0 rounded-full bg-cinnabar",
+          isOverInteractive ? 'opacity-20' : 'opacity-80'
+        )} />
+        <div className={cn(
+          "absolute inset-0 rounded-full bg-cinnabar",
+          isOverInteractive ? 'opacity-10 blur-sm' : 'opacity-80 blur-sm'
+        )} />
       </MotionDiv>
     </MotionDiv>
   );
