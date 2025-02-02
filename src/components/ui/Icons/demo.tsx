@@ -12,7 +12,7 @@ export function IconDemo() {
   // Get first 12 icons from each library
   const lucideIconNames = Object.keys(LucideIcons).slice(0, 12) as LucideIconName[];
   const reactSimpleIconNames = Object.keys(ReactSimpleIcons)
-    .filter(name => name.startsWith('si'))
+    .filter(name => name.startsWith('Si') && !name.endsWith('Hex'))
     .slice(0, 12) as ReactSimpleIconName[];
 
   return (

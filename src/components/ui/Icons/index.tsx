@@ -39,6 +39,10 @@ export function Icon({ name, source, color, size = IconSizes.md, className, ...p
 
   // Render Simple Icons
   if (iconSource === 'simple' && isSimpleIcon(name)) {
+    // Remove 'Hex' suffix from Simple Icons names just for good measure. If we need to handle these icons differently, we can add a separate check for them.
+    if (name.endsWith('Hex')) {
+      name = name.slice(0, -3) as ReactSimpleIconName;
+    }
     const SiReact = ReactSimpleIcons[name as ReactSimpleIconName] as ReactSimpleIcon;
 
     return <SiReact size={size} color={color} className={className} {...props} />;
