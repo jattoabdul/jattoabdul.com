@@ -12,6 +12,7 @@ export function Cursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
   const [isOverInteractive, setIsOverInteractive] = useState(false);
+  const [isOverSocial, setIsOverSocial] = useState(false);
   const [exitDirection, setExitDirection] = useState({ x: 0, y: 0 });
 
   // Mouse position with spring physics
@@ -33,12 +34,16 @@ export function Cursor() {
       // Check if we're over an interactive element
       const target = e.target as HTMLElement;
       const isInteractive = target.closest('[data-cursor-interactive]') !== null;
-      setIsOverInteractive(isInteractive);
+      const isSocial = target.closest('[data-cursor-social]') !== null;
+      
+      setIsOverInteractive(isInteractive && !isSocial);
+      setIsOverSocial(isSocial);
     };
 
     const handleMouseLeave = (e: MouseEvent) => {
       setIsLeaving(true);
       setIsOverInteractive(false);
+      setIsOverSocial(false);
       // Calculate exit direction
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
@@ -97,13 +102,15 @@ export function Cursor() {
         <div
           className={cn(
             'absolute inset-0 rounded-full bg-cinnabar transition-all duration-300',
-            isOverInteractive ? 'opacity-100 scale-[1.5]' : 'opacity-80'
+            isOverInteractive ? 'opacity-100 scale-[1.5]' : 'opacity-80',
+            isOverSocial && 'scale-100'
           )}
         />
         <div
           className={cn(
             'absolute inset-0 rounded-full bg-cinnabar transition-all duration-300',
-            isOverInteractive ? 'opacity-50 scale-[1.75] blur-sm' : 'opacity-80 blur-sm'
+            isOverInteractive ? 'opacity-50 scale-[1.75] blur-sm' : 'opacity-80 blur-sm',
+            isOverSocial && 'scale-100'
           )}
         />
       </MotionDiv>
