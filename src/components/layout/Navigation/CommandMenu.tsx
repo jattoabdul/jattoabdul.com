@@ -26,10 +26,10 @@ const navItems = [
 const socialItems = [
   { label: 'Email', href: 'mailto:jattoabdul@gmail.com', icon: 'Mail' },
   { label: 'GitHub', href: 'https://github.com/jattoabdul', icon: 'SiGithub' },
-  { label: 'YouTube', href: 'https://youtube.com/jattoabdul', icon: 'Play' },
-  { label: 'Instagram', href: 'https://instagram.com/jattoabdul', icon: 'SiInstagram' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/jattoabdul', icon: 'Linkedin' },
-  { label: 'X (Twitter)', href: 'https://x.com/jatto_abdul', icon: 'SiX' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@jatto_abdul', icon: 'Play' },
+  { label: 'Instagram', href: 'https://instagram.com/jatto_abdul', icon: 'SiInstagram' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jattoade/', icon: 'Linkedin' },
+  { label: 'X (Twitter)', href: 'https://x.com/Jattorize', icon: 'SiX' },
 ] as const;
 
 interface CommandMenuProps {

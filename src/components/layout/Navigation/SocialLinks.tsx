@@ -7,22 +7,17 @@ import { MagneticContainer } from '@/components/ui/MagneticContainer';
 const socialLinks = [
   { icon: 'Mail', href: 'mailto:jattoabdul@gmail.com' },
   { icon: 'SiGithub', href: 'https://github.com/jattoabdul' },
-  { icon: 'Play', href: 'https://youtube.com/jattoabdul' },
-  { icon: 'SiInstagram', href: 'https://instagram.com/jattoabdul' },
-  { icon: 'Linkedin', href: 'https://linkedin.com/in/jattoabdul' },
-  { icon: 'SiX', href: 'https://x.com/jatto_abdul' },
+  { icon: 'Play', href: 'https://www.youtube.com/@jatto_abdul' },
+  { icon: 'SiInstagram', href: 'https://instagram.com/jatto_abdul' },
+  { icon: 'Linkedin', href: 'https://www.linkedin.com/in/jattoade/' },
+  { icon: 'SiX', href: 'https://x.com/Jattorize' },
 ];
 
 export function SocialLinks() {
   return (
     <nav className="fixed right-8 bottom-8 -translate-y-8 flex flex-col gap-6 z-50">
       {socialLinks.map(({ icon, href }) => (
-        <MagneticContainer
-          key={href}
-          padding={40}
-          magneticStrength={3}
-          variant="social"
-        >
+        <MagneticContainer key={href} padding={40} magneticStrength={3} variant="social">
           <Link
             href={href}
             className="text-muted-foreground hover:text-foreground transition-colors"
