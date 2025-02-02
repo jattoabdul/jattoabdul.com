@@ -27,6 +27,7 @@ export function SideNav() {
             activeTransitionDuration={0.3}
             inactiveTransitionDuration={0.5}
             className="relative"
+            variant="social"
           >
             <Link
               href={href}
