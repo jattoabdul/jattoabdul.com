@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import localFont from 'next/font/local';
@@ -29,7 +30,7 @@ const nunitoSans = Nunito_Sans({
 export const metadata: Metadata = {
   title: 'Jatto Abdul | Building Digital Experiences',
   description:
-    'Fullstack Engineer building digital experiences and simplifying complex systems since 2017. Specializing in Ruby, Go, and JavaScript.',
+    'Fullstack Engineer crafting delightful digital experiences and simplifying complex systems since 2017. Specializing in Ruby, Go, and JavaScript.',
   keywords: [
     'Jatto Abdul',
     'Software Engineer',
@@ -47,14 +48,14 @@ export const metadata: Metadata = {
     url: 'https://jattoabdul.com',
     title: 'Jatto Abdul | Building Digital Experiences',
     description:
-      'Fullstack Engineer building digital experiences and simplifying complex systems since 2017. Specializing in Ruby, Go, and JavaScript.',
+      'Fullstack Engineer crafting delightful digital experiences and simplifying complex systems since 2017. Specializing in Ruby, Go, and JavaScript.',
     siteName: 'Jatto Abdul',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Jatto Abdul | Building Digital Experiences',
     description:
-      'Fullstack Engineer building digital experiences and simplifying complex systems since 2017. Specializing in Ruby, Go, and JavaScript.',
+      'Fullstack Engineer crafting delightful digital experiences and simplifying complex systems since 2017. Specializing in Ruby, Go, and JavaScript.',
     creator: '@jatto_abdul',
   },
   robots: {
@@ -70,6 +71,7 @@ export const metadata: Metadata = {
   },
 };
 
+// export default function RootLayout({ children }: { children: React.ReactNode }) {
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -85,7 +87,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <div className="relative flex min-h-screen flex-col">
             <Header />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 min-h-screen">{children}</main>
             <Footer />
           </div>
         </ThemeProvider>
