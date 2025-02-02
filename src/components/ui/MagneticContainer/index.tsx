@@ -78,7 +78,7 @@ export function MagneticContainer({
       ref={ref}
       className={wrapperClassName}
       style={{ position: 'relative', display: 'inline-block' }}
-      data-magnetic="true"
+      data-cursor-interactive="true"
     >
       <MotionDiv
         className={cn(innerClassName, className)}

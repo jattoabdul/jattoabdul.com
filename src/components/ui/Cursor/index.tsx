@@ -32,7 +32,7 @@ export function Cursor() {
 
       // Check if we're over an interactive element
       const target = e.target as HTMLElement;
-      const isInteractive = target.closest('[data-magnetic]') !== null;
+      const isInteractive = target.closest('[data-cursor-interactive]') !== null;
       setIsOverInteractive(isInteractive);
     };
 
