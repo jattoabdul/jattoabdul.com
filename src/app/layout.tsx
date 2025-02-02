@@ -5,7 +5,6 @@ import localFont from 'next/font/local';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ThemeProvider } from '@/components/providers/theme-provider';
-import { Cursor } from '@/components/ui/Cursor';
 
 import '@/styles/globals.css';
 
@@ -85,7 +84,6 @@ export default function RootLayout({
       <body className="min-h-screen bg-background font-avant-garde antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <div className="relative flex min-h-screen flex-col">
-            <Cursor />
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
