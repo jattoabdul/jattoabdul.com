@@ -9,6 +9,7 @@ import { Icon } from '@components/ui/Icons';
 import { SideNav } from '@components/layout/Navigation/SideNav';
 import { CommandMenu } from '@components/layout/Navigation/CommandMenu';
 import { MagneticContainer } from '@components/ui/MagneticContainer';
+import { cn } from '@/lib/utils';
 
 export function Header() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -40,7 +41,10 @@ export function Header() {
                   alt="JA Logo"
                   width={72}
                   height={72}
-                  className="transition-all duration-300 group-hover:invert"
+                  className={cn(
+                    "transition-all duration-300 text-wheat",
+                    "group-hover:invert group-hover:brightness-0"
+                  )}
                 />
               </div>
             </Link>
@@ -64,7 +68,10 @@ export function Header() {
               <Icon
                 name="Command"
                 size="32"
-                className="transition-all duration-300 group-hover:invert"
+                className={cn(
+                  "transition-all duration-300 text-wheat",
+                  "group-hover:invert group-hover:brightness-0"
+                )}
               />
               <span className="sr-only">Command Menu</span>
             </Button>
