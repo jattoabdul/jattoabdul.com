@@ -21,7 +21,7 @@ export function HeroSection() {
     <section className="relative h-screen hero-section">
       {/* Main Hero Content Mask Layer */}
       <motion.div
-        className="w-full h-full flex flex-col items-center justify-center cursor-default absolute bg-primary text-themeSmokyBlack"
+        className="w-full h-full flex flex-col text-6xl items-center justify-center cursor-default absolute bg-primary text-smoky"
         animate={{
           WebkitMaskPosition: `${mousePos.x - size / 2}px ${mousePos.y - size / 2}px`,
           WebkitMaskSize: `${size}px`,
@@ -39,14 +39,14 @@ export function HeroSection() {
         }}
       >
         {/*<p onMouseEnter={() => setMousePos(x, y)} onMouseLeave={() => setMousePos(x, y)}>*/}
-        <p onMouseEnter={() => setSize(400)} onMouseLeave={() => setSize(40)}>
-          Main Site Mask Content Wrapped in Mask Hover HOC and then Wrapped in Mask Frame HOC
+        <p className="p-10" onMouseEnter={() => setSize(400)} onMouseLeave={() => setSize(40)}>
+          Main Site Mask Content
         </p>
       </motion.div>
 
       {/* Main Hero Content Original Layer */}
-      <div className="w-full h-full flex flex-col items-center justify-center cursor-default">
-        <p>Main Site Original Content Not in a Mask Hover HOC and not Wrapped in Mask Frame HOC</p>
+      <div className="w-full h-full flex flex-col text-6xl items-center justify-center cursor-default">
+        <p className="p-10">Main Site Original Content</p>
       </div>
     </section>
   );
