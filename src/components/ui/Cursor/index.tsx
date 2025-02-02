@@ -77,7 +77,7 @@ export function Cursor() {
   };
 
   const cursorProps: DivProps = {
-    className: 'relative h-8 w-8',
+    className: 'relative h-10 w-10',
     animate: {
       scale: isVisible ? 1 : 0,
       x: isLeaving ? exitDirection.x * 100 : 0,
@@ -93,14 +93,18 @@ export function Cursor() {
   return (
     <MotionDiv {...containerProps}>
       <MotionDiv {...cursorProps}>
-        <div className={cn(
-          "absolute inset-0 rounded-full bg-cinnabar",
-          isOverInteractive ? 'opacity-20' : 'opacity-80'
-        )} />
-        <div className={cn(
-          "absolute inset-0 rounded-full bg-cinnabar",
-          isOverInteractive ? 'opacity-10 blur-sm' : 'opacity-80 blur-sm'
-        )} />
+        <div
+          className={cn(
+            'absolute inset-0 rounded-full bg-cinnabar',
+            isOverInteractive ? 'opacity-20' : 'opacity-80'
+          )}
+        />
+        <div
+          className={cn(
+            'absolute inset-0 rounded-full bg-cinnabar',
+            isOverInteractive ? 'opacity-10 blur-sm' : 'opacity-80 blur-sm'
+          )}
+        />
       </MotionDiv>
     </MotionDiv>
   );
