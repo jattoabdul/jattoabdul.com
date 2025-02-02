@@ -16,76 +16,64 @@ export function IconDemo() {
     .slice(0, 12) as ReactSimpleIconName[];
 
   return (
-    <div>
-      <h2 className="text-2xl font-heading mb-4">Icon System Demo</h2>
+    <div className="space-y-16">
+      {/* Heading */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-heading">Icon System</h2>
+        <p className="text-muted-foreground">A showcase of our icon system with different sizes and variations.</p>
+      </div>
 
       {/* Icon sizes demo */}
-      <div>
-        <h3 className="text-xl font-heading mb-2">Icon Sizes</h3>
-        <div className="flex items-center gap-4">
+      <div className="space-y-8">
+        <div className="space-y-4">
+          <h3 className="text-xl font-heading">Icon Sizes</h3>
+          <p className="text-muted-foreground">Available icon sizes for consistent scaling.</p>
+        </div>
+        <div className="flex items-center gap-8">
           {Object.entries(IconSizes).map(([size, value]) => (
             <div key={size} className="flex flex-col items-center gap-2">
               <Icon name="Github" size={value} />
-              <span className="text-sm">{size}</span>
+              <span className="text-sm text-muted-foreground">{size}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Lucide icons demo */}
-      <div>
-        <h3 className="text-xl font-heading mb-2">Lucide Icons</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+      <div className="space-y-8">
+        <div className="space-y-4">
+          <h3 className="text-xl font-heading">Lucide Icons</h3>
+          <p className="text-muted-foreground">A collection of beautifully crafted open source icons.</p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
           {lucideIconNames.map(name => (
             <div
               key={name}
-              className="flex flex-col items-center gap-2 p-4 rounded-lg border border-border hover:bg-accent hover:text-primary-foreground transition-colors"
+              className="flex flex-col items-center gap-3 p-4 rounded-lg border border-border hover:bg-accent hover:text-accent-foreground transition-colors"
             >
               <Icon name={name} size={IconSizes.md} />
-              <span className="text-xs text-center">{name}</span>
+              <span className="text-xs text-center text-muted-foreground">{name}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Simple icons demo */}
-      <div>
-        <h3 className="text-xl font-heading mb-2">Simple Icons</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+      <div className="space-y-8">
+        <div className="space-y-4">
+          <h3 className="text-xl font-heading">Brand Icons</h3>
+          <p className="text-muted-foreground">Popular brand and logo icons from Simple Icons.</p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
           {reactSimpleIconNames.map(name => (
             <div
               key={name}
-              className="flex flex-col items-center gap-2 p-4 rounded-lg border border-border hover:bg-accent transition-colors"
+              className="flex flex-col items-center gap-3 p-4 rounded-lg border border-border hover:bg-accent hover:text-accent-foreground transition-colors"
             >
-              <Icon name={name} size={IconSizes.md} source="simple" />
-              <span className="text-xs text-center">{name.replace('Si', '')}</span>
+              <Icon name={name} size={IconSizes.md} />
+              <span className="text-xs text-center text-muted-foreground">{name.replace('si', '')}</span>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* Pre-configured brand icons demo */}
-      <div>
-        <h3 className="text-xl font-heading mb-2">Pre-configured Brand Icons</h3>
-        <div className="flex items-center gap-4">
-          {Object.entries(BrandIcons).map(([name, BrandIcon]) => (
-            <div key={name} className="flex flex-col items-center gap-2">
-              <BrandIcon name={name as ReactSimpleIconName} size={IconSizes.md} />
-              <span className="text-xs">{name}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Icon colors demo */}
-      <div>
-        <h3 className="text-xl font-heading mb-2">Icon Colors</h3>
-        <div className="flex items-center gap-4">
-          <Icon name="SiGithub" className="text-primary" />
-          <Icon name="SiGithub" className="text-secondary" />
-          <Icon name="SiGithub" className="text-accent" />
-          <Icon name="SiGithub" className="text-muted-foreground" />
-          <Icon name="SiGithub" className="text-cinnabar" />
         </div>
       </div>
     </div>

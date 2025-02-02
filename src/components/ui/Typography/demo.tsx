@@ -1,49 +1,59 @@
 export const Typography = () => {
   return (
-    <div>
-      {/* Existing Text Showcase */}
-      <h1 className="font-avant-garde text-center">Typography Demo</h1>
-      <h1 className="flex flex-col items-center text-9xl text-center uppercase font-avant-garde font-bold">
-        <div className="line flex">
-          <div className="char">M</div>
-          <div className="char">a</div>
-          <div className="char">k</div>
-          <div className="char">i</div>
-          <div className="char">n</div>
-          <div className="char">g</div>
-        </div>
-        <div className="line flex">
-          <div className="char">G</div>
-          <div className="char">o</div>
-          <div className="char">o</div>
-          <div className="char">d</div>
-        </div>
-        <div className="line flex">
-          <div className="char">S</div>
-          <div className="char">h</div>
-          <div className="char">i</div>
-          <div className="char">t</div>
-        </div>
-        <div className="line flex">
-          <div className="char">S</div>
-          <div className="char">i</div>
-          <div className="char">n</div>
-          <div className="char">c</div>
-          <div className="char">e</div>
-        </div>
-        <div className="line flex">
-          <div className="char">2</div>
-          <div className="char">0</div>
-          <div className="char">0</div>
-          <div className="char">9</div>
-        </div>
-      </h1>
-      <p className="font-nunito-sans text-center">Interactive Labs</p>
+    <div className="space-y-16">
+      {/* Heading */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-heading">Typography System</h2>
+        <p className="text-muted-foreground">A showcase of our typography system and text styles.</p>
+      </div>
+
+      {/* Hero Text Showcase */}
+      <div className="py-12 space-y-6">
+        <h1 className="flex flex-col items-center text-9xl text-center uppercase font-avant-garde font-bold leading-none tracking-tight">
+          <div className="line flex">
+            <div className="char">M</div>
+            <div className="char">a</div>
+            <div className="char">k</div>
+            <div className="char">i</div>
+            <div className="char">n</div>
+            <div className="char">g</div>
+          </div>
+          <div className="line flex">
+            <div className="char">G</div>
+            <div className="char">o</div>
+            <div className="char">o</div>
+            <div className="char">d</div>
+          </div>
+          <div className="line flex">
+            <div className="char">S</div>
+            <div className="char">h</div>
+            <div className="char">i</div>
+            <div className="char">t</div>
+          </div>
+          <div className="line flex">
+            <div className="char">S</div>
+            <div className="char">i</div>
+            <div className="char">n</div>
+            <div className="char">c</div>
+            <div className="char">e</div>
+          </div>
+          <div className="line flex">
+            <div className="char">2</div>
+            <div className="char">0</div>
+            <div className="char">0</div>
+            <div className="char">9</div>
+          </div>
+        </h1>
+        <p className="font-nunito-sans text-center text-xl text-muted-foreground">Interactive Labs</p>
+      </div>
 
       {/* Headings */}
       <div className="space-y-8">
-        <h2 className="text-2xl font-heading mb-4">Headings</h2>
         <div className="space-y-4">
+          <h3 className="text-xl font-heading">Headings</h3>
+          <p className="text-muted-foreground">Available heading styles with different sizes and weights.</p>
+        </div>
+        <div className="space-y-8">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Heading 1 - The Quick Brown Fox
           </h1>
@@ -59,100 +69,64 @@ export const Typography = () => {
         </div>
       </div>
 
-      {/* Paragraphs */}
+      {/* Body Text */}
       <div className="space-y-8">
-        <h2 className="text-2xl font-heading mb-4">Paragraphs</h2>
-        <div className="space-y-4 max-w-prose">
-          <p className="leading-7 [&:not(:first-child)]:mt-6">
-            The quick brown fox jumps over the lazy dog. Default paragraph text with standard line
-            height and spacing. This is how most of your content will look.
-          </p>
-          <p className="text-sm leading-6 [&:not(:first-child)]:mt-6">
-            The quick brown fox jumps over the lazy dog. Small text variant for less important
-            content or supporting text.
-          </p>
-          <p className="text-lg leading-8 [&:not(:first-child)]:mt-6">
-            The quick brown fox jumps over the lazy dog. Large text variant for important content or
-            introductory paragraphs.
-          </p>
+        <div className="space-y-4">
+          <h3 className="text-xl font-heading">Body Text</h3>
+          <p className="text-muted-foreground">Different text styles for body content.</p>
         </div>
-      </div>
-
-      {/* Text Colors */}
-      <div className="space-y-8">
-        <h2 className="text-2xl font-heading mb-4">Text Colors</h2>
         <div className="space-y-6">
-          {/* Brand Colors */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-heading">Brand Colors</h3>
-            <div className="grid gap-4">
-              <div className="bg-cinnabar p-4 rounded-md">
-                <p className="text-cinnabar-foreground">Text on Cinnabar Background</p>
-              </div>
-              <div className="bg-wheat p-4 rounded-md">
-                <p className="text-wheat-foreground">Text on Wheat Background</p>
-              </div>
-              <div className="bg-smoky p-4 rounded-md">
-                <p className="text-foreground">Text on Smoky Background</p>
-              </div>
-            </div>
-          </div>
-
-          {/* UI Colors */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-heading">UI Colors</h3>
-            <div className="grid gap-4">
-              <p className="text-primary">Primary Text</p>
-              <p className="text-secondary">Secondary Text</p>
-              <p className="text-accent">Accent Text</p>
-              <p className="text-muted-foreground">Muted Text</p>
-              <p className="text-destructive">Destructive Text</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Font Weights */}
-      <div className="space-y-8">
-        <h2 className="text-2xl font-heading mb-4">Font Weights</h2>
-        <div className="space-y-4">
-          <p className="font-light">Light - The quick brown fox jumps over the lazy dog (300)</p>
-          <p className="font-normal">Regular - The quick brown fox jumps over the lazy dog (400)</p>
-          <p className="font-medium">Medium - The quick brown fox jumps over the lazy dog (500)</p>
-          <p className="font-semibold">
-            Semibold - The quick brown fox jumps over the lazy dog (600)
+          <p className="leading-7 [&:not(:first-child)]:mt-6">
+            The quick brown fox jumps over the lazy dog. This is a paragraph of text that demonstrates
+            the default body style. It includes multiple sentences to show line height and spacing.
           </p>
-          <p className="font-bold">Bold - The quick brown fox jumps over the lazy dog (700)</p>
-          <p className="font-extrabold">
-            Extra Bold - The quick brown fox jumps over the lazy dog (800)
+          <p className="text-xl text-muted-foreground">
+            Large muted text style - The quick brown fox jumps over the lazy dog.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Small muted text style - The quick brown fox jumps over the lazy dog.
           </p>
         </div>
       </div>
 
-      {/* Font Families */}
+      {/* Lists */}
       <div className="space-y-8">
-        <h2 className="text-2xl font-heading mb-4">Font Families</h2>
         <div className="space-y-4">
-          <p className="font-avant-garde text-xl">Avant Garde - Primary Display Font</p>
-          <p className="font-nunito-sans text-xl">Nunito Sans - Primary Body Font</p>
+          <h3 className="text-xl font-heading">Lists</h3>
+          <p className="text-muted-foreground">Different list styles and variations.</p>
+        </div>
+        <div className="grid gap-8 md:grid-cols-2">
+          <ul className="list-disc list-inside space-y-2">
+            <li>First item in an unordered list</li>
+            <li>Second item in an unordered list</li>
+            <li>Third item in an unordered list</li>
+          </ul>
+          <ol className="list-decimal list-inside space-y-2">
+            <li>First item in an ordered list</li>
+            <li>Second item in an ordered list</li>
+            <li>Third item in an ordered list</li>
+          </ol>
         </div>
       </div>
 
-      {/* Special Text Styles */}
+      {/* Inline Text */}
       <div className="space-y-8">
-        <h2 className="text-2xl font-heading mb-4">Special Text Styles</h2>
         <div className="space-y-4">
-          <p className="italic">Italic text style</p>
-          <p className="underline">Underlined text style</p>
-          <p className="line-through">Strikethrough text style</p>
-          <p className="uppercase">Uppercase text transform</p>
-          <p className="lowercase">Lowercase text transform</p>
-          <p className="capitalize">Capitalized text transform</p>
-          <div className="bg-primary/10 p-4 rounded-md">
-            <p className="text-sm text-muted-foreground">
-              Muted text in a subtle container - often used for helper text or metadata
-            </p>
-          </div>
+          <h3 className="text-xl font-heading">Inline Styles</h3>
+          <p className="text-muted-foreground">Various inline text decorations and styles.</p>
+        </div>
+        <div className="space-y-4">
+          <p>
+            Text can be <strong>bold</strong>, <em>italic</em>, or <u>underlined</u>. You can also add{' '}
+            <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+              inline code
+            </code>{' '}
+            or <kbd className="bg-accent px-1 py-0.5 text-accent-foreground">keyboard shortcuts</kbd>.
+          </p>
+          <p>
+            Links can be <a href="#" className="font-medium text-primary underline underline-offset-4">underlined</a> or{' '}
+            <a href="#" className="font-medium text-primary hover:underline">hover underlined</a>.
+          </p>
         </div>
       </div>
     </div>
