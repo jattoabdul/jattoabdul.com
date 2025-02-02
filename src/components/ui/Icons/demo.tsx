@@ -74,7 +74,6 @@ export function IconDemo() {
               key={name}
               className="flex flex-col items-center gap-3 p-4 rounded-lg border border-border hover:bg-accent hover:text-accent-foreground transition-colors"
             >
-              {name}
               <Icon name={name} size={IconSizes.md} source="simple" />
               <span className="text-xs text-center text-muted-foreground">
                 {name.replace('Si', '')}
