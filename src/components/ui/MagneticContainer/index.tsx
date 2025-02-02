@@ -20,9 +20,22 @@ interface MagneticContainerProps extends HTMLMotionProps<'div'> {
   wrapperClassName?: string;
   /** Optional class for the moving/inner element */
   innerClassName?: string;
+  /** Variant of the magnetic effect */
+  variant?: 'default' | 'social';
 }
 
 const MotionDiv = motion.div;
+
+const variants = {
+  default: {
+    springConfig: { damping: 15, stiffness: 150, mass: 0.2 },
+    cursorAttribute: 'data-cursor-interactive',
+  },
+  social: {
+    springConfig: { damping: 20, stiffness: 250, mass: 0.1 },
+    cursorAttribute: 'data-cursor-social',
+  },
+} as const;
 
 export function MagneticContainer({
   children,
@@ -34,11 +47,15 @@ export function MagneticContainer({
   wrapperClassName = '',
   innerClassName = '',
   className = '',
+  variant = 'default',
   ...props
 }: MagneticContainerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  // Get variant configuration
+  const variantConfig = variants[variant];
 
   useEffect(() => {
     if (disabled) {
@@ -53,13 +70,19 @@ export function MagneticContainer({
       const centerX = left + width / 2;
       const centerY = top + height / 2;
 
-      const distX = Math.abs(centerX - e.clientX);
-      const distY = Math.abs(centerY - e.clientY);
+      const distanceX = e.clientX - centerX;
+      const distanceY = e.clientY - centerY;
+      const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-      if (distX < width / 2 + padding && distY < height / 2 + padding) {
+      if (distance < padding) {
         setIsActive(true);
-        const offsetX = (e.clientX - centerX) / magneticStrength;
-        const offsetY = (e.clientY - centerY) / magneticStrength;
+        // Adjust pull strength based on variant
+        const pullStrength = variant === 'social' 
+          ? Math.max(0.2, (distance / padding) * 0.8)
+          : Math.max(0.1, distance / padding);
+        
+        const offsetX = (distanceX / magneticStrength) * pullStrength;
+        const offsetY = (distanceY / magneticStrength) * pullStrength;
         setPosition({ x: offsetX, y: offsetY });
       } else {
         setIsActive(false);
@@ -67,27 +90,33 @@ export function MagneticContainer({
       }
     };
 
+    const handleMouseLeave = () => {
+      setIsActive(false);
+      setPosition({ x: 0, y: 0 });
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [padding, disabled, magneticStrength]);
+  }, [padding, disabled, magneticStrength, variant]);
 
   return (
     <div
       ref={ref}
       className={wrapperClassName}
       style={{ position: 'relative', display: 'inline-block' }}
-      data-cursor-interactive="true"
+      {...{ [variantConfig.cursorAttribute]: true }}
     >
       <MotionDiv
         className={cn(innerClassName, className)}
         animate={position}
         transition={{
           type: 'spring',
-          stiffness: 150,
-          damping: 15,
-          mass: 0.1,
+          ...variantConfig.springConfig,
           duration: isActive ? activeTransitionDuration : inactiveTransitionDuration,
         }}
         style={{

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Icon, IconProps } from '@components/ui/Icons';
-import { MagneticSocial } from '@/components/ui/MagneticSocial';
+import { MagneticContainer } from '@/components/ui/MagneticContainer';
 
 const socialLinks = [
   { icon: 'Mail', href: 'mailto:jattoabdul@gmail.com' },
@@ -17,10 +17,11 @@ export function SocialLinks() {
   return (
     <nav className="fixed right-8 bottom-8 -translate-y-8 flex flex-col gap-6 z-50">
       {socialLinks.map(({ icon, href }) => (
-        <MagneticSocial
+        <MagneticContainer
           key={href}
           padding={40}
           magneticStrength={3}
+          variant="social"
         >
           <Link
             href={href}
@@ -31,7 +32,7 @@ export function SocialLinks() {
             <Icon name={icon as IconProps['name']} className="size-5" />
             <span className="sr-only">{icon.replace('Si', '')}</span>
           </Link>
-        </MagneticSocial>
+        </MagneticContainer>
       ))}
     </nav>
   );
