@@ -1,6 +1,11 @@
-import Link from 'next/link';
+'use client';
 
+import Link from 'next/link';
 import { SocialLinks } from '@components/layout/Navigation/SocialLinks';
+
+// const originalText = 'Built with ❤️ by Jatto Abdul. The source code is available on GitHub.';
+// const revealText =
+//   "Inspired by Minh Pham's portfolio, crafted from scratch with passion by yours truly.";
 
 export function Footer() {
   return (

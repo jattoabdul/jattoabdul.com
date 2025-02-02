@@ -1,15 +1,19 @@
 'use client';
 
-import { Typography } from '@components/ui/Typography/demo';
+import { TypographyDemo } from '@components/ui/Typography/demo';
 import { IconDemo } from '@components/ui/Icons/demo';
 import { ButtonDemo } from '@components/ui/Button/demo';
 import { Section } from '@components/ui/Section';
 import { Grid } from '@components/ui/Grid';
 import { Container } from '@components/ui/Container';
 
-export function ThemeContent() {
+interface ThemeContentProps {
+  className?: string;
+}
+
+export function ThemeContent({ className }: ThemeContentProps) {
   return (
-    <main className="min-h-screen bg-background">
+    <main className={className}>
       {/* Hero Section */}
       <Section variant="default" animation="slide-down" className="min-h-[50vh] flex items-center">
         <div className="space-y-4">
@@ -67,7 +71,7 @@ export function ThemeContent() {
 
       {/* Typography */}
       <Section animation="slide-up" delay={0.3}>
-        <Typography />
+        <TypographyDemo />
       </Section>
 
       {/* Icons */}

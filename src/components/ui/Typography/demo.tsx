@@ -1,10 +1,14 @@
-export const Typography = () => {
+'use client';
+
+export function TypographyDemo() {
   return (
     <div className="space-y-16">
       {/* Heading */}
       <div className="space-y-4">
         <h2 className="text-2xl font-heading">Typography System</h2>
-        <p className="text-muted-foreground">A showcase of our typography system and text styles.</p>
+        <p className="text-muted-foreground">
+          A showcase of our typography system and text styles.
+        </p>
       </div>
 
       {/* Hero Text Showcase */}
@@ -44,14 +48,18 @@ export const Typography = () => {
             <div className="char">9</div>
           </div>
         </h1>
-        <p className="font-nunito-sans text-center text-xl text-muted-foreground">Interactive Labs</p>
+        <p className="font-nunito-sans text-center text-xl text-muted-foreground">
+          Interactive Labs
+        </p>
       </div>
 
-      {/* Headings */}
+      {/* Text Styles */}
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="text-xl font-heading">Headings</h3>
-          <p className="text-muted-foreground">Available heading styles with different sizes and weights.</p>
+          <h3 className="text-xl font-heading">Text Styles</h3>
+          <p className="text-muted-foreground">
+            Available text styles with different sizes and weights.
+          </p>
         </div>
         <div className="space-y-8">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
@@ -69,16 +77,17 @@ export const Typography = () => {
         </div>
       </div>
 
-      {/* Body Text */}
+      {/* Paragraphs */}
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="text-xl font-heading">Body Text</h3>
-          <p className="text-muted-foreground">Different text styles for body content.</p>
+          <h3 className="text-xl font-heading">Paragraphs</h3>
+          <p className="text-muted-foreground">Different paragraph styles and text formatting.</p>
         </div>
         <div className="space-y-6">
           <p className="leading-7 [&:not(:first-child)]:mt-6">
-            The quick brown fox jumps over the lazy dog. This is a paragraph of text that demonstrates
-            the default body style. It includes multiple sentences to show line height and spacing.
+            The quick brown fox jumps over the lazy dog. This is a paragraph of text that
+            demonstrates the default body style. It includes multiple sentences to show line height
+            and spacing.
           </p>
           <p className="text-xl text-muted-foreground">
             Large muted text style - The quick brown fox jumps over the lazy dog.
@@ -109,26 +118,35 @@ export const Typography = () => {
         </div>
       </div>
 
-      {/* Inline Text */}
+      {/* Text Formatting */}
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="text-xl font-heading">Inline Styles</h3>
-          <p className="text-muted-foreground">Various inline text decorations and styles.</p>
+          <h3 className="text-xl font-heading">Text Formatting</h3>
+          <p className="text-muted-foreground">Examples of inline text formatting.</p>
         </div>
         <div className="space-y-4">
           <p>
-            Text can be <strong>bold</strong>, <em>italic</em>, or <u>underlined</u>. You can also add{' '}
+            Text can be <strong>bold</strong>, <em>italic</em>, or <u>underlined</u>. You can also
+            add{' '}
             <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
               inline code
             </code>{' '}
-            or <kbd className="bg-accent px-1 py-0.5 text-accent-foreground">keyboard shortcuts</kbd>.
+            or{' '}
+            <kbd className="bg-accent px-1 py-0.5 text-accent-foreground">keyboard shortcuts</kbd>.
           </p>
           <p>
-            Links can be <a href="#" className="font-medium text-primary underline underline-offset-4">underlined</a> or{' '}
-            <a href="#" className="font-medium text-primary hover:underline">hover underlined</a>.
+            Links can be{' '}
+            <a href="#" className="font-medium text-primary underline underline-offset-4">
+              underlined
+            </a>{' '}
+            or{' '}
+            <a href="#" className="font-medium text-primary hover:underline">
+              hover underlined
+            </a>
+            .
           </p>
         </div>
       </div>
     </div>
   );
-};
+}
