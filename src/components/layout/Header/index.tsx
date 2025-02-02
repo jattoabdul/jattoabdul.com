@@ -9,86 +9,70 @@ import { Icon } from '@components/ui/Icons';
 import { SideNav } from '@components/layout/Navigation/SideNav';
 import { CommandMenu } from '@components/layout/Navigation/CommandMenu';
 import { MagneticContainer } from '@components/ui/MagneticContainer';
-import { cn } from '@/lib/utils';
 
 export function Header() {
   const [openMenu, setOpenMenu] = useState(false);
-  const [isLogoHovered, setIsLogoHovered] = useState(false);
-  const [isCommandHovered, setIsCommandHovered] = useState(false);
 
   return (
     <>
-      <header className="fixed top-5 left-0 right-0 z-50 bg-background/0 px-4 md:px-6">
+      <header className="fixed top-5 left-0 right-0 z-40 bg-background/0 px-4 md:px-6">
         {/* Left Side Navigation Menu */}
         <SideNav />
 
         {/* Header Content */}
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <MagneticContainer 
+          <MagneticContainer
             magneticStrength={4}
             padding={50}
             activeTransitionDuration={0.3}
             inactiveTransitionDuration={0.5}
-            onMouseEnter={() => setIsLogoHovered(true)}
-            onMouseLeave={() => setIsLogoHovered(false)}
-            innerClassName="relative z-10"
+            innerClassName="relative"
           >
             <Link
               href="/"
               className="group relative flex items-center gap-2 p-2"
+              data-cursor-interactive
             >
-              <div className="relative z-10 transition-transform duration-300">
+              <div className="relative z-50">
                 <Image
                   src="/images/JAlogoOption1.svg"
                   alt="JA Logo"
                   width={72}
                   height={72}
-                  className={cn('transition-all duration-300', isLogoHovered ? 'invert' : '')}
+                  className="transition-all duration-300 group-hover:invert"
                 />
               </div>
-              {/* Hover Effect Circle */}
-              <div
-                className={cn(
-                  'absolute inset-0 -z-0 rounded-full bg-cinnabar transition-all duration-300',
-                  isLogoHovered ? 'scale-[2] opacity-100' : 'scale-0 opacity-0'
-                )}
-              />
             </Link>
           </MagneticContainer>
 
           {/* App Command Icon (Command+K Keybinding) */}
-          <MagneticContainer 
+          <MagneticContainer
             magneticStrength={4}
             padding={50}
             activeTransitionDuration={0.3}
             inactiveTransitionDuration={0.5}
-            onMouseEnter={() => setIsCommandHovered(true)}
-            onMouseLeave={() => setIsCommandHovered(false)}
-            innerClassName="relative z-10"
+            innerClassName="relative"
           >
             <Button
               variant="ghost"
               size="icon"
-              className={cn(
-                'relative z-10 md:inline-flex [&_svg]:size-8 transition-all duration-300',
-                isCommandHovered ? 'text-smoky-primary' : ''
-              )}
+              className="relative z-50 md:inline-flex [&_svg]:size-8 group"
               onClick={() => setOpenMenu(true)}
+              data-cursor-interactive
             >
-              <Icon name="Command" size="32" />
+              <Icon
+                name="Command"
+                size="32"
+                className="transition-all duration-300 group-hover:invert"
+              />
               <span className="sr-only">Command Menu</span>
             </Button>
-            {/* Hover Effect Circle */}
-            <div
-              className={cn(
-                'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-0 rounded-full bg-cinnabar transition-all duration-300',
-                isCommandHovered ? 'w-20 h-20 opacity-100' : 'w-0 h-0 opacity-0'
-              )}
-            />
           </MagneticContainer>
         </div>
       </header>
+
+      {/* Command Menu */}
       <CommandMenu open={openMenu} onOpenChangeAction={setOpenMenu} />
     </>
   );

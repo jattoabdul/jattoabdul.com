@@ -66,8 +66,8 @@ export function Cursor() {
 
   const containerProps: DivProps = {
     className: cn(
-      'pointer-events-none fixed left-0 top-0 z-[999]',
-      !isOverInteractive && 'mix-blend-difference'
+      'pointer-events-none fixed left-0 top-0 z-30',
+      'hidden md:block' // Only show on desktop
     ),
     style: {
       x: springX,
@@ -85,8 +85,9 @@ export function Cursor() {
     },
     transition: {
       type: 'spring',
-      damping: 20,
-      stiffness: 300,
+      stiffness: 150,
+      damping: 15,
+      mass: 0.1,
     },
   };
 
@@ -95,14 +96,14 @@ export function Cursor() {
       <MotionDiv {...cursorProps}>
         <div
           className={cn(
-            'absolute inset-0 rounded-full bg-cinnabar',
-            isOverInteractive ? 'opacity-20' : 'opacity-80'
+            'absolute inset-0 rounded-full bg-cinnabar transition-all duration-300',
+            isOverInteractive ? 'opacity-100 scale-[1.5]' : 'opacity-80'
           )}
         />
         <div
           className={cn(
-            'absolute inset-0 rounded-full bg-cinnabar',
-            isOverInteractive ? 'opacity-10 blur-sm' : 'opacity-80 blur-sm'
+            'absolute inset-0 rounded-full bg-cinnabar transition-all duration-300',
+            isOverInteractive ? 'opacity-50 scale-[1.75] blur-sm' : 'opacity-80 blur-sm'
           )}
         />
       </MotionDiv>
