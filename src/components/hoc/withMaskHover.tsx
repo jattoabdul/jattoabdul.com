@@ -1,12 +1,12 @@
 'use client';
 
 import { ComponentType } from 'react';
-import { useMaskStore, MASK_SIZE, type MaskState } from '@/stores/maskStore';
+import { useMaskStore, MASK_SIZE, selectSize, selectSetSize } from '@/stores/maskStore';
 import { motion } from 'framer-motion';
 import useMousePosition from '@/hooks/useMousePosition';
+import { useMask } from '@/contexts/MaskContext';
 
 interface WithMaskHoverProps {
-  maskColor?: string;
   className?: string;
 }
 
@@ -14,18 +14,21 @@ export function withMaskHover<P extends object>(
   WrappedComponent: ComponentType<P & WithMaskHoverProps>
 ) {
   const WithMaskHover = (props: P & WithMaskHoverProps) => {
-    const { setSize, size } = useMaskStore((state: MaskState) => ({
-      setSize: state.setSize,
-      size: state.size,
-    }));
+    const size = useMaskStore(selectSize);
+    const setSize = useMaskStore(selectSetSize);
     const { x, y } = useMousePosition();
-    const { maskColor = '#F2542D', className, ...componentProps } = props;
+    const { config } = useMask();
+    const { className, ...componentProps } = props;
+
+    if (!config.enabled) {
+      return <WrappedComponent {...(componentProps as P)} className={className} />;
+    }
 
     return (
       <div
         className={`relative cursor-none ${className}`}
-        onMouseEnter={() => setSize(MASK_SIZE.onHover)}
-        onMouseLeave={() => setSize(MASK_SIZE.initial)}
+        onMouseEnter={() => setSize(config.hoverSize || MASK_SIZE.onHover)}
+        onMouseLeave={() => setSize(config.initialSize || MASK_SIZE.initial)}
       >
         {/* Original Component Layer */}
         <div className="relative">
@@ -47,11 +50,14 @@ export function withMaskHover<P extends object>(
           }}
           transition={{
             type: 'tween',
-            ease: 'backOut',
-            duration: 0.5,
+            ease: config.easing || 'backOut',
+            duration: config.transitionDuration || 0.5,
           }}
         >
-          <div className="absolute inset-0" style={{ backgroundColor: maskColor }} />
+          <div 
+            className="absolute inset-0" 
+            style={{ backgroundColor: config.color || '#F2542D' }} 
+          />
           <div className="relative">
             <WrappedComponent {...(componentProps as P)} />
           </div>

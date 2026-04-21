@@ -6,8 +6,7 @@ import { motion } from 'framer-motion';
 import useMousePosition from '@/hooks/useMousePosition';
 import { useMaskStore } from '@/stores/maskStore';
 
-const MASK_IMAGE_URL =
-  'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iMTAwIiBmaWxsPSJibGFjayIvPgo8L3N2Zz4K';
+const MASK_IMAGE_URL = 'https://framerusercontent.com/images/De0CMakQwO0HOVWPyQnVeTw.svg';
 
 export function withMaskFrame<P extends object>(Component: ComponentType<P>): ComponentType<P> {
   const WithMaskFrame = (props: P) => {
