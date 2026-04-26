@@ -1,26 +1,20 @@
-'use client';
-
-import Link from 'next/link';
-import posthog from 'posthog-js';
-
 import type { Project } from '@/data/projects';
+import { TrackedLink } from '@/components/site/TrackedLink';
 
 export function ProjectCard({ project }: { project: Project }) {
   const Icon = project.icon;
 
-  function handleClick() {
-    posthog.capture('project_card_clicked', {
-      slug: project.slug,
-      title: project.title,
-      status: project.status,
-    });
-  }
-
   return (
-    <Link
+    <TrackedLink
       href={`/projects/${project.slug}`}
+      label={project.title}
+      eventName="project_card_clicked"
+      properties={{
+        slug: project.slug,
+        title: project.title,
+        status: project.status,
+      }}
       className="group flex flex-col gap-3 rounded-md border border-border bg-bg-surface p-5 shadow-sm transition-all hover:border-border-mid hover:shadow-md"
-      onClick={handleClick}
     >
       <div className="flex items-start justify-between">
         <div className="flex size-9 items-center justify-center rounded-md border border-accent-mid bg-accent-light">
@@ -47,6 +41,6 @@ export function ProjectCard({ project }: { project: Project }) {
           </span>
         ))}
       </div>
-    </Link>
+    </TrackedLink>
   );
 }

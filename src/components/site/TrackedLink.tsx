@@ -1,19 +1,31 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import posthog from 'posthog-js';
 
 type TrackedLinkProps = {
   href: string;
   label: string;
+  eventName?: string;
+  properties?: Record<string, string | number | boolean | null | undefined>;
   className?: string;
   target?: string;
   rel?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-export function TrackedLink({ href, label, className, target, rel, children }: TrackedLinkProps) {
+export function TrackedLink({
+  href,
+  label,
+  eventName = 'social_link_clicked',
+  properties,
+  className,
+  target,
+  rel,
+  children,
+}: TrackedLinkProps) {
   function handleClick() {
-    posthog.capture('social_link_clicked', { label, href });
+    posthog.capture(eventName, { label, href, ...properties });
   }
 
   return (
