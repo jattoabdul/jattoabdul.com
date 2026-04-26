@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import posthog from 'posthog-js';
 
 type Status = 'idle' | 'submitting' | 'done' | 'error';
 
@@ -19,9 +20,12 @@ export function NewsletterForm() {
         body: JSON.stringify({ email }),
       });
       if (!res.ok) throw new Error(`status ${res.status}`);
+      posthog.capture('newsletter_subscribed');
       setStatus('done');
       setEmail('');
-    } catch {
+    } catch (err) {
+      posthog.captureException(err);
+      posthog.capture('newsletter_subscription_failed');
       setStatus('error');
     }
   }
@@ -49,7 +53,7 @@ export function NewsletterForm() {
         required
         autoComplete="email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={e => setEmail(e.target.value)}
         placeholder="your@email.com"
         className="min-w-[200px] flex-1 rounded-md border border-border-mid bg-bg-surface px-3.5 py-2.5 text-[14px] text-fg outline-none placeholder:text-fg-3 focus:border-accent focus:ring-2 focus:ring-accent/30"
       />

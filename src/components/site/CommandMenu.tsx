@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Command } from 'cmdk';
 import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowUpRight, FileText, Hash, Search } from 'lucide-react';
+import posthog from 'posthog-js';
 
 import { primaryNav } from '@/data/site';
 import { posts } from '@/data/posts';
@@ -23,23 +24,31 @@ export function CommandMenuTrigger({ variant = 'pill', className }: CommandTrigg
     const handler = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        setOpen((v) => !v);
+        setOpen(v => {
+          if (!v) posthog.capture('command_menu_opened', { trigger: 'keyboard' });
+          return !v;
+        });
       }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
+  function handleOpen() {
+    posthog.capture('command_menu_opened', { trigger: 'button' });
+    setOpen(true);
+  }
+
   return (
     <>
       {variant === 'pill' ? (
         <button
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={handleOpen}
           aria-label="Open command menu"
           className={cn(
             'inline-flex items-center gap-2 rounded-md border border-border bg-bg-raised px-2.5 py-1.5 text-[12px] text-fg-3 transition-colors hover:border-border-mid hover:text-fg',
-            className,
+            className
           )}
         >
           <Search className="size-[13px]" />
@@ -48,11 +57,11 @@ export function CommandMenuTrigger({ variant = 'pill', className }: CommandTrigg
       ) : (
         <button
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={handleOpen}
           aria-label="Open command menu"
           className={cn(
             'inline-flex size-8 items-center justify-center rounded-md text-fg-3 transition-colors hover:bg-bg-raised hover:text-fg',
-            className,
+            className
           )}
         >
           <Search className="size-4" />
@@ -72,7 +81,8 @@ function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
   const router = useRouter();
 
   const go = useCallback(
-    (href: string, external = false) => {
+    (href: string, label: string, group: string, external = false) => {
+      posthog.capture('command_menu_item_selected', { href, label, group, external });
       onOpenChange(false);
       if (external) {
         window.open(href, '_blank', 'noopener,noreferrer');
@@ -80,7 +90,7 @@ function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
         router.push(href);
       }
     },
-    [onOpenChange, router],
+    [onOpenChange, router]
   );
 
   return (
@@ -114,11 +124,15 @@ function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                 heading="Navigate"
                 className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pb-1 [&_[cmdk-group-heading]]:pt-3 [&_[cmdk-group-heading]]:font-mono [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-fg-3"
               >
-                <CommandItem onSelect={() => go('/')} icon="hash" label="Home" />
-                {primaryNav.map((nav) => (
+                <CommandItem
+                  onSelect={() => go('/', 'Home', 'navigate')}
+                  icon="hash"
+                  label="Home"
+                />
+                {primaryNav.map(nav => (
                   <CommandItem
                     key={nav.href}
-                    onSelect={() => go(nav.href)}
+                    onSelect={() => go(nav.href, nav.label, 'navigate')}
                     icon="hash"
                     label={nav.label}
                   />
@@ -129,7 +143,7 @@ function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                 heading="Writing"
                 className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pb-1 [&_[cmdk-group-heading]]:pt-3 [&_[cmdk-group-heading]]:font-mono [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-fg-3"
               >
-                {posts.map((post) => (
+                {posts.map(post => (
                   <CommandItem
                     key={post.slug}
                     icon={post.source === 'medium' ? 'external' : 'file'}
@@ -137,8 +151,8 @@ function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                     meta={post.category}
                     onSelect={() =>
                       post.source === 'medium' && post.url
-                        ? go(post.url, true)
-                        : go(`/writing/${post.slug}`)
+                        ? go(post.url, post.title, 'writing', true)
+                        : go(`/writing/${post.slug}`, post.title, 'writing')
                     }
                   />
                 ))}
@@ -148,13 +162,13 @@ function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                 heading="Projects"
                 className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pb-1 [&_[cmdk-group-heading]]:pt-3 [&_[cmdk-group-heading]]:font-mono [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-fg-3"
               >
-                {projects.map((p) => (
+                {projects.map(p => (
                   <CommandItem
                     key={p.slug}
                     icon="hash"
                     label={p.title}
                     meta={p.role}
-                    onSelect={() => go(`/projects/${p.slug}`)}
+                    onSelect={() => go(`/projects/${p.slug}`, p.title, 'projects')}
                   />
                 ))}
               </Command.Group>

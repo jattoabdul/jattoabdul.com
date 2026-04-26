@@ -63,3 +63,4 @@ plan.out
 
 # Railway local
 .railway/
+.env.local
