@@ -45,6 +45,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# opentofu / terraform local state and var files
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfplan
+plan.out
+.terraform/
+
 # editors and IDEs
 .idea/
 .vscode/
