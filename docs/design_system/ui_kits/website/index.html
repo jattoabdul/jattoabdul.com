@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jatto Abdul — jattoabdul.com v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Light tokens */
+:root {
+  --bg: #FAFAF9; --bg-surface: #FFFFFF; --bg-raised: #F5F5F4;
+  --bg-sunken: #EFEFED; --bg-accent: #ECFDF5; --bg-code: #F4F2EC;
+  --fg: #18181B; --fg-2: #57534E; --fg-3: #A8A29E;
+  --border: #E7E5E4; --border-mid: #D6D3D1;
+  --accent: #059669; --accent-h: #047857;
+  --accent-light: #ECFDF5; --accent-mid: #A7F3D0;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --transition: 150ms ease-out;
+}
+
+/* Dark tokens */
+.dark {
+  --bg: #0C0A09; --bg-surface: #161412; --bg-raised: #1E1B18;
+  --bg-sunken: #0A0908; --bg-accent: #022C22; --bg-code: #111008;
+  --fg: #FAFAF9; --fg-2: #A8A29E; --fg-3: #78716C;
+  --border: #292524; --border-mid: #3C3834;
+  --accent: #34D399; --accent-h: #6EE7B7;
+  --accent-light: #022C22; --accent-mid: #065F46;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.25);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.40);
+}
+
+html { -webkit-font-smoothing: antialiased; }
+body { font-family: var(--sans); background: var(--bg); color: var(--fg); transition: background 200ms, color 200ms; }
+a { color: var(--accent); text-decoration: none; }
+button { font-family: var(--sans); cursor: pointer; border: none; background: none; }
+input { font-family: var(--sans); }
+
+::selection { background: var(--accent-light); color: var(--fg); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Scrollbar (dark mode) */
+.dark ::-webkit-scrollbar { width: 6px; height: 6px; }
+.dark ::-webkit-scrollbar-track { background: var(--bg-raised); }
+.dark ::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 3px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+/* ══════════════════════════════════════════════════════════
+   ICONS
+══════════════════════════════════════════════════════════ */
+const ICON_PATHS = {
+  arrowRight: <><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>,
+  arrowUpRight: <><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></>,
+  layers:    <><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></>,
+  terminal:  <><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></>,
+  code:      <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></>,
+  zap:       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>,
+  fileText:  <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></>,
+  github:    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>,
+  twitter:   <path d="M4 4l11.733 16H20L8.267 4zM4 20l6.768-6.768M15.232 9.768L20 4"/>,
+  sun:       <><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></>,
+  moon:      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>,
+  search:    <><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></>,
+  command:   <><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></>,
+  rss:       <><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></>,
+  tag:       <><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></>,
+  hash:      <><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></>,
+  x: <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>,
+};
+
+function Icon({ name, size = 16, color = 'currentColor', sw = 1.5 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      stroke={color} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round"
+      aria-hidden="true">
+      {ICON_PATHS[name]}
+    </svg>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   DATA
+══════════════════════════════════════════════════════════ */
+const POSTS = [
+  { slug: 'pipelines', cat: 'Backend Systems', title: "Designing data pipelines that don't lie to you", excerpt: "Most pipeline failures aren't bugs — they're assumption violations baked in at design time.", date: '2025-04-12', mins: 8, tags: ['backend', 'python'], source: 'local' },
+  { slug: 'ai-workflows', cat: 'Applied AI', title: 'Building AI-assisted workflows without the hype', excerpt: "Real notes from integrating LLMs into production systems — what worked, what didn't.", date: '2025-03-28', mins: 6, tags: ['applied ai', 'llms'], source: 'local' },
+  { slug: 'staff-eng', cat: 'Career', title: 'What staff-level judgment actually looks like', excerpt: "It's less about technical complexity and more about which problems you choose to solve.", date: '2025-03-10', mins: 5, tags: ['career'], source: 'local' },
+  { slug: 'medium-kafka', cat: 'Platform Engineering', title: 'Kafka consumer group rebalancing — what triggers it and how to avoid it', excerpt: 'A practical guide to diagnosing and reducing rebalance frequency in high-throughput systems.', date: '2025-02-18', mins: 9, tags: ['kafka', 'backend', 'platform'], source: 'medium', mediumUrl: 'https://medium.com' },
+  { slug: 'medium-llm', cat: 'Applied AI', title: 'Structuring LLM outputs for downstream reliability', excerpt: 'Why function calling and structured outputs are not the same thing, and when to use each.', date: '2025-02-05', mins: 7, tags: ['applied ai', 'llms'], source: 'medium', mediumUrl: 'https://medium.com' },
+];
+
+const NOTES = [
+  { date: 'Apr 20', title: 'On idempotency in distributed systems', tags: ['backend'] },
+  { date: 'Apr 15', title: 'Why I stopped using ORMs for reporting queries', tags: ['sql', 'backend'] },
+  { date: 'Apr 8',  title: 'Prompt caching in production: what actually matters', tags: ['applied ai'] },
+  { date: 'Mar 30', title: 'Structured outputs vs function calling', tags: ['applied ai'] },
+  { date: 'Mar 22', title: 'The underrated value of boring architecture', tags: ['platform'] },
+  { date: 'Mar 14', title: 'How I run async standups for distributed teams', tags: ['communication'] },
+  { date: 'Mar 6',  title: 'Notes on Kafka consumer group rebalancing', tags: ['kafka'] },
+  { date: 'Feb 27', title: 'What I look for in senior engineering candidates', tags: ['career'] },
+];
+
+const PROJECTS = [
+  { title: 'AI Pipeline Orchestrator', desc: 'Lightweight system for composing and observing LLM workflows in production.', tags: ['Python', 'FastAPI'], icon: 'zap', status: 'Active' },
+  { title: 'Event-Driven Data Platform', desc: 'Kafka-backed ingestion layer with contract-first schema validation.', tags: ['Kafka', 'Go', 'Postgres'], icon: 'layers', status: 'Active' },
+  { title: 'Internal Developer Portal', desc: 'Platform tooling unifying deployments, docs, and runbooks for 60+ engineers.', tags: ['Next.js', 'TypeScript'], icon: 'terminal', status: 'Shipped' },
+];
+
+const fmtDate = (iso) => {
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+};
+
+/* ══════════════════════════════════════════════════════════
+   COMMAND MENU
+══════════════════════════════════════════════════════════ */
+function CommandMenu({ open, onClose, navigate, setArticle }) {
+  const [q, setQ] = useState('');
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (open) { setQ(''); setTimeout(() => inputRef.current?.focus(), 50); }
+  }, [open]);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); open ? onClose() : null; }
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [open, onClose]);
+
+  const navItems = [
+    { label: 'Home', icon: 'hash', action: () => { navigate('home'); onClose(); } },
+    { label: 'Writing', icon: 'fileText', action: () => { navigate('writing'); onClose(); } },
+    { label: 'Notes', icon: 'tag', action: () => { navigate('notes'); onClose(); } },
+    { label: 'Projects', icon: 'layers', action: () => { navigate('projects'); onClose(); } },
+    { label: 'About', icon: 'rss', action: () => { navigate('about'); onClose(); } },
+  ];
+
+  const postItems = POSTS.map(p => ({
+    label: p.title, icon: 'fileText', meta: p.cat,
+    action: () => { setArticle(p.slug); navigate('article'); onClose(); }
+  }));
+
+  const allItems = [...navItems.map(i => ({...i, group: 'Navigate'})), ...postItems.map(i => ({...i, group: 'Writing'}))];
+  const filtered = q.trim() ? allItems.filter(i => i.label.toLowerCase().includes(q.toLowerCase()) || (i.meta||'').toLowerCase().includes(q.toLowerCase())) : allItems;
+  const grouped = filtered.reduce((acc, item) => { (acc[item.group] = acc[item.group] || []).push(item); return acc; }, {});
+
+  if (!open) return null;
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 200, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '15vh' }}
+      onClick={(e) => e.target === e.currentTarget && onClose()}>
+      {/* Backdrop */}
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)' }} onClick={onClose} />
+      {/* Dialog */}
+      <div style={{ position: 'relative', width: '100%', maxWidth: 520, margin: '0 16px', background: 'var(--bg-surface)', border: '1px solid var(--border-mid)', borderRadius: 14, boxShadow: 'var(--shadow-md)', overflow: 'hidden' }}>
+        {/* Input */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 16px', borderBottom: '1px solid var(--border)' }}>
+          <Icon name="search" size={16} color="var(--fg-3)" />
+          <input ref={inputRef} value={q} onChange={e => setQ(e.target.value)} placeholder="Search pages, posts, projects…"
+            style={{ flex: 1, background: 'none', border: 'none', outline: 'none', fontSize: 15, color: 'var(--fg)', fontFamily: 'var(--sans)' }} />
+          <kbd style={{ fontSize: 11, color: 'var(--fg-3)', background: 'var(--bg-raised)', border: '1px solid var(--border)', borderRadius: 4, padding: '2px 6px' }}>esc</kbd>
+        </div>
+        {/* Results */}
+        <div style={{ maxHeight: 360, overflowY: 'auto' }}>
+          {Object.keys(grouped).length === 0 ? (
+            <div style={{ padding: '32px 16px', textAlign: 'center', fontSize: 14, color: 'var(--fg-3)' }}>No results for "{q}"</div>
+          ) : Object.entries(grouped).map(([group, items]) => (
+            <div key={group}>
+              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.09em', textTransform: 'uppercase', color: 'var(--fg-3)', padding: '10px 16px 4px' }}>{group}</div>
+              {items.map((item, i) => (
+                <button key={i} onClick={item.action}
+                  style={{ display: 'flex', alignItems: 'center', gap: 10, width: '100%', padding: '8px 16px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', borderRadius: 6, margin: '0 0', transition: 'background 100ms' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-raised)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'none'}>
+                  <Icon name={item.icon} size={15} color="var(--fg-3)" />
+                  <span style={{ flex: 1, fontSize: 14, color: 'var(--fg)' }}>{item.label}</span>
+                  {item.meta && <span style={{ fontSize: 12, color: 'var(--fg-3)' }}>{item.meta}</span>}
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div style={{ padding: '8px 16px', borderTop: '1px solid var(--border)', display: 'flex', gap: 16 }}>
+          {[['↑↓', 'navigate'], ['↵', 'open'], ['esc', 'close']].map(([k, l]) => (
+            <span key={k} style={{ fontSize: 11, color: 'var(--fg-3)', display: 'flex', alignItems: 'center', gap: 4 }}>
+              <kbd style={{ background: 'var(--bg-raised)', border: '1px solid var(--border)', borderRadius: 3, padding: '1px 5px', fontFamily: 'var(--mono)', fontSize: 11 }}>{k}</kbd> {l}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════════════════════ */
+function Header({ page, navigate, dark, toggleDark, openCmd }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const links = [['Writing', 'writing'], ['Projects', 'projects'], ['Notes', 'notes'], ['About', 'about']];
+
+  const linkStyle = (p) => ({
+    fontSize: 14, fontWeight: 500, padding: '6px 10px', borderRadius: 5,
+    color: page === p ? 'var(--accent)' : 'var(--fg-2)',
+    textDecoration: 'none', transition: 'color 120ms, background 120ms',
+    cursor: 'pointer',
+  });
+
+  return (
+    <header style={{ position: 'sticky', top: 0, zIndex: 100, background: `color-mix(in srgb, var(--bg) 92%, transparent)`, backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border)' }}>
+      <div style={{ maxWidth: 1024, margin: '0 auto', padding: '0 28px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <a href="#" style={{ fontFamily: 'var(--serif)', fontSize: 18, fontWeight: 400, color: 'var(--fg)', textDecoration: 'none', whiteSpace: 'nowrap', letterSpacing: '-0.01em' }}
+          onClick={e => { e.preventDefault(); navigate('home'); setMobileOpen(false); }}>
+          Jatto Abdul
+        </a>
+        <nav style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
+          {links.map(([label, p]) => (
+            <a key={p} href="#" style={linkStyle(p)} onClick={e => { e.preventDefault(); navigate(p); }}
+              onMouseEnter={e => { if (page !== p) { e.currentTarget.style.color = 'var(--fg)'; e.currentTarget.style.background = 'var(--bg-raised)'; } }}
+              onMouseLeave={e => { e.currentTarget.style.color = page === p ? 'var(--accent)' : 'var(--fg-2)'; e.currentTarget.style.background = 'transparent'; }}>
+              {label}
+            </a>
+          ))}
+          <div style={{ width: 1, height: 18, background: 'var(--border)', margin: '0 8px' }} />
+          {/* Command menu trigger */}
+          <button onClick={openCmd} title="Search (⌘K)"
+            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '5px 9px', borderRadius: 5, background: 'var(--bg-raised)', border: '1px solid var(--border)', color: 'var(--fg-3)', fontSize: 12, cursor: 'pointer', transition: 'border-color 150ms' }}
+            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--border-mid)'}
+            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}>
+            <Icon name="search" size={13} />
+            <kbd style={{ fontFamily: 'var(--mono)', fontSize: 11 }}>⌘K</kbd>
+          </button>
+          {/* Dark mode toggle */}
+          <button onClick={toggleDark} title="Toggle dark mode"
+            style={{ marginLeft: 6, padding: 7, borderRadius: 5, background: 'none', border: 'none', color: 'var(--fg-3)', cursor: 'pointer', display: 'flex', alignItems: 'center', transition: 'color 150ms' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--fg)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--fg-3)'}>
+            <Icon name={dark ? 'sun' : 'moon'} size={16} />
+          </button>
+        </nav>
+      </div>
+      {mobileOpen && (
+        <div style={{ borderTop: '1px solid var(--border)', background: 'var(--bg)', padding: '12px 20px 20px' }}>
+          {links.map(([label, p]) => (
+            <a key={p} href="#" style={{ display: 'block', padding: '10px 0', borderBottom: '1px solid var(--border)', fontSize: 15, fontWeight: 500, color: 'var(--fg-2)', textDecoration: 'none' }}
+              onClick={e => { e.preventDefault(); navigate(p); setMobileOpen(false); }}>{label}</a>
+          ))}
+        </div>
+      )}
+    </header>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════════════════════════ */
+function HomePage({ navigate, setArticle }) {
+  return (
+    <main id="main-content">
+      <Hero navigate={navigate} setArticle={setArticle} />
+      <WritingSection navigate={navigate} setArticle={setArticle} />
+      <ProjectsSection navigate={navigate} />
+      <NewsletterSection />
+    </main>
+  );
+}
+
+function Hero({ navigate, setArticle }) {
+  return (
+    <section style={{ padding: '80px 28px 72px', borderBottom: '1px solid var(--border)' }}>
+      <div style={{ maxWidth: 680, margin: '0 auto' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginBottom: 24, padding: '4px 12px 4px 8px', background: 'var(--accent-light)', border: '1px solid var(--accent-mid)', borderRadius: 9999 }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', display: 'inline-block', flexShrink: 0 }}></span>
+          <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--accent)', letterSpacing: '0.03em', whiteSpace: 'nowrap' }}>Senior Software Engineer</span>
+        </div>
+
+        <h1 style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(2.25rem, 5vw, 3.25rem)', fontWeight: 400, lineHeight: 1.08, letterSpacing: '-0.025em', color: 'var(--fg)', marginBottom: 20 }}>
+          Building backend, platform,<br />
+          <span style={{ fontStyle: 'italic', color: 'var(--fg-2)' }}>and applied&#8209;AI systems.</span>
+        </h1>
+
+        <p style={{ fontSize: 17, lineHeight: 1.8, color: 'var(--fg-2)', maxWidth: '52ch', marginBottom: 36 }}>
+          I write about practical engineering, AI-assisted product building, and communication for engineers. Notes from real builds — not tutorials.
+        </p>
+
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 44 }}>
+          <a href="#" onClick={e => { e.preventDefault(); setArticle('pipelines'); navigate('article'); }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 14, fontWeight: 600, background: 'var(--accent)', color: '#fff', padding: '10px 20px', borderRadius: 7, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+            Read the latest <Icon name="arrowRight" size={14} color="#fff" />
+          </a>
+          <a href="#" onClick={e => { e.preventDefault(); navigate('notes'); }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 14, fontWeight: 500, border: '1px solid var(--border-mid)', color: 'var(--fg-2)', padding: '10px 20px', borderRadius: 7, textDecoration: 'none' }}>
+            Browse notes
+          </a>
+        </div>
+
+        <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
+          {['Backend Systems', 'Applied AI', 'Platform Eng', 'Engineering Communication', 'Career Growth'].map(t => (
+            <span key={t} style={{ fontSize: 12, fontWeight: 500, background: 'var(--bg-raised)', border: '1px solid var(--border)', borderRadius: 9999, padding: '3px 10px', color: 'var(--fg-3)', whiteSpace: 'nowrap' }}>{t}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WritingSection({ navigate, setArticle }) {
+  return (
+    <section style={{ padding: '60px 28px', borderBottom: '1px solid var(--border)' }}>
+      <div style={{ maxWidth: 720, margin: '0 auto' }}>
+        <SectionHeader title="Recent Writing" action="See all writing" onAction={() => navigate('writing')} />
+        {POSTS.slice(0, 4).map((p, i) => (
+          <PostRow key={p.slug} post={p} last={i === 3}
+            onClick={() => { if (p.source === 'medium') { window.open(p.mediumUrl, '_blank'); } else { setArticle(p.slug); navigate('article'); } }} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PostRow({ post, last, onClick }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <div onClick={onClick}
+      style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 20, alignItems: 'start', padding: '18px 0', borderBottom: last ? 'none' : '1px solid var(--border)', cursor: 'pointer', opacity: hov ? 0.68 : 1, transition: 'opacity 120ms' }}
+      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 5 }}>
+          <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--accent)' }}>{post.cat}</span>
+          {post.source === 'medium' && <SourceBadge />}
+        </div>
+        <h3 style={{ fontFamily: 'var(--serif)', fontSize: 17, fontWeight: 400, color: 'var(--fg)', lineHeight: 1.3, marginBottom: 5 }}>{post.title}</h3>
+        <p style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--fg-2)', maxWidth: '60ch' }}>{post.excerpt}</p>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 3, paddingTop: 1, flexShrink: 0 }}>
+        <span style={{ fontSize: 12, color: 'var(--fg-3)', whiteSpace: 'nowrap' }}>{fmtDate(post.date)}</span>
+        <span style={{ fontSize: 12, color: 'var(--fg-3)', whiteSpace: 'nowrap' }}>{post.mins} min</span>
+      </div>
+    </div>
+  );
+}
+
+function SourceBadge() {
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 500, padding: '1px 7px', borderRadius: 9999, border: '1px solid var(--border)', background: 'var(--bg-raised)', color: 'var(--fg-3)', whiteSpace: 'nowrap' }}>
+      <svg width="10" height="10" viewBox="0 0 1043 167" fill="var(--fg-3)"><path d="M128.03 0L0 167h256.06L128.03 0zM372.8 0L256.06 167h233.48L372.8 0zM617.58 0L500.84 167h233.48L617.58 0zM862.35 0L745.62 167h233.48L862.35 0z"/></svg>
+      Via Medium
+    </span>
+  );
+}
+
+function ProjectsSection({ navigate }) {
+  return (
+    <section style={{ padding: '60px 28px', borderBottom: '1px solid var(--border)' }}>
+      <div style={{ maxWidth: 960, margin: '0 auto' }}>
+        <SectionHeader title="Selected Projects" action="See all" onAction={() => navigate('projects')} />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
+          {PROJECTS.map(p => <ProjectCard key={p.title} {...p} />)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectCard({ title, desc, tags, icon, status }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '20px', boxShadow: hov ? 'var(--shadow-md)' : 'var(--shadow-sm)', borderColor: hov ? 'var(--border-mid)' : 'var(--border)', transition: 'box-shadow 150ms, border-color 150ms', cursor: 'pointer' }}
+      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+        <div style={{ width: 36, height: 36, borderRadius: 8, background: 'var(--accent-light)', border: '1px solid var(--accent-mid)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Icon name={icon} size={16} color="var(--accent)" />
+        </div>
+        <span style={{ fontSize: 11, fontWeight: 500, padding: '2px 8px', borderRadius: 9999, border: '1px solid var(--border)', color: 'var(--fg-3)', background: 'var(--bg-raised)' }}>{status}</span>
+      </div>
+      <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--fg)', marginBottom: 5, lineHeight: 1.35 }}>{title}</h3>
+      <p style={{ fontSize: 13, lineHeight: 1.65, color: 'var(--fg-2)', marginBottom: 14 }}>{desc}</p>
+      <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+        {tags.map(t => <span key={t} style={{ fontSize: 11, background: 'var(--bg-raised)', border: '1px solid var(--border)', borderRadius: 4, padding: '1px 7px', color: 'var(--fg-3)' }}>{t}</span>)}
+      </div>
+    </div>
+  );
+}
+
+function NewsletterSection() {
+  const [email, setEmail] = useState('');
+  const [done, setDone] = useState(false);
+  return (
+    <section style={{ padding: '72px 28px', background: 'var(--bg-accent)', borderBottom: '1px solid var(--accent-mid)' }}>
+      <div style={{ maxWidth: 480, margin: '0 auto', textAlign: 'center' }}>
+        <h2 style={{ fontFamily: 'var(--serif)', fontSize: 26, fontWeight: 400, color: 'var(--fg)', letterSpacing: '-0.01em', marginBottom: 10 }}>Writing for engineers who build.</h2>
+        <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--fg-2)', marginBottom: 24 }}>
+          Practical notes on backend systems, applied AI, and senior engineering. A few times a month.
+        </p>
+        {done ? (
+          <p style={{ fontWeight: 600, color: 'var(--accent)', fontSize: 15 }}>You're in — talk soon.</p>
+        ) : (
+          <form onSubmit={e => { e.preventDefault(); setDone(true); }} style={{ display: 'flex', gap: 8, maxWidth: 380, margin: '0 auto 8px' }}>
+            <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="your@email.com"
+              style={{ flex: 1, fontSize: 14, padding: '9px 13px', border: '1px solid var(--border-mid)', borderRadius: 7, background: 'var(--bg-surface)', color: 'var(--fg)', outline: 'none', fontFamily: 'var(--sans)' }} />
+            <button type="submit" style={{ background: 'var(--accent)', color: '#fff', fontSize: 14, fontWeight: 600, padding: '9px 18px', borderRadius: 7, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>Subscribe</button>
+          </form>
+        )}
+        <p style={{ fontSize: 12, color: 'var(--fg-3)', marginTop: 8 }}>No spam. Unsubscribe any time.</p>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   WRITING PAGE (with Medium integration)
+══════════════════════════════════════════════════════════ */
+function WritingPage({ navigate, setArticle }) {
+  const [filter, setFilter] = useState('All');
+  const [sourceFilter, setSourceFilter] = useState('All');
+  const [mediumState, setMediumState] = useState('success'); // 'loading' | 'success' | 'error' | 'empty'
+
+  const allTags = ['All', 'backend', 'applied ai', 'platform', 'career'];
+
+  let visible = POSTS;
+  if (filter !== 'All') visible = visible.filter(p => p.tags.includes(filter));
+  if (sourceFilter === 'First-party') visible = visible.filter(p => p.source === 'local');
+  if (sourceFilter === 'Via Medium') visible = visible.filter(p => p.source === 'medium');
+
+  return (
+    <main id="main-content" style={{ padding: '52px 28px 96px' }}>
+      <div style={{ maxWidth: 720, margin: '0 auto' }}>
+        <h1 style={{ fontFamily: 'var(--serif)', fontSize: 34, fontWeight: 400, color: 'var(--fg)', letterSpacing: '-0.02em', marginBottom: 6 }}>Writing</h1>
+        <p style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--fg-2)', marginBottom: 28 }}>
+          Practical notes from real builds. Some posts are first-party; others are syndicated from Medium.
+        </p>
+
+        {/* Tag filters */}
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 10 }}>
+          {allTags.map(t => (
+            <button key={t} onClick={() => setFilter(t)}
+              style={{ fontSize: 12, fontWeight: 500, padding: '4px 12px', borderRadius: 9999, border: '1px solid', cursor: 'pointer', background: filter === t ? 'var(--accent)' : 'var(--bg-raised)', color: filter === t ? '#fff' : 'var(--fg-2)', borderColor: filter === t ? 'var(--accent)' : 'var(--border)', transition: 'all 120ms' }}>
+              {t}
+            </button>
+          ))}
+        </div>
+
+        {/* Source filter */}
+        <div style={{ display: 'flex', gap: 6, marginBottom: 28 }}>
+          {['All', 'First-party', 'Via Medium'].map(s => (
+            <button key={s} onClick={() => setSourceFilter(s)}
+              style={{ fontSize: 11, fontWeight: 500, padding: '3px 10px', borderRadius: 4, border: '1px solid', cursor: 'pointer', background: sourceFilter === s ? 'var(--bg-sunken)' : 'transparent', color: sourceFilter === s ? 'var(--fg)' : 'var(--fg-3)', borderColor: sourceFilter === s ? 'var(--border-mid)' : 'var(--border)', transition: 'all 120ms' }}>
+              {s}
+            </button>
+          ))}
+          {/* Medium state demo toggle (prototype only) */}
+          <div style={{ marginLeft: 'auto', display: 'flex', gap: 4, alignItems: 'center' }}>
+            <span style={{ fontSize: 11, color: 'var(--fg-3)' }}>Feed state:</span>
+            {['success','loading','error','empty'].map(s => (
+              <button key={s} onClick={() => setMediumState(s)}
+                style={{ fontSize: 10, padding: '2px 6px', borderRadius: 3, border: '1px solid var(--border)', cursor: 'pointer', background: mediumState === s ? 'var(--bg-raised)' : 'transparent', color: 'var(--fg-3)' }}>
+                {s}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Medium feed state UI */}
+        {mediumState === 'loading' && (
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.09em', textTransform: 'uppercase', color: 'var(--fg-3)', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <SourceBadge /> Loading
+            </div>
+            {[1,2,3].map(i => (
+              <div key={i} style={{ height: 64, background: 'var(--bg-raised)', borderRadius: 6, marginBottom: 8, opacity: 0.6 }} />
+            ))}
+          </div>
+        )}
+        {mediumState === 'error' && (
+          <div style={{ background: 'var(--bg-raised)', border: '1px solid var(--border)', borderRadius: 8, padding: '14px 18px', marginBottom: 24, display: 'flex', gap: 10, alignItems: 'center' }}>
+            <span style={{ fontSize: 13, color: 'var(--fg-2)' }}>Couldn't load Medium posts right now.</span>
+            <a href="https://medium.com" target="_blank" style={{ fontSize: 13, color: 'var(--accent)', fontWeight: 500, marginLeft: 'auto', whiteSpace: 'nowrap' }}>View on Medium →</a>
+          </div>
+        )}
+        {mediumState === 'empty' && (
+          <div style={{ padding: '32px 0', textAlign: 'center', color: 'var(--fg-3)', fontSize: 14 }}>Nothing here yet. Check back soon.</div>
+        )}
+
+        {/* Post list */}
+        {mediumState === 'success' && (
+          <div>
+            {visible.length === 0 ? (
+              <div style={{ padding: '32px 0', textAlign: 'center', color: 'var(--fg-3)', fontSize: 14 }}>No posts match this filter.</div>
+            ) : visible.map((p, i) => (
+              <PostRow key={p.slug} post={p} last={i === visible.length - 1}
+                onClick={() => { if (p.source === 'medium') { window.open(p.mediumUrl, '_blank'); } else { setArticle(p.slug); navigate('article'); } }} />
+            ))}
+          </div>
+        )}
+      </div>
+    </main>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   ARTICLE PAGE
+══════════════════════════════════════════════════════════ */
+function ArticlePage({ slug, navigate }) {
+  const post = POSTS.find(p => p.slug === slug) || POSTS[0];
+  return (
+    <main id="main-content" style={{ padding: '44px 28px 96px' }}>
+      <div style={{ maxWidth: 680, margin: '0 auto' }}>
+        <a href="#" onClick={e => { e.preventDefault(); navigate('writing'); }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 14, color: 'var(--fg-3)', textDecoration: 'none', marginBottom: 36, whiteSpace: 'nowrap' }}>
+          ← Writing
+        </a>
+
+        <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.09em', textTransform: 'uppercase', color: 'var(--accent)', display: 'block', marginBottom: 10 }}>{post.cat}</span>
+        <h1 style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)', fontWeight: 400, lineHeight: 1.12, letterSpacing: '-0.025em', color: 'var(--fg)', marginBottom: 14 }}>{post.title}</h1>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', fontSize: 13, color: 'var(--fg-3)', marginBottom: 36, flexWrap: 'wrap' }}>
+          <span style={{ whiteSpace: 'nowrap' }}>{fmtDate(post.date)}</span>
+          <span>·</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{post.mins} min read</span>
+          {post.tags.map(t => <span key={t} style={{ background: 'var(--bg-raised)', border: '1px solid var(--border)', borderRadius: 4, padding: '1px 7px', fontSize: 11, color: 'var(--fg-3)' }}>{t}</span>)}
+        </div>
+
+        <hr style={{ border: 'none', borderTop: '1px solid var(--border)', marginBottom: 32 }} />
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+          <p style={{ fontSize: 17, lineHeight: 1.85, color: 'var(--fg)' }}>
+            Most pipeline failures aren't bugs — they're assumption violations baked in at design time. The schema changed. The upstream vendor didn't tell you. A field that was always populated is now sometimes null.
+          </p>
+          <blockquote style={{ borderLeft: '3px solid var(--accent)', paddingLeft: 20, color: 'var(--fg-2)', fontFamily: 'var(--serif)', fontSize: 19, fontStyle: 'italic', fontWeight: 300, lineHeight: 1.6, margin: 0 }}>
+            "The most dangerous pipelines are the ones that succeed silently with wrong data."
+          </blockquote>
+          <h2 style={{ fontFamily: 'var(--serif)', fontSize: 22, fontWeight: 400, color: 'var(--fg)', lineHeight: 1.25, marginTop: 6 }}>Validate at the boundary</h2>
+          <p style={{ fontSize: 17, lineHeight: 1.85, color: 'var(--fg)' }}>
+            Use <code style={{ fontFamily: 'var(--mono)', fontSize: '0.875em', background: 'var(--bg-sunken)', border: '1px solid var(--border)', borderRadius: 4, padding: '1px 5px' }}>pydantic</code> or a lightweight schema contract layer to assert shape at ingestion time — not inside your transforms.
+          </p>
+          {/* Code block */}
+          <div style={{ background: 'var(--bg-code)', border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 16px', borderBottom: '1px solid var(--border)', background: 'color-mix(in srgb, var(--bg-code) 60%, var(--border))' }}>
+              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--fg-3)', fontFamily: 'var(--mono)' }}>python</span>
+              <span style={{ fontSize: 11, color: 'var(--fg-3)', cursor: 'pointer' }}>Copy</span>
+            </div>
+            <pre style={{ fontFamily: 'var(--mono)', fontSize: 13.5, lineHeight: 1.65, padding: '16px 20px', overflowX: 'auto', color: 'var(--fg)', background: 'none', border: 'none', borderRadius: 0, margin: 0 }}>
+{`@validator("event_type")
+def check_event(cls, v):
+    assert v in VALID_EVENTS
+    return v`}
+            </pre>
+          </div>
+          <p style={{ fontSize: 17, lineHeight: 1.85, color: 'var(--fg)' }}>
+            Design for observability from the start: emit metrics on schema violations, track null rates per field, and alert when rates deviate from a rolling baseline.
+          </p>
+        </div>
+
+        <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '36px 0 24px' }} />
+
+        {/* Inline CTA */}
+        <div style={{ background: 'var(--bg-accent)', border: '1px solid var(--accent-mid)', borderRadius: 10, padding: '22px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap' }}>
+          <div>
+            <h3 style={{ fontFamily: 'var(--serif)', fontSize: 17, fontWeight: 400, color: 'var(--fg)', marginBottom: 3 }}>Enjoyed this? There's more.</h3>
+            <p style={{ fontSize: 13, color: 'var(--fg-2)' }}>Notes on backend systems, applied AI, and engineering judgment.</p>
+          </div>
+          <a href="#" onClick={e => e.preventDefault()} style={{ background: 'var(--accent)', color: '#fff', fontSize: 13, fontWeight: 600, padding: '9px 18px', borderRadius: 6, textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>Subscribe →</a>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   NOTES PAGE
+══════════════════════════════════════════════════════════ */
+function NotesPage({ navigate, setArticle }) {
+  const [filter, setFilter] = useState('All');
+  const allFilters = ['All', 'backend', 'applied ai', 'platform', 'career', 'communication'];
+  const filtered = filter === 'All' ? NOTES : NOTES.filter(n => n.tags.includes(filter));
+
+  return (
+    <main id="main-content" style={{ padding: '52px 28px 96px' }}>
+      <div style={{ maxWidth: 680, margin: '0 auto' }}>
+        <h1 style={{ fontFamily: 'var(--serif)', fontSize: 34, fontWeight: 400, color: 'var(--fg)', letterSpacing: '-0.02em', marginBottom: 6 }}>Notes</h1>
+        <p style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--fg-2)', marginBottom: 28, maxWidth: '50ch' }}>
+          Short-form observations and quick references. Not polished essays — just honest notes.
+        </p>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 28 }}>
+          {allFilters.map(f => (
+            <button key={f} onClick={() => setFilter(f)}
+              style={{ fontSize: 12, fontWeight: 500, padding: '4px 12px', borderRadius: 9999, border: '1px solid', cursor: 'pointer', background: filter === f ? 'var(--accent)' : 'var(--bg-raised)', color: filter === f ? '#fff' : 'var(--fg-2)', borderColor: filter === f ? 'var(--accent)' : 'var(--border)', transition: 'all 120ms' }}>
+              {f}
+            </button>
+          ))}
+        </div>
+        <div>
+          {filtered.map((n, i) => <NoteRow key={i} note={n} last={i === filtered.length - 1}
+            onClick={() => { setArticle('pipelines'); navigate('article'); }} />)}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function NoteRow({ note, last, onClick }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <div onClick={onClick}
+      style={{ display: 'grid', gridTemplateColumns: '52px 1fr 16px', alignItems: 'center', gap: 16, padding: '12px 0', borderBottom: last ? 'none' : '1px solid var(--border)', cursor: 'pointer', opacity: hov ? 0.65 : 1, transition: 'opacity 120ms' }}
+      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
+      <span style={{ fontSize: 11, color: 'var(--fg-3)', whiteSpace: 'nowrap', fontFamily: 'var(--mono)' }}>{note.date}</span>
+      <div>
+        <span style={{ fontSize: 15, fontWeight: 500, color: 'var(--fg)', display: 'block', marginBottom: 3 }}>{note.title}</span>
+        <div style={{ display: 'flex', gap: 4 }}>
+          {note.tags.map(t => <span key={t} style={{ fontSize: 10, background: 'var(--bg-raised)', border: '1px solid var(--border)', borderRadius: 3, padding: '1px 5px', color: 'var(--fg-3)' }}>{t}</span>)}
+        </div>
+      </div>
+      <Icon name="arrowRight" size={13} color="var(--fg-3)" />
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   PROJECTS PAGE
+══════════════════════════════════════════════════════════ */
+function ProjectsPage() {
+  const all = [
+    ...PROJECTS,
+    { title: 'Distributed Rate Limiter', desc: 'Redis-backed sliding window rate limiter as a reusable Go library.', tags: ['Go', 'Redis'], icon: 'code', status: 'Open Source' },
+    { title: 'Engineering Blog Platform', desc: 'MDX-based writing platform with per-author sections, tagging, and RSS.', tags: ['Next.js', 'MDX'], icon: 'fileText', status: 'Shipped' },
+  ];
+  return (
+    <main id="main-content" style={{ padding: '52px 28px 96px' }}>
+      <div style={{ maxWidth: 960, margin: '0 auto' }}>
+        <h1 style={{ fontFamily: 'var(--serif)', fontSize: 34, fontWeight: 400, color: 'var(--fg)', letterSpacing: '-0.02em', marginBottom: 6 }}>Projects</h1>
+        <p style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--fg-2)', marginBottom: 36, maxWidth: '50ch' }}>Selected builds — backend systems, platform tooling, and applied-AI work.</p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
+          {all.map(p => <ProjectCard key={p.title} {...p} />)}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════════════════════════════ */
+function AboutPage() {
+  return (
+    <main id="main-content" style={{ padding: '52px 28px 96px' }}>
+      <div style={{ maxWidth: 600, margin: '0 auto' }}>
+        <h1 style={{ fontFamily: 'var(--serif)', fontSize: 34, fontWeight: 400, color: 'var(--fg)', letterSpacing: '-0.02em', marginBottom: 28 }}>About</h1>
+        <p style={{ fontSize: 17, lineHeight: 1.85, color: 'var(--fg)', marginBottom: 18 }}>
+          I'm Jatto Abdul — a senior software engineer positioning toward staff-level work. My strongest lane is backend, platform, and applied-AI systems, with strong frontend and product fluency.
+        </p>
+        <p style={{ fontSize: 17, lineHeight: 1.85, color: 'var(--fg-2)', marginBottom: 18 }}>
+          I write because thinking in public makes me build better. These are practical notes from real builds — not tutorials, not takes. Just honest engineering.
+        </p>
+        <p style={{ fontSize: 17, lineHeight: 1.85, color: 'var(--fg-2)', marginBottom: 40 }}>
+          Open to staff-level roles and collaborations with engineering-led teams. Reach out on any of the platforms below.
+        </p>
+        <div style={{ display: 'flex', gap: 10 }}>
+          {[['GitHub', 'github'], ['Twitter / X', 'twitter'], ['RSS', 'rss']].map(([label, icon]) => (
+            <a key={label} href="#" onClick={e => e.preventDefault()}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 14, fontWeight: 500, color: 'var(--fg-2)', textDecoration: 'none', padding: '8px 14px', border: '1px solid var(--border)', borderRadius: 7, background: 'var(--bg-surface)' }}>
+              <Icon name={icon} size={14} color="var(--fg-3)" />
+              {label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════════════ */
+function Footer({ navigate }) {
+  return (
+    <footer style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-raised)', padding: '44px 28px 24px' }}>
+      <div style={{ maxWidth: 960, margin: '0 auto', display: 'flex', gap: 48, justifyContent: 'space-between', flexWrap: 'wrap', marginBottom: 32 }}>
+        <div style={{ maxWidth: 240 }}>
+          <a href="#" onClick={e => { e.preventDefault(); navigate('home'); }}
+            style={{ fontFamily: 'var(--serif)', fontSize: 17, color: 'var(--fg)', textDecoration: 'none', display: 'block', marginBottom: 8 }}>Jatto Abdul</a>
+          <p style={{ fontSize: 13, lineHeight: 1.65, color: 'var(--fg-2)', marginBottom: 14 }}>
+            Senior Software Engineer. Writing about backend systems, applied AI, and engineering judgment.
+          </p>
+          <div style={{ display: 'flex', gap: 12 }}>
+            {['github', 'twitter', 'rss'].map(icon => (
+              <a key={icon} href="#" onClick={e => e.preventDefault()} style={{ color: 'var(--fg-3)', display: 'flex' }}>
+                <Icon name={icon} size={16} color="var(--fg-3)" />
+              </a>
+            ))}
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 44 }}>
+          {[['Site', [['Writing','writing'],['Projects','projects'],['Notes','notes'],['About','about']]], ['Topics', [['Backend Systems',null],['Applied AI',null],['Platform Eng',null],['Career',null]]]].map(([grp, lnks]) => (
+            <div key={grp} style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.09em', textTransform: 'uppercase', color: 'var(--fg-3)', marginBottom: 2 }}>{grp}</div>
+              {lnks.map(([l, p]) => (
+                <a key={l} href="#" onClick={e => { e.preventDefault(); if (p) navigate(p); }}
+                  style={{ fontSize: 13, color: 'var(--fg-2)', textDecoration: 'none' }}>{l}</a>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ maxWidth: 960, margin: '0 auto', display: 'flex', justifyContent: 'space-between', paddingTop: 16, borderTop: '1px solid var(--border)' }}>
+        <span style={{ fontSize: 12, color: 'var(--fg-3)' }}>© {new Date().getFullYear()} Jatto Abdul</span>
+        <span style={{ fontSize: 12, color: 'var(--fg-3)' }}>jattoabdul.com</span>
+      </div>
+    </footer>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   SHARED
+══════════════════════════════════════════════════════════ */
+function SectionHeader({ title, action, onAction }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 20 }}>
+      <h2 style={{ fontFamily: 'var(--serif)', fontSize: 22, fontWeight: 400, color: 'var(--fg)', letterSpacing: '-0.01em' }}>{title}</h2>
+      <a href="#" onClick={e => { e.preventDefault(); onAction(); }}
+        style={{ fontSize: 13, fontWeight: 600, color: 'var(--accent)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap' }}>
+        {action} <Icon name="arrowRight" size={12} color="var(--accent)" />
+      </a>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   APP
+══════════════════════════════════════════════════════════ */
+function App() {
+  const [page, setPage] = useState('home');
+  const [article, setArticle] = useState('pipelines');
+  const [dark, setDark] = useState(false);
+  const [cmdOpen, setCmdOpen] = useState(false);
+
+  // Restore dark mode from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('ja-dark');
+    if (saved === 'true') setDark(true);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.className = dark ? 'dark' : '';
+    document.body.className = dark ? 'dark' : '';
+    localStorage.setItem('ja-dark', dark);
+  }, [dark]);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); setCmdOpen(v => !v); }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
+
+  const navigate = (p) => { setPage(p); window.scrollTo({ top: 0, behavior: 'instant' }); };
+
+  return (
+    <div className={dark ? 'dark' : ''}>
+      <Header page={page} navigate={navigate} dark={dark} toggleDark={() => setDark(v => !v)} openCmd={() => setCmdOpen(true)} />
+      <CommandMenu open={cmdOpen} onClose={() => setCmdOpen(false)} navigate={navigate} setArticle={setArticle} />
+      {page === 'home'     && <HomePage navigate={navigate} setArticle={setArticle} />}
+      {page === 'writing'  && <WritingPage navigate={navigate} setArticle={setArticle} />}
+      {page === 'article'  && <ArticlePage slug={article} navigate={navigate} />}
+      {page === 'notes'    && <NotesPage navigate={navigate} setArticle={setArticle} />}
+      {page === 'projects' && <ProjectsPage />}
+      {page === 'about'    && <AboutPage />}
+      <Footer navigate={navigate} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

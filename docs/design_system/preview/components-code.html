@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FAFAF8; padding: 28px; }
+  .label { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #9C9A95; margin-bottom: 12px; }
+  .section { margin-bottom: 24px; }
+
+  /* Light code block */
+  .code-block { background: #F0EDE6; border: 1px solid #E5E3DC; border-radius: 8px; overflow: hidden; }
+  .code-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; border-bottom: 1px solid #E5E3DC; background: #ECEAE3; }
+  .code-lang { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #9C9A95; }
+  .code-copy { font-size: 11px; color: #9C9A95; cursor: pointer; }
+  pre.code { font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.65; padding: 16px 20px; background: none; border: none; border-radius: 0; margin: 0; overflow-x: auto; }
+  .kw  { color: #6B9FD4; }
+  .str { color: #C97B30; }
+  .typ { color: #2E9968; }
+  .cmt { color: #9C9A95; font-style: italic; }
+  .num { color: #B87333; }
+
+  /* Dark code block */
+  .code-block-dark { background: #191917; border: 1px solid #2E2D2A; border-radius: 8px; overflow: hidden; }
+  .code-header-dark { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; border-bottom: 1px solid #2E2D2A; background: #111110; }
+  .code-lang-dark { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #6B6860; }
+  pre.code-dark { font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.65; padding: 16px 20px; background: none; margin: 0; overflow-x: auto; color: #F0EDE6; }
+
+  /* Inline code */
+  code.inline { font-family: 'JetBrains Mono', monospace; font-size: 13px; background: #F0EDE6; border: 1px solid #E5E3DC; border-radius: 4px; padding: 2px 6px; color: #1A1916; }
+</style>
+</head>
+<body>
+  <div class="section">
+    <div class="label">Code Block — Light</div>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Python</span><span class="code-copy">Copy</span></div>
+      <pre class="code"><span class="kw">async def</span> <span class="typ">process_events</span>(batch: <span class="typ">List</span>[<span class="typ">Event</span>]) -> <span class="typ">None</span>:
+    <span class="cmt"># Validate at the boundary, not mid-pipeline</span>
+    validated = [<span class="typ">Event</span>.parse_obj(e) <span class="kw">for</span> e <span class="kw">in</span> batch]
+    <span class="kw">await</span> db.bulk_insert(validated, timeout=<span class="num">30</span>)</pre>
+    </div>
+  </div>
+  <div class="section">
+    <div class="label">Code Block — Dark</div>
+    <div class="code-block-dark">
+      <div class="code-header-dark"><span class="code-lang-dark">Python</span><span class="code-lang-dark" style="cursor:pointer">Copy</span></div>
+      <pre class="code-dark"><span style="color:#6B9FD4">async def</span> <span style="color:#2E9968">process_events</span>(batch):
+    <span style="color:#7A7770;font-style:italic"># Validate at the boundary</span>
+    validated = [<span style="color:#2E9968">Event</span>.parse_obj(e) <span style="color:#6B9FD4">for</span> e <span style="color:#6B9FD4">in</span> batch]
+    <span style="color:#6B9FD4">await</span> db.bulk_insert(validated)</pre>
+    </div>
+  </div>
+  <div class="section">
+    <div class="label">Inline Code</div>
+    <p style="font-size:15px;color:#1A1916;line-height:1.7;">Use <code class="inline">pydantic</code> or a schema contract layer at the <code class="inline">ingestion boundary</code> to catch issues early.</p>
+  </div>
+</body>
+</html>

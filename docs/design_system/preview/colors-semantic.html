@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FAFAF8; padding: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .token { background: #fff; border: 1px solid #E5E3DC; border-radius: 8px; padding: 12px; }
+  .chip { height: 40px; border-radius: 4px; margin-bottom: 8px; border: 1px solid rgba(0,0,0,0.07); }
+  .var  { font-size: 11px; font-weight: 600; color: #1A1916; margin-bottom: 2px; font-family: 'JetBrains Mono', monospace; }
+  .desc { font-size: 10px; color: #9C9A95; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="token"><div class="chip" style="background:#FAFAF8; border:1px solid #E5E3DC;"></div><div class="var">--bg</div><div class="desc">Page background</div></div>
+    <div class="token"><div class="chip" style="background:#FFFFFF; border:1px solid #E5E3DC;"></div><div class="var">--bg-surface</div><div class="desc">Card / panel</div></div>
+    <div class="token"><div class="chip" style="background:#F5F4F0"></div><div class="var">--bg-raised</div><div class="desc">Elevated bg</div></div>
+    <div class="token"><div class="chip" style="background:#EDF5F0"></div><div class="var">--bg-accent</div><div class="desc">Accent tint</div></div>
+    <div class="token"><div class="chip" style="background:#1A1916"></div><div class="var">--fg</div><div class="desc">Primary text</div></div>
+    <div class="token"><div class="chip" style="background:#6B6860"></div><div class="var">--fg-secondary</div><div class="desc">Secondary text</div></div>
+    <div class="token"><div class="chip" style="background:#9C9A95"></div><div class="var">--fg-muted</div><div class="desc">Muted / labels</div></div>
+    <div class="token"><div class="chip" style="background:#1A6B4A"></div><div class="var">--accent</div><div class="desc">Primary accent</div></div>
+    <div class="token"><div class="chip" style="background:#145538"></div><div class="var">--accent-hover</div><div class="desc">Accent hover</div></div>
+    <div class="token"><div class="chip" style="background:#E5E3DC"></div><div class="var">--border</div><div class="desc">Default border</div></div>
+    <div class="token"><div class="chip" style="background:#D4D1C9"></div><div class="var">--border-mid</div><div class="desc">Stronger border</div></div>
+    <div class="token"><div class="chip" style="background:#F0EDE6"></div><div class="var">--bg-code</div><div class="desc">Code background</div></div>
+  </div>
+</body>
+</html>

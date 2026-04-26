@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #111110; padding: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .token { background: #1C1C1A; border: 1px solid #2E2D2A; border-radius: 8px; padding: 12px; }
+  .chip { height: 40px; border-radius: 4px; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.06); }
+  .var  { font-size: 11px; font-weight: 600; color: #F0EDE6; margin-bottom: 2px; }
+  .hex  { font-size: 10px; color: #6B6860; }
+  .label { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #6B6860; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+  <div class="label">Dark Mode Palette</div>
+  <div class="grid">
+    <div class="token"><div class="chip" style="background:#111110"></div><div class="var">--bg</div><div class="hex">#111110</div></div>
+    <div class="token"><div class="chip" style="background:#1C1C1A"></div><div class="var">--bg-surface</div><div class="hex">#1C1C1A</div></div>
+    <div class="token"><div class="chip" style="background:#242422"></div><div class="var">--bg-raised</div><div class="hex">#242422</div></div>
+    <div class="token"><div class="chip" style="background:#2E2D2A"></div><div class="var">--border</div><div class="hex">#2E2D2A</div></div>
+    <div class="token"><div class="chip" style="background:#F0EDE6"></div><div class="var">--fg</div><div class="hex">#F0EDE6</div></div>
+    <div class="token"><div class="chip" style="background:#A8A49E"></div><div class="var">--fg-secondary</div><div class="hex">#A8A49E</div></div>
+    <div class="token"><div class="chip" style="background:#6B6860"></div><div class="var">--fg-muted</div><div class="hex">#6B6860</div></div>
+    <div class="token"><div class="chip" style="background:#2E9968"></div><div class="var">--accent</div><div class="hex">#2E9968</div></div>
+    <div class="token"><div class="chip" style="background:#5EAF86"></div><div class="var">--accent-hover</div><div class="hex">#5EAF86</div></div>
+    <div class="token"><div class="chip" style="background:#082617"></div><div class="var">--bg-accent</div><div class="hex">#082617</div></div>
+    <div class="token"><div class="chip" style="background:#191917"></div><div class="var">--bg-code</div><div class="hex">#191917</div></div>
+    <div class="token"><div class="chip" style="background:#3A3936"></div><div class="var">--border-mid</div><div class="hex">#3A3936</div></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FAFAF8; padding: 28px 32px; }
+  .label { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #9C9A95; margin-bottom: 14px; }
+  .section { margin-bottom: 24px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 6px; border: 1px solid transparent; cursor: pointer; text-decoration: none; }
+  .btn-primary  { background: #1A6B4A; color: #fff; border-color: #1A6B4A; }
+  .btn-primary-hover { background: #145538; color: #fff; border-color: #145538; }
+  .btn-secondary { background: transparent; color: #1A6B4A; border-color: #1A6B4A; }
+  .btn-secondary-hover { background: #EDF5F0; color: #1A6B4A; border-color: #1A6B4A; }
+  .btn-ghost { background: transparent; color: #6B6860; border-color: #E5E3DC; }
+  .btn-ghost-hover { background: #F5F4F0; color: #1A1916; border-color: #E5E3DC; }
+  .btn-sm { padding: 5px 10px; font-size: 12px; }
+  .btn-lg { padding: 12px 28px; font-size: 17px; }
+  .btn-disabled { background: #F5F4F0; color: #9C9A95; border-color: #E5E3DC; cursor: not-allowed; }
+  .state-label { font-size: 10px; color: #9C9A95; margin-top: 3px; text-align: center; }
+  .col { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+</style>
+</head>
+<body>
+  <div class="section">
+    <div class="label">Primary Button</div>
+    <div class="row">
+      <div class="col"><div class="btn btn-sm btn-primary">Small</div><div class="state-label">sm</div></div>
+      <div class="col"><div class="btn btn-primary">Read the post →</div><div class="state-label">default</div></div>
+      <div class="col"><div class="btn btn-primary-hover">Read the post →</div><div class="state-label">hover</div></div>
+      <div class="col"><div class="btn btn-lg btn-primary">Subscribe</div><div class="state-label">lg</div></div>
+      <div class="col"><div class="btn btn-disabled">Disabled</div><div class="state-label">disabled</div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="label">Secondary (Outlined)</div>
+    <div class="row">
+      <div class="col"><div class="btn btn-secondary">See all writing</div><div class="state-label">default</div></div>
+      <div class="col"><div class="btn btn-secondary-hover">See all writing</div><div class="state-label">hover</div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="label">Ghost</div>
+    <div class="row">
+      <div class="col"><div class="btn btn-ghost">View project</div><div class="state-label">default</div></div>
+      <div class="col"><div class="btn btn-ghost-hover">View project</div><div class="state-label">hover</div></div>
+    </div>
+  </div>
+</body>
+</html>

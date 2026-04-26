@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FAFAF8; padding: 28px 32px; }
+  .row { display: flex; align-items: baseline; gap: 24px; padding: 10px 0; border-bottom: 1px solid #E5E3DC; }
+  .row:last-child { border-bottom: none; }
+  .meta { width: 120px; flex-shrink: 0; }
+  .token { font-size: 10px; font-weight: 600; color: #9C9A95; letter-spacing: 0.07em; text-transform: uppercase; }
+  .size  { font-size: 10px; color: #9C9A95; margin-top: 2px; }
+  .specimen { flex: 1; color: #1A1916; }
+  .display-text { font-family: 'Fraunces', serif; font-size: 48px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; }
+  .h1-text     { font-family: 'Fraunces', serif; font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 400; }
+  .h2-text     { font-family: 'Fraunces', serif; font-size: 28px; line-height: 1.25; letter-spacing: -0.01em; font-weight: 400; }
+  .h3-text     { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 600; line-height: 1.3; }
+  .h4-text     { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 600; line-height: 1.4; }
+  .body-text   { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; line-height: 1.75; }
+  .small-text  { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: #6B6860; line-height: 1.5; }
+  .label-text  { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #9C9A95; }
+  .code-text   { font-family: 'JetBrains Mono', monospace; font-size: 15px; line-height: 1.6; color: #1A1916; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="meta"><div class="token">Display</div><div class="size">48px / serif</div></div>
+    <div class="specimen display-text">Building Systems</div>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="token">H1</div><div class="size">36px / serif</div></div>
+    <div class="specimen h1-text">Senior Software Engineer</div>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="token">H2</div><div class="size">28px / serif</div></div>
+    <div class="specimen h2-text">Recent Writing</div>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="token">H3</div><div class="size">22px / sans 600</div></div>
+    <div class="specimen h3-text">Designing for latency at scale</div>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="token">H4</div><div class="size">18px / sans 600</div></div>
+    <div class="specimen h4-text">Backend Systems · Applied AI</div>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="token">Body</div><div class="size">17px / 1.75</div></div>
+    <div class="specimen body-text">I build backend systems that scale. I also write about the messy middle of software engineering.</div>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="token">Small</div><div class="size">14px / secondary</div></div>
+    <div class="specimen small-text">Apr 12, 2025 · 8 min read</div>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="token">Label</div><div class="size">12px / caps</div></div>
+    <div class="specimen label-text">Applied AI</div>
+  </div>
+  <div class="row">
+    <div class="meta"><div class="token">Mono</div><div class="size">15px / mono</div></div>
+    <div class="specimen code-text">const pipeline = await build(config);</div>
+  </div>
+</body>
+</html>

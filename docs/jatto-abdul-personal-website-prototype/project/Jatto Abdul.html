@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jatto Abdul — Senior Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="data.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Accent variants */
+  --green-light-accent: #047857;
+  --green-light-h: #065F46;
+  --green-light-bg: #ECFDF5;
+  --green-light-mid: #A7F3D0;
+  --green-dark-accent: #34D399;
+  --green-dark-h: #6EE7B7;
+  --green-dark-bg: #022C22;
+  --green-dark-mid: #065F46;
+
+  --amber-light-accent: #B45309;
+  --amber-light-h: #92400E;
+  --amber-light-bg: #FFFBEB;
+  --amber-light-mid: #FCD34D;
+  --amber-dark-accent: #FBBF24;
+  --amber-dark-h: #FCD34D;
+  --amber-dark-bg: #292014;
+  --amber-dark-mid: #78350F;
+
+  --slate-light-accent: #1E40AF;
+  --slate-light-h: #1E3A8A;
+  --slate-light-bg: #EFF6FF;
+  --slate-light-mid: #BFDBFE;
+  --slate-dark-accent: #93C5FD;
+  --slate-dark-h: #BFDBFE;
+  --slate-dark-bg: #0C1A2E;
+  --slate-dark-mid: #1E3A5F;
+
+  --mono-light-accent: #1C1917;
+  --mono-light-h: #44403C;
+  --mono-light-bg: #F5F5F4;
+  --mono-light-mid: #D6D3D1;
+  --mono-dark-accent: #FAFAF9;
+  --mono-dark-h: #E7E5E4;
+  --mono-dark-bg: #1C1917;
+  --mono-dark-mid: #44403C;
+
+  --bg: #FAFAF9; --bg-surface: #FFFFFF; --bg-raised: #F5F5F4;
+  --bg-sunken: #EFEFED; --bg-code: #F4F2EC;
+  --fg: #18181B; --fg-2: #57534E; --fg-3: #A8A29E;
+  --fg-on-accent: #FFFFFF;
+  --border: #E7E5E4; --border-mid: #D6D3D1;
+  --accent: var(--green-light-accent);
+  --accent-h: var(--green-light-h);
+  --accent-light: var(--green-light-bg);
+  --accent-mid: var(--green-light-mid);
+  --bg-accent: var(--accent-light);
+
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.dark {
+  --bg: #0C0A09; --bg-surface: #161412; --bg-raised: #1E1B18;
+  --bg-sunken: #0A0908; --bg-code: #111008;
+  --fg: #FAFAF9; --fg-2: #A8A29E; --fg-3: #78716C;
+  --fg-on-accent: #0C0A09;
+  --border: #292524; --border-mid: #3C3834;
+  --accent: var(--green-dark-accent);
+  --accent-h: var(--green-dark-h);
+  --accent-light: var(--green-dark-bg);
+  --accent-mid: var(--green-dark-mid);
+  --bg-accent: var(--accent-light);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.25);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.40);
+}
+
+[data-accent="amber"] { --accent: var(--amber-light-accent); --accent-h: var(--amber-light-h); --accent-light: var(--amber-light-bg); --accent-mid: var(--amber-light-mid); --bg-accent: var(--accent-light); }
+.dark[data-accent="amber"] { --accent: var(--amber-dark-accent); --accent-h: var(--amber-dark-h); --accent-light: var(--amber-dark-bg); --accent-mid: var(--amber-dark-mid); --bg-accent: var(--accent-light); }
+[data-accent="slate"] { --accent: var(--slate-light-accent); --accent-h: var(--slate-light-h); --accent-light: var(--slate-light-bg); --accent-mid: var(--slate-light-mid); --bg-accent: var(--accent-light); }
+.dark[data-accent="slate"] { --accent: var(--slate-dark-accent); --accent-h: var(--slate-dark-h); --accent-light: var(--slate-dark-bg); --accent-mid: var(--slate-dark-mid); --bg-accent: var(--accent-light); }
+[data-accent="mono"] { --accent: var(--mono-light-accent); --accent-h: var(--mono-light-h); --accent-light: var(--mono-light-bg); --accent-mid: var(--mono-light-mid); --bg-accent: var(--accent-light); --fg-on-accent: #FAFAF9; }
+.dark[data-accent="mono"] { --accent: var(--mono-dark-accent); --accent-h: var(--mono-dark-h); --accent-light: var(--mono-dark-bg); --accent-mid: var(--mono-dark-mid); --bg-accent: var(--accent-light); --fg-on-accent: #0C0A09; }
+[data-accent="amber"] .dark { --fg-on-accent: #0C0A09; }
+
+[data-density="compact"] section { padding-top: 44px !important; padding-bottom: 44px !important; }
+
+[data-serif="off"] { --serif: 'Plus Jakarta Sans', system-ui, sans-serif; }
+[data-serif="off"] h1, [data-serif="off"] h2, [data-serif="off"] h3 { letter-spacing: -0.025em !important; font-weight: 600 !important; }
+[data-serif="off"] em, [data-serif="off"] i { font-style: normal; color: var(--fg-3) !important; }
+
+html { -webkit-font-smoothing: antialiased; }
+body { font-family: var(--sans); background: var(--bg); color: var(--fg); transition: background 200ms, color 200ms; }
+a { color: var(--accent); text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+input, textarea { font-family: inherit; }
+
+::selection { background: var(--accent-light); color: var(--fg); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+.dark ::-webkit-scrollbar { width: 8px; height: 8px; }
+.dark ::-webkit-scrollbar-track { background: var(--bg); }
+.dark ::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 4px; }
+
+@keyframes pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 0.8; } }
+
+@media (max-width: 720px) {
+  .nav-desktop { display: none !important; }
+  .nav-mobile-btn { display: flex !important; }
+  .about-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .video-feature { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" style="position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--fg-on-accent);padding:8px 14px;border-radius:6px;z-index:9999;" onfocus="this.style.left='12px';this.style.top='12px'" onblur="this.style.left='-9999px'">Skip to content</a>
+<div id="root"></div>
+<script type="text/babel" src="primitives.jsx"></script>
+<script type="text/babel" src="chrome.jsx"></script>
+<script type="text/babel" src="home-sections.jsx"></script>
+<script type="text/babel" src="pages.jsx"></script>
+<script src="tweaks-panel.jsx" type="text/babel"></script>
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "hero": "terminal",
+  "terminalCopy": "workshop",
+  "accent": "green",
+  "density": "comfortable",
+  "serif": "on",
+  "newsletter": true,
+  "dark": false
+}/*EDITMODE-END*/;
+
+function HomePage({ navigate, setArticle, setProject, tweaks }) {
+  return (
+    <main id="main-content">
+      <Hero navigate={navigate} setArticle={setArticle} variant={tweaks.hero} terminalCopy={tweaks.terminalCopy} />
+      <FocusSection />
+      <WritingSection navigate={navigate} setArticle={setArticle} />
+      <VideosSection navigate={navigate} />
+      <ProjectsSection navigate={navigate} setProject={setProject} />
+      <NotesSection navigate={navigate} />
+      <AboutSection navigate={navigate} />
+      <ConnectSection showNewsletter={tweaks.newsletter} />
+    </main>
+  );
+}
+
+function App() {
+  const [page, setPage] = useState('home');
+  const [article, setArticle] = useState('pipelines-that-dont-lie');
+  const [project, setProject] = useState('discova');
+  const [cmdOpen, setCmdOpen] = useState(false);
+  const [tweaks, setTweak] = window.useTweaks(TWEAK_DEFAULTS);
+  const dark = !!tweaks.dark;
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', dark);
+    document.documentElement.setAttribute('data-accent', tweaks.accent || 'green');
+    document.documentElement.setAttribute('data-density', tweaks.density || 'comfortable');
+    document.documentElement.setAttribute('data-serif', tweaks.serif || 'on');
+  }, [dark, tweaks.accent, tweaks.density, tweaks.serif]);
+
+  useEffect(() => {
+    const h = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); setCmdOpen(v => !v); }
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+  }, []);
+
+  const navigate = (p) => { setPage(p); window.scrollTo({ top: 0, behavior: 'instant' }); };
+
+  return (
+    <div data-screen-label={page} style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Header page={page} navigate={navigate} dark={dark} toggleDark={() => setTweak('dark', !dark)} openCmd={() => setCmdOpen(true)} />
+      <CommandMenu open={cmdOpen} onClose={() => setCmdOpen(false)} navigate={navigate} setArticle={setArticle} />
+      <div style={{ flex: 1 }}>
+        {page === 'home'     && <HomePage navigate={navigate} setArticle={setArticle} setProject={setProject} tweaks={tweaks} />}
+        {page === 'writing'  && <WritingPage navigate={navigate} setArticle={setArticle} />}
+        {page === 'notes'    && <NotesPage navigate={navigate} />}
+        {page === 'projects' && <ProjectsPage navigate={navigate} setProject={setProject} />}
+        {page === 'videos'   && <VideosPage />}
+        {page === 'article'  && <ArticlePage slug={article} navigate={navigate} />}
+        {page === 'project'  && <ProjectPage slug={project} navigate={navigate} />}
+        {page === 'about'    && <AboutPage />}
+        {page === 'contact'  && <ContactPage />}
+      </div>
+      <Footer navigate={navigate} />
+
+      <window.TweaksPanel title="Tweaks">
+        <window.TweakSection title="Theme">
+          <window.TweakRadio label="Mode" value={dark ? 'dark' : 'light'} onChange={v => setTweak('dark', v === 'dark')} options={[{value:'light',label:'Light'},{value:'dark',label:'Dark'}]} />
+          <window.TweakSelect label="Accent" value={tweaks.accent} onChange={v => setTweak('accent', v)} options={[{value:'green',label:'Green (default)'},{value:'amber',label:'Amber'},{value:'slate',label:'Slate'},{value:'mono',label:'Monochrome'}]} />
+          <window.TweakRadio label="Density" value={tweaks.density} onChange={v => setTweak('density', v)} options={[{value:'comfortable',label:'Comfortable'},{value:'compact',label:'Compact'}]} />
+          <window.TweakRadio label="Serif" value={tweaks.serif} onChange={v => setTweak('serif', v)} options={[{value:'on',label:'On'},{value:'off',label:'Off (all sans)'}]} />
+        </window.TweakSection>
+        <window.TweakSection title="Home">
+          <window.TweakSelect label="Hero variant" value={tweaks.hero} onChange={v => setTweak('hero', v)} options={[{value:'editorial',label:'Editorial (default)'},{value:'minimal',label:'Minimal'},{value:'reading',label:'Reading list'},{value:'terminal',label:'Terminal'}]} />
+          {tweaks.hero === 'terminal' && (
+            <window.TweakSelect label="Terminal headline" value={tweaks.terminalCopy} onChange={v => setTweak('terminalCopy', v)} options={[
+              {value:'blueprint',label:'A systems blueprint, in long form'},
+              {value:'workshop',label:'A working engineer\u2019s public workshop'},
+              {value:'field',label:'Field notes from real software'},
+              {value:'staff',label:'Engineering thought, written clearly'},
+              {value:'build',label:'Build, write, review, repeat'},
+            ]} />
+          )}
+          <window.TweakToggle label="Newsletter section" value={tweaks.newsletter} onChange={v => setTweak('newsletter', v)} />
+        </window.TweakSection>
+        <window.TweakSection title="Try">
+          <window.TweakButton label="Open command menu (⌘K)" onClick={() => setCmdOpen(true)} />
+          <window.TweakButton label="Go to Writing" onClick={() => navigate('writing')} />
+          <window.TweakButton label="Open article" onClick={() => { setArticle('pipelines-that-dont-lie'); navigate('article'); }} />
+        </window.TweakSection>
+      </window.TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

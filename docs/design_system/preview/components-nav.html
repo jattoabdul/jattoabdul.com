@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FAFAF8; padding: 0; }
+
+  nav {
+    height: 64px; display: flex; align-items: center;
+    border-bottom: 1px solid #E5E3DC; background: #FAFAF8;
+    padding: 0 40px; justify-content: space-between;
+  }
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; color: #1A1916; text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-link {
+    font-size: 14px; font-weight: 500; color: #6B6860;
+    text-decoration: none; padding: 6px 10px; border-radius: 4px;
+    transition: color 150ms;
+  }
+  .nav-link.active { color: #1A6B4A; }
+  .nav-link:hover { color: #1A1916; background: #F5F4F0; }
+  .nav-cta {
+    font-size: 13px; font-weight: 500; background: #1A6B4A;
+    color: #fff; padding: 7px 14px; border-radius: 6px;
+    text-decoration: none; margin-left: 8px;
+  }
+
+  /* Mobile nav preview */
+  .mobile-nav {
+    height: 56px; display: flex; align-items: center;
+    border-bottom: 1px solid #E5E3DC; background: #FAFAF8;
+    padding: 0 20px; justify-content: space-between;
+    margin-top: 2px;
+  }
+  .hamburger { display: flex; flex-direction: column; gap: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: #6B6860; border-radius: 2px; }
+  .label { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #9C9A95; padding: 10px 40px 6px; }
+</style>
+</head>
+<body>
+  <div class="label">Desktop Nav</div>
+  <nav>
+    <a class="wordmark" href="#">Jatto Abdul</a>
+    <div class="nav-links">
+      <a class="nav-link active" href="#">Writing</a>
+      <a class="nav-link" href="#">Projects</a>
+      <a class="nav-link" href="#">Notes</a>
+      <a class="nav-link" href="#">About</a>
+      <a class="nav-cta" href="#">Subscribe</a>
+    </div>
+  </nav>
+  <div class="label">Mobile Nav</div>
+  <div class="mobile-nav">
+    <a class="wordmark" href="#">Jatto Abdul</a>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</body>
+</html>

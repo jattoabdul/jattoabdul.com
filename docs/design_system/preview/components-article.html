@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FAFAF8; padding: 32px; }
+  .article { max-width: 640px; }
+  .post-label { font-size: 11px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #1A6B4A; margin-bottom: 14px; }
+  h1 { font-family: 'Fraunces', serif; font-size: 32px; line-height: 1.15; color: #1A1916; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .post-meta { font-size: 13px; color: #9C9A95; margin-bottom: 28px; display: flex; gap: 12px; }
+  p { font-size: 16px; line-height: 1.75; color: #1A1916; margin-bottom: 16px; max-width: 65ch; }
+  h2 { font-family: 'Fraunces', serif; font-size: 22px; color: #1A1916; margin: 28px 0 10px; line-height: 1.25; }
+  blockquote { border-left: 3px solid #1A6B4A; padding: 4px 0 4px 20px; color: #6B6860; font-family: 'Fraunces', serif; font-size: 17px; font-style: italic; line-height: 1.55; margin: 20px 0; }
+  code.inline { font-family: 'JetBrains Mono', monospace; font-size: 13px; background: #F0EDE6; border: 1px solid #E5E3DC; border-radius: 4px; padding: 2px 6px; color: #1A1916; }
+  pre { font-family: 'JetBrains Mono', monospace; font-size: 13px; background: #F0EDE6; border: 1px solid #E5E3DC; border-radius: 8px; padding: 16px 20px; overflow-x: auto; line-height: 1.65; color: #1A1916; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid #E5E3DC; margin: 28px 0; }
+</style>
+</head>
+<body>
+  <div class="article">
+    <div class="post-label">Backend Systems</div>
+    <h1>Designing data pipelines that don't lie to you</h1>
+    <div class="post-meta"><span>Apr 12, 2025</span><span>·</span><span>8 min read</span></div>
+    <p>Most pipeline failures aren't bugs — they're assumption violations baked in at design time. The schema changed. A field that was always populated is now sometimes null.</p>
+    <blockquote>"The most dangerous pipelines are the ones that succeed silently with wrong data."</blockquote>
+    <h2>Validate at the boundary</h2>
+    <p>Use <code class="inline">pydantic</code> or a lightweight schema contract layer to assert shape at ingestion time, not inside your transforms.</p>
+    <pre><span style="color:#C97B30">@validator</span>(<span style="color:#C97B30">"event_type"</span>)
+<span style="color:#6B9FD4">def</span> <span style="color:#2E9968">check_event</span>(cls, v):
+    assert v <span style="color:#6B9FD4">in</span> VALID_EVENTS
+    <span style="color:#6B9FD4">return</span> v</pre>
+    <hr>
+    <p style="font-size:13px;color:#9C9A95;">Tagged: <a href="#" style="color:#1A6B4A;text-decoration:none;">backend</a> · <a href="#" style="color:#1A6B4A;text-decoration:none;">data engineering</a> · <a href="#" style="color:#1A6B4A;text-decoration:none;">python</a></p>
+  </div>
+</body>
+</html>

@@ -12,8 +12,12 @@ Useful screenshots:
 
 - [inspiration-contact-sheet.png](../../output/playwright/personal-site-research-2026-04-25/inspiration-contact-sheet.png)
 - individual screenshots are in [output/playwright/personal-site-research-2026-04-25](../../output/playwright/personal-site-research-2026-04-25)
+- [simple-complex-contact-sheet.png](../../output/playwright/personal-site-research-2026-04-25-addendum/simple-complex-contact-sheet.png)
+- addendum screenshots are in [output/playwright/personal-site-research-2026-04-25-addendum](../../output/playwright/personal-site-research-2026-04-25-addendum)
 
 ![Inspiration contact sheet](../../output/playwright/personal-site-research-2026-04-25/inspiration-contact-sheet.png)
+
+![Simple with complexity contact sheet](../../output/playwright/personal-site-research-2026-04-25-addendum/simple-complex-contact-sheet.png)
 
 ## Best Overall Pattern
 
@@ -23,6 +27,7 @@ The strongest fit is a hybrid of:
 - Hamel Husain for applied-AI authority and consulting/teaching clarity
 - Tania Rascia for maintainable blog/notes/projects structure
 - Arpit Bhayani for backend/systems credibility and social proof
+- Asiful Alam for a Medium-plus-personal-site publishing model and a darker developer portfolio feel
 - Josh Comeau or Kent C. Dodds for warmth and teaching personality, used sparingly
 
 Recommended direction:
@@ -51,6 +56,48 @@ Recommended direction:
 | [Dan Abramov / Overreacted](https://overreacted.io/) | Deep React/software thinking through essays. | Minimal blog index with color accent and essay titles. | Let writing carry authority; keep article index fast and clean. | No homepage context for new visitors unless paired with an About section. |
 | [Jacob Kaplan-Moss](https://jacobian.org/) | Django co-creator, engineering leader, consultant/writer. | Bold simple header, concise bio, chronological writing list. | Senior credibility in one paragraph; clear writing list. | Topic mix can drift once the brand expands. |
 | [Monica Lent](https://monica.carrd.co/) | Software engineer with projects and personal sites. | Minimal Carrd-style profile, short tech stack, project and CV links. | Simple single-page structure and project grouping. | Feels older and less content-led than the target site. |
+
+## Addendum: Asiful Alam And Simple-With-Complexity Sites
+
+This addendum focuses on the kind of developer site that looks simple at first glance but carries extra craft through layout, interaction, content automation, dark mode, or unusually clear information architecture.
+
+| Person / Site | Why It Matters | Borrow | Be Careful |
+| --- | --- | --- | --- |
+| [Asiful Alam](https://asifulalam.me/) | Dark, simple developer portfolio with a clear personal intro, brand/client proof, contact path, and latest blog section. His Medium article shows a practical path for syncing Medium writing into a personal site. | Medium-backed blog cards, dark mode option, personal portrait, brand proof, direct contact CTA. | His site is more freelance/portfolio than staff-engineer publishing hub; borrow the publishing model and restrained dark aesthetic, not the whole positioning. |
+| [Paco Coursey](https://paco.me/) | Ultra-minimal design-engineer page with polished writing, projects, and "now" copy. | Short blocks, tasteful microcopy, compact projects/writing sections, craft without visual noise. | Too minimal alone; Jatto needs stronger engineering proof and blog discoverability. |
+| [Emil Kowalski](https://emilkowal.ski/) | Clean design-engineer site with projects, writing, and course/newsletter CTA. | White-space discipline, direct project descriptions, writing archive as authority. | More design-animation focused than backend/platform. |
+| [Rauno Freiberg](https://rauno.me/) | Experimental interaction-designer identity with very simple words and rich interaction/visual details. | Memorable mantra-style principles, careful motion, "details matter" feel. | Too abstract for homepage clarity if copied directly. |
+| [Braydon Coyer](https://www.braydoncoyer.dev/) | Playful blogfolio that is intentionally over-engineered as a personal sandbox. | Changelog, link previews, experiments, newsletter, personality in the site itself. | Too playful/noisy for staff-engineer credibility if not restrained. |
+| [Max Boeck](https://mxb.dev/) | Personal web/developer site with writing, notes, many themes, and a clear old-web/IndieWeb sensibility. | Blog/notes split, theme experimentation, RSS-first mindset. | The visual theme is more front-end/IndieWeb than platform-engineer. |
+| [Max Leiter](https://maxleiter.com/) | Dark terminal-like personal hub with blog, notes, projects, labs, and AI/Vercel credibility. | Dense but scannable developer hub, labs/projects separation, technical personality. | Dark terminal aesthetic can become too niche for broad audiences. |
+| [Brittany Chiang](https://brittanychiang.com/) | Minimal dark portfolio with polished engineering credibility, experience, projects, writing, and social links. | Clear left/right layout, restrained dark theme, proof-first experience section. | It is still portfolio-first; Jatto needs writing/content to be more central. |
+| [Chanh Dai](https://chanhdai.com/) | Resume-like but highly engineered personal site with command palette, components, blog, sponsors, testimonials, contributions, and detailed proof. | "Simple shell, complex internals", command palette, component demos, proof modules, open-source credibility. | Very dense. Use modular ideas, not the entire information load. |
+
+### Medium + Personal Website Blog Model
+
+Asiful's article, [How I Successfully Added Medium Blogs to My Website](https://javascript.plainenglish.io/how-i-successfully-added-medium-blogs-to-my-website-abafd76c4182), is useful because it treats Medium as both a distribution platform and a content source. The practical pattern:
+
+- fetch Medium profile RSS content, optionally through an RSS-to-JSON service
+- render recent posts as cards on the personal site
+- link to Medium or render a full article page from feed content
+- refresh periodically so new Medium posts appear without manual site edits
+- keep a clear path back to Medium for followers and engagement
+
+Important constraints:
+
+- Medium's official help confirms profile/publication RSS feeds exist and can be integrated into a website.
+- Medium notes that paywalled stories are not available as full stories in RSS feeds.
+- Asiful's article reports a practical limit where the Medium RSS feed only exposed the latest 10 items.
+- The site should treat the feed as external content with caching, empty states, and failure states rather than relying on client-side fetching at runtime.
+
+Recommended Jatto version:
+
+- Use the personal site as the main reading hub and archive over time.
+- Use Medium as distribution or cross-posting, not as the only long-term content database.
+- For the first version, show `Latest from Medium` cards sourced from RSS and link out to Medium.
+- For the stronger version, ingest Medium RSS server-side into a local cache/content index, preserve source/canonical links, and gradually move evergreen posts into first-party MDX.
+- Label external posts clearly: `Published on Medium`.
+- Add a `Writing` page with filters for `Essays`, `Notes`, `Medium`, `Videos`, and `Case Studies`.
 
 ## Patterns Worth Borrowing
 
@@ -209,15 +256,18 @@ Risk:
 
 Use:
 
-- 55% Technical Editorial
+- 45% Technical Editorial
 - 25% Systems Blueprint
-- 15% Warm Product Educator
+- 15% Simple-With-Complexity Developer Craft
+- 10% Warm Product Educator
 - 5% Premium Engineering Leader
 
 In practice:
 
 - homepage structure from Lee/Hamel/Tania
 - backend/platform credibility modules from Arpit
+- Medium publishing model and dark developer feel from Asiful
+- compact craft/detail inspiration from Paco, Emil, Rauno, Max Leiter, and Chanh Dai
 - diagrams and explainers inspired by ByteByteGo
 - a little warmth and personality from Josh/Kent/Cassidy
 - avoid launching with a dark, high-drama Addy/Sarah-style identity until the content body is stronger
@@ -265,7 +315,9 @@ Most useful to adopt:
 2. Hamel Husain: applied-AI credibility through practical writing.
 3. Tania Rascia: blog/notes/projects information architecture.
 4. Arpit Bhayani: backend/platform authority and recent-post proof.
-5. Josh Comeau: warmth and memorable teaching energy.
+5. Asiful Alam: Medium-backed blog integration and dark developer portfolio restraint.
+6. Paco Coursey / Emil Kowalski: simple layout with high craft.
+7. Josh Comeau: warmth and memorable teaching energy.
 
 Most useful to discard for now:
 
@@ -274,6 +326,7 @@ Most useful to discard for now:
 - dark premium inventory wall from Addy Osmani
 - raw dense weblog homepage from Simon Willison as the main first screen
 - old-school single-page CV layout from Monica Lent
+- purely client-side Medium fetching without caching, SEO, canonical-link, and failure-state planning
 
 ## Sources
 
@@ -296,3 +349,14 @@ Most useful to discard for now:
 - [Dan Abramov / Overreacted](https://overreacted.io/)
 - [Jacob Kaplan-Moss](https://jacobian.org/)
 - [Monica Lent](https://monica.carrd.co/)
+- [Asiful Alam](https://asifulalam.me/)
+- [How I Successfully Added Medium Blogs to My Website](https://javascript.plainenglish.io/how-i-successfully-added-medium-blogs-to-my-website-abafd76c4182)
+- [Medium RSS feed help](https://help.medium.com/hc/en-us/articles/214874118-Using-RSS-feeds-of-profiles-publications-and-topics)
+- [Paco Coursey](https://paco.me/)
+- [Emil Kowalski](https://emilkowal.ski/)
+- [Rauno Freiberg](https://rauno.me/)
+- [Braydon Coyer](https://www.braydoncoyer.dev/)
+- [Max Boeck](https://mxb.dev/)
+- [Max Leiter](https://maxleiter.com/)
+- [Brittany Chiang](https://brittanychiang.com/)
+- [Chanh Dai](https://chanhdai.com/)

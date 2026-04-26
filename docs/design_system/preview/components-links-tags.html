@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FAFAF8; padding: 28px 32px; }
+  .label { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #9C9A95; margin-bottom: 12px; }
+  .section { margin-bottom: 24px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+
+  /* Tags */
+  .tag { display: inline-flex; align-items: center; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 3px 8px; border-radius: 4px; border: 1px solid #E5E3DC; background: #F5F4F0; color: #6B6860; }
+  .tag-hover { border-color: #1A6B4A; background: #EDF5F0; color: #1A6B4A; }
+  .tag-accent { background: #EDF5F0; border-color: #A0D3B9; color: #1A6B4A; }
+  .tag-dark   { background: #1A1916; border-color: #1A1916; color: #F0EDE6; }
+
+  /* Links */
+  .link-default { color: #1A6B4A; font-size: 15px; text-decoration: none; }
+  .link-hover   { color: #145538; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; }
+  .link-nav     { color: #6B6860; font-size: 14px; font-weight: 500; text-decoration: none; padding: 4px 10px; border-radius: 4px; }
+  .link-nav-active { color: #1A6B4A; font-size: 14px; font-weight: 500; text-decoration: none; padding: 4px 10px; border-radius: 4px; }
+  .link-nav-hover  { color: #1A1916; font-size: 14px; font-weight: 500; text-decoration: none; background: #F5F4F0; padding: 4px 10px; border-radius: 4px; }
+
+  /* Arrow link */
+  .link-arrow { display: inline-flex; align-items: center; gap: 4px; color: #1A6B4A; font-size: 14px; font-weight: 500; text-decoration: none; }
+  .link-arrow:hover { gap: 8px; }
+</style>
+</head>
+<body>
+  <div class="section">
+    <div class="label">Tags / Badges</div>
+    <div class="row">
+      <span class="tag">Backend</span>
+      <span class="tag">Applied AI</span>
+      <span class="tag">Platform</span>
+      <span class="tag tag-hover">Hover state</span>
+      <span class="tag tag-accent">Featured</span>
+      <span class="tag tag-dark">New</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="label">Inline Links</div>
+    <div class="row">
+      <a class="link-default" href="#">Default link</a>
+      <a class="link-hover"   href="#">Hovered link</a>
+      <a class="link-arrow"  href="#">See all writing →</a>
+    </div>
+  </div>
+  <div class="section">
+    <div class="label">Nav Links</div>
+    <div class="row">
+      <a class="link-nav" href="#">Writing</a>
+      <a class="link-nav-hover" href="#">Projects</a>
+      <a class="link-nav-active" href="#">Notes</a>
+      <a class="link-nav" href="#">About</a>
+    </div>
+  </div>
+</body>
+</html>

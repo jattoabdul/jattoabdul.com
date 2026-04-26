@@ -123,8 +123,7 @@ Homepage hero should avoid generic lines like:
 Stronger phrasing:
 
 - `Senior Software Engineer building backend, platform, and applied-AI systems.`
--
-`I write about practical software engineering, AI-assisted product building, and the communication habits that make engineers more effective.`
+- `I write about practical software engineering, AI-assisted product building, and the communication habits that make engineers more effective.`
 - `Currently focused on data modernization, search/reporting workflows, and AI-adjacent infrastructure.`
 
 ## Design Direction
@@ -170,3 +169,49 @@ Avoid:
   employment detail?
 - Which projects are public-safe enough to feature as case studies?
 - Should the blog launch as `Writing`, `Notes`, or both?
+
+1. I like the Terminal hero direction. It is perfect, but need to get some tweaks options for the headline and subtext
+2. Real copy for About/Operating Style:
+```
+How I think, build, and write.
+
+I'm Jatto Abdul. Senior software engineer with a strong lane in backend, platform, and applied-AI systems — and strong frontend and product fluency to round it out.
+
+My work sits in the messy middle where product ideas become real software solutions - APIs, data flows, search and reporting workflows, integrations, caching, deployment, and the judgment calls that keep systems understandable as they grow.
+
+I think in systems: boundaries, contracts, observability, blast radius, and the people who have to operate the thing after it ships. I care about communication as much as code because most technical problems get easier when the assumptions are visible.
+
+That is also why I write and create contents. Writing, videos, and public notes help me turn real engineering work into clearer lessons - what I tried, what broke, what worked, and what I would do differently next time. It forces the assumptions out of my head and into something I can argue with.
+
+Operating style:
+
+I write down assumptions before writing code. Most bugs are assumption bugs.
+
+I prefer boring, durable architecture and reach for novelty only when boring genuinely does not fit.
+
+I instrument early. If I cannot see what the system is doing, I have not finished building it.
+
+I review my own PRs first. The fastest way to get useful feedback is to delete my own weak ideas before someone else has to.
+
+I explain the tradeoff, not just the decision. Good engineering is usually a record of what we chose, what we rejected, and why.
+
+I build in public where it makes sense. Thinking out loud helps me find the parts of an idea that do not actually work, that needs rethinking or that others can contribute to.
+
+
+Open to:
+
+Staff-level engineering roles, advisory work with engineering-led teams, and collaborations around backend, platform, product, and applied-AI systems. I am especially interested in teams that value clear thinking, durable software, and products that respect users. Always happy to trade notes with other engineers as well.
+```
+
+Real one-liners copy for Projects:
+```
+Minerva: My current engineering home, building backend and platform systems for AI-powered AML screening, search, reporting, and risk-monitoring workflows.
+
+Discova: A technical reading and discovery product I built to turn scattered engineering content into a calmer, more useful learning flow and discovery experience.
+
+TrustKarry: A peer-to-peer logistics marketplace connecting senders with trusted travelers through structured trip, package, request, and verification workflows.
+
+Fera: A multi-platform commerce product suite where I built and led work across reviews, Q&A, messaging, verification, widgets, dashboards, and merchant integrations.
+
+Heroshe: A logistics platform modernization effort where I helped move the business from third-party operations tooling toward custom software for shipment, customer, and internal workflows.
+```

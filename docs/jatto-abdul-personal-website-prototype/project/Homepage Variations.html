@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jatto Abdul — Homepage Variations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="data.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #FAFAF9; --bg-surface: #FFFFFF; --bg-raised: #F5F5F4;
+  --bg-sunken: #EFEFED; --bg-code: #F4F2EC; --bg-accent: #ECFDF5;
+  --fg: #18181B; --fg-2: #57534E; --fg-3: #A8A29E; --fg-on-accent: #FFFFFF;
+  --border: #E7E5E4; --border-mid: #D6D3D1;
+  --accent: #047857; --accent-h: #065F46; --accent-light: #ECFDF5; --accent-mid: #A7F3D0;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+}
+.dark {
+  --bg: #0C0A09; --bg-surface: #161412; --bg-raised: #1E1B18;
+  --bg-sunken: #0A0908; --bg-code: #111008; --bg-accent: #022C22;
+  --fg: #FAFAF9; --fg-2: #A8A29E; --fg-3: #78716C; --fg-on-accent: #0C0A09;
+  --border: #292524; --border-mid: #3C3834;
+  --accent: #34D399; --accent-h: #6EE7B7; --accent-light: #022C22; --accent-mid: #065F46;
+}
+html { -webkit-font-smoothing: antialiased; }
+body { font-family: var(--sans); background: #EBEAE6; color: var(--fg); }
+a { color: var(--accent); text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+input, textarea { font-family: inherit; }
+::selection { background: var(--accent-light); color: var(--fg); }
+@keyframes pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 0.8; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="primitives.jsx"></script>
+<script type="text/babel" src="chrome.jsx"></script>
+<script type="text/babel" src="home-sections.jsx"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel">
+const { useState } = React;
+
+// Compact header for variation previews
+function MiniHeader({ accent }) {
+  return (
+    <div style={{ height: 56, borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', background: 'var(--bg)' }}>
+      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 9 }}>
+        <span style={{ width: 22, height: 22, borderRadius: 5, background: 'var(--fg)', color: 'var(--bg)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--serif)', fontSize: 13 }}>j</span>
+        <span style={{ fontFamily: 'var(--serif)', fontSize: 16 }}>Jatto Abdul</span>
+      </div>
+      <div style={{ display: 'flex', gap: 14, fontSize: 13, color: 'var(--fg-2)' }}>
+        {['Writing','Notes','Projects','Videos','About'].map(l => <span key={l}>{l}</span>)}
+      </div>
+    </div>
+  );
+}
+
+function VariationFrame({ children, theme = 'light', accent }) {
+  return (
+    <div className={theme === 'dark' ? 'dark' : ''} data-accent={accent}
+      style={{ background: 'var(--bg)', color: 'var(--fg)', minHeight: '100%', fontFamily: 'var(--sans)' }}>
+      <MiniHeader />
+      {children}
+    </div>
+  );
+}
+
+const noop = () => {};
+
+function App() {
+  const [tab, setTab] = useState(null);
+  return (
+    <window.DesignCanvas title="Jatto Abdul — Homepage Directions" subtitle="Four hero treatments × light + dark — pick what feels most you, then I'll wire the chosen direction into the main site.">
+      <window.DCSection id="editorial" title="Editorial — the default" subtitle="Eyebrow pill, serif headline with italic second line, four CTAs, current-focus grid below. Closest to a confident senior-engineer voice.">
+        <window.DCArtboard id="editorial-light" label="Editorial · light" width={1100} height={1280}>
+          <VariationFrame theme="light">
+            <Hero variant="editorial" navigate={noop} setArticle={noop} />
+            <FocusSection />
+          </VariationFrame>
+        </window.DCArtboard>
+        <window.DCArtboard id="editorial-dark" label="Editorial · dark" width={1100} height={1280}>
+          <VariationFrame theme="dark">
+            <Hero variant="editorial" navigate={noop} setArticle={noop} />
+            <FocusSection />
+          </VariationFrame>
+        </window.DCArtboard>
+      </window.DCSection>
+
+      <window.DCSection id="minimal" title="Minimal — Paco / Lee Robinson flavor" subtitle="Just name + one line + recent posts. The site does the talking.">
+        <window.DCArtboard id="minimal-light" label="Minimal · light" width={1100} height={780}>
+          <VariationFrame theme="light"><Hero variant="minimal" navigate={noop} setArticle={noop} /></VariationFrame>
+        </window.DCArtboard>
+        <window.DCArtboard id="minimal-dark" label="Minimal · dark" width={1100} height={780}>
+          <VariationFrame theme="dark"><Hero variant="minimal" navigate={noop} setArticle={noop} /></VariationFrame>
+        </window.DCArtboard>
+      </window.DCSection>
+
+      <window.DCSection id="reading" title="Reading list — Tania Rascia flavor" subtitle="The hero IS the writing. URL slug, headline, and a dated reading list of the latest five.">
+        <window.DCArtboard id="reading-light" label="Reading list · light" width={1100} height={920}>
+          <VariationFrame theme="light"><Hero variant="reading" navigate={noop} setArticle={noop} /></VariationFrame>
+        </window.DCArtboard>
+        <window.DCArtboard id="reading-dark" label="Reading list · dark" width={1100} height={920}>
+          <VariationFrame theme="dark"><Hero variant="reading" navigate={noop} setArticle={noop} /></VariationFrame>
+        </window.DCArtboard>
+      </window.DCSection>
+
+      <window.DCSection id="terminal" title="Terminal — systems-blueprint flavor" subtitle="A small terminal block as the hero element. Subtle developer craft, no kitsch.">
+        <window.DCArtboard id="terminal-light" label="Terminal · light" width={1100} height={820}>
+          <VariationFrame theme="light"><Hero variant="terminal" navigate={noop} setArticle={noop} /></VariationFrame>
+        </window.DCArtboard>
+        <window.DCArtboard id="terminal-dark" label="Terminal · dark" width={1100} height={820}>
+          <VariationFrame theme="dark"><Hero variant="terminal" navigate={noop} setArticle={noop} /></VariationFrame>
+        </window.DCArtboard>
+      </window.DCSection>
+    </window.DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
