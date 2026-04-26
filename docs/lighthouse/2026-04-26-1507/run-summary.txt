@@ -1,0 +1,4 @@
+Lighthouse run against https://jattoabdul.com
+Date: 2026-04-26
+Location/runtime: local Codex workspace
+Lighthouse: 13.1.0 via npx
