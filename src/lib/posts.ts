@@ -1,4 +1,4 @@
-import { posts as localPosts, type Post } from '@/data/posts';
+import { mediumPosts, getLocalPosts, type Post } from '@/data/posts';
 
 /**
  * Server-side Medium RSS fetch.
@@ -94,10 +94,15 @@ type RssItem = {
 };
 
 export async function getWritingFeed(): Promise<WritingFeed> {
-  const local = localPosts.filter((p) => p.published);
+  // Local published posts come from MDX files now; manually-curated Medium
+  // entries live in `mediumPosts`. Both go through the same filter pipeline.
+  const local = await getLocalPosts();
+  const curatedMedium = mediumPosts.filter((p) => p.published);
+
+  const baseline = [...local, ...curatedMedium];
 
   if (!MEDIUM_FEED_ENABLED) {
-    return { posts: sortByDate(local), state: 'success' };
+    return { posts: sortByDate(baseline), state: 'success' };
   }
 
   try {
@@ -122,10 +127,10 @@ export async function getWritingFeed(): Promise<WritingFeed> {
       }))
       .filter(passesMediumFilter);
 
-    const merged = dedupe([...local, ...remote]);
+    const merged = dedupe([...baseline, ...remote]);
     return { posts: sortByDate(merged), state: merged.length ? 'success' : 'empty' };
   } catch {
-    return { posts: sortByDate(local), state: 'error' };
+    return { posts: sortByDate(baseline), state: 'error' };
   }
 }
 

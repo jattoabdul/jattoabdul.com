@@ -1,0 +1,15 @@
+---
+title: 'Building AI-assisted workflows without the hype'
+category: 'Applied AI'
+excerpt: "Field notes from integrating LLMs into production systems — what worked, what didn't, and the tradeoffs nobody warned me about."
+date: '2026-03-28'
+readTime: 6
+tags: ['applied-ai', 'llms']
+published: false
+---
+
+There's a version of every applied-AI feature that ships in a week and a version that survives in production. The difference is almost never the model — it's the surrounding system.
+
+## Treat the LLM as a stochastic dependency
+
+Wrap calls in retries with jitter. Cache aggressively where determinism matters. Validate outputs against a schema before you trust them downstream. None of this is glamorous; all of it is required.

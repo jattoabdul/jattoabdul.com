@@ -1,16 +1,21 @@
 import { ImageResponse } from 'next/og';
 
-import { getLocalPosts, getPost } from '@/data/posts';
+import { getLocalPosts } from '@/data/posts';
 import { siteConfig } from '@/data/site';
 import { formatDate } from '@/lib/format';
+import { getAllMdxPostMeta } from '@/lib/mdx';
 
 export const alt = 'Article on jattoabdul.com';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
-export const runtime = 'edge';
+// nodejs runtime is required because we read MDX files from the filesystem
+// to populate the OG metadata. The image itself is built once per article
+// and cached by Next.js, so the per-render cost is negligible.
+export const runtime = 'nodejs';
 
-export function generateImageMetadata() {
-  return getLocalPosts().map((p) => ({
+export async function generateImageMetadata() {
+  const local = await getLocalPosts();
+  return local.map((p) => ({
     id: p.slug,
     alt: p.title,
     contentType,
@@ -22,7 +27,8 @@ type Params = { params: Promise<{ slug: string }> };
 
 export default async function ArticleOgImage({ params }: Params) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const all = await getAllMdxPostMeta();
+  const post = all.find((p) => p.slug === slug);
 
   const title = post?.title ?? siteConfig.name;
   const category = post?.category ?? 'Writing';
@@ -111,7 +117,6 @@ export default async function ArticleOgImage({ params }: Params) {
               flexWrap: 'wrap',
             }}
           >
-            {/* CTA chip — primary */}
             <div
               style={{
                 display: 'flex',

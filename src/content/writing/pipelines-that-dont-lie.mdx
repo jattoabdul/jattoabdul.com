@@ -1,0 +1,37 @@
+---
+title: "Designing data pipelines that don't lie to you"
+category: 'Backend Systems'
+excerpt: "Most pipeline failures aren't bugs — they're assumption violations baked in at design time. Here's how I learned to validate at the boundary."
+date: '2026-04-12'
+readTime: 8
+tags: ['backend', 'data']
+published: false
+---
+
+Most pipeline failures aren't bugs — they're assumption violations baked in at design time. The schema changed. The upstream vendor didn't tell you. A field that was always populated is now sometimes null. The job didn't crash; it produced wrong numbers, and the dashboard kept going.
+
+> The most dangerous pipelines are the ones that succeed silently with wrong data.
+
+## Validate at the boundary
+
+Use a schema contract layer to assert shape at ingestion time — not inside your transforms. Inside transforms is too late: errors there mean you've already promised correctness to someone downstream.
+
+```python
+from pydantic import BaseModel, validator
+
+
+class Event(BaseModel):
+    user_id: str
+    event_type: str
+    ts: int
+
+    @validator("event_type")
+    def check_event(cls, v):
+        if v not in VALID_EVENTS:
+            raise ValueError(f"unknown event: {v}")
+        return v
+```
+
+## Design for observability
+
+Emit metrics on schema violations. Track null rates per field. Alert when rates deviate from a rolling baseline. The pipeline that tells you when it's confused is worth ten that fail loudly once a year.

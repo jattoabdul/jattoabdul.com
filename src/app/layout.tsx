@@ -4,6 +4,7 @@ import { Fraunces, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { Header } from '@/components/site/Header';
 import { Footer } from '@/components/site/Footer';
+import { getCommandMenuPosts } from '@/data/posts';
 import { siteConfig } from '@/data/site';
 import '@/styles/globals.css';
 
@@ -76,9 +77,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // Server-fetch the writing list for the command menu so the client
+  // component doesn't need filesystem access. Cheap (4 small MDX reads),
+  // cached by Next for static routes.
+  const commandMenuPosts = await getCommandMenuPosts();
+
   return (
     <html
       lang="en"
@@ -96,7 +102,7 @@ export default function RootLayout({
             Skip to content
           </a>
           <div className="flex min-h-screen flex-col">
-            <Header />
+            <Header commandMenuPosts={commandMenuPosts} />
             <div className="flex-1">{children}</div>
             <Footer />
           </div>

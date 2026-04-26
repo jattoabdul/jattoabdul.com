@@ -5,7 +5,7 @@ import { getLocalPosts } from '@/data/posts';
 import { getPublishedNotes } from '@/data/notes';
 import { projects } from '@/data/projects';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url.replace(/\/$/, '');
   const now = new Date();
 
@@ -24,7 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === '' ? 1.0 : 0.7,
   }));
 
-  const articleRoutes = getLocalPosts().map((post) => ({
+  const localArticles = await getLocalPosts();
+  const articleRoutes = localArticles.map((post) => ({
     url: `${base}/writing/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,

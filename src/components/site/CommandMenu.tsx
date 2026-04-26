@@ -7,7 +7,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowUpRight, FileText, Hash, Search } from 'lucide-react';
 
 import { primaryNav } from '@/data/site';
-import { posts } from '@/data/posts';
+import type { CommandMenuPost } from '@/data/posts';
 import { projects } from '@/data/projects';
 import { captureEvent } from '@/lib/posthog-client';
 import { cn } from '@/lib/utils';
@@ -15,9 +15,10 @@ import { cn } from '@/lib/utils';
 type CommandTriggerProps = {
   variant?: 'pill' | 'icon';
   className?: string;
+  posts: CommandMenuPost[];
 };
 
-export function CommandMenuTrigger({ variant = 'pill', className }: CommandTriggerProps) {
+export function CommandMenuTrigger({ variant = 'pill', className, posts }: CommandTriggerProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -67,7 +68,7 @@ export function CommandMenuTrigger({ variant = 'pill', className }: CommandTrigg
           <Search className="size-4" />
         </button>
       )}
-      <CommandMenu open={open} onOpenChange={setOpen} />
+      <CommandMenu open={open} onOpenChange={setOpen} posts={posts} />
     </>
   );
 }
@@ -75,9 +76,10 @@ export function CommandMenuTrigger({ variant = 'pill', className }: CommandTrigg
 type CommandMenuProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  posts: CommandMenuPost[];
 };
 
-function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
+function CommandMenu({ open, onOpenChange, posts }: CommandMenuProps) {
   const router = useRouter();
 
   const go = useCallback(

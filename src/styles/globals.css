@@ -126,4 +126,73 @@
     left: 12px;
     top: 12px;
   }
+
+  /* ──────────────────────────────────────────────────────────────────────
+   * MDX article styles
+   * ──────────────────────────────────────────────────────────────────── */
+
+  /* rehype-pretty-code emits <figure data-rehype-pretty-code-figure> wrapping
+     a <pre>. Each line is a <span data-line>. Highlighted lines / words /
+     diff markers each get their own data attributes — style here. */
+  .article-prose figure[data-rehype-pretty-code-figure] {
+    margin: 0.5rem 0;
+  }
+  .article-prose figcaption[data-rehype-pretty-code-title] {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background: var(--bg-raised);
+    font-family: var(--font-mono), monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-3);
+  }
+  .article-prose figcaption[data-rehype-pretty-code-title] + pre {
+    border-top-left-radius: 0;
+  }
+  .article-prose pre {
+    counter-reset: line;
+  }
+  .article-prose pre code {
+    display: grid;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: inherit;
+  }
+  .article-prose pre code [data-line] {
+    padding: 0 1rem;
+    border-left: 2px solid transparent;
+  }
+  .article-prose pre code [data-highlighted-line] {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border-left-color: var(--accent);
+  }
+  .article-prose pre code [data-highlighted-chars] {
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 3px;
+    padding: 0 2px;
+  }
+  /* Light vs dark theme switch — rehype-pretty-code emits both inline.
+     Hide the dark theme tokens in light mode and vice-versa. */
+  .article-prose pre code [data-theme='dark'],
+  .article-prose pre [data-theme='dark'] {
+    display: none;
+  }
+  .dark .article-prose pre code [data-theme='light'],
+  .dark .article-prose pre [data-theme='light'] {
+    display: none;
+  }
+  .dark .article-prose pre code [data-theme='dark'],
+  .dark .article-prose pre [data-theme='dark'] {
+    display: initial;
+  }
 }

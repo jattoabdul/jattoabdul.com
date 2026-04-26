@@ -5,18 +5,23 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 
+import type { CommandMenuPost } from '@/data/posts';
 import { primaryNav } from '@/data/site';
 import { cn } from '@/lib/utils';
 import { CommandMenuTrigger } from './CommandMenu';
 import { ThemeToggle } from './ThemeToggle';
 import { Wordmark } from './Wordmark';
 
+type HeaderProps = {
+  commandMenuPosts: CommandMenuPost[];
+};
+
 function isActive(pathname: string, href: string): boolean {
   if (href === '/') return pathname === '/';
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function Header() {
+export function Header({ commandMenuPosts }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname() ?? '/';
 
@@ -47,12 +52,12 @@ export function Header() {
             );
           })}
           <span aria-hidden className="mx-2 h-4 w-px bg-border" />
-          <CommandMenuTrigger />
+          <CommandMenuTrigger posts={commandMenuPosts} />
           <ThemeToggle className="ml-1" />
         </nav>
 
         <div className="flex items-center gap-1 md:hidden">
-          <CommandMenuTrigger variant="icon" />
+          <CommandMenuTrigger variant="icon" posts={commandMenuPosts} />
           <ThemeToggle />
           <button
             type="button"

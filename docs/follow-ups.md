@@ -33,9 +33,13 @@ Site is live at https://jattoabdul.com. All pre-launch items are shipped.
 
 ## Quarter 1
 
-- [ ] **MDX migration** — `src/content/writing/*.mdx` once ~5 first-party
-      posts exist. Add `@next/mdx` + `rehype-pretty-code` for syntax
-      highlighting.
+- [x] **MDX migration** — landed early so post editing is plain prose, not
+      arrays. Files at `src/content/writing/*.mdx`, frontmatter validated,
+      `next-mdx-remote/rsc` compiles per request, `published: false`
+      filtering still applies.
+- [x] **Syntax highlighting** — `rehype-pretty-code` + `shiki` (light +
+      dark themes), build-time tokenisation, zero client JS. Styles in
+      `globals.css` under `.article-prose`.
 - [ ] **Tag landing pages** at `/writing/tag/[tag]` — when ~20 posts.
 
 ## Tooling debt
