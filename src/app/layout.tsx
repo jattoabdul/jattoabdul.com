@@ -1,62 +1,66 @@
-import React from 'react';
 import type { Metadata } from 'next';
-import { Nunito_Sans } from 'next/font/google';
-import localFont from 'next/font/local';
+import { Fraunces, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 import { ThemeProvider } from '@/components/providers/theme-provider';
-
+import { Header } from '@/components/site/Header';
+import { Footer } from '@/components/site/Footer';
+import { siteConfig } from '@/data/site';
 import '@/styles/globals.css';
 
-// Fonts made by <a href="http://www.webfontfree.com" target="_blank">Web Free Fonts</a> is licensed by <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC 4.0 BY</a>
-const avantGarde = localFont({
-  src: [
-    {
-      path: '../../public/fonts/avant-garde/AvantGardeBook.woff2',
-      style: 'regular',
-    },
-  ],
-  variable: '--font-avant-garde',
+const serif = Fraunces({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
   display: 'swap',
 });
 
-const nunitoSans = Nunito_Sans({
+const sans = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-nunito-sans',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Jatto Abdul | Building Digital Experiences',
-  description:
-    'Fullstack Engineer crafting delightful digital experiences and simplifying complex systems since 2017. Specializing in Ruby, Go, and JavaScript.',
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} — Senior Software Engineer`,
+    template: `%s — ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
   keywords: [
     'Jatto Abdul',
-    'Software Engineer',
-    'Full Stack Developer',
-    'Web Developer',
-    'Ruby Developer',
-    'JavaScript Developer',
-    'Go Developer',
+    'Senior Software Engineer',
+    'Backend Engineer',
+    'Platform Engineer',
+    'Applied AI',
+    'Engineering writing',
+    'Engineering blog',
+    'Practical engineering',
   ],
-  authors: [{ name: 'Jatto Abdul', url: 'https://jattoabdul.com' }],
-  creator: 'Jatto Abdul',
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://jattoabdul.com',
-    title: 'Jatto Abdul | Building Digital Experiences',
-    description:
-      'Fullstack Engineer crafting delightful digital experiences and simplifying complex systems since 2017. Specializing in Ruby, Go, and JavaScript.',
-    siteName: 'Jatto Abdul',
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: `${siteConfig.name} — Senior Software Engineer`,
+    description: siteConfig.description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Jatto Abdul | Building Digital Experiences',
-    description:
-      'Fullstack Engineer crafting delightful digital experiences and simplifying complex systems since 2017. Specializing in Ruby, Go, and JavaScript.',
-    creator: '@jatto_abdul',
+    title: `${siteConfig.name} — Senior Software Engineer`,
+    description: siteConfig.description,
+    creator: '@Jattorize',
   },
   robots: {
     index: true,
@@ -64,30 +68,34 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
   },
 };
 
-// export default function RootLayout({ children }: { children: React.ReactNode }) {
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
-      className={`${avantGarde.variable} ${nunitoSans.variable}`}
+      className={`${serif.variable} ${sans.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-background font-avant-garde antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <div className="relative flex min-h-screen flex-col">
+      <body className="min-h-screen bg-bg font-sans text-fg antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <a href="#main-content" className="skip-link">
+            Skip to content
+          </a>
+          <div className="flex min-h-screen flex-col">
             <Header />
-            <main className="flex-1 min-h-screen">{children}</main>
+            <div className="flex-1">{children}</div>
             <Footer />
           </div>
         </ThemeProvider>
