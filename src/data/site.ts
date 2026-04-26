@@ -20,8 +20,13 @@ export const siteConfig = {
   url: 'https://jattoabdul.com',
   positioning:
     'Senior Software Engineer building backend, platform, and applied-AI systems. I write about practical engineering, AI-assisted product building, and communication for engineers.',
+  // SEO description — kept in the 110–160 char sweet spot so social previews
+  // don't truncate. Update both this and siteConfig.titleSuffix together.
   description:
-    'Jatto Abdul — Senior Software Engineer building backend, platform, and applied-AI systems. Writing about practical engineering, AI-assisted product building, and communication for engineers.',
+    'Senior Software Engineer building backend, platform, and applied-AI systems. Writing about practical engineering and AI-assisted product building.',
+  // Title suffix — combined with siteConfig.name in the layout, this keeps
+  // the rendered <title> in the 50–60 char range that opengraph.xyz prefers.
+  titleSuffix: 'Senior Engineer · Backend, Platform, Applied-AI',
   copyrightYear: 2026,
   newsletterEnabled: true,
   /**

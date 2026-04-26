@@ -1,12 +1,19 @@
-import Link from 'next/link';
-
 import type { Project } from '@/data/projects';
+import { TrackedLink } from '@/components/site/TrackedLink';
 
 export function ProjectCard({ project }: { project: Project }) {
   const Icon = project.icon;
+
   return (
-    <Link
+    <TrackedLink
       href={`/projects/${project.slug}`}
+      label={project.title}
+      eventName="project_card_clicked"
+      properties={{
+        slug: project.slug,
+        title: project.title,
+        status: project.status,
+      }}
       className="group flex flex-col gap-3 rounded-md border border-border bg-bg-surface p-5 shadow-sm transition-all hover:border-border-mid hover:shadow-md"
     >
       <div className="flex items-start justify-between">
@@ -25,7 +32,7 @@ export function ProjectCard({ project }: { project: Project }) {
         </p>
       </div>
       <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
-        {project.stack.slice(0, 3).map((s) => (
+        {project.stack.slice(0, 3).map(s => (
           <span
             key={s}
             className="rounded border border-border bg-bg-raised px-1.5 py-0.5 font-mono text-[10.5px] text-fg-3"
@@ -34,6 +41,6 @@ export function ProjectCard({ project }: { project: Project }) {
           </span>
         ))}
       </div>
-    </Link>
+    </TrackedLink>
   );
 }

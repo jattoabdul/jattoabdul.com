@@ -1,43 +1,60 @@
 # Follow-ups
 
-Living list of non-urgent improvements. Cross items off as they land.
+In-repo mirror of the longer list at
+`personals/notes/projects/jattoabdul.com/improvements.md`.
 
-## Tooling
+This file tracks technical / repo-level follow-ups; the personals doc tracks
+content + cadence + business decisions.
 
-- [ ] **Re-audit when `resend` ships a fix for the transitive `uuid <14` advisory.** Currently `resend` → `svix` → `uuid@10` triggers a moderate `npm audit` warning ([GHSA-w5hq-g745-h8pq](https://github.com/advisories/GHSA-w5hq-g745-h8pq)). The vuln only affects calls that pass a `buf` argument to `uuid.v3/v5/v6`, which svix does not. Forcing `uuid@^14` via npm `overrides` breaks svix's ESM/CJS expectations. Revisit after `resend` updates `svix` (track at https://github.com/resend/resend-node/issues).
+## Status
 
+Site is live at https://jattoabdul.com. All pre-launch items are shipped.
 
-- [ ] **Migrate from `next lint` to ESLint CLI.** `next lint` is deprecated and will be removed in Next.js 16.
-  - Run the codemod when ready:
-    ```bash
-    npx @next/codemod@canary next-lint-to-eslint-cli .
-    ```
-  - Update `package.json` `lint` script to `eslint .` (the codemod handles this).
-  - Verify `eslint.config.mjs` still extends `next/core-web-vitals` and `next/typescript`.
+---
 
-- [ ] **Bump to Next.js 16.** Wait for at least one patch release (16.0.x) after GA before bumping. Track release notes for App Router / Turbopack changes.
-  - Pre-flight: do the `next lint` migration above first; Next 16 removes the legacy command entirely.
-  - Re-run `npm audit` after upgrading — it usually clears any remaining transitive issues.
+## Week 1 — instrument
 
-## Content / data
+- [ ] **PostHog** — replaces analytics + error tracking. Install
+      `posthog-js` + `posthog-node`, init in `app/layout.tsx`, capture
+      pageviews + `subscribe_attempt` events + exceptions.
+- [ ] **Lighthouse against `https://jattoabdul.com`** — target ≥95 on
+      Perf / A11y / Best Practices / SEO (mobile and desktop).
+- [ ] **Re-validate OG card** on opengraph.xyz, X composer, LinkedIn
+      composer, iMessage preview after the metadata + image fix.
 
-- [ ] **First-party MDX for evergreen Medium posts.** Pick the 2–3 best Medium-syndicated posts (`source: 'medium'` in `src/data/posts.ts`) and copy them to local with `canonical` pointing to the Medium URL. Adds `@next/mdx` if/when needed.
-- [ ] **Real article body content.** Several local posts (`ai-workflows`, `staff-judgment`, `writing-as-engineer`) have placeholder bodies — flesh out before sharing widely.
+## Month 1
 
-## Newsletter
+- [ ] **Newsletter welcome email** via `resend.emails.send` from
+      `/api/subscribe` after `contacts.create` succeeds.
+- [ ] **Set `MEDIUM_FILTER.minDate`** in `src/lib/posts.ts` once first new
+      brand-aligned Medium post lands.
+- [ ] **Google Search Console** — add property + verify via Cloudflare TXT
+      + submit `/sitemap.xml`.
 
-- [ ] **Double opt-in flow.** Resend Audiences `create-contact` adds the email immediately. If you want confirmation, send a verification email via `resend.emails.send` from the same route and only flip `unsubscribed: false` after the user clicks through.
-- [ ] **Welcome email.** Once Resend is wired, send a one-time welcome email on first subscription.
-- [ ] **Re-evaluate provider after ~100 subscribers.** If you outgrow Resend Audiences (no segmentation, no rich editor), Buttondown is the natural step up; ConvertKit if you start running launches.
+## Quarter 1
+
+- [ ] **MDX migration** — `src/content/writing/*.mdx` once ~5 first-party
+      posts exist. Add `@next/mdx` + `rehype-pretty-code` for syntax
+      highlighting.
+- [ ] **Tag landing pages** at `/writing/tag/[tag]` — when ~20 posts.
+
+## Tooling debt
+
+- [ ] **`next lint` → ESLint CLI.** Deprecated in Next 16.
+      `npx @next/codemod@canary next-lint-to-eslint-cli .`
+- [ ] **Next.js 16 bump.** Wait for 16.0.x patch.
+- [ ] **`resend` → `svix` → `uuid@10`** moderate audit advisory. Track
+      resend-node releases.
+- [ ] **Bundle audit quarterly.** Target First Load JS < 110 kB on `/`.
 
 ## Site features
 
-- [ ] **Console-triggerable hero — currently shipped via `?hero=editorial` and `localStorage.setItem('hero', 'editorial')`.** Consider a tiny floating tweaks panel (dev-only) if you want to flip variants without typing in the console.
-- [ ] **Code-block syntax highlighting.** Article bodies render `pre/code` plain. When MDX lands, add Shiki or `rehype-pretty-code`.
-- [ ] **OG image per article.** Currently one site-wide OG. Generate per-post via `app/writing/[slug]/opengraph-image.tsx` if/when articles are shared individually.
+- [ ] **`next/image`** when real cover images appear.
+- [ ] **Self-host short thumbnails** in `public/shorts/` for LinkedIn / X
+      where hot-linking is blocked.
+- [ ] **Per-article cover images** support in the `Post` type.
 
-## Deploy / ops
+## Deferred
 
-- [ ] **Wire Railway env vars** before first deploy: `NEXT_PUBLIC_ENABLE_MEDIUM_FEED`, `NEXT_PUBLIC_HERO_VARIANT`, `RESEND_API_KEY`, `RESEND_AUDIENCE_ID` (when ready).
-- [ ] **Custom domain on Railway.** Add `jattoabdul.com` once the deploy is stable.
-- [ ] **Analytics.** Pick a privacy-respecting option (Plausible, Vercel Analytics, or self-hosted Umami) and wire it from `app/layout.tsx`.
+- ~~Uptime probe~~ — Railway healthcheck is enough for now.
+- ~~Sentry~~ — PostHog covers error tracking.

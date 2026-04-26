@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 import { siteConfig } from '@/data/site';
 
-export const alt = `${siteConfig.name} — Senior Software Engineer`;
+export const alt = `${siteConfig.name} — ${siteConfig.titleSuffix}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 export const runtime = 'edge';
@@ -83,20 +83,47 @@ export default function OpenGraphImage() {
           <div
             style={{
               display: 'flex',
-              gap: 18,
-              fontSize: 22,
+              alignItems: 'center',
+              gap: 24,
               fontFamily: 'monospace',
-              color: '#34D399',
+              fontSize: 22,
               letterSpacing: '0.04em',
             }}
           >
-            <span style={{ display: 'flex' }}>writing</span>
-            <span style={{ display: 'flex', color: '#3C3834' }}>·</span>
-            <span style={{ display: 'flex' }}>projects</span>
-            <span style={{ display: 'flex', color: '#3C3834' }}>·</span>
-            <span style={{ display: 'flex' }}>videos</span>
-            <span style={{ display: 'flex', color: '#3C3834' }}>·</span>
-            <span style={{ display: 'flex' }}>notes</span>
+            {/* CTA chip — primary accent button */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                background: '#34D399',
+                color: '#0C0A09',
+                padding: '12px 22px',
+                borderRadius: 10,
+                fontWeight: 600,
+                letterSpacing: '0.02em',
+                fontFamily: 'sans-serif',
+                fontSize: 22,
+              }}
+            >
+              <span style={{ display: 'flex' }}>Read the writing</span>
+              <span style={{ display: 'flex' }}>→</span>
+            </div>
+
+            {/* Secondary nav chips, muted */}
+            <div
+              style={{
+                display: 'flex',
+                gap: 14,
+                color: '#78716C',
+              }}
+            >
+              <span style={{ display: 'flex' }}>projects</span>
+              <span style={{ display: 'flex', color: '#3C3834' }}>·</span>
+              <span style={{ display: 'flex' }}>videos</span>
+              <span style={{ display: 'flex', color: '#3C3834' }}>·</span>
+              <span style={{ display: 'flex' }}>notes</span>
+            </div>
           </div>
         </div>
       </div>

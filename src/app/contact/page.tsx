@@ -14,6 +14,7 @@ import type { LucideIcon } from 'lucide-react';
 import { Container } from '@/components/site/Container';
 import { PageHeader } from '@/components/site/PageHeader';
 import { SectionLabel } from '@/components/site/SectionHeader';
+import { TrackedLink } from '@/components/site/TrackedLink';
 import { socials } from '@/data/site';
 
 export const metadata: Metadata = {
@@ -58,8 +59,9 @@ export default function ContactPage() {
         intro="The fastest way to reach me is email. I usually reply within a few days. For everything else, I'm reachable on the platforms below."
       />
       <Container width="text">
-        <a
+        <TrackedLink
           href={socials.email.href}
+          label="Email"
           className="mb-7 flex items-center gap-3.5 rounded-md border border-accent-mid bg-bg-accent p-5 text-fg no-underline transition-colors hover:border-accent"
         >
           <Mail className="size-5 text-accent" />
@@ -67,19 +69,18 @@ export default function ContactPage() {
             <div className="mb-0.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-accent">
               Email
             </div>
-            <div className="font-mono text-[16px] font-medium text-fg">
-              {socials.email.handle}
-            </div>
+            <div className="font-mono text-[16px] font-medium text-fg">{socials.email.handle}</div>
           </div>
           <ArrowUpRight className="size-4 text-accent" />
-        </a>
+        </TrackedLink>
 
         <SectionLabel className="mb-3.5 block">Elsewhere</SectionLabel>
         <div className="overflow-hidden rounded-md border border-border">
           {channels.map(({ icon: Icon, label, href, handle }, i) => (
-            <a
+            <TrackedLink
               key={label}
               href={href}
+              label={label}
               target="_blank"
               rel="noopener noreferrer"
               className={`grid grid-cols-[28px_1fr_auto_auto] items-center gap-3.5 bg-bg-surface px-4 py-3.5 text-fg no-underline transition-colors hover:bg-bg-raised ${
@@ -90,7 +91,7 @@ export default function ContactPage() {
               <span className="text-[14.5px] font-medium text-fg">{label}</span>
               <span className="font-mono text-[12.5px] text-fg-3">{handle}</span>
               <ArrowUpRight className="size-3.5 text-fg-3" />
-            </a>
+            </TrackedLink>
           ))}
         </div>
       </Container>

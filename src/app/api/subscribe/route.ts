@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+import { getPostHogClient } from '@/lib/posthog-server';
+
 export const runtime = 'nodejs';
 
 /**
@@ -48,16 +50,19 @@ export async function POST(req: Request) {
     if (error) {
       // Resend treats duplicates as a 422 with a recognisable error name.
       const isDuplicate =
-        error.name === 'validation_error' &&
-        /already exists/i.test(error.message ?? '');
+        error.name === 'validation_error' && /already exists/i.test(error.message ?? '');
       if (isDuplicate) {
         return NextResponse.json({ ok: true, mode: 'duplicate' });
       }
-      return NextResponse.json(
-        { error: 'subscribe failed' },
-        { status: 502 },
-      );
+      return NextResponse.json({ error: 'subscribe failed' }, { status: 502 });
     }
+
+    const posthog = getPostHogClient();
+    posthog?.capture({
+      distinctId: 'newsletter-subscriber',
+      event: 'newsletter_subscribed_server',
+      properties: { mode: 'resend' },
+    });
 
     return NextResponse.json({ ok: true, mode: 'resend' });
   } catch {

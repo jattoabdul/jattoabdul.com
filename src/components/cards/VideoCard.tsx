@@ -1,6 +1,9 @@
+'use client';
+
 import { Play } from 'lucide-react';
 
 import type { Video } from '@/data/videos';
+import { captureEvent } from '@/lib/posthog-client';
 import { cn } from '@/lib/utils';
 
 type VideoCardProps = {
@@ -10,12 +13,22 @@ type VideoCardProps = {
 
 export function VideoCard({ video, large = false }: VideoCardProps) {
   const href = video.href ?? 'https://www.youtube.com/@jatto_abdul';
+
+  function handleClick() {
+    captureEvent('video_clicked', {
+      title: video.title,
+      platform: video.platform,
+      kind: video.kind,
+    });
+  }
+
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="group block text-fg no-underline"
+      onClick={handleClick}
     >
       <div className="relative mb-3 aspect-video overflow-hidden rounded-md border border-border bg-gradient-to-br from-bg-raised to-bg-sunken transition-colors group-hover:border-border-mid">
         {video.thumbnail ? (
@@ -58,7 +71,7 @@ export function VideoCard({ video, large = false }: VideoCardProps) {
       <h3
         className={cn(
           'font-serif font-normal leading-snug tracking-tight text-fg',
-          large ? 'text-[19px]' : 'text-[15.5px]',
+          large ? 'text-[19px]' : 'text-[15.5px]'
         )}
       >
         {video.title}
