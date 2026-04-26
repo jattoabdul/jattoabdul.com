@@ -103,21 +103,50 @@ export default async function ArticleOgImage({ params }: Params) {
           >
             {title}
           </div>
-          {(date || readTime) && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 24,
+              flexWrap: 'wrap',
+            }}
+          >
+            {/* CTA chip — primary */}
             <div
               style={{
                 display: 'flex',
-                gap: 20,
+                alignItems: 'center',
+                gap: 10,
+                background: '#34D399',
+                color: '#0C0A09',
+                padding: '12px 22px',
+                borderRadius: 10,
+                fontWeight: 600,
+                letterSpacing: '0.02em',
+                fontFamily: 'sans-serif',
                 fontSize: 22,
-                fontFamily: 'monospace',
-                color: '#A8A29E',
               }}
             >
-              {date && <span style={{ display: 'flex' }}>{date}</span>}
-              {date && readTime && <span style={{ display: 'flex' }}>·</span>}
-              {readTime && <span style={{ display: 'flex' }}>{readTime}</span>}
+              <span style={{ display: 'flex' }}>Read the article</span>
+              <span style={{ display: 'flex' }}>→</span>
             </div>
-          )}
+
+            {(date || readTime) && (
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 14,
+                  fontSize: 20,
+                  fontFamily: 'monospace',
+                  color: '#A8A29E',
+                }}
+              >
+                {date && <span style={{ display: 'flex' }}>{date}</span>}
+                {date && readTime && <span style={{ display: 'flex' }}>·</span>}
+                {readTime && <span style={{ display: 'flex' }}>{readTime}</span>}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     ),

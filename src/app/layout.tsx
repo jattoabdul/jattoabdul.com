@@ -29,10 +29,12 @@ const mono = JetBrains_Mono({
   display: 'swap',
 });
 
+const fullTitle = `${siteConfig.name} — ${siteConfig.titleSuffix}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Senior Software Engineer`,
+    default: fullTitle,
     template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -53,12 +55,12 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Senior Software Engineer`,
+    title: fullTitle,
     description: siteConfig.description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.name} — Senior Software Engineer`,
+    title: fullTitle,
     description: siteConfig.description,
     creator: '@Jattorize',
   },
