@@ -2,7 +2,7 @@
 
 ## Scope
 
-Applies only to `/Users/jatto/Documents/workspaces/jattoabdul.com`.
+Applies only to `/jattoabdul.com`.
 
 ## First-Step Protocol
 
