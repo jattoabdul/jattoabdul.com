@@ -60,6 +60,7 @@ plan.out
 .history/
 .fleet/
 .zed/
+.claude/
 
 # Railway local
 .railway/
