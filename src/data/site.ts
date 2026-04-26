@@ -24,6 +24,15 @@ export const siteConfig = {
     'Jatto Abdul — Senior Software Engineer building backend, platform, and applied-AI systems. Writing about practical engineering, AI-assisted product building, and communication for engineers.',
   copyrightYear: 2026,
   newsletterEnabled: true,
+  /**
+   * Public resume.
+   *
+   * - `url`: drop the PDF at /public/resume.pdf and the link below resolves
+   *   to /resume.pdf. To host externally (Read.cv, Notion, Google Drive),
+   *   replace with the absolute URL.
+   * - Set to `null` to hide the Resume CTA everywhere.
+   */
+  resumeUrl: '/resume.pdf' as string | null,
 } as const;
 
 export const socials: Record<SocialKey, SocialEntry> = {

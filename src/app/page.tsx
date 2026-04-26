@@ -6,6 +6,7 @@ import { SelectedProjects } from '@/components/sections/SelectedProjects';
 import { NotesPreview } from '@/components/sections/NotesPreview';
 import { AboutPreview } from '@/components/sections/AboutPreview';
 import { ConnectSection } from '@/components/sections/ConnectSection';
+import { toListItem } from '@/data/posts';
 import { getWritingFeed } from '@/lib/posts';
 import { getVideoFeed } from '@/lib/videos';
 
@@ -18,7 +19,7 @@ export default async function HomePage() {
     <main id="main-content">
       <Hero />
       <CurrentFocus />
-      <LatestWriting posts={writing.posts} />
+      <LatestWriting posts={writing.posts.map(toListItem)} />
       <LatestVideos videos={videoFeed.videos} />
       <SelectedProjects />
       <NotesPreview />

@@ -59,6 +59,7 @@ export function Header() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
+            aria-controls="mobile-nav"
             className="inline-flex size-9 items-center justify-center rounded-md text-fg hover:bg-bg-raised"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -67,7 +68,11 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-bg px-5 pb-4 pt-2 md:hidden">
+        <div
+          id="mobile-nav"
+          aria-label="Mobile navigation"
+          className="border-t border-border bg-bg px-5 pb-4 pt-2 md:hidden"
+        >
           {primaryNav.map((item) => {
             const active = isActive(pathname, item.href);
             return (

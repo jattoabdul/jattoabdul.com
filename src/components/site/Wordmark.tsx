@@ -14,6 +14,7 @@ export function Wordmark({ className, size = 'md' }: WordmarkProps) {
   return (
     <Link
       href="/"
+      aria-label={`${siteConfig.name} — Home`}
       className={cn(
         'inline-flex items-center gap-2.5 text-fg no-underline transition-opacity hover:opacity-80',
         className,

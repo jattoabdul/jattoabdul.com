@@ -110,11 +110,41 @@ class Event(BaseModel):
     readTime: 5,
     tags: ['career'],
     source: 'local',
-    published: false,
+    published: true,
     body: [
       {
         type: 'p',
         text: "The senior-to-staff jump isn't about being able to solve harder problems. It's about being able to spot which problems are worth solving at all — and which ones you should explicitly decide to leave alone for now.",
+      },
+      {
+        type: 'p',
+        text: "Most senior engineers I respect can debug almost anything. The staff engineers I respect debug less, because they've designed systems where fewer things break in the first place — and when they do, the failure modes are obvious.",
+      },
+      { type: 'h2', text: 'Three things staff judgment looks like in practice' },
+      {
+        type: 'p',
+        text: "One: choosing which problems are worth a meeting. Most aren't. Most can be resolved by writing the answer down once where the right people will find it later. Defaulting to async is judgment.",
+      },
+      {
+        type: 'p',
+        text: "Two: pushing back on shiny tech. The technology that gets a feature to launch is rarely the technology that should run it for three years. Boring stacks compound; novel stacks expire. Picking boring on purpose is judgment.",
+      },
+      {
+        type: 'p',
+        text: "Three: explicit non-goals. Saying 'this thing we're shipping won't handle X, and that's fine' is more useful than any architecture diagram. Most outage retrospectives I've read trace back to an implicit non-goal someone had — they just never said it out loud.",
+      },
+      {
+        type: 'quote',
+        text: "Senior engineers solve hard problems. Staff engineers prevent them.",
+      },
+      { type: 'h2', text: "What it isn't" },
+      {
+        type: 'p',
+        text: "Staff judgment isn't being right more often. It's being honestly uncertain in public — saying 'I'm not sure, here are the two options, here's the one I'd pick and why, but I could be wrong' — in a way that helps the team move without forcing them to either disagree or comply.",
+      },
+      {
+        type: 'p',
+        text: "The work is mostly invisible. Nobody points at the migration that didn't happen, the meeting that became a doc, the service that didn't get split. But over a year, the absence of pain is the signal that someone made a lot of small good calls.",
       },
     ],
   },
@@ -156,17 +186,55 @@ class Event(BaseModel):
     readTime: 4,
     tags: ['communication', 'career'],
     source: 'local',
-    published: false,
+    published: true,
     body: [
       {
         type: 'p',
         text: "Writing forces you to commit to specific words. The vague intuitions in your head can't survive the page; either they sharpen, or they fall apart. Either outcome is useful.",
+      },
+      {
+        type: 'p',
+        text: "Most engineering posts I write start as a Slack message I never sent. The act of explaining something to someone, even an imagined someone, exposes the bits I thought I understood and didn't.",
+      },
+      { type: 'h2', text: 'Why public, not just a private notebook' },
+      {
+        type: 'p',
+        text: "Private notes let you stay vague. You know what you meant — past-you and present-you share enough context that imprecise language still works. Public writing strips that crutch away. Either you say what you mean or someone in the comments will tell you what you actually said.",
+      },
+      {
+        type: 'p',
+        text: "It also compounds in ways the resume never will. Posts I wrote two and three years ago still land in my inbox — sometimes from the people I most wanted to be reading them. A resume gets you in the room once; writing keeps the room finding you.",
+      },
+      { type: 'h2', text: 'How to start without overthinking it' },
+      {
+        type: 'p',
+        text: "Pick the smallest real lesson from this week. Not 'how to think about distributed systems' — 'the one config knob that fixed our rebalance lag'. Three paragraphs. Hit publish. The bar for engineering writing is lower than you think; the bar for honest engineering writing is barely populated.",
+      },
+      {
+        type: 'p',
+        text: "The first ten posts will feel rough. They will be rough. Ship them anyway. The compounding starts with post eleven, and it doesn't start at all without the first ten.",
+      },
+      {
+        type: 'quote',
+        text: "Most technical problems get easier when the assumptions are visible. Writing makes them visible — first to you, then to everyone else.",
       },
     ],
   },
 ];
 
 export const allTags = Array.from(new Set(posts.flatMap(p => p.tags))).sort();
+
+/**
+ * Slim list-card shape — exclude `body` so it doesn't get serialised into
+ * client component props. Article bodies stay server-side until needed.
+ */
+export type PostListItem = Omit<Post, 'body'>;
+
+export function toListItem(p: Post): PostListItem {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { body: _body, ...rest } = p;
+  return rest;
+}
 
 export function getPost(slug: string): Post | undefined {
   return posts.find(p => p.slug === slug);

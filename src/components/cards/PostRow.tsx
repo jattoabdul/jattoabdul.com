@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
-import type { Post } from '@/data/posts';
+import type { PostListItem } from '@/data/posts';
 import { formatDate } from '@/lib/format';
 import { cn } from '@/lib/utils';
 import { SourceBadge } from '@/components/site/SourceBadge';
 
 type PostRowProps = {
-  post: Post;
+  post: PostListItem;
   last?: boolean;
 };
 

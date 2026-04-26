@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { Github, Linkedin, Mail, Rss } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
+import { FileText } from 'lucide-react';
+
 import { Container } from '@/components/site/Container';
 import { PageHeader } from '@/components/site/PageHeader';
-import { socials } from '@/data/site';
+import { siteConfig, socials } from '@/data/site';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -25,6 +27,9 @@ const links: { icon: LucideIcon; label: string; href: string }[] = [
   { icon: Mail, label: 'Email', href: socials.email.href },
   { icon: Linkedin, label: 'LinkedIn', href: socials.linkedin.href },
   { icon: Github, label: 'GitHub', href: socials.github.href },
+  ...(siteConfig.resumeUrl
+    ? [{ icon: FileText, label: 'Resume (PDF)', href: siteConfig.resumeUrl }]
+    : []),
   { icon: Rss, label: 'RSS', href: '/rss.xml' },
 ];
 

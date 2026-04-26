@@ -1,10 +1,10 @@
 import { Container } from '@/components/site/Container';
 import { SectionHeader } from '@/components/site/SectionHeader';
 import { PostRow } from '@/components/cards/PostRow';
-import type { Post } from '@/data/posts';
+import type { PostListItem } from '@/data/posts';
 
 type LatestWritingProps = {
-  posts: Post[];
+  posts: PostListItem[];
 };
 
 export function LatestWriting({ posts }: LatestWritingProps) {

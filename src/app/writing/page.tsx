@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Container } from '@/components/site/Container';
 import { PageHeader } from '@/components/site/PageHeader';
 import { WritingIndex } from '@/components/site/WritingIndex';
+import { toListItem } from '@/data/posts';
 import { getWritingFeed } from '@/lib/posts';
 
 export const revalidate = 3600;
@@ -28,7 +29,7 @@ export default async function WritingPage() {
         intro="Some posts live here as first-party essays; others are syndicated from Medium. Filter by topic or source. Canonical links always point to the source."
       />
       <Container width="text">
-        <WritingIndex posts={feed.posts} feedState={feed.state} />
+        <WritingIndex posts={feed.posts.map(toListItem)} feedState={feed.state} />
       </Container>
     </main>
   );

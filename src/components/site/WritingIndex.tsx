@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Rss } from 'lucide-react';
 
-import type { Post } from '@/data/posts';
+import type { PostListItem } from '@/data/posts';
 import { PostRow } from '@/components/cards/PostRow';
 import { cn } from '@/lib/utils';
 
@@ -11,7 +11,7 @@ type FeedState = 'success' | 'empty' | 'error';
 type SourceFilter = 'All' | 'First-party' | 'Via Medium';
 
 type WritingIndexProps = {
-  posts: Post[];
+  posts: PostListItem[];
   feedState: FeedState;
 };
 

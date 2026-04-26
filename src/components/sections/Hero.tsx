@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 import { Container } from '@/components/site/Container';
+import { siteConfig } from '@/data/site';
 
 export type HeroVariant = 'terminal' | 'editorial';
 
@@ -86,11 +87,21 @@ function HeroActions() {
       >
         View projects
       </Link>
+      {siteConfig.resumeUrl && (
+        <a
+          href={siteConfig.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-md border border-border-mid px-5 py-2.5 text-[14px] font-medium text-fg-2 transition-colors hover:bg-bg-raised hover:text-fg"
+        >
+          Resume <ArrowUpRight className="size-3.5" />
+        </a>
+      )}
       <Link
         href="/contact"
         className="inline-flex items-center gap-1.5 px-3 py-2.5 text-[14px] font-medium text-fg-3 transition-colors hover:text-fg"
       >
-        Resume / contact <ArrowUpRight className="size-3.5" />
+        Contact <ArrowUpRight className="size-3.5" />
       </Link>
     </div>
   );
