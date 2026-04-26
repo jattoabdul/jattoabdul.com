@@ -1,0 +1,15 @@
+cloudflare_account_id = "<cloudflare-account-id>"
+cloudflare_zone_id    = "<cloudflare-zone-id>"
+
+# Railway returns these when the custom domains are added on the service.
+# Get them from: Railway → Service → Settings → Networking → Custom Domains.
+apex_cname_target = "<railway-apex-domain-target>"
+www_cname_target  = "<railway-www-domain-target>"
+
+apex_railway_verification_token = "railway-verify=<apex-token>"
+www_railway_verification_token  = "railway-verify=<www-token>"
+
+# Set to true once you want Cloudflare's orange-cloud proxy + WAF in front of
+# the site. Recommend keeping false until first deploy is healthy and TLS is
+# stable (Railway issues its own cert and renews via the verification record).
+proxied = false

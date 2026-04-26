@@ -1,0 +1,7 @@
+# https://docs.github.com/en/repositories/managing-your-repositories-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Default reviewer for everything. Combined with branch protection on `main`,
+# this ensures any PR opened by anyone (including a future me on another
+# machine) needs an explicit approval before it can land.
+
+* @jattoabdul

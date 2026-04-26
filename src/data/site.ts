@@ -1,0 +1,89 @@
+export type SocialKey =
+  | 'linkedin'
+  | 'medium'
+  | 'github'
+  | 'x'
+  | 'youtube'
+  | 'instagram'
+  | 'email'
+  | 'rss';
+
+export type SocialEntry = {
+  label: string;
+  href: string;
+  handle?: string;
+};
+
+export const siteConfig = {
+  name: 'Jatto Abdul',
+  shortName: 'Jatto',
+  url: 'https://jattoabdul.com',
+  positioning:
+    'Senior Software Engineer building backend, platform, and applied-AI systems. I write about practical engineering, AI-assisted product building, and communication for engineers.',
+  description:
+    'Jatto Abdul — Senior Software Engineer building backend, platform, and applied-AI systems. Writing about practical engineering, AI-assisted product building, and communication for engineers.',
+  copyrightYear: 2026,
+  newsletterEnabled: true,
+  /**
+   * Public resume.
+   *
+   * - `url`: drop the PDF at /public/resume.pdf and the link below resolves
+   *   to /resume.pdf. To host externally (Read.cv, Notion, Google Drive),
+   *   replace with the absolute URL.
+   * - Set to `null` to hide the Resume CTA everywhere.
+   */
+  resumeUrl: '/resume.pdf' as string | null,
+} as const;
+
+export const socials: Record<SocialKey, SocialEntry> = {
+  linkedin: {
+    label: 'LinkedIn',
+    href: 'https://linkedin.com/in/jattoade',
+    handle: '@jattoade',
+  },
+  medium: {
+    label: 'Medium',
+    href: 'https://medium.com/@jattoabdul',
+    handle: '@jattoabdul',
+  },
+  github: {
+    label: 'GitHub',
+    href: 'https://github.com/jattoabdul',
+    handle: '@jattoabdul',
+  },
+  x: {
+    label: 'X / Twitter',
+    href: 'https://x.com/Jattorize',
+    handle: '@Jattorize',
+  },
+  youtube: {
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@jatto_abdul',
+    handle: '@jatto_abdul',
+  },
+  instagram: {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/jatto_abdul/',
+    handle: '@jatto_abdul',
+  },
+  email: {
+    label: 'Email',
+    href: 'mailto:me@jattoabdul.com',
+    handle: 'me@jattoabdul.com',
+  },
+  rss: {
+    label: 'RSS',
+    href: '/rss.xml',
+  },
+};
+
+export type NavItem = { label: string; href: string };
+
+export const primaryNav: NavItem[] = [
+  { label: 'Writing', href: '/writing' },
+  { label: 'Notes', href: '/notes' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Videos', href: '/videos' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];

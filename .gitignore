@@ -23,8 +23,10 @@
 
 # misc
 .DS_Store
+Thumbs.db
 *.pem
 *.swp
+*.tmp
 
 # debug
 /logs
@@ -43,6 +45,21 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# opentofu / terraform local state and var files
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfplan
+plan.out
+.terraform/
+
 # editors and IDEs
-.idea
-.vscode
+.idea/
+.vscode/
+*.code-workspace
+.history/
+.fleet/
+.zed/
+
+# Railway local
+.railway/

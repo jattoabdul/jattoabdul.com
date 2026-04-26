@@ -2,11 +2,17 @@
   "name": "jattoabdul.com",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "22.x",
+    "npm": ">=10"
+  },
+  "packageManager": "npm@10.9.2",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^11.2.0",
@@ -14,13 +20,14 @@
     "@radix-ui/react-slot": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "cmdk": "^1.0.0",
+    "cmdk": "^1.1.1",
     "framer-motion": "^12.0.0-alpha.2",
     "lucide-react": "^0.474.0",
-    "next": "15.1.6",
+    "next": "^15.5.15",
     "next-themes": "^0.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "resend": "^6.12.2",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "zustand": "^5.0.3"
@@ -34,12 +41,15 @@
     "@typescript-eslint/parser": "^8.22.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^9",
-    "eslint-config-next": "15.1.6",
+    "eslint-config-next": "^15.5.15",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
-    "postcss": "^8",
+    "postcss": "^8.5.10",
     "prettier": "^3.4.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
   }
 }

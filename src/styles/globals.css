@@ -3,146 +3,127 @@
 @tailwind utilities;
 
 @layer base {
-    :root {
-        /* Base Colors */
-        --background: 24 100% 3%; /* Smoky Black */
-        --foreground: 35 67% 85%; /* Wheat */
+  :root {
+    /* Light mode — warm paper */
+    --bg: #FAFAF9;
+    --bg-surface: #FFFFFF;
+    --bg-raised: #F5F5F4;
+    --bg-sunken: #EFEFED;
+    --bg-accent: #ECFDF5;
+    --bg-code: #F4F2EC;
 
-        --card: 22 13% 9%; /* Smoky Light */
-        --card-foreground: 35 67% 85%;
+    --fg: #18181B;
+    --fg-2: #57534E;
+    --fg-3: #A8A29E;
+    --fg-on-accent: #FFFFFF;
 
-        --popover: 22 13% 9%;
-        --popover-foreground: 35 67% 85%;
+    --border: #E7E5E4;
+    --border-mid: #D6D3D1;
 
-        /* Brand Colors - Consistent across themes */
-        --cinnabar: 9 89% 56%; /* Cinnabar Primary */
-        --cinnabar-50: 9 89% 97%;
-        --cinnabar-100: 9 89% 95%;
-        --cinnabar-200: 9 89% 90%;
-        --cinnabar-300: 9 89% 85%;
-        --cinnabar-400: 9 89% 80%;
-        --cinnabar-500: 9 89% 56%;
-        --cinnabar-600: 9 89% 48%;
-        --cinnabar-700: 9 89% 40%;
-        --cinnabar-800: 9 89% 32%;
-        --cinnabar-900: 9 89% 24%;
-        --cinnabar-950: 9 89% 16%;
-        --cinnabar-foreground: var(--smoky-primary);
+    --accent: #047857;
+    --accent-h: #065F46;
+    --accent-light: #ECFDF5;
+    --accent-mid: #A7F3D0;
 
-        --wheat: 35 67% 85%; /* Wheat Primary */
-        --wheat-50: 35 67% 97%;
-        --wheat-100: 35 67% 95%;
-        --wheat-200: 35 67% 90%;
-        --wheat-300: 35 67% 85%;
-        --wheat-400: 35 67% 80%;
-        --wheat-500: 35 67% 85%;
-        --wheat-600: 35 67% 75%;
-        --wheat-700: 35 67% 65%;
-        --wheat-800: 35 67% 55%;
-        --wheat-900: 35 67% 45%;
-        --wheat-950: 35 67% 35%;
-        --wheat-foreground: var(--smoky-primary);
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.06);
+  }
 
-        /* Smoky Black Colors */
-        --smoky-primary: 24 100% 3%; /* Smoky Black Primary */
-        --smoky-light: 22 13% 9%; /* For elevated surfaces */
-        --smoky-dark: 24 100% 1%; /* For shadows */
-        --smoky-faded: 24 100% 3% / 0.5; /* For overlays */
+  .dark {
+    --bg: #0C0A09;
+    --bg-surface: #161412;
+    --bg-raised: #1E1B18;
+    --bg-sunken: #0A0908;
+    --bg-accent: #022C22;
+    --bg-code: #111008;
 
-        /* Chart Colors - Using brand colors */
-        --chart-1: var(--cinnabar);
-        --chart-2: var(--wheat);
-        --chart-3: var(--cinnabar-300);
-        --chart-4: var(--wheat-300);
-        --chart-5: var(--cinnabar-600);
+    --fg: #FAFAF9;
+    --fg-2: #A8A29E;
+    --fg-3: #78716C;
+    --fg-on-accent: #0C0A09;
 
-        /* Light Theme UI Colors */
-        --primary: var(--cinnabar);
-        --primary-foreground: var(--smoky-primary);
+    --border: #292524;
+    --border-mid: #3C3834;
 
-        --secondary: var(--wheat);
-        --secondary-foreground: var(--smoky-primary);
+    --accent: #34D399;
+    --accent-h: #6EE7B7;
+    --accent-light: #022C22;
+    --accent-mid: #065F46;
 
-        --accent: var(--cinnabar-500);
-        --accent-foreground: var(--smoky-primary);
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.20);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.30);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.40);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.55);
+  }
 
-        --muted: 35 67% 95%;
-        --muted-foreground: 35 67% 45%;
+  * {
+    border-color: var(--border);
+  }
 
-        --destructive: 0 84% 60%;
-        --destructive-foreground: 0 0% 100%;
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-        /* Light Theme Border and Input Colors */
-        --border: 35 67% 85%;
-        --input: 35 67% 85%;
-        --ring: var(--cinnabar);
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    transition: background 200ms ease, color 200ms ease;
+  }
 
-        /* Radii */
-        --radius: 0.5rem;
+  ::selection {
+    background: var(--accent-light);
+    color: var(--fg);
+  }
 
-        /* Spacing */
-        --navbar-height: 4rem;
-        --footer-height: 4rem;
-        --sidebar-width: 16rem;
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
 
-        /* Shadows */
-        --shadow-sm: 0 1px 2px 0 rgb(11 5 0 / 0.05);
-        --shadow: 0 1px 3px 0 rgb(11 5 0 / 0.1), 0 1px 2px -1px rgb(11 5 0 / 0.1);
-        --shadow-md: 0 4px 6px -1px rgb(11 5 0 / 0.1), 0 2px 4px -2px rgb(11 5 0 / 0.1);
-        --shadow-lg: 0 10px 15px -3px rgb(11 5 0 / 0.1), 0 4px 6px -4px rgb(11 5 0 / 0.1);
+  .dark ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .dark ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: var(--border-mid);
+    border-radius: 4px;
+  }
 
-        /* Animations */
-        --transition-slow: 700ms cubic-bezier(0.4, 0, 0.2, 1);
-        --transition-medium: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-        --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
     }
-
-    .dark {
-        /* Dark Theme Base Colors */
-        --background: 24 100% 3%; /* Smoky Black */
-        --foreground: 35 67% 85%; /* Wheat */
-
-        --card: 22 13% 9%; /* Smoky Light */
-        --card-foreground: 35 67% 85%;
-
-        --popover: 22 13% 9%;
-        --popover-foreground: 35 67% 85%;
-
-        /* Dark Theme UI Colors - Using same gem colors */
-        --primary: var(--cinnabar);
-        --primary-foreground: var(--smoky-primary);
-
-        --secondary: var(--wheat);
-        --secondary-foreground: var(--smoky-primary);
-
-        --accent: var(--cinnabar-500);
-        --accent-foreground: var(--smoky-primary);
-
-        --muted: 22 13% 9%;
-        --muted-foreground: 35 67% 65%;
-
-        --destructive: 0 84% 60%;
-        --destructive-foreground: 0 0% 100%;
-
-        /* Dark Theme Border and Input Colors */
-        --border: 35 67% 25%;
-        --input: 35 67% 25%;
-        --ring: var(--cinnabar);
-
-        /* Dark Theme Shadows */
-        --shadow-sm: 0 1px 2px 0 rgb(6 3 0 / 0.3);
-        --shadow: 0 1px 3px 0 rgb(6 3 0 / 0.4), 0 1px 2px -1px rgb(6 3 0 / 0.4);
-        --shadow-md: 0 4px 6px -1px rgb(6 3 0 / 0.4), 0 2px 4px -2px rgb(6 3 0 / 0.4);
-        --shadow-lg: 0 10px 15px -3px rgb(6 3 0 / 0.4), 0 4px 6px -4px rgb(6 3 0 / 0.4);
-    }
+  }
 }
 
-@layer base {
-    * {
-        @apply border-border;
-    }
-
-    body {
-        @apply bg-background text-foreground dark;
-    }
+@layer components {
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--accent);
+    color: var(--fg-on-accent);
+    padding: 8px 14px;
+    border-radius: 6px;
+    z-index: 9999;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .skip-link:focus {
+    left: 12px;
+    top: 12px;
+  }
 }
