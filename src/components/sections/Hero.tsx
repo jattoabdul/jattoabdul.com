@@ -1,9 +1,21 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 import { Container } from '@/components/site/Container';
 
 export type HeroVariant = 'terminal' | 'editorial';
+
+const VARIANTS: HeroVariant[] = ['terminal', 'editorial'];
+const STORAGE_KEY = 'hero';
+
+const ENV_DEFAULT: HeroVariant =
+  ((process.env.NEXT_PUBLIC_HERO_VARIANT as HeroVariant | undefined) ?? 'terminal') ===
+  'editorial'
+    ? 'editorial'
+    : 'terminal';
 
 const TERMINAL_HEADLINE = ['A working engineer’s', 'public workshop.'];
 const TERMINAL_SUB =
@@ -13,12 +25,44 @@ type HeroProps = {
   variant?: HeroVariant;
 };
 
+/**
+ * Override priority: explicit `variant` prop > `?hero=` query > localStorage `hero` > env default.
+ *
+ * From the browser console:
+ *   localStorage.setItem('hero', 'editorial'); location.reload();
+ *   localStorage.removeItem('hero'); location.reload();
+ */
 export function Hero({ variant }: HeroProps) {
-  const envDefault =
-    (process.env.NEXT_PUBLIC_HERO_VARIANT as HeroVariant | undefined) ?? 'terminal';
-  const resolved: HeroVariant = variant ?? envDefault;
+  const [resolved, setResolved] = useState<HeroVariant>(variant ?? ENV_DEFAULT);
+
+  useEffect(() => {
+    if (variant) return;
+    const queryVariant = readVariant(
+      new URLSearchParams(window.location.search).get('hero'),
+    );
+    if (queryVariant) {
+      setResolved(queryVariant);
+      try {
+        localStorage.setItem(STORAGE_KEY, queryVariant);
+      } catch {
+        // ignore — private mode / disabled storage
+      }
+      return;
+    }
+    try {
+      const stored = readVariant(localStorage.getItem(STORAGE_KEY));
+      if (stored) setResolved(stored);
+    } catch {
+      // ignore
+    }
+  }, [variant]);
 
   return resolved === 'editorial' ? <HeroEditorial /> : <HeroTerminal />;
+}
+
+function readVariant(value: string | null | undefined): HeroVariant | null {
+  if (!value) return null;
+  return (VARIANTS as string[]).includes(value) ? (value as HeroVariant) : null;
 }
 
 function HeroActions() {
@@ -55,7 +99,7 @@ function HeroActions() {
 function HeroTerminal() {
   return (
     <section className="border-b border-border py-16 md:py-20">
-      <Container width="text">
+      <Container width="hero">
         <div className="mb-9 overflow-hidden rounded-md border border-border bg-bg-code">
           <div
             className="flex items-center gap-1.5 border-b border-border px-3.5 py-2"
@@ -111,7 +155,7 @@ function HeroTerminal() {
 function HeroEditorial() {
   return (
     <section className="border-b border-border py-20 md:py-24">
-      <Container width="text">
+      <Container width="hero">
         <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-accent-mid bg-accent-light px-3 py-1 pl-2.5">
           <span className="size-1.5 rounded-full bg-accent" />
           <span className="font-mono text-[11.5px] font-semibold uppercase tracking-[0.06em] text-accent">

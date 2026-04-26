@@ -1,13 +1,26 @@
+/**
+ * Local video data — used when the YouTube channel feed is disabled or fails.
+ * When NEXT_PUBLIC_ENABLE_YOUTUBE_FEED=true and YOUTUBE_CHANNEL_ID is set,
+ * `getVideoFeed()` (in src/lib/videos.ts) replaces this with the live feed.
+ *
+ * Shorts have no clean public feed across LinkedIn / X / Instagram /
+ * YouTube Shorts, so we keep them as a manually curated array. Add new
+ * entries below — newest first.
+ */
+
 export type VideoKind = 'Long-form' | 'Talk' | 'Tutorial';
 
 export type Video = {
   id: string;
   title: string;
-  duration: string;
+  /** Display string, e.g. "18:24". Optional when sourced from YouTube RSS (no duration in feed). */
+  duration?: string;
+  /** ISO date or YYYY-MM */
   date: string;
   kind: VideoKind;
   platform: 'YouTube';
   href?: string;
+  thumbnail?: string;
 };
 
 export type Short = {
@@ -20,28 +33,31 @@ export type Short = {
 
 export const videos: Video[] = [
   {
-    id: 'v1',
+    id: 'placeholder-1',
     title: 'Designing for partial connectivity: an African engineering perspective',
     duration: '18:24',
     date: '2026-04',
     kind: 'Long-form',
     platform: 'YouTube',
+    href: 'https://www.youtube.com/@jatto_abdul',
   },
   {
-    id: 'v2',
+    id: 'placeholder-2',
     title: 'How I structure prompts for production LLM features',
     duration: '11:02',
     date: '2026-03',
     kind: 'Long-form',
     platform: 'YouTube',
+    href: 'https://www.youtube.com/@jatto_abdul',
   },
   {
-    id: 'v3',
+    id: 'placeholder-3',
     title: 'Reading a senior-engineer job description like a staff engineer',
     duration: '07:48',
     date: '2026-02',
     kind: 'Long-form',
     platform: 'YouTube',
+    href: 'https://www.youtube.com/@jatto_abdul',
   },
 ];
 

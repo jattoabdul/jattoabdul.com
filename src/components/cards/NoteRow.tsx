@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 import type { Note } from '@/data/notes';
@@ -10,13 +11,15 @@ type NoteRowProps = {
 };
 
 export function NoteRow({ note, last = false }: NoteRowProps) {
-  return (
-    <div
-      className={cn(
-        'grid grid-cols-[64px_1fr_auto] items-center gap-4 py-3.5 transition-opacity hover:opacity-65',
-        !last && 'border-b border-border',
-      )}
-    >
+  const hasBody = !!note.body?.length;
+  const className = cn(
+    'grid grid-cols-[64px_1fr_auto] items-center gap-4 py-3.5 transition-opacity',
+    hasBody && 'hover:opacity-65',
+    !last && 'border-b border-border',
+  );
+
+  const inner = (
+    <>
       <span className="whitespace-nowrap font-mono text-[11.5px] text-fg-3">
         {formatShortDate(note.date)}
       </span>
@@ -35,7 +38,22 @@ export function NoteRow({ note, last = false }: NoteRowProps) {
           ))}
         </div>
       </div>
-      <ArrowRight className="size-3.5 text-fg-3" />
-    </div>
+      {hasBody ? (
+        <ArrowRight className="size-3.5 text-fg-3" />
+      ) : (
+        <span className="font-mono text-[10.5px] uppercase tracking-wider text-fg-3">
+          idea
+        </span>
+      )}
+    </>
   );
+
+  if (hasBody) {
+    return (
+      <Link href={`/notes/${note.slug}`} className={className}>
+        {inner}
+      </Link>
+    );
+  }
+  return <div className={className}>{inner}</div>;
 }

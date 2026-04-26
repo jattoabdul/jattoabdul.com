@@ -1,5 +1,12 @@
 export type PostSource = 'local' | 'medium' | 'external';
 
+/**
+ * Post: a writing entry. `published: false` items act as content ideas /
+ * drafts — they stay in this file as scaffolding but never render in the
+ * site, the writing index, the RSS feed, the sitemap, or `generateStaticParams`.
+ *
+ * To publish: flesh out the body, then flip `published: true`.
+ */
 export type Post = {
   slug: string;
   category: string;
@@ -32,7 +39,7 @@ export const posts: Post[] = [
     readTime: 8,
     tags: ['backend', 'data'],
     source: 'local',
-    published: true,
+    published: false,
     body: [
       {
         type: 'p',
@@ -80,7 +87,7 @@ class Event(BaseModel):
     readTime: 6,
     tags: ['applied-ai', 'llms'],
     source: 'local',
-    published: true,
+    published: false,
     body: [
       {
         type: 'p',
@@ -103,7 +110,7 @@ class Event(BaseModel):
     readTime: 5,
     tags: ['career'],
     source: 'local',
-    published: true,
+    published: false,
     body: [
       {
         type: 'p',
@@ -123,7 +130,7 @@ class Event(BaseModel):
     source: 'medium',
     url: 'https://medium.com/@jattoabdul',
     canonical: 'https://medium.com/@jattoabdul',
-    published: true,
+    published: false,
   },
   {
     slug: 'structured-outputs',
@@ -137,7 +144,7 @@ class Event(BaseModel):
     source: 'medium',
     url: 'https://medium.com/@jattoabdul',
     canonical: 'https://medium.com/@jattoabdul',
-    published: true,
+    published: false,
   },
   {
     slug: 'writing-as-engineer',
@@ -149,7 +156,7 @@ class Event(BaseModel):
     readTime: 4,
     tags: ['communication', 'career'],
     source: 'local',
-    published: true,
+    published: false,
     body: [
       {
         type: 'p',

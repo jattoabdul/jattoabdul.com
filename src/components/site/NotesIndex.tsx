@@ -3,17 +3,22 @@
 import { useMemo, useState } from 'react';
 
 import { NoteRow } from '@/components/cards/NoteRow';
-import { notes, noteTags } from '@/data/notes';
+import { getPublishedNotes, noteTags } from '@/data/notes';
 import { cn } from '@/lib/utils';
 
 const TAGS = ['All', ...noteTags];
 
 export function NotesIndex() {
   const [tag, setTag] = useState<string>('All');
+  const allNotes = useMemo(
+    () =>
+      getPublishedNotes().sort((a, b) => +new Date(b.date) - +new Date(a.date)),
+    [],
+  );
 
   const visible = useMemo(
-    () => (tag === 'All' ? notes : notes.filter((n) => n.tags.includes(tag))),
-    [tag],
+    () => (tag === 'All' ? allNotes : allNotes.filter((n) => n.tags.includes(tag))),
+    [tag, allNotes],
   );
 
   return (
@@ -42,7 +47,9 @@ export function NotesIndex() {
       </div>
       <div>
         {visible.length === 0 ? (
-          <div className="py-12 text-center text-[14px] text-fg-3">No notes match this filter.</div>
+          <div className="py-12 text-center text-[14px] text-fg-3">
+            No notes match this filter.
+          </div>
         ) : (
           visible.map((n, i) => (
             <NoteRow key={n.slug} note={n} last={i === visible.length - 1} />

@@ -1,10 +1,12 @@
 import { Container } from '@/components/site/Container';
 import { SectionHeader } from '@/components/site/SectionHeader';
 import { NoteRow } from '@/components/cards/NoteRow';
-import { notes } from '@/data/notes';
+import { getPublishedNotes } from '@/data/notes';
 
 export function NotesPreview() {
-  const recent = notes.slice(0, 5);
+  const recent = getPublishedNotes()
+    .sort((a, b) => +new Date(b.date) - +new Date(a.date))
+    .slice(0, 5);
   return (
     <section className="border-b border-border py-16">
       <Container width="text">

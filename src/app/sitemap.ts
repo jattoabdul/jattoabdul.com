@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 
 import { siteConfig } from '@/data/site';
 import { getLocalPosts } from '@/data/posts';
+import { getPublishedNotes } from '@/data/notes';
 import { projects } from '@/data/projects';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -37,5 +38,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...articleRoutes, ...projectRoutes];
+  const noteRoutes = getPublishedNotes()
+    .filter((n) => n.body?.length)
+    .map((n) => ({
+      url: `${base}/notes/${n.slug}`,
+      lastModified: new Date(n.date),
+      changeFrequency: 'monthly' as const,
+      priority: 0.4,
+    }));
+
+  return [...staticRoutes, ...articleRoutes, ...projectRoutes, ...noteRoutes];
 }

@@ -53,6 +53,7 @@ export default {
       },
       maxWidth: {
         text: '680px',
+        hero: '775px',
         wide: '960px',
         shell: '1120px',
         nav: '1024px',

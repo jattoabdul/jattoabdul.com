@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 
 type ContainerProps = {
-  width?: 'text' | 'wide' | 'nav' | 'shell';
+  width?: 'text' | 'hero' | 'wide' | 'nav' | 'shell';
   as?: keyof React.JSX.IntrinsicElements;
   className?: string;
   children: React.ReactNode;
@@ -9,6 +9,7 @@ type ContainerProps = {
 
 const widthClass: Record<NonNullable<ContainerProps['width']>, string> = {
   text: 'max-w-text',
+  hero: 'max-w-hero',
   wide: 'max-w-wide',
   nav: 'max-w-nav',
   shell: 'max-w-shell',

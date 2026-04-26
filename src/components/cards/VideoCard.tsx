@@ -18,19 +18,31 @@ export function VideoCard({ video, large = false }: VideoCardProps) {
       className="group block text-fg no-underline"
     >
       <div className="relative mb-3 aspect-video overflow-hidden rounded-md border border-border bg-gradient-to-br from-bg-raised to-bg-sunken transition-colors group-hover:border-border-mid">
-        <div
-          className="absolute inset-0 opacity-80"
-          style={{
-            background:
-              'radial-gradient(circle at 30% 30%, var(--accent-light), transparent 50%), radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%)',
-          }}
-        />
+        {video.thumbnail ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={video.thumbnail}
+            alt=""
+            className="absolute inset-0 size-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <div
+            className="absolute inset-0 opacity-80"
+            style={{
+              background:
+                'radial-gradient(circle at 30% 30%, var(--accent-light), transparent 50%), radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%)',
+            }}
+          />
+        )}
         <div className="absolute left-3 top-3 rounded border border-border bg-bg-surface px-2 py-0.5 font-mono text-[10.5px] font-semibold uppercase tracking-wider text-fg">
           {video.platform}
         </div>
-        <div className="absolute bottom-2.5 right-2.5 rounded bg-black/65 px-2 py-0.5 font-mono text-[11px] font-medium text-white">
-          {video.duration}
-        </div>
+        {video.duration && (
+          <div className="absolute bottom-2.5 right-2.5 rounded bg-black/65 px-2 py-0.5 font-mono text-[11px] font-medium text-white">
+            {video.duration}
+          </div>
+        )}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="flex size-14 items-center justify-center rounded-full border border-border-mid bg-bg-surface shadow-sm transition-transform group-hover:scale-110">
             <Play className="size-[18px] text-accent" />

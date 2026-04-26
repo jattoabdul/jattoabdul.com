@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
 export default async function ArticlePage({ params }: RouteParams) {
   const { slug } = await params;
   const post = getPost(slug);
-  if (!post || post.source !== 'local' || !post.body) notFound();
+  if (!post || !post.published || post.source !== 'local' || !post.body) notFound();
 
   return (
     <main id="main-content" className="pb-16 pt-12 sm:pt-14">
