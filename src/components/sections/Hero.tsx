@@ -18,9 +18,63 @@ const ENV_DEFAULT: HeroVariant =
     ? 'editorial'
     : 'terminal';
 
-const TERMINAL_HEADLINE = ['A working engineer’s', 'public workshop.'];
-const TERMINAL_SUB =
-  'Backend, platform, and applied-AI builds — written down so the lessons survive the work.';
+/**
+ * Five terminal-hero copy variants from the original prototype. The hero
+ * cycles through them on an interval and picks a random starting variant on
+ * mount, so each refresh shows a fresh one.
+ *
+ * Tweak rhythm: 8 seconds per variant. Disable rotation respects
+ * `prefers-reduced-motion: reduce` and shows whatever was picked at mount.
+ *
+ * To pin one for testing:
+ *   localStorage.setItem('terminalCopy', 'workshop'); location.reload();
+ *   localStorage.removeItem('terminalCopy'); location.reload();
+ *
+ * Or via query string: /?terminal=field
+ */
+type TerminalCopyKey = 'blueprint' | 'workshop' | 'field' | 'staff' | 'build';
+
+type TerminalCopy = {
+  key: TerminalCopyKey;
+  headline: [string, string]; // first half (regular) + second half (italic)
+  sub: string;
+};
+
+const TERMINAL_COPIES: TerminalCopy[] = [
+  {
+    key: 'blueprint',
+    headline: ['A systems blueprint,', 'in long form.'],
+    sub: 'Practical engineering essays, field notes, and the projects behind them. Pick a thread.',
+  },
+  {
+    key: 'workshop',
+    headline: ['A working engineer’s', 'public workshop.'],
+    sub: 'Backend, platform, and applied-AI builds — written down so the lessons survive the work.',
+  },
+  {
+    key: 'field',
+    headline: ['Field notes from', 'real software.'],
+    sub: 'Senior engineering, told plainly: what I tried, what broke, what worked, and what I’d do differently.',
+  },
+  {
+    key: 'staff',
+    headline: ['Engineering thought,', 'written clearly.'],
+    sub: 'Backend, platform, and applied-AI systems — plus the communication that holds them together.',
+  },
+  {
+    key: 'build',
+    headline: ['Build, write,', 'review, repeat.'],
+    sub: 'I ship backend and platform systems, then write the parts that were actually hard.',
+  },
+];
+
+const TERMINAL_ROTATION_MS = 8000;
+const TERMINAL_STORAGE_KEY = 'terminalCopy';
+
+function findTerminalCopy(key: string | null | undefined): TerminalCopy | null {
+  if (!key) return null;
+  return TERMINAL_COPIES.find((c) => c.key === key) ?? null;
+}
 
 type HeroProps = {
   variant?: HeroVariant;
@@ -108,6 +162,59 @@ function HeroActions() {
 }
 
 function HeroTerminal() {
+  // SSR + first paint always show index 0 (blueprint) — no flash of empty.
+  // Mount-time effect picks a random starting variant + starts rotation.
+  const [index, setIndex] = useState(0);
+  const [pinned, setPinned] = useState(false);
+
+  useEffect(() => {
+    // Override priority: ?terminal=<key> (URL) > localStorage > random rotation.
+    let initial = -1;
+    let pin = false;
+    try {
+      const queryKey = new URLSearchParams(window.location.search).get('terminal');
+      const queryMatch = findTerminalCopy(queryKey);
+      if (queryMatch) {
+        initial = TERMINAL_COPIES.indexOf(queryMatch);
+        pin = true;
+        try {
+          localStorage.setItem(TERMINAL_STORAGE_KEY, queryMatch.key);
+        } catch {
+          /* storage disabled */
+        }
+      } else {
+        const storedKey = localStorage.getItem(TERMINAL_STORAGE_KEY);
+        const storedMatch = findTerminalCopy(storedKey);
+        if (storedMatch) {
+          initial = TERMINAL_COPIES.indexOf(storedMatch);
+          pin = true;
+        }
+      }
+    } catch {
+      /* storage disabled */
+    }
+
+    if (initial < 0) initial = Math.floor(Math.random() * TERMINAL_COPIES.length);
+    setIndex(initial);
+    setPinned(pin);
+  }, []);
+
+  useEffect(() => {
+    if (pinned) return;
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % TERMINAL_COPIES.length);
+    }, TERMINAL_ROTATION_MS);
+    return () => window.clearInterval(id);
+  }, [pinned]);
+
+  const copy = TERMINAL_COPIES[index];
+
   return (
     <section className="border-b border-border py-16 md:py-20">
       <Container width="hero">
@@ -149,13 +256,27 @@ function HeroTerminal() {
           </div>
         </div>
 
-        <h1 className="mb-4 font-serif text-[clamp(2rem,4.6vw,2.6rem)] font-normal leading-[1.1] tracking-[-0.02em] text-fg [text-wrap:balance]">
-          {TERMINAL_HEADLINE[0]}{' '}
-          <span className="italic text-fg-2">{TERMINAL_HEADLINE[1]}</span>
-        </h1>
-        <p className="mb-8 max-w-[54ch] text-[16.5px] leading-[1.75] text-fg-2">
-          {TERMINAL_SUB}
-        </p>
+        {/*
+          aria-live="polite" tells screen readers the headline can change so
+          they can announce it without interrupting other speech.
+          The fade key reuses the variant key so React swaps the node
+          cleanly and CSS animates the new copy in.
+        */}
+        <div aria-live="polite" aria-atomic="true">
+          <h1
+            key={`${copy.key}-h`}
+            className="mb-4 animate-fade-in font-serif text-[clamp(2rem,4.6vw,2.6rem)] font-normal leading-[1.1] tracking-[-0.02em] text-fg [text-wrap:balance]"
+          >
+            {copy.headline[0]}{' '}
+            <span className="italic text-fg-2">{copy.headline[1]}</span>
+          </h1>
+          <p
+            key={`${copy.key}-p`}
+            className="mb-8 max-w-[54ch] animate-fade-in text-[16.5px] leading-[1.75] text-fg-2"
+          >
+            {copy.sub}
+          </p>
+        </div>
 
         <HeroActions />
       </Container>
