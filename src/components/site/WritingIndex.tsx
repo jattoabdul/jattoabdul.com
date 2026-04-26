@@ -34,16 +34,16 @@ export function WritingIndex({ posts, feedState }: WritingIndexProps) {
 
   const visible = useMemo(() => {
     let list = posts;
-    if (tag !== 'All') list = list.filter((p) => p.tags.includes(tag));
-    if (source === 'First-party') list = list.filter((p) => p.source === 'local');
-    if (source === 'Via Medium') list = list.filter((p) => p.source === 'medium');
+    if (tag !== 'All') list = list.filter(p => p.tags.includes(tag));
+    if (source === 'First-party') list = list.filter(p => p.source === 'local');
+    if (source === 'Via Medium') list = list.filter(p => p.source === 'medium');
     return list;
   }, [posts, tag, source]);
 
   return (
     <div>
       <div className="mb-3 flex flex-wrap gap-1.5" role="tablist" aria-label="Filter by tag">
-        {TAGS.map((t) => {
+        {TAGS.map(t => {
           const active = tag === t;
           return (
             <button
@@ -57,7 +57,7 @@ export function WritingIndex({ posts, feedState }: WritingIndexProps) {
                 active
                   ? 'border-accent bg-accent text-fg-on-accent'
                   : 'border-border bg-bg-raised text-fg-2 hover:border-border-mid hover:text-fg',
-                t !== 'All' && 'font-mono',
+                t !== 'All' && 'font-mono'
               )}
             >
               {t === 'All' ? t : `#${t}`}
@@ -68,7 +68,7 @@ export function WritingIndex({ posts, feedState }: WritingIndexProps) {
 
       <div className="mb-7 flex flex-wrap items-center gap-1.5">
         <span className="mr-1 font-mono text-[11.5px] text-fg-3">source:</span>
-        {(['All', 'First-party', 'Via Medium'] as SourceFilter[]).map((s) => {
+        {(['All', 'First-party', 'Via Medium'] as SourceFilter[]).map(s => {
           const active = source === s;
           return (
             <button
@@ -79,7 +79,7 @@ export function WritingIndex({ posts, feedState }: WritingIndexProps) {
                 'rounded-sm border px-2.5 py-0.5 font-mono text-[11.5px] font-medium transition-colors',
                 active
                   ? 'border-border-mid bg-bg-sunken text-fg'
-                  : 'border-border text-fg-3 hover:text-fg',
+                  : 'border-border text-fg-3 hover:text-fg'
               )}
             >
               {s}
@@ -95,7 +95,7 @@ export function WritingIndex({ posts, feedState }: WritingIndexProps) {
             Couldn&apos;t load Medium posts right now. First-party posts shown below.
           </span>
           <a
-            href="https://medium.com/@jattoade"
+            href="https://medium.com/@jattoabdul"
             target="_blank"
             rel="noopener noreferrer"
             className="whitespace-nowrap text-[13px] font-medium text-accent hover:text-accent-h"

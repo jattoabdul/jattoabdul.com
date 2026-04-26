@@ -34,8 +34,8 @@ export const socials: Record<SocialKey, SocialEntry> = {
   },
   medium: {
     label: 'Medium',
-    href: 'https://medium.com/@jattoade',
-    handle: '@jattoade',
+    href: 'https://medium.com/@jattoabdul',
+    handle: '@jattoabdul',
   },
   github: {
     label: 'GitHub',

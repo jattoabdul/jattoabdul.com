@@ -15,7 +15,7 @@ export type WritingFeed = {
 };
 
 const MEDIUM_FEED_URL =
-  'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@jattoade';
+  'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@jattoabdul';
 
 const MEDIUM_FEED_ENABLED = process.env.NEXT_PUBLIC_ENABLE_MEDIUM_FEED === 'true';
 
@@ -29,7 +29,10 @@ function slugify(title: string): string {
 }
 
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+  return html
+    .replace(/<[^>]*>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function estimateReadTime(html: string): number {
@@ -46,7 +49,7 @@ type RssItem = {
 };
 
 export async function getWritingFeed(): Promise<WritingFeed> {
-  const local = localPosts.filter((p) => p.published);
+  const local = localPosts.filter(p => p.published);
 
   if (!MEDIUM_FEED_ENABLED) {
     return { posts: sortByDate(local), state: 'success' };
@@ -58,7 +61,7 @@ export async function getWritingFeed(): Promise<WritingFeed> {
     });
     if (!res.ok) throw new Error(`feed status ${res.status}`);
     const data = (await res.json()) as { items?: RssItem[] };
-    const remote: Post[] = (data.items ?? []).map((item) => ({
+    const remote: Post[] = (data.items ?? []).map(item => ({
       slug: slugify(item.title),
       category: item.categories?.[0] ?? 'Medium',
       title: item.title,

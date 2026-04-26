@@ -121,8 +121,8 @@ class Event(BaseModel):
     readTime: 9,
     tags: ['kafka', 'platform'],
     source: 'medium',
-    url: 'https://medium.com/@jattoade',
-    canonical: 'https://medium.com/@jattoade',
+    url: 'https://medium.com/@jattoabdul',
+    canonical: 'https://medium.com/@jattoabdul',
     published: true,
   },
   {
@@ -135,8 +135,8 @@ class Event(BaseModel):
     readTime: 7,
     tags: ['applied-ai', 'llms'],
     source: 'medium',
-    url: 'https://medium.com/@jattoade',
-    canonical: 'https://medium.com/@jattoade',
+    url: 'https://medium.com/@jattoabdul',
+    canonical: 'https://medium.com/@jattoabdul',
     published: true,
   },
   {
@@ -159,12 +159,12 @@ class Event(BaseModel):
   },
 ];
 
-export const allTags = Array.from(new Set(posts.flatMap((p) => p.tags))).sort();
+export const allTags = Array.from(new Set(posts.flatMap(p => p.tags))).sort();
 
 export function getPost(slug: string): Post | undefined {
-  return posts.find((p) => p.slug === slug);
+  return posts.find(p => p.slug === slug);
 }
 
 export function getLocalPosts(): Post[] {
-  return posts.filter((p) => p.source === 'local' && p.published);
+  return posts.filter(p => p.source === 'local' && p.published);
 }
