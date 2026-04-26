@@ -6,10 +6,18 @@ type RouteContext = {
 };
 
 const DEFAULT_POSTHOG_HOST = 'https://us.i.posthog.com';
-const REQUEST_HEADERS_TO_REMOVE = [
+const REQUEST_HEADERS_TO_FORWARD = [
+  'accept',
+  'content-encoding',
+  'content-type',
+  'origin',
+  'referer',
+  'user-agent',
+];
+const RESPONSE_HEADERS_TO_REMOVE = [
   'connection',
+  'content-encoding',
   'content-length',
-  'host',
   'keep-alive',
   'proxy-authenticate',
   'proxy-authorization',
@@ -18,7 +26,6 @@ const REQUEST_HEADERS_TO_REMOVE = [
   'transfer-encoding',
   'upgrade',
 ];
-const RESPONSE_HEADERS_TO_REMOVE = [...REQUEST_HEADERS_TO_REMOVE, 'content-encoding'];
 
 function getPostHogHost() {
   return (process.env.NEXT_PUBLIC_POSTHOG_HOST ?? DEFAULT_POSTHOG_HOST).replace(/\/$/, '');
@@ -36,10 +43,23 @@ function getPostHogAssetsHost(postHogHost: string) {
   return postHogHost;
 }
 
-function cleanHeaders(headers: Headers, headersToRemove: string[]) {
+function getPostHogRequestHeaders(headers: Headers) {
+  const nextHeaders = new Headers();
+
+  for (const header of REQUEST_HEADERS_TO_FORWARD) {
+    const value = headers.get(header);
+    if (value) {
+      nextHeaders.set(header, value);
+    }
+  }
+
+  return nextHeaders;
+}
+
+function cleanResponseHeaders(headers: Headers) {
   const nextHeaders = new Headers(headers);
 
-  for (const header of headersToRemove) {
+  for (const header of RESPONSE_HEADERS_TO_REMOVE) {
     nextHeaders.delete(header);
   }
 
@@ -65,7 +85,7 @@ async function proxyPostHog(request: Request, context: RouteContext) {
 
   const response = await fetch(upstreamUrl, {
     method: request.method,
-    headers: cleanHeaders(request.headers, REQUEST_HEADERS_TO_REMOVE),
+    headers: getPostHogRequestHeaders(request.headers),
     body,
     cache: 'no-store',
     redirect: 'manual',
@@ -74,7 +94,7 @@ async function proxyPostHog(request: Request, context: RouteContext) {
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
-    headers: cleanHeaders(response.headers, RESPONSE_HEADERS_TO_REMOVE),
+    headers: cleanResponseHeaders(response.headers),
   });
 }
 
