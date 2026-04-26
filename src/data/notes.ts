@@ -58,6 +58,11 @@ export const notes: Note[] = [
     date: '2026-03-30',
     title: 'Structured outputs vs function calling',
     tags: ['applied-ai'],
+    body: [
+      "These get conflated, but they answer different questions. Function calling is the model deciding what to do — pick a tool, fill its arguments. Structured outputs is the model deciding how to shape an answer you've already decided you want.",
+      "Use function calling when there's branching: search vs respond, fetch vs compute, escalate vs resolve. Use structured outputs when the path is fixed and you need parseable JSON downstream.",
+      "Most teams I see reach for tools when they actually wanted a schema. The result is a bag of one-tool 'pseudo-functions' that always get called — which is just a clumsier way to ask for JSON.",
+    ],
   },
   {
     slug: 'boring-architecture',
@@ -74,12 +79,22 @@ export const notes: Note[] = [
     date: '2026-03-14',
     title: 'How I run async standups for distributed teams',
     tags: ['communication'],
+    body: [
+      "Daily standup as a meeting is a tax on focus time. The information is rarely worth the synchronisation cost, especially across time zones.",
+      "We post three lines in a thread instead: what I shipped yesterday, what I'm doing today, what I'm blocked on. Anyone reading at any time gets the state of the team. Blockers turn into sub-threads with the right person, not a 30-minute group meeting.",
+      "Two rules make it work: post by a specific local time (mine: end of working day), and treat blockers as the only mandatory line.",
+    ],
   },
   {
     slug: 'kafka-rebalance-notes',
     date: '2026-03-06',
     title: 'Notes on Kafka consumer rebalancing in the wild',
     tags: ['platform', 'kafka'],
+    body: [
+      "Rebalances are usually fine. The bad ones are the ones nobody notices until lag spikes — caused by silent consumer death, slow message processing exceeding `max.poll.interval.ms`, or a deploy that thrashes group membership.",
+      "Three knobs that bought us most of the wins: cooperative-sticky assignor (no full stop-the-world), tuning `session.timeout.ms` and `heartbeat.interval.ms` for our actual processing time, and shipping a metric for partition-revoked count so a 'normal' deploy doesn't hide a leaking pod.",
+      "Static membership helps for stable consumer pools — at the cost of slower failover. Pick deliberately.",
+    ],
   },
   {
     slug: 'senior-candidates',
@@ -96,6 +111,10 @@ export const notes: Note[] = [
     date: '2026-02-14',
     title: 'A small note on backpressure',
     tags: ['backend'],
+    body: [
+      "If you don't reject load when the system is stressed, the system rejects load for you — usually by falling over. Backpressure is the polite version of saying no.",
+      "Surface it everywhere there's a queue. A bounded channel that drops or rejects beats an unbounded one that quietly fills memory until OOM. Same for HTTP — return 429 with a useful Retry-After before the latency tail eats everyone.",
+    ],
   },
   {
     slug: 'minerva-week-one',
@@ -134,6 +153,11 @@ export const notes: Note[] = [
     date: '2025-07-21',
     title: 'Code review etiquette I wish I learned sooner',
     tags: ['communication'],
+    body: [
+      "Lead with intent before mechanics. 'I think we're solving the wrong problem here, here's why' lands differently than fifteen line-comments about variable names attached to a fundamentally wrong design.",
+      "Mark which comments are blocking and which are taste. Reviewers conflating the two is a top reason juniors over-rotate on stylistic feedback.",
+      "And: praise the non-obvious good calls. Nobody mentions the small refactor that made the diff readable, but those are the ones worth noticing.",
+    ],
   },
   {
     slug: 'first-outage',
@@ -172,6 +196,10 @@ export const notes: Note[] = [
     date: '2024-06-04',
     title: 'What I learned my first year as a senior engineer',
     tags: ['career'],
+    body: [
+      "The title is mostly a permission slip. People expected my opinion to carry more weight — which mattered more than any technical change. The work was already familiar; the new skill was knowing when to step back and let someone else figure it out.",
+      "Three things I underestimated: how much of the role is writing (PR descriptions, design docs, async updates), how much it's about creating context for other people, and how often the right answer is 'let's not build that yet'.",
+    ],
   },
 ];
 
