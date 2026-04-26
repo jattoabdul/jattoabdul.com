@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import { Command } from 'cmdk';
 import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowUpRight, FileText, Hash, Search } from 'lucide-react';
-import posthog from 'posthog-js';
 
 import { primaryNav } from '@/data/site';
 import { posts } from '@/data/posts';
 import { projects } from '@/data/projects';
+import { captureEvent } from '@/lib/posthog-client';
 import { cn } from '@/lib/utils';
 
 type CommandTriggerProps = {
@@ -25,7 +25,7 @@ export function CommandMenuTrigger({ variant = 'pill', className }: CommandTrigg
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         setOpen(v => {
-          if (!v) posthog.capture('command_menu_opened', { trigger: 'keyboard' });
+          if (!v) captureEvent('command_menu_opened', { trigger: 'keyboard' });
           return !v;
         });
       }
@@ -35,7 +35,7 @@ export function CommandMenuTrigger({ variant = 'pill', className }: CommandTrigg
   }, []);
 
   function handleOpen() {
-    posthog.capture('command_menu_opened', { trigger: 'button' });
+    captureEvent('command_menu_opened', { trigger: 'button' });
     setOpen(true);
   }
 
@@ -82,7 +82,7 @@ function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
 
   const go = useCallback(
     (href: string, label: string, group: string, external = false) => {
-      posthog.capture('command_menu_item_selected', { href, label, group, external });
+      captureEvent('command_menu_item_selected', { href, label, group, external });
       onOpenChange(false);
       if (external) {
         window.open(href, '_blank', 'noopener,noreferrer');

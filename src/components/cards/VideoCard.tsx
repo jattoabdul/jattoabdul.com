@@ -1,9 +1,9 @@
 'use client';
 
 import { Play } from 'lucide-react';
-import posthog from 'posthog-js';
 
 import type { Video } from '@/data/videos';
+import { captureEvent } from '@/lib/posthog-client';
 import { cn } from '@/lib/utils';
 
 type VideoCardProps = {
@@ -15,7 +15,7 @@ export function VideoCard({ video, large = false }: VideoCardProps) {
   const href = video.href ?? 'https://www.youtube.com/@jatto_abdul';
 
   function handleClick() {
-    posthog.capture('video_clicked', {
+    captureEvent('video_clicked', {
       title: video.title,
       platform: video.platform,
       kind: video.kind,

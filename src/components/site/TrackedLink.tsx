@@ -1,7 +1,8 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import posthog from 'posthog-js';
+
+import { captureEvent } from '@/lib/posthog-client';
 
 type TrackedLinkProps = {
   href: string;
@@ -25,7 +26,7 @@ export function TrackedLink({
   children,
 }: TrackedLinkProps) {
   function handleClick() {
-    posthog.capture(eventName, { label, href, ...properties });
+    captureEvent(eventName, { label, href, ...properties });
   }
 
   return (

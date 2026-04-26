@@ -58,7 +58,7 @@ export async function POST(req: Request) {
     }
 
     const posthog = getPostHogClient();
-    posthog.capture({
+    posthog?.capture({
       distinctId: 'newsletter-subscriber',
       event: 'newsletter_subscribed_server',
       properties: { mode: 'resend' },

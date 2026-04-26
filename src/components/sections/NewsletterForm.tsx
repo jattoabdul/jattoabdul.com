@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import posthog from 'posthog-js';
+
+import { captureEvent, captureException } from '@/lib/posthog-client';
 
 type Status = 'idle' | 'submitting' | 'done' | 'error';
 
@@ -20,12 +21,12 @@ export function NewsletterForm() {
         body: JSON.stringify({ email }),
       });
       if (!res.ok) throw new Error(`status ${res.status}`);
-      posthog.capture('newsletter_subscribed');
+      captureEvent('newsletter_subscribed');
       setStatus('done');
       setEmail('');
     } catch (err) {
-      posthog.captureException(err);
-      posthog.capture('newsletter_subscription_failed');
+      captureException(err);
+      captureEvent('newsletter_subscription_failed');
       setStatus('error');
     }
   }
