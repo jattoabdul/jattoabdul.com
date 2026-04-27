@@ -1,0 +1,150 @@
+---
+title: 'Why I built Infergo (and what it does today)'
+category: 'Applied AI'
+excerpt: 'A Go-native inference toolkit for backend services. Pre-alpha, narrow on purpose, and the thing I wished existed the last three times I had to run model traffic through a Python sidecar.'
+date: '2026-04-26'
+readTime: 9
+tags: ['applied-ai', 'go', 'backend']
+published: false
+---
+
+Most of the inference I've shipped in production didn't run in the same process as the service that needed the prediction.
+
+It ran in a Python sidecar over HTTP. Or in a separate FastAPI service that the Go service called. Or, twice, behind a TorchScript+libtorch bridge that worked until it didn't and then nobody on the team wanted to debug. The Go service was simple. The model was simple. The runtime story between them was always the most complicated part of the stack.
+
+Infergo is the toolkit I started building when I got tired of that.
+
+It's a Go-native inference toolkit for backend services. The idea is small: export a supported model once, load it in Go, run predictions without Python in production. It's currently at `v0.2.0-alpha.3`. It's narrow on purpose. This post is the honest version of where it actually is, what it actually does, and what it isn't yet.
+
+## The shape of the problem
+
+If you run a Go backend and you want to add a small inference workload, your options are:
+
+- **Stand up a Python service.** Two deployables instead of one. Two health checks. Two scaling stories. A network hop on every request.
+- **Run a Python sidecar.** Still two processes per pod. Different lifecycle. Different observability. You inherit Python's startup cost and dependency surface.
+- **Use a managed inference platform.** Works, but couples your stack to a vendor and adds a hop. Latency budget and bill go up together.
+- **Bridge into libtorch from Go via TorchScript bindings.** Possible. Fragile. Painful CI. The first person to upgrade Go or libtorch finds out.
+
+For a small classifier or a token-tagger that's already useful, all four are heavier than the model warrants. The model is 100MB. The deployment story is the rest of the kilometre.
+
+The thing I wanted is the thing most Go teams want when they actually look at their inference workload honestly: load the model in Go, run it inline, don't bring Python to production.
+
+## What Infergo is today
+
+Infergo is a Go library plus a small set of CLIs.
+
+The library surface lives at `github.com/pergamon-labs/infergo/infer`. The primary entrypoints are `infer.LoadTextBundle`, `infer.LoadTextClassifier`, and `infer.LoadTokenClassifier`. You point them at an exported bundle directory, you get back something you can call from a handler:
+
+```go
+bundle, err := infer.LoadTextBundle("./artifacts/distilbert-sst2-alpha")
+if err != nil {
+  log.Fatal(err)
+}
+defer bundle.Close()
+
+result, err := bundle.PredictText("This product is excellent and reliable.")
+```
+
+That's the main path. You're embedding inference in a Go service the same way you'd embed any other dependency. No sidecar. No Python at runtime. The runtime is `bionet`, the project's first native backend, written in Go.
+
+There are three CLIs that matter for a first encounter:
+
+- `infergo-export` — takes a supported model from a PyTorch / Hugging Face Transformers-style workflow and produces an Infergo bundle. This is the one place Python tooling is needed; it does not carry into production.
+- `infergo-serve` — wraps a loaded bundle in an HTTP server. Useful when you want a separate model process or a non-Go caller. Most teams embedding Infergo won't need this.
+- `infergo-parity` — compares an exported bundle against the source reference output. Parity is part of the product surface, not just test scaffolding.
+
+The repo also ships a curated pack layer (`infer/packs`), a sample NER extraction service, and a small benchmark suite. Curated packs are checked-in proof fixtures — text and token classification bundles built from public-safe data, used to demonstrate the runtime against known reference outputs. They are explicitly *not* a model zoo.
+
+On an Apple M3 Max, a checked-in SST-2 text classifier loads in ~345 microseconds and a single prediction runs in ~1.5 microseconds. Those numbers are illustrative, not a contract — they exist mostly to answer the first three questions a backend team asks: how expensive is bundle load at process start, what is steady-state CPU latency for a prediction, and what do allocations look like under `-benchmem`.
+
+## What Infergo is not
+
+This is the part I want to be loud about, because the failure mode of a project like this is the project that quietly promises more than it actually delivers.
+
+Infergo is not:
+
+- A blanket `.pt` loader. It does not load arbitrary PyTorch artifacts.
+- A general transformer runtime. It supports a narrow, documented family.
+- A training framework. It does not train, fine-tune, or distill.
+- A model zoo. The checked-in packs are proof fixtures, not a catalogue.
+
+The current public bring-your-own-model path is "family 1": PyTorch-origin, Hugging Face Transformers-style, encoder text classification and paired-text classification. Tokenizer support is narrow on purpose — validated subsets of BERT-style WordPiece and RoBERTa-style ByteLevel BPE. If your model falls outside that, the export still produces a bundle, but it stays tokenized-input-only.
+
+That family-1 path is *Experimental*. The status table in the repo says so. The runtime, the bundle format, and the loader contract are all on `v1.0` of an explicit native bundle version, and the exporter rejects bundles outside that version up front. Nothing in this project is being marketed beyond what it does today.
+
+## What's not in alpha yet
+
+Things you might reasonably expect that aren't there:
+
+- Token-classification BYOM export/import. (Token classification works today via curated packs and the sample NER service. Not via export-your-own.)
+- gRPC serving. HTTP only.
+- ONNX runtime support.
+- GPU runtime. Infergo is CPU-first by design for the alpha.
+- Direct loading from arbitrary Hugging Face repositories.
+
+Some of those are on the roadmap. Some are explicit non-goals. The repo's `COMPATIBILITY.md` is the source of truth for "is X supported", not anything I write here.
+
+## How to try it
+
+If you have a Go service and you want to take it for a spin, the no-clone path is:
+
+```bash
+go install github.com/pergamon-labs/infergo/cmd/infergo-export@latest
+go install github.com/pergamon-labs/infergo/cmd/infergo-serve@latest
+go install github.com/pergamon-labs/infergo/cmd/infergo-parity@latest
+```
+
+Then write a small input file, export a supported model, and load the resulting bundle:
+
+```bash
+infergo-export template -kind single -out ./family1-inputs.json
+# edit family1-inputs.json with a few representative public-safe examples
+
+infergo-export export \
+  -model distilbert/distilbert-base-uncased-finetuned-sst-2-english \
+  -input ./family1-inputs.json \
+  -out ./artifacts/distilbert-sst2-alpha \
+  -reference-output ./artifacts/distilbert-sst2-reference.json
+```
+
+Then in Go:
+
+```go
+bundle, _ := infer.LoadTextBundle("./artifacts/distilbert-sst2-alpha")
+defer bundle.Close()
+result, _ := bundle.PredictText("This product is excellent and reliable.")
+fmt.Printf("label=%s logits=%v\n", result.Label, result.Logits)
+```
+
+And to verify the export matches the source model:
+
+```bash
+infergo-parity \
+  -reference ./artifacts/distilbert-sst2-reference.json \
+  -infergo-bundle-dir ./artifacts/distilbert-sst2-alpha \
+  -tolerance 1e-4
+```
+
+That's the honest end-to-end path. You need `uv` plus the Python-side `transformers` dependencies at export time. You don't need them at runtime.
+
+The full walkthrough lives in `docs/alpha-family-1-walkthrough.md` in the repo. The compatibility envelope is in `COMPATIBILITY.md`. If you find a model that should fit and doesn't, that's the most useful kind of issue to file.
+
+## Why narrow on purpose
+
+The temptation with a project like this is to claim breadth — "supports any HF model" — and let the reality lag the claim. Every project in the inference space that I've watched ship and then stall has done this.
+
+I want Infergo to do the opposite. Make narrow, specific support claims. Back them with parity. Widen the envelope only when the evidence is in the repo. The product rule for the alpha is "bring your own model for documented model families" — not "bring any model from any source."
+
+That's slower. It also means the next person who looks at the README knows what they're getting.
+
+## What's next
+
+A few things in the near distance:
+
+- Token-classification BYOM is the obvious next supported family.
+- The exporter's user experience around tokenizer-boundary failures needs more honest signposting at the moment of failure, not just in the docs.
+- The sample NER service is currently the demonstration vehicle for stable token and entity offsets — some of that needs to graduate into a first-class `infer/` helper before the v0.3 line.
+
+If any of this is useful, the repo is at [github.com/pergamon-labs/infergo](https://github.com/pergamon-labs/infergo). Issues and PRs welcome. The compatibility table is the contract.
+
+I'll keep writing about this here as it moves. The next post will probably be a walk through the parity machinery, because it's the part of the project I'm most opinionated about and the part I think most inference toolkits skip.
