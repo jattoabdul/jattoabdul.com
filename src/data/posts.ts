@@ -49,6 +49,21 @@ export function toListItem(p: Post): PostListItem {
  */
 export const mediumPosts: Post[] = [
   {
+    slug: 'why-i-built-infergo',
+    category: 'Applied AI',
+    title: 'Why I built Infergo (and what it does today)',
+    excerpt:
+      'A Go-native inference toolkit for backend services. Pre-alpha, narrow on purpose, and the thing I wished existed the last three times I had to run model traffic through a Python sidecar.',
+    date: '2026-04-29',
+    readTime: 9,
+    tags: ['applied-ai', 'go', 'backend'],
+    source: 'medium',
+    // Replace url + canonical with the live Medium URL once the post is published.
+    url: 'https://medium.com/@jattoabdul',
+    canonical: 'https://medium.com/@jattoabdul',
+    published: false,
+  },
+  {
     slug: 'most-engineering-writing-is-for-the-wrong-reader',
     category: 'Communication',
     title: 'Most engineering writing is for the wrong reader',
