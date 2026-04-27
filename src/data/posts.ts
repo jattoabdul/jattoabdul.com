@@ -49,6 +49,21 @@ export function toListItem(p: Post): PostListItem {
  */
 export const mediumPosts: Post[] = [
   {
+    slug: 'most-engineering-writing-is-for-the-wrong-reader',
+    category: 'Communication',
+    title: 'Most engineering writing is for the wrong reader',
+    excerpt:
+      "The reviewer reads it once. The merge bot doesn't read it at all. Future-you reads it forever. Pick the longer-running reader.",
+    date: '2026-04-27',
+    readTime: 6,
+    tags: ['communication', 'product'],
+    source: 'medium',
+    url: 'https://medium.com/@jattoabdul/most-engineering-writing-is-for-the-wrong-reader-56261b5a10ca',
+    canonical:
+      'https://medium.com/@jattoabdul/most-engineering-writing-is-for-the-wrong-reader-56261b5a10ca',
+    published: true,
+  },
+  {
     slug: 'kafka-rebalance',
     category: 'Platform Engineering',
     title: 'Kafka consumer group rebalancing: triggers and mitigations',
