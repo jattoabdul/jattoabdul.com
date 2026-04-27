@@ -1,0 +1,87 @@
+---
+title: 'Why your best engineering writing is for an audience of one'
+category: 'Communication'
+excerpt: 'The most useful documentation I have written this year is for a project that has not shipped publicly yet. Three markdown files at the root of an open-source repo most readers will not see for another six months.'
+date: '2026-04-27'
+readTime: 7
+tags: ['communication', 'applied-ai']
+published: false
+---
+
+The most useful documentation I have written this year is for a project that has not shipped publicly yet.
+
+Three markdown files at the root of an open-source repo most readers will not see for another six months. An architecture file that explains the public surfaces, the backends, and the artifact contract. An agents file that lists the product guardrails as plain rules instead of lore. A compatibility file that holds, line by line, the support claims the project is willing to make.
+
+The audience for all three was one person. Me, nine months from now, after I had forgotten everything about the day they were written.
+
+I want to make a small argument about that audience. The engineer writing for an audience of one writes differently than the engineer writing for everyone. The difference compounds. The artifacts that survive in any codebase you have touched for more than two years are almost always the ones written for the audience-of-one reader, even when nobody intended them that way.
+
+## The audience that does not exist yet
+
+Most engineering writing is optimised for whoever is in the room when the writing happens. The reviewer who is about to merge your PR. The lead approving your design. The executives who will see the postmortem in tomorrow's recap. The merge bot that will swallow your commit message whole.
+
+All of those readers are real. None of them is the most important one.
+
+The most important reader is the version of someone who picks up this code in nine months with no context and a deadline. That reader does not exist when the writing happens. They show up later, and by the time they show up, the discussion that produced the artifact is gone. The meeting is forgotten. The Slack thread has fallen out of retention. The original ticket has been closed and re-numbered when the team migrated trackers.
+
+What survives in the working directory is the artifact. The artifact is what the audience-of-one will read.
+
+I made the longer version of this argument on Medium last week, about all five engineering artifacts at once. This post is the narrower version. It is about one specific situation: writing docs for code that does not have any other readers yet.
+
+## What I noticed writing the open-source docs
+
+When I started writing the markdown files for the open-source project, I noticed something I had not before. I was writing every paragraph as if I were the only person who would read it. Not in the lazy way. Not "I know what I mean, so I will write less." In the opposite way. I was writing more, because I knew the only person who would be there to puzzle over it later was me.
+
+The architecture file got the *why* of each backend, not just the *what*. The agents file got the explicit list of what the project is and is not. "Not a blanket `.pt` loader, not a general transformer runtime, not a training framework, not a model zoo." I knew the version of me reading this in six months would have forgotten which of those was the live debate when the file was first written. Future-me would need the boundary spelled out.
+
+The compatibility file got the version-pinning rules and the tokenizer-subset boundary, because the boundary is what future-me would want first. Not the marketing claim. The exact line where support stops.
+
+None of that was for an external reader. The repo had no users yet. The audience was one person, and that person had no context.
+
+That is the cleanest case of the rule. There is no other audience to dilute the choice.
+
+## Why the discipline transferred
+
+The discipline transferred to my day-job writing within the same week. I started writing PR descriptions with a "why" paragraph at the top, even when the reviewer was the same colleague I had spoken to about the change ten minutes earlier. I started leaving longer code comments above the load-bearing functions, naming the constraint instead of the workaround. I started keeping a "considered alternatives" section at the bottom of design docs even when I knew the approver would skip past it.
+
+It was not because the day-job audience changed. It was because writing for an audience of one had reset my default. The version of me who would come back to this code in two years became the implicit reader of every artifact I touched.
+
+That is the part I think gets undersold. People talk about the discipline of open-source documentation as if it is a separate skill. It is not. It is the same skill. The only difference is that writing for an open-source repo with no users forces you to choose the audience-of-one reader explicitly, because there is no other reader available. Once you have chosen them once, the choice is easier the next time. And the next time. And eventually you are choosing them for every artifact, including the ones that have many other readers, because you have noticed that the audience-of-one reader is also the one who matters most.
+
+## What this discipline costs
+
+I want to be honest about what this is not.
+
+It is slower. The first ten things you write for an audience of one will feel slightly over-explained to present-you. They are over-explained for present-you. That is the point. Ship them anyway.
+
+It feels indulgent. Writing more carefully for an audience that does not exist yet feels, on a Tuesday afternoon, like the wrong use of the next forty minutes. Especially when the inbox is loud and there is a real task waiting. The compounding has not started yet, so the cost feels bigger than the payoff.
+
+You ship fewer commits per week. Not many fewer. But the marginal time per artifact goes up by some percent. If your team's only metric is throughput, the discipline will feel like a tax.
+
+The payoff is later. Year one is the worst year. Year three is when you start grepping your own old commit messages and finding the breadcrumb. Year five is when you become the only person who can answer specific questions on a system, because you wrote the answers down for yourself.
+
+The compounding is unfair to engineers who do not start. There is no shortcut. You cannot retroactively rewrite the comments you did not write. You can only start writing them differently from the next PR forward.
+
+## The diagram in the design doc
+
+One specific piece of advice that came out of the open-source writing process, and that I have since carried back to the day job.
+
+Put the architecture diagram inline in the design doc, not as a link to an external diagramming tool. Lucidchart, Excalidraw, Figjam, whatever. Those tools are not stable on a five-year horizon. The link rots. The workspace gets archived. The diagram becomes inaccessible exactly when audience-of-one needs it most.
+
+A flat-image export, embedded in the markdown, is uglier than the live diagram. It is also legible in nine months. The live diagram, six months from now, is a 404. Pick the legible one.
+
+## Audience-of-one is also you
+
+The frame in this post is "future-you reading this in nine months." That is the version that lands in writing. The harder version, in practice, is *present-you reading this on the day you write it*.
+
+Present-you is the first reader of the artifact. If the artifact is not legible to present-you ten minutes after you finish it, it will not be legible to anyone else later. Re-read what you just wrote. If it is hand-wavy, you have not written it. You have gestured at it.
+
+The audience-of-one reader is more demanding than present-you, because they have less context. But they are also the same person, eventually. Every piece of engineering writing you do is, in practice, training data for the version of you who will come back to it.
+
+> The reviewer reads it once. Audience-of-one reads it forever.
+
+## What's next
+
+The open-source project I have been referring to is called Infergo. It is a Go-native inference toolkit for backend services, currently at v0.2.0-alpha.3. I will have a longer post about it shortly, walking through what it actually does today, what it explicitly is not, and how to try it. The interesting thing about the docs in that repo is not what they say about the project. It is that they were written for an audience that did not exist yet. That is the audience to write for. Whether or not the project ever attracts other contributors, the discipline of writing as if it might has already paid off.
+
+Pick the longer-running reader. The reviewer reads it once. Audience-of-one reads it forever.
