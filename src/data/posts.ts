@@ -55,7 +55,7 @@ export const mediumPosts: Post[] = [
     excerpt:
       "The reviewer reads it once. The merge bot doesn't read it at all. Future-you reads it forever. Pick the longer-running reader.",
     date: '2026-04-27',
-    readTime: 6,
+    readTime: 8,
     tags: ['communication', 'product'],
     source: 'medium',
     url: 'https://medium.com/@jattoabdul/most-engineering-writing-is-for-the-wrong-reader-56261b5a10ca',
@@ -97,7 +97,7 @@ export const mediumPosts: Post[] = [
 // know about the split is this module + the writing feed.
 export const posts = mediumPosts;
 
-export const allTags = Array.from(new Set(mediumPosts.flatMap((p) => p.tags))).sort();
+export const allTags = Array.from(new Set(mediumPosts.flatMap(p => p.tags))).sort();
 
 /**
  * @deprecated Use `getMediumLinkPost` (sync, for the medium-link entries)
@@ -107,11 +107,11 @@ export const allTags = Array.from(new Set(mediumPosts.flatMap((p) => p.tags))).s
  * local posts now live in MDX and need an async filesystem read.
  */
 export function getPost(slug: string): Post | undefined {
-  return mediumPosts.find((p) => p.slug === slug);
+  return mediumPosts.find(p => p.slug === slug);
 }
 
 export function getMediumLinkPost(slug: string): Post | undefined {
-  return mediumPosts.find((p) => p.slug === slug);
+  return mediumPosts.find(p => p.slug === slug);
 }
 
 /**
@@ -122,7 +122,7 @@ export function getMediumLinkPost(slug: string): Post | undefined {
 export async function getLocalPosts(): Promise<Post[]> {
   const { getAllMdxPostMeta } = await import('@/lib/mdx');
   const all = await getAllMdxPostMeta();
-  return all.filter((p) => p.published);
+  return all.filter(p => p.published);
 }
 
 /**
@@ -141,8 +141,8 @@ export type CommandMenuPost = {
 
 export async function getCommandMenuPosts(): Promise<CommandMenuPost[]> {
   const local = await getLocalPosts();
-  const curated = mediumPosts.filter((p) => p.published);
-  return [...local, ...curated].map((p) => ({
+  const curated = mediumPosts.filter(p => p.published);
+  return [...local, ...curated].map(p => ({
     slug: p.slug,
     title: p.title,
     category: p.category,
