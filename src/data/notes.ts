@@ -24,6 +24,39 @@ export type Note = {
 export const notes: Note[] = [
   // ── 2026 ────────────────────────────────────────────────────────────────
   {
+    slug: 'agents-move-the-bottleneck-up',
+    date: '2026-05-01',
+    title: 'Agents move the bottleneck up the stack',
+    tags: ['applied-ai', 'career'],
+    body: [
+      'InferGo is public and in alpha now: a Go-native inference toolkit for backend services. The promise is deliberately narrow — export a supported model once, load it in Go, and run predictions without Python in production.',
+      'A lot of the work moved faster with Codex, Claude Code, and Claude Design in the loop. But the speed only held when the contract was clear: bundle versions, parity checks, supported model families, and what should fail loudly instead of pretending to work.',
+      'That is the lesson I keep relearning with agents. They reduce typing, searching, and first-pass implementation time. They do not remove engineering judgment. The bottleneck moves up the stack: naming the API, drawing the boundary, choosing the non-goals, and deciding which promises survive the next release.',
+    ],
+  },
+  {
+    slug: 'staging-is-not-production-shaped',
+    date: '2026-04-29',
+    title: 'Staging is not production-shaped',
+    tags: ['platform', 'backend'],
+    body: [
+      'A framework upgrade can pass review, pass staging, and still fail in production. The code may be correct in isolation, but production adds the parts staging rarely carries: real traffic, background workers, connection pressure, failover paths, and configuration drift.',
+      'That is the trap. A green staging run proves the app works against a smaller copy of the world. It does not prove the system will hold when traffic, concurrency, and operational history arrive at the same time.',
+      'For high-risk framework or infrastructure changes, the useful test is production-shaped: realistic load, realistic failure paths, clear rollback criteria, and the right owners online. Anything less is not useless, but it should be treated as confidence-building, not proof.',
+    ],
+  },
+  {
+    slug: 'acknowledgements-are-not-settlements',
+    date: '2026-04-25',
+    title: 'Acknowledgements are not settlements',
+    tags: ['platform', 'product'],
+    body: [
+      'TrustKarry can let senders and travelers acknowledge that a payment hand-off happened without becoming the system that moves the money. That sounds like a small wording choice. It is not.',
+      'Settlement means rails, disputes, compliance scope, payout operations, and a very different risk profile. Acknowledgement means the product records what both parties say happened, while the MVP stays a coordination marketplace.',
+      "The data model decides what business you're in. Sometimes the most important product decision is refusing the larger business until you have the legal, operational, and technical runway to support it.",
+    ],
+  },
+  {
     slug: 'idempotency-distributed',
     date: '2026-04-20',
     title: 'On idempotency in distributed systems',
