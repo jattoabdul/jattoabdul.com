@@ -24,6 +24,60 @@ export type Note = {
 export const notes: Note[] = [
   // ── 2026 ────────────────────────────────────────────────────────────────
   {
+    slug: 'codify-before-scale-demands-it',
+    date: '2026-05-15',
+    title: 'Codify before scale demands it',
+    tags: ['platform'],
+    body: [
+      'jattoabdul.com is two DNS records and one Railway service. I codified them in OpenTofu anyway. There is no team that needs the audit trail, no scale that needs the repeatability — at this size, click-ops in the Cloudflare dashboard would work fine.',
+      "I'm doing it for the muscle. The first time you reach for OpenTofu in anger is the wrong time to learn its diff semantics or how its state file behaves under a rushed typo. Personal infra is the practice scrimmage: low stakes, real workflow, same discipline.",
+      'It is a broader pattern. The branch protection on this repo, the CI that runs lint and type-check on every PR, a CODEOWNERS file with one name on it — none of it is load-bearing today. All of it is enforcing on myself, at small scale, the rules I want enforced at work. The discipline you practice when nothing depends on it is the discipline you keep when everything does.',
+    ],
+  },
+  {
+    slug: 'branch-protection-on-personal-repos',
+    date: '2026-05-13',
+    title: 'Branch protection on a personal repo',
+    tags: ['career', 'communication'],
+    published: false,
+  },
+  {
+    slug: 'resend-for-now',
+    date: '2026-05-12',
+    title: 'Resend, for now',
+    tags: ['product', 'career'],
+    published: false,
+  },
+  {
+    slug: 'shape-of-the-tool-decides-cadence',
+    date: '2026-05-10',
+    title: 'The shape of the tool decides the cadence',
+    tags: ['communication'],
+    body: [
+      "Article bodies on my site used to be typed arrays — `{ type: 'p', text: '...' }`, neat and validated. I could draft a post in fifteen minutes; I could barely face editing one. Every fix meant escaping a string, counting commas, hunting a stray quote.",
+      "I moved the bodies to MDX last week. Same words, different shell. The change wasn't technical — it was admitting the old format was charging me a tax I'd been paying in posts I never finished. Markdown isn't fancier than the array. It's lower-friction. And friction in writing tools is silent until you measure how much you don't write.",
+      'This generalises past my site. Engineering docs, RFC templates, PR descriptions, retros — the format quietly decides how often anyone reaches for them. Pick tools that do not make you flinch. The right shape is the one you reach for on a tired Friday without thinking.',
+    ],
+  },
+  {
+    slug: 'one-vendor-two-boxes',
+    date: '2026-05-07',
+    title: 'One vendor, two boxes ticked',
+    tags: ['product', 'platform'],
+    published: false,
+  },
+  {
+    slug: 'cheapest-commitment-device',
+    date: '2026-05-05',
+    title: 'The cheapest commitment device in engineering',
+    tags: ['communication', 'career'],
+    body: [
+      'The moment a homepage said "Senior Engineer · Backend, Platform, Applied-AI" out loud to the public internet, the words started working on me. You cannot half-believe a positioning sentence that someone might quote back to you.',
+      "That is most of what shipping a personal site bought me. Not traffic. Not subscribers. A public commitment to a narrower version of what I'm choosing to be known for. The discomfort of trimming everything else out of that sentence is the point — the trim is the work.",
+      "A personal site is the cheapest commitment device in engineering. You do not need a contract, a manager, or a public talk. You need a URL and the willingness to say one specific thing in front of strangers. The site does not make me a better engineer. It makes me a less hedged one, which turns out to be most of the gap.",
+    ],
+  },
+  {
     slug: 'agents-move-the-bottleneck-up',
     date: '2026-05-01',
     title: 'Agents move the bottleneck up the stack',
