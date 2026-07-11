@@ -120,7 +120,7 @@ export const notes: Note[] = [
     body: [
       'The easiest way to over-engineer a personal site is to treat it like a company platform. Notes can become a CMS migration. A blog can become a publishing pipeline. A simple deploy can become a release process with more ritual than risk.',
       "I'm trying to keep the opposite rule in place: use the smallest tool that preserves the promise. If the promise is weekly notes, the tool should make writing feel like editing one object and pushing one commit. Anything heavier has to earn its keep.",
-      "This is product judgment wearing an engineering jacket. Good systems are not the ones with the most impressive machinery. They are the ones whose machinery matches the cost of being wrong. Add weight when the system earns it, not when your imagination gets bored.",
+      'This is product judgment wearing an engineering jacket. Good systems are not the ones with the most impressive machinery. They are the ones whose machinery matches the cost of being wrong. Add weight when the system earns it, not when your imagination gets bored.',
     ],
   },
   {
@@ -167,7 +167,7 @@ export const notes: Note[] = [
     body: [
       'The moment a homepage said "Senior Engineer · Backend, Platform, Applied-AI" out loud to the public internet, the words started working on me. It is harder to half-believe a positioning sentence once someone can quote it back to you.',
       "That is most of what shipping a personal site bought me. Not traffic. Not subscribers. A public commitment to a narrower version of what I'm choosing to be known for. The discomfort of trimming everything else out of that sentence is the point — the trim is the work.",
-      "A public site is a commitment device. You do not need a contract, a manager, or a public talk. You need a URL and the willingness to say one specific thing in front of strangers. The site does not make me a better engineer. It makes me a less hedged one, which turns out to be most of the gap.",
+      'A public site is a commitment device. You do not need a contract, a manager, or a public talk. You need a URL and the willingness to say one specific thing in front of strangers. The site does not make me a better engineer. It makes me a less hedged one, which turns out to be most of the gap.',
     ],
   },
   {
@@ -220,7 +220,7 @@ export const notes: Note[] = [
     tags: ['backend', 'sql'],
     body: [
       "ORMs are great for the 80% of CRUD that looks like CRUD. Reporting isn't CRUD.",
-      "Once a query touches three joins, a window function, and a CTE, the ORM expression is harder to read than the SQL it generates — and harder to optimise. I write the SQL by hand, version it like code, and let the ORM stay in its lane.",
+      'Once a query touches three joins, a window function, and a CTE, the ORM expression is harder to read than the SQL it generates — and harder to optimise. I write the SQL by hand, version it like code, and let the ORM stay in its lane.',
     ],
   },
   {
@@ -260,9 +260,9 @@ export const notes: Note[] = [
     title: 'How I run async standups for distributed teams',
     tags: ['communication'],
     body: [
-      "Daily standup as a meeting is a tax on focus time. The information is rarely worth the synchronisation cost, especially across time zones.",
+      'Daily standup as a meeting is a tax on focus time. The information is rarely worth the synchronisation cost, especially across time zones.',
       "We post three lines in a thread instead: what I shipped yesterday, what I'm doing today, what I'm blocked on. Anyone reading at any time gets the state of the team. Blockers turn into sub-threads with the right person, not a 30-minute group meeting.",
-      "Two rules make it work: post by a specific local time (mine: end of working day), and treat blockers as the only mandatory line.",
+      'Two rules make it work: post by a specific local time (mine: end of working day), and treat blockers as the only mandatory line.',
     ],
   },
   {
@@ -271,9 +271,9 @@ export const notes: Note[] = [
     title: 'Notes on Kafka consumer rebalancing in the wild',
     tags: ['platform', 'kafka'],
     body: [
-      "Rebalances are usually fine. The bad ones are the ones nobody notices until lag spikes — caused by silent consumer death, slow message processing exceeding `max.poll.interval.ms`, or a deploy that thrashes group membership.",
+      'Rebalances are usually fine. The bad ones are the ones nobody notices until lag spikes — caused by silent consumer death, slow message processing exceeding `max.poll.interval.ms`, or a deploy that thrashes group membership.',
       "Three knobs that bought us most of the wins: cooperative-sticky assignor (no full stop-the-world), tuning `session.timeout.ms` and `heartbeat.interval.ms` for our actual processing time, and shipping a metric for partition-revoked count so a 'normal' deploy doesn't hide a leaking pod.",
-      "Static membership helps for stable consumer pools — at the cost of slower failover. Pick deliberately.",
+      'Static membership helps for stable consumer pools — at the cost of slower failover. Pick deliberately.',
     ],
   },
   {
@@ -282,8 +282,8 @@ export const notes: Note[] = [
     title: 'What I look for in senior engineering candidates',
     tags: ['career'],
     body: [
-      "Three things, in order. One: can they explain a tradeoff without flinching? Two: do they reach for the boring solution first? Three: when something broke, do they tell you what they actually did, or what the postmortem said they did?",
-      "Pattern-matching to titles or company names is a shortcut that works exactly often enough to be dangerous.",
+      'Three things, in order. One: can they explain a tradeoff without flinching? Two: do they reach for the boring solution first? Three: when something broke, do they tell you what they actually did, or what the postmortem said they did?',
+      'Pattern-matching to titles or company names is a shortcut that works exactly often enough to be dangerous.',
     ],
   },
   {
@@ -303,7 +303,7 @@ export const notes: Note[] = [
     tags: ['career', 'platform'],
     body: [
       "First week at a new company is mostly listening. The questions I ask aren't 'how does X work?' — those are in the docs. They're 'what was the hardest tradeoff this team made in the last six months, and would they make it again?'",
-      "The answers tell you where the real complexity lives, where the team has scar tissue, and where you should probably not start refactoring on day three.",
+      'The answers tell you where the real complexity lives, where the team has scar tissue, and where you should probably not start refactoring on day three.',
     ],
   },
 
@@ -325,7 +325,7 @@ export const notes: Note[] = [
     tags: ['communication', 'career'],
     body: [
       "Open the PR, walk away for ten minutes, then read it like a stranger. Half the comments your reviewer would have left, you'll catch yourself. The half that remain are the ones worth their time.",
-      "It also speeds reviews up. Reviewers learn to trust that your PRs come pre-thought-through.",
+      'It also speeds reviews up. Reviewers learn to trust that your PRs come pre-thought-through.',
     ],
   },
   {
@@ -335,8 +335,8 @@ export const notes: Note[] = [
     tags: ['communication'],
     body: [
       "Lead with intent before mechanics. 'I think we're solving the wrong problem here, here's why' lands differently than fifteen line-comments about variable names attached to a fundamentally wrong design.",
-      "Mark which comments are blocking and which are taste. Reviewers conflating the two is a top reason juniors over-rotate on stylistic feedback.",
-      "And: praise the non-obvious good calls. Nobody mentions the small refactor that made the diff readable, but those are the ones worth noticing.",
+      'Mark which comments are blocking and which are taste. Reviewers conflating the two is a top reason juniors over-rotate on stylistic feedback.',
+      'And: praise the non-obvious good calls. Nobody mentions the small refactor that made the diff readable, but those are the ones worth noticing.',
     ],
   },
   {
@@ -368,7 +368,7 @@ export const notes: Note[] = [
     tags: ['communication', 'career'],
     body: [
       'I started writing because the same lessons were being relearned by everyone around me — and by me, again, six months later. Writing them down forces me to commit to a position; publishing forces me to defend it.',
-      "The compounding is real. Posts I wrote two years ago still land in my inbox, sometimes from the people I most wanted to be reading them.",
+      'The compounding is real. Posts I wrote two years ago still land in my inbox, sometimes from the people I most wanted to be reading them.',
     ],
   },
   {
@@ -377,18 +377,18 @@ export const notes: Note[] = [
     title: 'What I learned my first year as a senior engineer',
     tags: ['career'],
     body: [
-      "The title is mostly a permission slip. People expected my opinion to carry more weight — which mattered more than any technical change. The work was already familiar; the new skill was knowing when to step back and let someone else figure it out.",
+      'The title is mostly a permission slip. People expected my opinion to carry more weight — which mattered more than any technical change. The work was already familiar; the new skill was knowing when to step back and let someone else figure it out.',
       "Three things I underestimated: how much of the role is writing (PR descriptions, design docs, async updates), how much it's about creating context for other people, and how often the right answer is 'let's not build that yet'.",
     ],
   },
 ];
 
-export const noteTags = Array.from(new Set(notes.flatMap((n) => n.tags))).sort();
+export const noteTags = Array.from(new Set(notes.flatMap(n => n.tags))).sort();
 
 export function getPublishedNotes(): Note[] {
-  return notes.filter((n) => n.published !== false);
+  return notes.filter(n => n.published !== false);
 }
 
 export function getNote(slug: string): Note | undefined {
-  return notes.find((n) => n.slug === slug);
+  return notes.find(n => n.slug === slug);
 }
