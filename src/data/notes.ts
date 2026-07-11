@@ -24,6 +24,95 @@ export type Note = {
 export const notes: Note[] = [
   // ── 2026 ────────────────────────────────────────────────────────────────
   {
+    slug: 'skill-you-stop-practicing',
+    date: '2026-07-17',
+    title: 'The skill you stop practicing does not stay paused',
+    tags: ['career', 'language'],
+    published: false,
+    body: [
+      'I paused my Arabic speaking sessions for about three months. Not because I stopped caring about the language, but because work got heavy, contract work kept moving, home kept moving, and life with three children, including a six-month-old, does not leave many quiet corners untouched.',
+      'The uncomfortable part is that a skill does not pause just because your calendar does. Speaking confidence decays quietly. The words are still somewhere in your head, but the path to them gets slower when you stop walking it.',
+      'I am trying to restart with a smaller promise instead of waiting for the old routine to become possible again. Thirty consistent minutes is better than a perfect schedule that never arrives. Maintenance is part of learning. The cadence that survives real life is the cadence that counts.',
+    ],
+  },
+  {
+    slug: 'legacy-systems-are-product-memory',
+    date: '2026-07-10',
+    title: 'Legacy systems are product memory',
+    tags: ['backend', 'product'],
+    body: [
+      'Contract work has been reminding me that legacy systems are rarely just old code. They are old promises. A strange branch in the flow might be a merchant exception. A confusing column might be a pricing rule from three business models ago. A widget that feels awkward might still be carrying the shape of a real customer workflow.',
+      'That does not mean the system should be left alone. It means the first job is translation, not judgment. Before changing a legacy path, I want to know which product memory it is preserving and who still depends on it.',
+      'Good modernization is not the act of replacing messy code with prettier code. It is the act of separating accidental complexity from earned complexity, then preserving the business truth while making the software easier to change next time.',
+    ],
+  },
+  {
+    slug: 'rest-is-not-a-reward-for-certainty',
+    date: '2026-07-03',
+    title: 'Rest is not a reward for certainty',
+    tags: ['career', 'family'],
+    body: [
+      'I took a short road trip to Montreal with my family after a role ended. The timing was awkward enough that part of me wanted to cancel it and stay home pretending that constant motion would turn uncertainty into control.',
+      'But rest is not only something you earn after life becomes stable. Sometimes rest is what keeps you from making every next decision from a tired and defensive place. A calendar break does not solve the job market, but it can give you enough room to remember you are more than the last thing that happened at work.',
+      'I am learning to treat recovery as part of the system, not a luxury outside it. Engineers understand capacity planning for services. We are slower to admit that people need it too.',
+    ],
+  },
+  {
+    slug: 'last-handoff-still-counts',
+    date: '2026-06-26',
+    title: 'The last handoff still counts',
+    tags: ['career', 'communication'],
+    body: [
+      'The end of a role is a strange test of professionalism. It is easy to treat the last few days as already gone, especially when the ending is not the one you would have chosen.',
+      'But the last handoff still counts. The open loops, the context that only lives in your head, the risks you know about, the small decisions someone will need to explain next month. Leaving those behind clearly is not about being performative. It is about respecting the work and the people who will keep carrying it.',
+      'Reputation is not only built in the visible wins. It is also built in the exits. Write the notes. Name the loose ends. Make the next person less surprised than they would have been.',
+    ],
+  },
+  {
+    slug: 'ai-gives-speed-fundamentals-give-direction',
+    date: '2026-06-19',
+    title: 'AI gives speed, fundamentals give direction',
+    tags: ['applied-ai', 'career'],
+    body: [
+      'AI can make you move much faster. It can draft the component, sketch the migration, write the first pass of the test, and turn a rough idea into working code before your coffee cools.',
+      'That speed is only useful if you know where to point it. Fundamentals are not valuable because they let you avoid AI. They are valuable because they teach you what good looks like: the boundary that should exist, the query that will not scale, the abstraction that is arriving too early, the test that proves less than it claims.',
+      'The edge is not being the engineer who types everything by hand. The edge is being the engineer who can use the machine without outsourcing taste, judgment, and direction to it.',
+    ],
+  },
+  {
+    slug: 'verification-is-not-a-boolean',
+    date: '2026-06-12',
+    title: 'Verification is not a boolean',
+    tags: ['product', 'platform'],
+    body: [
+      'While thinking through a data engine product at Minerva, I keep coming back to one product trap: treating verification as a green checkmark. Real verification is rarely that clean. It is evidence, source quality, confidence, review history, and the cost of being wrong.',
+      'A system that says only verified or not verified hides the part operators actually need to reason about. What matched? Which source said so? How fresh is it? Was the decision automatic, reviewed, disputed, or only good enough for the next step?',
+      'The data model has to leave room for uncertainty because the real world does. The product can still make decisions, but it should not pretend the decision erased the ambiguity underneath it.',
+    ],
+  },
+  {
+    slug: 'entity-resolution-starts-with-doubt',
+    date: '2026-06-05',
+    title: 'Entity resolution starts with doubt',
+    tags: ['platform', 'data'],
+    body: [
+      'Entity resolution sounds tidy until real records arrive. Names are misspelled. Companies use aliases. Addresses drift. Two records look identical until one field quietly proves they are different, and two messy records sometimes point to the same real thing.',
+      'The tempting mistake is to make the system too confident too early. Merge first, explain later. But resolution work should start with doubt. Every match needs a reason, every reason needs a source, and every source has a quality level.',
+      'That lesson travels outside the database. People, teams, and products all get misread when we flatten partial evidence into certainty. Better systems keep the trail of why they believe something, not just the final belief.',
+    ],
+  },
+  {
+    slug: 'org-chart-is-also-an-api',
+    date: '2026-05-29',
+    title: 'The org chart is also an API',
+    tags: ['communication', 'career'],
+    body: [
+      'Good colleagues can still collide when ownership is vague. Two people can both have useful context, strong taste, and enough experience to be dangerous. Without clear decision rights, a technical disagreement can quietly become a status negotiation.',
+      'That is why the org chart matters even in healthy teams. Not as theatre, and not as a way to shut down ideas, but as an API for direction. Who decides? Who advises? Who must be consulted? Who owns the tradeoff after the meeting ends?',
+      'Professionalism is not sharing every thought with every colleague at every moment. It is knowing which context helps, which context distracts, and where a disagreement belongs. Clarity of hierarchy is not the enemy of collaboration. Often, it is what lets collaboration survive contact with real decisions.',
+    ],
+  },
+  {
     slug: 'smallest-tool-that-fits',
     date: '2026-05-22',
     title: 'The smallest tool that fits',
