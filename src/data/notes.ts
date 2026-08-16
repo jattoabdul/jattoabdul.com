@@ -24,11 +24,54 @@ export type Note = {
 export const notes: Note[] = [
   // ── 2026 ────────────────────────────────────────────────────────────────
   {
+    slug: 'shipping-and-distribution-are-different-jobs',
+    date: '2026-08-14',
+    title: 'Shipping and distribution are different jobs',
+    tags: ['content-creation', 'product'],
+    body: [
+      'Publishing a video feels like shipping, because a lot of work ends there: script, recording, edit, thumbnail, description, upload, checks, and the small courage of making it public.',
+      'But the audience does not arrive just because the artifact exists. Distribution is a different job. It needs a list of people who would actually care, a few good places to share it, and enough restraint not to turn every channel into a megaphone pointed at strangers.',
+      'I am trying to treat distribution as product work, not noise. Who is this for? Where are they already paying attention? What would make forwarding it useful instead of polite? Shipping creates the thing. Distribution earns the first real conversation around it.',
+    ],
+  },
+  {
+    slug: 'small-samples-change-one-decision',
+    date: '2026-08-07',
+    title: 'Small samples should change one decision, not your whole strategy',
+    tags: ['content-creation', 'product'],
+    body: [
+      'The first public checkpoint on a new video is emotionally loud and statistically tiny. A few views, a couple of likes, one comment — enough to feel something, not enough to know much.',
+      'The mistake is treating early numbers like a verdict. Small samples can still be useful, but only if they change one decision at a time. Maybe the next move is qualified distribution. Maybe it is fixing a description. It is almost never a full rewrite of the title, thumbnail, format, and strategy before the audience has had a chance to exist.',
+      'I want the feedback loop to stay honest: observations first, interpretation second, strategy last. A small sample should sharpen the next action, not hand the steering wheel to panic.',
+    ],
+  },
+  {
+    slug: 'command-center-is-a-map',
+    date: '2026-07-31',
+    title: 'A command center should be a map, not a second source of truth',
+    tags: ['platform', 'communication'],
+    body: [
+      'I spent more time than expected reorganizing my local workspace and command center. The hard part was not moving folders. The hard part was deciding what each place is allowed to be responsible for.',
+      'A command center can become seductive because everything feels better when it has an index. But the index is not the work. The project repo owns the code. The content folder owns the draft. The video project owns the production state. The command center should point clearly to those places, not quietly copy their facts until nobody knows which version to trust.',
+      'The rule I am keeping: maps are useful because they reduce search, not because they replace the territory. The moment the map starts competing with the thing it points to, the system is already drifting.',
+    ],
+  },
+  {
+    slug: 'content-system-reduces-decisions',
+    date: '2026-07-24',
+    title: 'A good content system reduces decisions, not creativity',
+    tags: ['content-creation', 'communication'],
+    body: [
+      'The point of building a content system is not to make every post sound planned by a committee. It is to remove the boring decisions that keep stealing energy from the useful ones.',
+      'Where does the idea go? What status is it in? Which platform is this for? Is it public-safe? What proof point anchors it? Those questions should have defaults. The creative work is the claim, the example, the turn, the sentence that finally says what I meant.',
+      'A good system gives creativity fewer places to leak out. It does not decide what I believe. It clears the table so I can notice the belief faster and publish it with less ceremony.',
+    ],
+  },
+  {
     slug: 'skill-you-stop-practicing',
     date: '2026-07-17',
     title: 'The skill you stop practicing does not stay paused',
     tags: ['career', 'language'],
-    published: false,
     body: [
       'I paused my Arabic speaking sessions for about three months. Not because I stopped caring about the language, but because work got heavy, contract work kept moving, home kept moving, and life with three children, including a six-month-old, does not leave many quiet corners untouched.',
       'The uncomfortable part is that a skill does not pause just because your calendar does. Speaking confidence decays quietly. The words are still somewhere in your head, but the path to them gets slower when you stop walking it.',

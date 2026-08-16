@@ -20,13 +20,13 @@ export const projects: Project[] = [
   {
     slug: 'minerva',
     title: 'Minerva',
-    tagline: 'AI-powered AML screening: backend, search, reporting, platform.',
+    tagline: 'AI-powered AML screening workflows across backend, search, reporting, and platform.',
     description:
-      'AI-powered AML screening software where I build backend, search, reporting, and platform workflows for sanctions, PEP, adverse media, and ongoing monitoring.',
+      'AI-powered AML screening software where I built backend, search, reporting, and platform workflows for sanctions, PEP, adverse media, and ongoing monitoring.',
     role: 'Senior Engineer',
-    year: '2025–present',
+    year: '2025–2026',
     stack: ['Backend', 'Platform', 'Applied-AI', 'Search'],
-    status: 'Active',
+    status: 'Shipped',
     icon: ShieldCheck,
   },
   {

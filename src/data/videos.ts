@@ -54,31 +54,14 @@ export type Short = {
 
 export const videos: Video[] = [
   {
-    id: 'placeholder-1',
-    title: 'Designing for partial connectivity: an African engineering perspective',
-    duration: '18:24',
-    date: '2026-04',
+    id: 'why-best-engineers-get-overlooked',
+    title: 'Why the Best Engineers Get Overlooked (and How to Fix It)',
+    duration: '17:26',
+    date: '2026-08-05',
     kind: 'Long-form',
     platform: 'YouTube',
-    href: 'https://www.youtube.com/@jatto_abdul',
-  },
-  {
-    id: 'placeholder-2',
-    title: 'How I structure prompts for production LLM features',
-    duration: '11:02',
-    date: '2026-03',
-    kind: 'Long-form',
-    platform: 'YouTube',
-    href: 'https://www.youtube.com/@jatto_abdul',
-  },
-  {
-    id: 'placeholder-3',
-    title: 'Reading a senior-engineer job description like a staff engineer',
-    duration: '07:48',
-    date: '2026-02',
-    kind: 'Long-form',
-    platform: 'YouTube',
-    href: 'https://www.youtube.com/@jatto_abdul',
+    href: 'https://youtu.be/pu-IHuL--hg',
+    thumbnail: 'https://i.ytimg.com/vi/pu-IHuL--hg/maxresdefault.jpg',
   },
 ];
 
