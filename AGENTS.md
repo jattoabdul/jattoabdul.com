@@ -46,3 +46,9 @@ Applies only to `/jattoabdul.com`.
 - Report changed files and behavior impact.
 - Report validation commands run (or why skipped).
 - Include explicit local date/time and timezone for time-sensitive notes.
+
+## Cinematic migration (owner approved 2026-09-07, America/Toronto)
+
+Branch `migration/cinematic-next` carries prototype checkpoint d202ec6. `checkpoint/pre-cinematic-migration` preserves the earlier dirty open-door work; its original checkout remains untouched. Use Node 24.20.0 and npm 11.19.0. Run lint, type-check, Workers build, and HTTP migration checks when changing rendering/routing. Preserve approved typography, palette, animation timing, content, published URLs and privacy of the number of children. Homepage story and reading bodies render on the server; client animation components may prerender but must never access browser globals during rendering. Native document navigation is deliberate to preserve animation lifecycle. Keep previews noindex, and do not push or deploy without owner instruction.
+
+Confirmed current statuses: TrustKarry closed beta; Pinnr awaiting Shopify approval; RuleNorth in development; owner open to full-time engineering alongside occasional Fera consulting.

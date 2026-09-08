@@ -1,12 +1,1 @@
-import type { MetadataRoute } from 'next';
-
-import { siteConfig } from '@/data/site';
-
-export default function robots(): MetadataRoute.Robots {
-  const base = siteConfig.url.replace(/\/$/, '');
-  return {
-    rules: [{ userAgent: '*', allow: '/' }],
-    sitemap: `${base}/sitemap.xml`,
-    host: base,
-  };
-}
+export default function robots(){return {rules:{userAgent:'*',...(process.env.SEO_INDEXABLE==='true'?{allow:'/'}:{disallow:'/'})},sitemap:'https://jattoabdul.com/sitemap.xml'}}

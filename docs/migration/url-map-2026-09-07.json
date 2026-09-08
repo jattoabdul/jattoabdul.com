@@ -1,0 +1,262 @@
+[
+  {
+    "oldUrl": "https://jattoabdul.com",
+    "action": "preserved",
+    "destination": "/"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/writing",
+    "action": "preserved",
+    "destination": "/writing"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes",
+    "action": "preserved",
+    "destination": "/notes"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/projects",
+    "action": "redirect",
+    "destination": "/building"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/videos",
+    "action": "preserved",
+    "destination": "/videos"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/about",
+    "action": "preserved",
+    "destination": "/about"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/contact",
+    "action": "preserved",
+    "destination": "/contact"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/writing/audience-of-one",
+    "action": "preserved",
+    "destination": "/writing/audience-of-one"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/writing/staff-judgment",
+    "action": "preserved",
+    "destination": "/writing/staff-judgment"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/writing/writing-as-engineer",
+    "action": "preserved",
+    "destination": "/writing/writing-as-engineer"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/projects/minerva",
+    "action": "redirect",
+    "destination": "/building#minerva"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/projects/discova",
+    "action": "redirect",
+    "destination": "/building/discova"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/projects/trustkarry",
+    "action": "redirect",
+    "destination": "/building/trustkarry"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/projects/fera",
+    "action": "redirect",
+    "destination": "/building#fera"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/projects/heroshe",
+    "action": "redirect",
+    "destination": "/building#heroshe"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/projects/ai-experiments",
+    "action": "redirect",
+    "destination": "/building#experiments"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/shipping-and-distribution-are-different-jobs",
+    "action": "preserved",
+    "destination": "/notes/shipping-and-distribution-are-different-jobs"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/small-samples-change-one-decision",
+    "action": "preserved",
+    "destination": "/notes/small-samples-change-one-decision"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/command-center-is-a-map",
+    "action": "preserved",
+    "destination": "/notes/command-center-is-a-map"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/content-system-reduces-decisions",
+    "action": "preserved",
+    "destination": "/notes/content-system-reduces-decisions"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/skill-you-stop-practicing",
+    "action": "preserved",
+    "destination": "/notes/skill-you-stop-practicing"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/legacy-systems-are-product-memory",
+    "action": "preserved",
+    "destination": "/notes/legacy-systems-are-product-memory"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/rest-is-not-a-reward-for-certainty",
+    "action": "preserved",
+    "destination": "/notes/rest-is-not-a-reward-for-certainty"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/last-handoff-still-counts",
+    "action": "preserved",
+    "destination": "/notes/last-handoff-still-counts"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/ai-gives-speed-fundamentals-give-direction",
+    "action": "preserved",
+    "destination": "/notes/ai-gives-speed-fundamentals-give-direction"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/verification-is-not-a-boolean",
+    "action": "preserved",
+    "destination": "/notes/verification-is-not-a-boolean"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/entity-resolution-starts-with-doubt",
+    "action": "preserved",
+    "destination": "/notes/entity-resolution-starts-with-doubt"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/org-chart-is-also-an-api",
+    "action": "preserved",
+    "destination": "/notes/org-chart-is-also-an-api"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/smallest-tool-that-fits",
+    "action": "preserved",
+    "destination": "/notes/smallest-tool-that-fits"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/codify-before-it-matters",
+    "action": "preserved",
+    "destination": "/notes/codify-before-it-matters"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/tool-decides-cadence",
+    "action": "preserved",
+    "destination": "/notes/tool-decides-cadence"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/public-site-commitment-device",
+    "action": "preserved",
+    "destination": "/notes/public-site-commitment-device"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/agents-move-the-bottleneck-up",
+    "action": "preserved",
+    "destination": "/notes/agents-move-the-bottleneck-up"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/staging-is-not-production-shaped",
+    "action": "preserved",
+    "destination": "/notes/staging-is-not-production-shaped"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/acknowledgements-are-not-settlements",
+    "action": "preserved",
+    "destination": "/notes/acknowledgements-are-not-settlements"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/idempotency-distributed",
+    "action": "preserved",
+    "destination": "/notes/idempotency-distributed"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/orms-reporting",
+    "action": "preserved",
+    "destination": "/notes/orms-reporting"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/prompt-caching-prod",
+    "action": "preserved",
+    "destination": "/notes/prompt-caching-prod"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/structured-outputs-vs-tools",
+    "action": "preserved",
+    "destination": "/notes/structured-outputs-vs-tools"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/boring-architecture",
+    "action": "preserved",
+    "destination": "/notes/boring-architecture"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/async-standups",
+    "action": "preserved",
+    "destination": "/notes/async-standups"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/kafka-rebalance-notes",
+    "action": "preserved",
+    "destination": "/notes/kafka-rebalance-notes"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/senior-candidates",
+    "action": "preserved",
+    "destination": "/notes/senior-candidates"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/backpressure",
+    "action": "preserved",
+    "destination": "/notes/backpressure"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/minerva-week-one",
+    "action": "preserved",
+    "destination": "/notes/minerva-week-one"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/observability-first",
+    "action": "preserved",
+    "destination": "/notes/observability-first"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/review-own-prs",
+    "action": "preserved",
+    "destination": "/notes/review-own-prs"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/code-review-etiquette",
+    "action": "preserved",
+    "destination": "/notes/code-review-etiquette"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/first-outage",
+    "action": "preserved",
+    "destination": "/notes/first-outage"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/when-to-stop-refactoring",
+    "action": "preserved",
+    "destination": "/notes/when-to-stop-refactoring"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/why-i-write",
+    "action": "preserved",
+    "destination": "/notes/why-i-write"
+  },
+  {
+    "oldUrl": "https://jattoabdul.com/notes/first-year-senior",
+    "action": "preserved",
+    "destination": "/notes/first-year-senior"
+  }
+]

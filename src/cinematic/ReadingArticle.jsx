@@ -1,0 +1,3 @@
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+export default function ReadingArticle({item,isNote}){const back=isNote?'/notes':'/writing#collection';return <article className="w-page w-reading"><a href={back} className="p-text-link">← {isNote?'Notes':'Writing'}</a><p className="w-meta">{isNote?'Note':'Essay'} · <time dateTime={item.date}>{new Intl.DateTimeFormat('en',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(item.date+'T12:00:00Z'))}</time></p><h1>{item.title}</h1>{item.excerpt&&<p className="w-reading-deck">{item.excerpt}</p>}<div className="w-prose"><Markdown remarkPlugins={[remarkGfm]}>{item.body}</Markdown></div><a href={back} className="p-text-link">Keep reading ↗</a></article>}

@@ -36,12 +36,16 @@ jobs:
       - name: Type check
         run: npm run type-check
 
-      - name: Build
-        # Build with feeds disabled so CI doesn't depend on third-party
-        # availability (Medium / YouTube). Production builds on Railway use
-        # the real env vars from the service settings.
-        env:
-          NEXT_PUBLIC_ENABLE_MEDIUM_FEED: 'false'
-          NEXT_PUBLIC_ENABLE_YOUTUBE_FEED: 'false'
-          NEXT_PUBLIC_HERO_VARIANT: 'terminal'
-        run: npm run build
+      - name: Content and motion invariants
+        run: npm run test:content
+
+      - name: Build Workers bundle
+        run: npm run build:worker
+
+      - name: Check rendered pages and migration URLs
+        run: |
+          npm start -- --port 3015 > /tmp/site-preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          node -e "let tries=0; const check=()=>fetch('http://127.0.0.1:3015').catch(()=>{if(++tries>30)process.exit(1);return new Promise(r=>setTimeout(r,1000)).then(check)});check()"
+          npm run test:migration
