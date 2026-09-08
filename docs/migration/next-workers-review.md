@@ -43,13 +43,13 @@ Local throttled Chromium spot check, 390 × 844, DPR 3, 4× CPU, 150 ms latency,
 | Latest note | 700 ms | 250,510 |
 | Homepage | 8,496 ms | 490,609 |
 
-These are single local measurements, not field metrics or a production Lighthouse score. The homepage remains expensive under throttling because its approved loader and WebGL arrival are retained. PostHog credentials were absent. Production CDN behavior, configured integrations and physical-device performance still need verification.
+These are single local measurements, not field metrics or a production Lighthouse score. The homepage remains expensive under throttling because its approved loader and WebGL arrival are retained. PostHog credentials were absent. Production CDN behavior and configured integrations still need verification. The owner subsequently verified the migrated experience on physical iPhone Safari with no issues.
 
-Screenshots are local review artifacts under ignored `output/playwright/`. Physical iPhone Safari review of this migration has been requested; the earlier prototype approval is not treated as approval of the migrated build.
+Screenshots are local review artifacts under ignored `output/playwright/`. Owner confirmed physical iPhone Safari verification of this migrated build: everything looks good, with no issues reported.
 
 ## Before launch
 
-Complete owner review on iPhone Safari and the migrated visual preview. Configure/test production provider credentials without stub success, review the final Workers domain/deployment and any desired live feeds, and run the migration checks against the actual staging host. Enable indexing only in the approved production build. No framework fallback is needed based on the current rendering and browser results.
+Owner iPhone Safari review is complete. Configure/test production provider credentials without stub success, review the final Workers domain/deployment and any desired live feeds, and run the migration checks against the actual staging host. Enable indexing only in the approved production build. No framework fallback is needed based on the current rendering and browser results.
 
 ## References
 
