@@ -7,6 +7,6 @@ import OpenGraphImage, {
 export const alt = ogAlt;
 export const size = ogSize;
 export const contentType = ogContentType;
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export default OpenGraphImage;

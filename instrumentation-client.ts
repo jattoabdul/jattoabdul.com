@@ -9,5 +9,6 @@ if (posthogToken) {
     defaults: '2026-01-30',
     capture_exceptions: true,
     debug: process.env.NODE_ENV === 'development',
+    loaded: client => { client.register({site_environment: process.env.NEXT_PUBLIC_SITE_ENV || 'production'}); },
   });
 }

@@ -54,10 +54,7 @@ export function Footer() {
         <div className="flex flex-wrap justify-between gap-12">
           <div className="max-w-[280px]">
             <Wordmark size="sm" className="mb-3" />
-            <p className="mb-4 text-[13.5px] leading-[1.7] text-fg-2">
-              Senior software engineer. Writing about backend, platform, and applied-AI systems —
-              and the engineering judgment around them.
-            </p>
+            <p className="mb-4 text-[13.5px] leading-[1.7] text-fg-2">{siteConfig.description}</p>
             <div className="flex gap-3">
               {socialLinks.map(({ key, icon: Icon, href, label }) => (
                 <a
@@ -75,12 +72,12 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap gap-12">
-            {linkGroups.map((group) => (
+            {linkGroups.map(group => (
               <div key={group.label} className="flex flex-col gap-2.5">
                 <div className="mb-1 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-fg-3">
                   {group.label}
                 </div>
-                {group.links.map((link) => (
+                {group.links.map(link => (
                   <Link
                     key={link.label}
                     href={link.href}

@@ -1,9 +1,9 @@
 import { ImageResponse } from 'next/og';
 
-import { getLocalPosts } from '@/data/posts';
+import content from '@/cinematic/content/published.json';
 import { siteConfig } from '@/data/site';
 import { formatDate } from '@/lib/format';
-import { getAllMdxPostMeta } from '@/lib/mdx';
+
 
 export const alt = 'Article on jattoabdul.com';
 export const size = { width: 1200, height: 630 };
@@ -14,7 +14,7 @@ export const contentType = 'image/png';
 export const runtime = 'nodejs';
 
 export async function generateImageMetadata() {
-  const local = await getLocalPosts();
+  const local = content.essays;
   return local.map((p) => ({
     id: p.slug,
     alt: p.title,
@@ -27,13 +27,13 @@ type Params = { params: Promise<{ slug: string }> };
 
 export default async function ArticleOgImage({ params }: Params) {
   const { slug } = await params;
-  const all = await getAllMdxPostMeta();
+  const all = content.essays;
   const post = all.find((p) => p.slug === slug);
 
   const title = post?.title ?? siteConfig.name;
-  const category = post?.category ?? 'Writing';
+  const category = 'Writing';
   const date = post?.date ? formatDate(post.date) : '';
-  const readTime = post?.readTime ? `${post.readTime} min read` : '';
+  const readTime = '';
 
   return new ImageResponse(
     (

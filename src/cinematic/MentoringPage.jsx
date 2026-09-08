@@ -1,0 +1,30 @@
+'use client';
+import {useEffect,useRef,useState} from 'react';
+import {WritingObject} from './WritingObject';
+import {Ambient,Player} from './SpeakingPage';
+import './writing.css';
+import './mentoring.css';
+
+const recording={id:'pu-IHuL--hg',title:'Why the Best Engineers Get Overlooked (and How to Fix It)'};
+const invitation='mailto:me@jattoabdul.com?subject=A%20conversation%20about%20my%20next%20step&body=Hello%20Jatto%2C%0A%0AHere%20is%20where%20I%20am%20right%20now%3A%0A%0AWhat%20I%20am%20working%20toward%3A%0A%0AThe%20question%20I%20am%20sitting%20with%3A%0A';
+export function MentoringPage(){
+ const root=useRef(null),trigger=useRef(null);const [watching,setWatching]=useState(false);
+ const play=e=>{trigger.current=e.currentTarget;setWatching(true)};
+ const close=()=>{setWatching(false);requestAnimationFrame(()=>trigger.current?.focus())};
+ useEffect(()=>{document.title='Mentoring | Jatto Abdul';const media=matchMedia('(prefers-reduced-motion: reduce)');const animations=[];const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;observer.unobserve(e.target);if(!media.matches)animations.push(e.target.animate([{opacity:.3,transform:'translateY(24px)'},{opacity:1,transform:'translateY(0)'}],{duration:800,easing:'cubic-bezier(.2,.7,.2,1)'}))})},{threshold:.15});root.current.querySelectorAll('[data-mentor-reveal]').forEach(el=>observer.observe(el));const stop=()=>{if(media.matches)animations.forEach(a=>a.finish())};media.addEventListener('change',stop);return()=>{observer.disconnect();media.removeEventListener('change',stop);animations.forEach(a=>a.cancel())}},[]);
+ return <div className="m-page" ref={root}>
+  <section className="m-arrival m-contained">
+   <div className="m-intro"><h1>You don’t have<br/>to figure it all<br/>out <em>alone.</em></h1><p>I’ve found my way with help from people who shared what they knew. I want to offer that same generosity to someone finding their own next step.</p><div className="m-actions"><a className="p-button" href="#begin">Find a place to begin ↗</a><a className="p-text-link" href="#conversation">Start a conversation ↗</a></div></div>
+   <div className="m-portrait"><img src="/assets/personal/jatto-portrait.webp" alt="Jatto Abdul" fetchPriority="high"/><WritingObject kind="hands"/></div>
+  </section>
+  <section id="begin" className="m-paths m-contained"><div className="m-section-intro" data-mentor-reveal><h2>What are you<br/><em>navigating?</em></h2><p>You don’t need to have everything mapped out. Start with the question closest to you.</p></div>
+   <article data-mentor-reveal><h3>Finding your<br/>footing in tech.</h3><div><p>Learning the tools is one part of it. Learning how to work with people, ask useful questions, and build confidence takes practice, too.</p><a className="p-text-link" href="/notes/first-year-senior">Read: What I learned my first year as a senior engineer ↗</a></div></article>
+   <article data-mentor-reveal><h3>Helping people see<br/>the value of your work.</h3><div><p>You can do good work and still struggle to explain what it contributes. Let’s start with making that contribution clearer.</p><button className="p-text-link" onClick={play}>Watch: Why the Best Engineers Get Overlooked ↗</button></div></article>
+   <article data-mentor-reveal><h3>Growing without<br/>losing yourself.</h3><div><p>Ambition, faith, and character belong in the same life. I’m learning how to pursue what matters without making achievement the measure of everything.</p><a className="p-text-link" href="/notes/rest-is-not-a-reward-for-certainty">Read: Rest is not a reward for certainty ↗</a></div></article>
+  </section>
+  <section className="m-origin m-contained" data-mentor-reveal><div className="m-origin-image"><img src="/assets/personal/about-first-pages.webp" alt="An illustrative study of a book and a computer" loading="lazy"/><span>Illustrative study</span></div><div><h2>Someone opened<br/><em>a possibility</em><br/>for me.</h2><p>Ali brought an HTML book to my university apartment. I picked it up, followed the first few pages, and watched something I had made appear in a browser.</p><p>Later, Joseph let me learn from the work he was doing. I took apart his framework, asked questions, and began building for clients of my own.</p><p>They helped me see a path I hadn’t known how to find. That is part of why I share what I know today.</p><a className="p-text-link" href="/about">The longer story ↗</a></div></section>
+  <section className="m-learning m-contained"><div className="m-section-intro" data-mentor-reveal><h2>Guidance can begin<br/>with something <em>small.</em></h2><p>A thought that stays with you. A question you hadn’t asked. One conversation that helps you move.</p></div><div className="m-watch" data-mentor-reveal><div className="m-footage"><Ambient suspended={watching}/></div><div className="m-watch-copy"><h3>Good work deserves<br/>to be understood.</h3><p>A conversation about engineering, visibility, and helping others understand the value you bring.</p><button className="p-button" onClick={play}>Watch the conversation ▶</button><a className="p-text-link" href="/speaking">More of the spoken side ↗</a></div></div><div className="m-follow"><div><h3>Think it through with me.</h3><p>Essays and notes from the things I’m building, noticing, and learning.</p><a className="p-text-link" href="/writing">Explore my writing ↗</a></div><div><h3>Keep learning along the way.</h3><p>Reflections and conversations shared as life and work unfold.</p><a className="p-text-link" href="https://www.instagram.com/jatto_abdul/">Follow along on Instagram ↗</a></div></div></section>
+  <section id="conversation" className="m-invitation m-contained" data-mentor-reveal><h2>Tell me<br/><em>where you are.</em></h2><p>What are you working toward? What feels unclear? Tell me a little about where you are and the next step you’re trying to take.</p><a className="p-button" href={invitation}>Start a conversation ↗</a><p className="m-closing">You don’t need a polished plan to say hello.</p></section>
+  {watching&&<Player video={recording} close={close}/>}
+ </div>
+}

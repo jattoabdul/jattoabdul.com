@@ -1,0 +1,2 @@
+import {redirects} from '@/cinematic/seo.js';
+export function GET(request:Request){const incoming=new URL(request.url);const destination=(redirects as Record<string,string>)[incoming.pathname.replace(/\/$/,'')];if(!destination)return new Response('Page not found',{status:404,headers:{'X-Robots-Tag':'noindex'}});const url=new URL(destination,incoming);url.search=incoming.search;return new Response(null,{status:308,headers:{Location:url.pathname+url.search+url.hash}})}

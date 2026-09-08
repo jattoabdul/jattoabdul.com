@@ -1,205 +1,77 @@
 # jattoabdul.com
 
-Personal website and publishing home for [Jatto Abdul](https://jattoabdul.com)
-— senior software engineer, builder, writer, and creator.
+Personal website and publishing home. This migration carries the approved cinematic prototype into the existing Next.js repository.
 
-> Senior Software Engineer building backend, platform, and applied-AI systems.
-> I write about practical engineering, AI-assisted product building, and
-> communication for engineers.
+## Runtime
 
-Built with Next.js 15 (App Router) + React 19 + TypeScript + Tailwind 3.
+Node 24.20.0, npm 11.19.0, Next.js 16.3.4, React 19.2.8. App Router prerenders the public pages. GSAP, Lenis and Three.js enhance the HTML in the browser. The original Tailwind and MDX infrastructure remains available for older components; the migrated design uses its approved custom CSS and self-hosted fonts.
 
----
+## Local review
 
-## Quick start
-
-```bash
-nvm use                # picks up .nvmrc / .tool-versions (Node 22.13.0)
-cp env.example .env.local
-npm install
-npm run dev            # http://localhost:3005 (or PORT in .env.local)
+```sh
+nvm use
+npm ci
+npm run dev -- --port 3015
 ```
 
-That's it. The site renders end-to-end with no external services configured —
-Medium feed, YouTube feed, and Resend all degrade gracefully when their env
-vars are missing.
+Production review: `npm run build`, then `npm start -- --port 3015`. Workers runtime: `npm run build:worker`, then `npm run preview:worker -- --port 3016`. No deployment is part of these commands.
 
-## Scripts
+## Publishing
 
-| Command | What it does |
-|---|---|
-| `npm run dev` | Local dev with Turbopack. |
-| `npm run build` | Production build (used by Railway). |
-| `npm run start` | Serve the production build. |
-| `npm run lint` | ESLint via `next lint`. |
-| `npm run type-check` | `tsc --noEmit` only — no emit. |
+Canonical source for the migrated archive: `src/cinematic/content/essays/*.md` and `src/cinematic/content/notes/*.md`. Each document has title, slug, date (YYYY-MM-DD), tags and published front matter; essays can include an excerpt. Drafts use `published: false`.
 
-## Project layout
-
-```
-src/
-├── app/                       # Next.js App Router routes + metadata
-│   ├── api/{health,subscribe}/route.ts
-│   ├── writing/[slug]/        # First-party article pages
-│   ├── notes/[slug]/          # Field-note pages
-│   ├── projects/[slug]/       # Project case-study pages
-│   ├── opengraph-image.tsx    # Programmatic OG image
-│   ├── icon.tsx               # Programmatic favicon
-│   ├── rss.xml/route.ts       # RSS 2.0 feed
-│   ├── sitemap.ts, robots.ts  # SEO
-│   └── layout.tsx, page.tsx
-├── components/
-│   ├── site/                  # Header, Footer, Container, CommandMenu, ...
-│   ├── sections/              # Homepage section blocks
-│   └── cards/                 # PostRow, ProjectCard, VideoCard, NoteRow
-├── data/                      # Typed content — POSTS, NOTES, PROJECTS, VIDEOS, FOCUS, SOCIAL
-├── lib/                       # Server-side fetchers + small utils
-└── styles/globals.css         # Tailwind base + design tokens
+```sh
+npm run new:writing -- note my-note 2026-09-07 "My note title"
 ```
 
-Content lives under `src/data/`. The whole site is driven from those files —
-no headless CMS, no DB.
+Review the writing and set `published: true` when ready. Build/dev startup generates the published content indexes. Restart the dev server or run `node scripts/prepare-content.mjs` after editing Markdown. Published essays and notes automatically appear in the archive, RSS, sitemap and static routes. The generated JSON is ignored by Git. Article bodies are server-rendered with React Markdown and GFM, and are excluded from archive browser bundles.
 
-## Setting up integrations
+`writing.json` holds the curated Medium snapshot and original source links. The legacy MDX files and feed helpers remain in `src/content/writing` and `src/lib`, but do not override the migrated archive. Rich MDX components can be introduced later where useful.
 
-All optional. The site renders without any of them.
+## Integrations
 
-### Medium RSS sync
+PostHog instrumentation and `/ingest` proxy remain. Configure the existing `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and optional host at build time. Resend remains behind `/api/subscribe`, using `RESEND_API_KEY` and `RESEND_SEGMENT_ID` at runtime (the existing `RESEND_AUDIENCE_ID` is a supported fallback). Missing configuration returns 503. Existing opt-outs are preserved. Unit tests mock provider calls; the separately approved staging verification exercises the real integrations and removes its temporary contact. Events include `site_environment` so staging can be excluded from production reports.
 
-Pulls your published Medium articles into `/writing` and `/rss.xml`.
+## Cloudflare
 
-```bash
-NEXT_PUBLIC_ENABLE_MEDIUM_FEED=true
+`open-next.config.ts` and `wrangler.jsonc` build and preview the Next.js app through OpenNext on Workers. The preview has no production domain. The read-only Workers Static Assets cache serves prerendered routes. No R2 bucket is needed for the current fixed publication snapshot; revisit incremental caching if enabling live feed fetching or ISR. Railway configuration remains as a fallback.
+
+Ordinary builds are **noindex**. `SEO_INDEXABLE=true` is reserved for an approved production build. Configure production secrets, domain, caching and deployment separately after final review.
+
+## Staging
+
+Create ignored `.env.staging.local` with the personal-site public `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and `NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com`. Keep existing Resend credentials in ignored `.env.local`.
+
+```sh
+npm run build:staging
+npm run deploy:staging
+npm run secrets:staging
 ```
 
-The Medium handle is hard-coded in [src/lib/posts.ts](src/lib/posts.ts) — change it
-there if your handle differs from `@jattoabdul`. Server-side fetch via
-`api.rss2json.com`, ISR-cached for 1h, falls back to local posts on failure.
+These explicit deployment commands target only `jattoabdul-staging`, with no custom-domain routes. The build forces noindex, labels analytics as staging, and checks output for private credentials. Runtime secrets go through Wrangler stdin. Public subscriptions are disabled in staging; the approved test address additionally requires the bearer token in ignored `.staging-check-token`. Do not share that token. Staging uses the real mailing list; repeat tests require deliberate coordination.
 
-### YouTube channel feed
+## Validation
 
-Pulls your most recent videos into the homepage and `/videos`.
-
-```bash
-NEXT_PUBLIC_ENABLE_YOUTUBE_FEED=true
-YOUTUBE_CHANNEL_ID=UC...   # find via youtube.com/@your-handle → view source → "channelId"
+```sh
+npm run lint
+npm run type-check
+npm run test:subscribe
+npm run build:worker
+npm run test:migration
+MIGRATION_URL=http://localhost:3016 npm run test:migration
 ```
 
-Atom RSS, no API key needed. Gives title / link / thumbnail / date — but
-no duration or view count (those need the YouTube Data API). Falls back to
-the curated list in [src/data/videos.ts](src/data/videos.ts).
+HTTP checks require the corresponding local server. See `docs/migration/next-workers-review.md` for coverage and remaining launch checks.
 
-### Newsletter (Resend Audiences)
+## Production
 
-Wires `/api/subscribe` to add contacts to a Resend Audience.
+The owner approved production cutover on September 8, 2026 (Toronto). Production uses the same personal-site PostHog ingestion project configured in ignored `.env.staging.local`, but the wrapper forces both runtime and browser environment labels to `production` and enables indexing. Resend runtime credentials come from ignored `.env.local` and are sent directly to Wrangler through stdin.
 
-```bash
-RESEND_API_KEY=re_...
-RESEND_AUDIENCE_ID=...     # from Resend → Audiences → New Audience
+```sh
+npm run build:production
+npm run deploy:production
+npm run secrets:production
+EXPECT_INDEXABLE=true MIGRATION_URL=https://jattoabdul.com npm run test:migration
 ```
 
-When either is missing, the endpoint stays in stub mode (returns 200) so the
-form keeps working in dev.
-
-### Hero variant
-
-Two homepage hero variants ship: `terminal` (default) and `editorial`.
-
-```bash
-NEXT_PUBLIC_HERO_VARIANT=terminal   # build-time default
-```
-
-Runtime override (no rebuild): visit `/?hero=editorial` or run
-`localStorage.setItem('hero', 'editorial'); location.reload();` from the
-browser console.
-
-## Common tasks
-
-### Publish an article
-
-1. Open [src/data/posts.ts](src/data/posts.ts).
-2. Find a `published: false` draft (or add a new entry).
-3. Fill out `body: PostBlock[]` — supports `p`, `h2`, `quote`, `code`.
-4. Flip to `published: true`.
-
-The post auto-appears on the homepage, in `/writing`, in `/rss.xml`, in the
-sitemap, and at `/writing/<slug>`.
-
-### Add a field note
-
-In [src/data/notes.ts](src/data/notes.ts):
-
-```ts
-{
-  slug: 'my-note',
-  date: '2026-05-01',
-  title: 'A short observation',
-  tags: ['backend'],
-  body: ['Paragraph one.', 'Paragraph two.'],   // omit for an "idea" entry
-}
-```
-
-Notes with a `body` get their own page at `/notes/<slug>`. Notes without a
-body still show in the index marked `IDEA` — useful as a public scratchpad.
-
-### Add a video / short
-
-Edit [src/data/videos.ts](src/data/videos.ts). For long-form videos, prefer
-turning on the YouTube feed (above) so updates are automatic. Shorts stay
-manually curated — they span LinkedIn, X, Instagram, and YouTube Shorts and
-have no unified feed.
-
-### Add a project
-
-Append to `projects` in [src/data/projects.ts](src/data/projects.ts). Set
-`status: 'Active' | 'Shipped' | 'Open Source' | 'Archived'`.
-
-### Update social handles or positioning
-
-[src/data/site.ts](src/data/site.ts) — `siteConfig`, `socials`, `primaryNav`.
-
-## Design system
-
-Colors, type scale, spacing, and component specs live in
-[tailwind.config.ts](tailwind.config.ts) and
-[src/styles/globals.css](src/styles/globals.css). Semantic tokens
-(`--bg`, `--fg`, `--accent`, etc.) drive both light and dark modes.
-
-Fonts: Fraunces (serif headings), Plus Jakarta Sans (body / UI), JetBrains
-Mono (technical). All loaded via `next/font/google`.
-
-## Deployment
-
-Configured for [Railway](https://railway.app) via [railway.toml](railway.toml):
-
-- Builder: Railpack (auto-detects Next.js)
-- Healthcheck: `/api/health`
-- Restart: ON_FAILURE, max 10 retries
-
-Set the env vars you want enabled in **Railway → Service → Variables**, then
-deploy. Custom domain (jattoabdul.com) is configured in **Settings → Domains**.
-
-## Tech reference
-
-- **Framework:** Next.js 15.5 (App Router, Turbopack dev)
-- **UI:** React 19, Tailwind 3.4, lucide-react icons
-- **Theme:** next-themes (class strategy, light default with dark toggle)
-- **Command menu:** cmdk + @radix-ui/react-dialog (⌘K / Ctrl+K)
-- **Newsletter:** resend (Audiences API)
-- **Lint:** ESLint 9, eslint-config-next, prettier
-- **Node:** 22.x (pinned via `.nvmrc` and `.tool-versions`)
-- **Package manager:** npm (single source of truth via `package-lock.json`)
-
-## Future improvements
-
-Living checklist of non-urgent work: [docs/follow-ups.md](docs/follow-ups.md).
-
-## Security
-
-See [SECURITY.md](SECURITY.md). For sensitive reports, email
-**me@jattoabdul.com** rather than opening a public issue.
-
-## License
-
-Code: [MIT](LICENSE). Written content (articles, notes, About copy,
-positioning) is © Jatto Abdul, all rights reserved.
+Production routes are declared in `wrangler.jsonc`. The existing Cloudflare-proxied DNS records and Railway origin remain intact for rollback. Removing only the production Worker routes restores requests to that origin. Do not disable Railway until the rollback window is deliberately closed. See `docs/migration/production-cutover.md` for deployment evidence.

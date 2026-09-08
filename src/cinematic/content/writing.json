@@ -1,0 +1,84 @@
+{
+  "medium": [
+    {
+      "kind": "medium",
+      "title": "InferGo: Run ML Inference in Go Without Python in Production",
+      "url": "https://medium.com/@jattoabdul/infergo-run-ml-inference-in-go-without-python-in-production-53f815e875f4",
+      "published": true,
+      "date": "2026-05-04",
+      "format": "Essay"
+    },
+    {
+      "kind": "medium",
+      "title": "Most engineering writing is for the wrong reader",
+      "url": "https://medium.com/@jattoabdul/most-engineering-writing-is-for-the-wrong-reader-56261b5a10ca",
+      "published": true,
+      "date": "2026-04-27",
+      "format": "Essay"
+    },
+    {
+      "kind": "medium",
+      "title": "Have You Pictured Your Life?",
+      "url": "https://medium.com/@jattoabdul/have-you-pictured-your-life-8987ba19890f",
+      "published": true,
+      "date": "2019-06-16",
+      "format": "Poetry"
+    },
+    {
+      "kind": "medium",
+      "title": "How to Build A Task Notification Bot for Slack with Python (Part 1)",
+      "url": "https://medium.com/the-andela-way/how-to-build-a-task-notification-bot-for-slack-with-python-part-1-333cb50985f4",
+      "published": true,
+      "date": "2018-07-17",
+      "format": "Essay"
+    },
+    {
+      "kind": "medium",
+      "title": "How to Build A Task Notification Bot for Slack with Python (Part 2)",
+      "url": "https://medium.com/the-andela-way/how-to-build-a-task-notification-bot-for-slack-with-python-part-2-eebf2b329422",
+      "published": true,
+      "date": "2018-07-17",
+      "format": "Essay"
+    },
+    {
+      "kind": "medium",
+      "title": "How to Build A Task Notification Bot for Slack with Python (Part 3)",
+      "url": "https://medium.com/the-andela-way/how-to-build-a-task-notification-bot-for-slack-with-python-part-3-39a7f6ad7685",
+      "published": true,
+      "date": "2018-07-24",
+      "format": "Essay"
+    },
+    {
+      "kind": "medium",
+      "title": "How to Build A Task Notification Bot for Slack with Python (Part 4) — Hosting and Testing",
+      "url": "https://medium.com/the-andela-way/how-to-build-a-task-notification-bot-for-slack-with-python-part-4-hosting-and-testing-cc2c727a67e6",
+      "published": true,
+      "date": "2018-07-24",
+      "format": "Essay"
+    },
+    {
+      "kind": "medium",
+      "title": "How I adapted to the Andela Change!",
+      "url": "https://medium.com/@jattoabdul/how-i-adapted-to-the-andela-change-f15eae9ac378",
+      "published": true,
+      "date": "2017-07-10",
+      "format": "Reflection"
+    },
+    {
+      "kind": "medium",
+      "title": "My Experience In Boot Camp So Far…",
+      "url": "https://medium.com/@jattoabdul/my-experience-in-boot-camp-so-far-b97e544170cf",
+      "published": true,
+      "date": "2017-07-06",
+      "format": "Reflection"
+    },
+    {
+      "kind": "medium",
+      "title": "My Most Recent Challenging Learning Experience",
+      "url": "https://medium.com/@jattoabdul/my-most-recent-challenging-learning-experience-d2a040d7a3e8",
+      "published": true,
+      "date": "2017-07-03",
+      "format": "Reflection"
+    }
+  ]
+}

@@ -5,6 +5,7 @@ export type SocialKey =
   | 'x'
   | 'youtube'
   | 'instagram'
+  | 'tiktok'
   | 'email'
   | 'rss';
 
@@ -14,36 +15,52 @@ export type SocialEntry = {
   handle?: string;
 };
 
+/**
+ * Site copy and configuration. Public copy follows the front door
+ * (command-center/notes/content/brand/positioning.md, v2.0): the label lives in metadata
+ * keywords, About, Press, and the footer descriptor, never in the first sentence.
+ */
 export const siteConfig = {
   name: 'Jatto Abdul',
   shortName: 'Jatto',
   url: 'https://jattoabdul.com',
   positioning:
-    'Senior Software Engineer building backend, platform, and applied-AI systems. I write about practical engineering, AI-assisted product building, and communication for engineers.',
-  // SEO description — kept in the 110–160 char sweet spot so social previews
-  // don't truncate. Update both this and siteConfig.titleSuffix together.
+    'An engineer and entrepreneur who mentors young people on career, character, and faith, so they can grow without losing themselves.',
+  // SEO description. Front-door wording (owner ruling 2026-09-05).
   description:
-    'Senior Software Engineer building backend, platform, and applied-AI systems. Writing about practical engineering and AI-assisted product building.',
-  // Title suffix — combined with siteConfig.name in the layout, this keeps
-  // the rendered <title> in the 50–60 char range that opengraph.xyz prefers.
-  titleSuffix: 'Senior Engineer · Backend, Platform, Applied-AI',
+    'An engineer and entrepreneur writing, speaking, and making videos for young people carrying ambition and faith at the same time.',
+  // Combined with siteConfig.name in the layout as "Jatto Abdul · <suffix>".
+  titleSuffix: 'Engineer. Entrepreneur. Mentor. Author.',
   copyrightYear: 2026,
   newsletterEnabled: true,
-  /**
-   * Public resume.
-   *
-   * - `url`: drop the PDF at /public/resume.pdf and the link below resolves
-   *   to /resume.pdf. To host externally (Read.cv, Notion, Google Drive),
-   *   replace with the absolute URL.
-   * - Set to `null` to hide the Resume CTA everywhere.
-   */
   resumeUrl: '/resume.pdf' as string | null,
+} as const;
+
+/** Arrival copy, locked in website.md (2026-09-05). */
+export const arrival = {
+  headlineLead: 'Grow without',
+  headlineEmphasis: 'losing yourself.',
+  supporting:
+    'An engineer and entrepreneur writing, speaking, and making videos for young people carrying ambition and faith at the same time.',
+  identity: 'Engineer × Entrepreneur × Mentor × Author',
+  identityPlain: 'Engineer. Entrepreneur. Mentor. Author.',
+  startLabel: 'Start here',
+  // The latest video on the Jatto Abdul channel (feed replaces this in a later round).
+  startHref: 'https://www.youtube.com/watch?v=3laKATXgM08',
+  comeInLabel: 'Come on in',
+} as const;
+
+/** The room behind the door. */
+export const door = {
+  body: "Whether it's faith, career, building, or a question you've been sitting on, my door is open. Write to me and I'll reply myself.",
+  secondYouTube: { label: 'YouTube', href: 'https://www.youtube.com/@jatto_abdul' },
+  secondInstagram: { label: '@jatto_abdul', href: 'https://www.instagram.com/jatto_abdul/' },
 } as const;
 
 export const socials: Record<SocialKey, SocialEntry> = {
   linkedin: {
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/jattoade',
+    href: 'https://www.linkedin.com/in/jattoade/',
     handle: '@jattoade',
   },
   medium: {
@@ -57,7 +74,7 @@ export const socials: Record<SocialKey, SocialEntry> = {
     handle: '@jattoabdul',
   },
   x: {
-    label: 'X / Twitter',
+    label: 'X',
     href: 'https://x.com/Jattorize',
     handle: '@Jattorize',
   },
@@ -69,6 +86,11 @@ export const socials: Record<SocialKey, SocialEntry> = {
   instagram: {
     label: 'Instagram',
     href: 'https://www.instagram.com/jatto_abdul/',
+    handle: '@jatto_abdul',
+  },
+  tiktok: {
+    label: 'TikTok',
+    href: 'https://www.tiktok.com/@jatto_abdul',
     handle: '@jatto_abdul',
   },
   email: {
@@ -84,11 +106,14 @@ export const socials: Record<SocialKey, SocialEntry> = {
 
 export type NavItem = { label: string; href: string };
 
-export const primaryNav: NavItem[] = [
-  { label: 'Writing', href: '/writing' },
-  { label: 'Notes', href: '/notes' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Videos', href: '/videos' },
+/** Header rooms, locked order (website.md, 2026-09-05). */
+export const rooms: NavItem[] = [
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Writing', href: '/writing' },
+  { label: 'Speaking', href: '/speaking' },
+  { label: 'Building', href: '/building' },
+  { label: 'Mentoring', href: '/mentoring' },
 ];
+
+/** @deprecated The header uses `rooms`. Kept until the footer and pages are redesigned. */
+export const primaryNav: NavItem[] = rooms;

@@ -1,0 +1,424 @@
+body:has(.cinematic-prototype) {
+  background: #000;
+  color: #fff;
+  --bg: #000;
+  --fg: #fff;
+  --fg-2: #bdbdbd;
+  --ink: #fff;
+  --hoverwash: #ffffff0d;
+}
+body:has(.cinematic-prototype) #site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  background: #0009;
+  backdrop-filter: blur(12px);
+  --ink: #fff;
+  --fg: #fff;
+  --lamp: #efc9a3;
+}
+body:has(.cinematic-prototype) footer {
+  display: none;
+}
+.cinematic-prototype {
+  font-family: 'Helvetica Neue', var(--font-sans), sans-serif;
+  background: #000;
+  color: #fff;
+  --cin-cream: #efc9a3;
+}
+.cinematic-prototype button,
+.cinematic-prototype a {
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.cinematic-prototype a:focus-visible,
+.cinematic-prototype button:focus-visible,
+.cinematic-prototype input:focus-visible,
+.cinematic-prototype summary:focus-visible {
+  outline: 3px solid #efc9a3;
+  outline-offset: 5px;
+}
+.cin-rail {
+  display: none;
+  height: 540svh;
+  position: relative;
+}
+.cin-stage {
+  height: 100svh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  background: #000;
+}
+.cin-stage canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.cinematic-prototype[data-enhanced='true'] .cin-rail {
+  display: block;
+}
+.cinematic-prototype[data-enhanced='true'] .cin-static {
+  display: none;
+}
+.cin-copy {
+  position: absolute;
+  top: 26%;
+  left: 6%;
+  width: 48%;
+  will-change: opacity, transform;
+}
+.cin-copy-1,
+.cin-copy-2 {
+  opacity: 0;
+  visibility: hidden;
+}
+.cin-copy-1 {
+  left: 56%;
+  top: 23%;
+  width: 38%;
+}
+.cin-copy-2 {
+  left: 8%;
+  right: 8%;
+  top: 17%;
+  width: auto;
+  text-align: center;
+}
+.cin-copy h1,
+.cin-copy h2,
+.cin-still h1,
+.cin-still h2 {
+  font-family: inherit;
+  font-size: clamp(52px, 6.8vw, 108px);
+  font-weight: 400;
+  line-height: 1.03;
+  letter-spacing: -0.048em;
+  margin: 0 0 30px;
+}
+.cin-copy-1 h2,
+.cin-copy-2 h2 {
+  font-size: clamp(44px, 5.2vw, 78px);
+}
+.cin-copy p,
+.cin-still p {
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.6;
+  color: #bdbdbd;
+  max-width: 440px;
+}
+.cin-copy-2 p {
+  max-width: none;
+}
+.cin-copy blockquote,
+.cin-still blockquote {
+  margin: 0 0 26px;
+  font-size: clamp(18px, 1.7vw, 25px);
+  line-height: 1.5;
+  color: #bdbdbd;
+  max-width: 480px;
+}
+.cin-essay {
+  font-size: 19px !important;
+  line-height: 1.45;
+  display: block;
+  max-width: 440px;
+}
+.cin-room-label {
+  display: inline-block;
+  font-size: 14px !important;
+  color: #efc9a3 !important;
+  margin-bottom: 24px;
+}
+.cin-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin-top: 30px;
+  font-size: 14px;
+}
+.cin-actions button {
+  background: transparent;
+  border: 0;
+  padding: 8px 0;
+}
+.cin-actions .cin-primary,
+.cin-primary {
+  background: #792a3d !important;
+  border: 1px solid #bd7888 !important;
+  border-radius: 28px;
+  padding: 14px 24px !important;
+  color: white !important;
+  font-size: 15px !important;
+}
+.cin-identity {
+  font-size: 13px !important;
+  margin-top: 42px;
+}
+.cin-rooms {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  color: #efc9a3;
+  margin-top: 32px;
+  font-size: 15px;
+}
+.cin-scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 6%;
+  font-size: 13px;
+  color: #bdbdbd;
+}
+.cin-controls {
+  position: fixed;
+  z-index: 29;
+  right: 20px;
+  top: 84px;
+  background: #151515eb;
+  border-radius: 18px;
+  width: 270px;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: white;
+  box-shadow: 0 12px 40px #0008;
+  backdrop-filter: blur(16px);
+}
+.cin-controls:not([open]) {
+  width: auto;
+}
+.cin-controls summary {
+  cursor: pointer;
+  color: #efc9a3;
+}
+.cin-controls p {
+  font-size: 12px;
+  color: #bdbdbd;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+.cin-controls label {
+  display: block;
+  margin: 18px 0;
+}
+.cin-controls input[type='range'] {
+  display: block;
+  width: 100%;
+  accent-color: #efc9a3;
+  margin-top: 8px;
+}
+.cin-controls button {
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 12px;
+  background: #303030;
+  font-size: 12px;
+}
+.cin-control-buttons {
+  display: flex;
+  gap: 6px;
+}
+.cin-check {
+  display: flex !important;
+  gap: 10px;
+  align-items: center;
+}
+.cin-still {
+  min-height: 100svh;
+  position: relative;
+  isolation: isolate;
+  padding: 180px 6% 100px;
+  overflow: hidden;
+}
+.cin-still-art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.cin-still-art > img {
+  object-fit: cover;
+}
+.cin-still-art .cin-still-portrait {
+  position: absolute;
+  left: 54.3%;
+  top: 19%;
+  width: 21.3%;
+  height: 67%;
+  object-fit: cover;
+  object-position: top;
+  mask-image: linear-gradient(#000 75%, transparent 98%);
+}
+.cin-still-copy {
+  width: 48%;
+}
+.cin-still-writing .cin-still-copy {
+  margin-left: 54%;
+  width: 44%;
+}
+.cin-still-foundation .cin-still-copy {
+  width: 100%;
+  text-align: center;
+}
+.cin-still-foundation p {
+  max-width: none;
+}
+.cin-end {
+  min-height: 70svh;
+  padding: 100px 24px;
+  text-align: center;
+  background: #000;
+}
+.cin-end h2 {
+  font:
+    400 clamp(60px, 8vw, 110px)/1.1 'Helvetica Neue',
+    sans-serif;
+  letter-spacing: -0.05em;
+  margin: 24px 0 40px;
+}
+.cin-end p {
+  color: #efc9a3;
+}
+.cin-end button,
+.cin-end > a {
+  margin: 14px;
+  display: inline-block;
+}
+.cin-end button:not(.cin-primary) {
+  background: none;
+  border: 0;
+}
+@media (max-width: 700px) {
+  .cin-rail {
+    height: 390svh;
+  }
+  .cin-copy {
+    top: 18%;
+    left: 24px;
+    right: 24px;
+    width: auto;
+  }
+  .cin-copy h1,
+  .cin-copy h2,
+  .cin-still h1,
+  .cin-still h2 {
+    font-size: 43px;
+    margin-bottom: 22px;
+  }
+  .cin-copy p,
+  .cin-still p {
+    font-size: 15px;
+    max-width: 330px;
+    line-height: 1.5;
+  }
+  .cin-copy-1 {
+    top: 18%;
+    background: linear-gradient(#000 80%, transparent);
+    padding-bottom: 40px;
+  }
+  .cin-copy-1 h2 {
+    font-size: 38px;
+  }
+  .cin-copy blockquote {
+    font-size: 17px;
+    max-width: 340px;
+    margin-bottom: 18px;
+  }
+  .cin-room-label {
+    margin-bottom: 14px;
+  }
+  .cin-essay {
+    font-size: 16px !important;
+  }
+  .cin-copy-2 {
+    top: 18%;
+    text-align: left;
+  }
+  .cin-copy-2 h2 {
+    font-size: 38px;
+  }
+  .cin-actions {
+    gap: 16px;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  .cin-actions .cin-primary {
+    font-size: 13px !important;
+    padding: 12px 18px !important;
+  }
+  .cin-identity {
+    display: none;
+  }
+  .cin-rooms {
+    gap: 16px;
+    font-size: 13px;
+    justify-content: flex-start;
+    margin-top: 24px;
+  }
+  .cin-desktop-break {
+    display: none;
+  }
+  .cin-controls {
+    top: 80px;
+    right: 12px;
+  }
+  .cin-controls[open] {
+    max-height: 70svh;
+    overflow: auto;
+  }
+  .cin-scroll-hint {
+    left: 24px;
+    bottom: 20px;
+  }
+  .cin-still {
+    min-height: 850px;
+    padding: 160px 24px 420px;
+  }
+  .cin-still-copy,
+  .cin-still-writing .cin-still-copy {
+    width: auto;
+    margin: 0;
+  }
+  .cin-still-art {
+    top: 420px;
+  }
+  .cin-still-art > img {
+    object-fit: cover;
+    object-position: 72% center;
+  }
+  .cin-still-art .cin-still-portrait {
+    left: 35%;
+    top: 19%;
+    width: 35%;
+    height: 67%;
+  }
+  .cin-still-foundation {
+    padding-bottom: 320px;
+    min-height: 780px;
+  }
+  .cin-still-foundation .cin-still-copy {
+    text-align: left;
+  }
+  .cin-still-foundation .cin-still-art > img {
+    object-fit: contain;
+  }
+  .cin-still-foundation .cin-still-art {
+    top: 400px;
+  }
+  .cin-still-writing .cin-still-art > img {
+    object-position: 20% center;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cin-rail {
+    display: none !important;
+  }
+  .cin-static {
+    display: block !important;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
+}

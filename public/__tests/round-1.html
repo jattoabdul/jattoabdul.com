@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>running</title>
+<style>
+  body { font-family: system-ui, sans-serif; padding: 20px; background: #F2EFE9; color: #11223E; }
+  pre { background: #fff; padding: 14px 16px; border-radius: 10px; white-space: pre-wrap; }
+  iframe { width: 1280px; max-width: 100%; height: 800px; border: 0; border-radius: 10px; background: #fff; }
+</style>
+</head>
+<body>
+<h1>Round 1 behaviour tests (dev server)</h1>
+<p>Prototype-only. Open <code>/__tests/round-1.html</code> on the dev server, or run <code>docs/redesign/test-round-1.sh</code>. Delete this folder at lock.</p>
+<pre id="log">running…</pre>
+<iframe id="f" src="/?treatment=dark&side=left&photo=study&door2=youtube"></iframe>
+<script>
+(function () {
+  var results = [], lines = [];
+  function t(name, ok, detail) { results.push({ name: name, ok: !!ok }); lines.push((ok ? 'PASS  ' : 'FAIL  ') + name + (detail ? '  [' + detail + ']' : '')); document.getElementById('log').textContent = lines.join('\n'); }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function key(d, w, k, opts) { var e = new w.KeyboardEvent('keydown', Object.assign({ key: k, bubbles: true, cancelable: true }, opts || {})); d.dispatchEvent(e); return e; }
+  var f = document.getElementById('f');
+  f.addEventListener('load', async function () {
+    var w = f.contentWindow, d = f.contentDocument;
+    try {
+      await wait(1200); // hydration
+      var door = d.querySelector('#site-header .door-btn'), room = d.getElementById('door-room'), header = d.getElementById('site-header'), main = d.getElementById('main-content');
+      t('door button carries the accessible name', door && door.getAttribute('aria-label') === 'Contact, come on in');
+      t('door starts closed', door.getAttribute('aria-expanded') === 'false' && room.hidden === true);
+      t('closed room is not displayed (no hidden focus targets)', w.getComputedStyle(room).display === 'none');
+      t('room is a dialog', room.getAttribute('role') === 'dialog' && room.getAttribute('aria-modal') === 'true' && room.getAttribute('aria-labelledby') === 'door-room-title');
+      door.click(); await wait(1800);
+      t('clicking the door opens the room', room.dataset.open === 'true' && door.getAttribute('aria-expanded') === 'true');
+      t('focus moves into the room', room.contains(d.activeElement), d.activeElement && d.activeElement.textContent.trim());
+      t('background is inert while the room is open', header.hasAttribute('inert') && main.hasAttribute('inert'));
+      t('email is the primary action', room.querySelector('.door-room-primary').getAttribute('href') === 'mailto:me@jattoabdul.com');
+      var focusables = room.querySelectorAll('a[href],button'); var first = focusables[0], last = focusables[focusables.length - 1];
+      last.focus(); key(d, w, 'Tab');
+      t('Tab from the last control wraps to the first', d.activeElement === first, d.activeElement.textContent.trim());
+      first.focus(); key(d, w, 'Tab', { shiftKey: true });
+      t('Shift+Tab from the first control wraps to the last', d.activeElement === last, d.activeElement.textContent.trim());
+      key(d, w, 'Escape'); await wait(1100);
+      t('Escape closes the room', room.dataset.open === 'false' && door.getAttribute('aria-expanded') === 'false' && room.hidden === true);
+      t('focus returns to the door', d.activeElement === door);
+      t('background is live again after close', !header.hasAttribute('inert'));
+
+      d.querySelector('.hero button.btn-pill').click(); await wait(1800);
+      t('"Come on in" opens the same room', room.dataset.open === 'true');
+      room.querySelector('.door-room-close').click(); await wait(1100);
+      t('"Close the door" closes it and returns focus to the door', room.dataset.open === 'false' && d.activeElement === door);
+
+      var sw = function (label) { return d.querySelector('#site-header [aria-label="Colour theme"] button[aria-label="' + label + '"]'); };
+      sw('Dark theme').click(); await wait(150);
+      t('dark choice adds the dark class', d.documentElement.classList.contains('dark') && sw('Dark theme').getAttribute('aria-pressed') === 'true');
+      sw('Follow the system theme').click(); await wait(150);
+      t('system choice is stored as system', w.localStorage.getItem('theme') === 'system' && sw('Follow the system theme').getAttribute('aria-pressed') === 'true');
+      sw('Light theme').click(); await wait(150);
+      t('light choice removes the dark class', !d.documentElement.classList.contains('dark'));
+      t('exactly one theme choice is pressed', d.querySelectorAll('#site-header [aria-label="Colour theme"] [aria-pressed="true"]').length === 1);
+
+      t('headline is the canonical line', d.querySelector('.hero h1').textContent.replace(/\s+/g, ' ').trim() === 'Grow without losing yourself.');
+      t('identity line has the plain accessible form', d.querySelector('.identity .sr-only').textContent === 'Engineer. Entrepreneur. Mentor. Author.');
+      t('identity line uses the multiplication sign', d.querySelector('.identity [aria-hidden]').textContent.indexOf('×') > -1);
+      var roomsText = Array.prototype.map.call(d.querySelectorAll('#site-header nav[aria-label="Rooms"] a'), function (a) { return a.textContent.trim(); }).join(',');
+      t('rooms are About, Writing, Speaking, Building, Mentoring in order', roomsText === 'About,Writing,Speaking,Building,Mentoring', roomsText);
+      var speakingHref = d.querySelector('#site-header nav[aria-label="Rooms"] a[href="/speaking"]');
+      t('Speaking links to /speaking', !!speakingHref);
+      t('no em or en dashes in visible text', !/[—–]/.test(d.body.innerText));
+      t('no religious label in visible text (front door)', !/Muslim/.test(d.body.innerText));
+      t('metadata description follows the front door', (d.querySelector('meta[name="description"]') || {}).content === 'An engineer and entrepreneur writing, speaking, and making videos for young people carrying ambition and faith at the same time.');
+      var r = await fetch('/contact'); t('/contact answers 200 (no-JavaScript fallback)', r.status === 200);
+      var r2 = await fetch('/start'); t('/start is gone (owner ruling)', r2.status === 404);
+
+      f.style.width = '390px'; await wait(500);
+      var menuBtn = d.querySelector('#site-header button[aria-controls="site-menu"]'), menu = d.getElementById('site-menu');
+      t('menu button shows on mobile', w.getComputedStyle(menuBtn).display !== 'none');
+      t('menu is closed by default on mobile', menu.hidden === true && w.getComputedStyle(menu).display === 'none');
+      t('the door stays visible on mobile', w.getComputedStyle(door).display !== 'none');
+      t('rooms nav is hidden on mobile', w.getComputedStyle(d.querySelector('#site-header nav[aria-label="Rooms"]')).display === 'none');
+      t('hero actions are visible on mobile', w.getComputedStyle(d.querySelector('.hero button.btn-pill')).display !== 'none');
+      menuBtn.click(); await wait(250);
+      var menuRooms = Array.prototype.map.call(menu.querySelectorAll('a'), function (a) { return a.textContent.trim(); });
+      t('menu opens and lists Speaking', !menu.hidden && menuRooms.indexOf('Speaking') > -1 && menuBtn.getAttribute('aria-expanded') === 'true');
+      t('theme switch is reachable inside the mobile menu', !!menu.querySelector('[aria-label="Colour theme"]'));
+      var menuContact = menu.querySelector('button');
+      t('contact is reachable inside the mobile menu', !!menuContact && menuContact.textContent.trim() === 'Contact, come on in');
+      key(d, w, 'Escape'); await wait(250);
+      t('Escape closes the menu and returns focus', menu.hidden === true && d.activeElement === menuBtn);
+      menuBtn.click(); await wait(250); menu.querySelector('button').click(); await wait(1800);
+      t('contact from the menu opens the room and closes the menu', room.dataset.open === 'true' && menu.hidden === true);
+      key(d, w, 'Escape'); await wait(1100);
+      t('no horizontal overflow on mobile', d.documentElement.scrollWidth <= 390, String(d.documentElement.scrollWidth));
+    } catch (e) { t('harness error', false, String(e)); }
+    var fails = results.filter(function (r) { return !r.ok; }).length;
+    document.title = (fails ? 'FAIL ' : 'PASS ') + (results.length - fails) + '/' + results.length;
+    lines.push('', document.title); document.getElementById('log').textContent = lines.join('\n');
+  });
+})();
+</script>
+</body>
+</html>

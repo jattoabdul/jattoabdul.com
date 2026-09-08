@@ -31,6 +31,22 @@ export default {
           light: 'var(--accent-light)',
           mid: 'var(--accent-mid)',
         },
+        // Brand v2.0 (The Open Door) fixed colours, for surfaces that do not follow the theme.
+        navy: {
+          DEFAULT: '#11223E',
+          glow: '#1B3358',
+          deep: '#0A1728',
+          panel: '#16294A',
+        },
+        maroon: {
+          DEFAULT: '#792A3D',
+          deep: '#5E1F2E',
+          bright: '#A23C52',
+        },
+        paper: '#F2EFE9',
+        lamplight: '#EFC9A3',
+        lamp: '#FAEEDD',
+        sand: '#D9C8A9',
       },
       fontFamily: {
         serif: ['var(--font-serif)', 'Georgia', 'serif'],
@@ -43,6 +59,7 @@ export default {
         md: '8px',
         lg: '12px',
         xl: '16px',
+        card: '22px',
       },
       boxShadow: {
         xs: 'var(--shadow-xs)',
@@ -57,6 +74,7 @@ export default {
         wide: '960px',
         shell: '1120px',
         nav: '1024px',
+        site: '1240px',
       },
       keyframes: {
         pulseSoft: {

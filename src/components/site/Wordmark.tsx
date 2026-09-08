@@ -8,29 +8,19 @@ type WordmarkProps = {
   size?: 'sm' | 'md';
 };
 
+/** The wordmark is the name in Fraunces. No monogram (owner ruling 2026-09-03). */
 export function Wordmark({ className, size = 'md' }: WordmarkProps) {
-  const dim = size === 'sm' ? 'size-[22px] text-[13px]' : 'size-6 text-[14px]';
-  const label = size === 'sm' ? 'text-[16px]' : 'text-[17px]';
   return (
     <Link
       href="/"
-      aria-label={`${siteConfig.name} — Home`}
+      aria-label={`${siteConfig.name}, home`}
       className={cn(
-        'inline-flex items-center gap-2.5 text-fg no-underline transition-opacity hover:opacity-80',
-        className,
+        'justify-self-start whitespace-nowrap font-serif font-medium tracking-[0.005em] text-[var(--ink,var(--fg))] no-underline transition-opacity hover:opacity-80',
+        size === 'sm' ? 'text-[20px]' : 'text-[24px]',
+        className
       )}
     >
-      <span
-        className={cn(
-          'inline-flex items-center justify-center rounded-md bg-fg font-serif font-medium leading-none tracking-tight text-bg',
-          dim,
-        )}
-      >
-        j
-      </span>
-      <span className={cn('whitespace-nowrap font-serif font-normal tracking-tight', label)}>
-        {siteConfig.name}
-      </span>
+      {siteConfig.name}
     </Link>
   );
 }
