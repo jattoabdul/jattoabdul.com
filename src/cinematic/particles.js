@@ -72,7 +72,7 @@ void main(){
  vec3 center=texture2D(simulation,lookup).xyz;
  vec4 viewCenter=modelViewMatrix*vec4(center,1.);
  float proximity=1.-smoothstep(0.,1.6,distance(viewCenter.xy,mouse));
- 
+
  float s=atlas(atlasScale,lookup,morph).r*particleScale+proximity*.75*(1.-explode);
  float angle=-time-sin(center.x*1.7+center.y*.8+center.z*1.3);
  vec3 axis=normalize(vec3(0.,1.,1.));
