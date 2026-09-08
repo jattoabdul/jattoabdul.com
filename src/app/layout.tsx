@@ -4,14 +4,14 @@ import { Fraunces, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { Header } from '@/components/site/Header';
 import { Footer } from '@/components/site/Footer';
-import { getCommandMenuPosts } from '@/data/posts';
 import { siteConfig } from '@/data/site';
 import '@/styles/globals.css';
 
 const serif = Fraunces({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
+  weight: 'variable',
   style: ['normal', 'italic'],
+  axes: ['opsz'],
   variable: '--font-serif',
   display: 'swap',
 });
@@ -30,24 +30,29 @@ const mono = JetBrains_Mono({
   display: 'swap',
 });
 
-const fullTitle = `${siteConfig.name} — ${siteConfig.titleSuffix}`;
+const fullTitle = `${siteConfig.name} · ${siteConfig.titleSuffix}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: fullTitle,
-    template: `%s — ${siteConfig.name}`,
+    template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  // The label lives here for search (positioning.md, search visibility), never in the first sentence.
   keywords: [
     'Jatto Abdul',
-    'Senior Software Engineer',
-    'Backend Engineer',
-    'Platform Engineer',
-    'Applied AI',
-    'Engineering writing',
-    'Engineering blog',
-    'Practical engineering',
+    'Engineer',
+    'Entrepreneur',
+    'Mentor',
+    'Author',
+    'Muslim mentor',
+    'Muslim engineer',
+    'Muslim entrepreneur',
+    'Muslim author',
+    'Grow without losing yourself',
+    'faith and ambition',
+    'career and character',
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
@@ -77,14 +82,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  // Server-fetch the writing list for the command menu so the client
-  // component doesn't need filesystem access. Cheap (4 small MDX reads),
-  // cached by Next for static routes.
-  const commandMenuPosts = await getCommandMenuPosts();
-
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
@@ -98,11 +96,12 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <div id="top-sentinel" aria-hidden="true" className="absolute left-0 top-0 h-px w-px" />
           <a href="#main-content" className="skip-link">
             Skip to content
           </a>
           <div className="flex min-h-screen flex-col">
-            <Header commandMenuPosts={commandMenuPosts} />
+            <Header />
             <div className="flex-1">{children}</div>
             <Footer />
           </div>

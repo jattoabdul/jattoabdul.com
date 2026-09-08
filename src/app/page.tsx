@@ -1,30 +1,27 @@
-import { Hero } from '@/components/sections/Hero';
-import { CurrentFocus } from '@/components/sections/CurrentFocus';
-import { LatestWriting } from '@/components/sections/LatestWriting';
-import { LatestVideos } from '@/components/sections/LatestVideos';
-import { SelectedProjects } from '@/components/sections/SelectedProjects';
-import { NotesPreview } from '@/components/sections/NotesPreview';
-import { AboutPreview } from '@/components/sections/AboutPreview';
-import { ConnectSection } from '@/components/sections/ConnectSection';
-import { toListItem } from '@/data/posts';
-import { getWritingFeed } from '@/lib/posts';
-import { getVideoFeed } from '@/lib/videos';
+import { Arrival } from '@/components/sections/Arrival';
+import { PrototypeControls } from '@/components/site/PrototypeControls';
 
-export const revalidate = 3600;
-
-export default async function HomePage() {
-  const [writing, videoFeed] = await Promise.all([getWritingFeed(), getVideoFeed()]);
-
+/**
+ * Homepage, redesign branch (The Open Door, brand v2.0). Built one section per round.
+ * Round 1: the arrival. Later rounds add the three entry points, the featured piece, the
+ * channels row, Building now, the letter, and About, then the previous homepage sections
+ * and this note are removed.
+ */
+export default function HomePage() {
   return (
     <main id="main-content">
-      <Hero />
-      <CurrentFocus />
-      <LatestWriting posts={writing.posts.map(toListItem)} />
-      <LatestVideos videos={videoFeed.videos} />
-      <SelectedProjects />
-      <NotesPreview />
-      <AboutPreview />
-      <ConnectSection />
+      <Arrival />
+      <section className="next-rounds" aria-label="What comes next in this prototype">
+        <div className="mx-auto max-w-[720px] px-6 text-fg-2">
+          <h2 className="mb-3 font-serif text-[1.6rem] font-normal text-fg">Round 1 ends here.</h2>
+          <p>
+            This round is the header, the arrival, and the door. The three entry points, the
+            featured piece, the channels row, Building now, the letter, and About come in the next
+            rounds once this one is agreed.
+          </p>
+        </div>
+      </section>
+      <PrototypeControls />
     </main>
   );
 }
