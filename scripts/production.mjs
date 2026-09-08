@@ -6,7 +6,10 @@ import {spawnSync} from 'node:child_process';
 const action=process.argv[2];
 if(!['build','deploy','secrets'].includes(action))throw Error('Use build, deploy or secrets');
 const local=existsSync('.env.local')?parseEnv(await readFile('.env.local','utf8')):{};
-const analytics=parseEnv(await readFile('.env.staging.local','utf8'));
+const analyticsFile=existsSync('.env.staging.local')?parseEnv(await readFile('.env.staging.local','utf8')):{};
+const analytics={...analyticsFile};
+for(const key of ['NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN','NEXT_PUBLIC_POSTHOG_HOST']){if(process.env[key])analytics[key]=process.env[key]}
+if(!analytics.NEXT_PUBLIC_POSTHOG_HOST)analytics.NEXT_PUBLIC_POSTHOG_HOST='https://us.i.posthog.com';
 if(!analytics.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN)throw Error('Configure the personal-site PostHog token first');
 const env={...process.env,...analytics,SEO_INDEXABLE:'true',SITE_ENV:'production',NEXT_PUBLIC_SITE_ENV:'production',RESEND_API_KEY:'',RESEND_AUDIENCE_ID:'',RESEND_SEGMENT_ID:'',STAGING_CHECK_TOKEN:'',STAGING_SUBSCRIBE_TEST_EMAIL:''};
 function run(args,options={}){const result=spawnSync('npx',args,{env,stdio:'inherit',...options});if(result.status!==0)throw Error('Production command failed; deployment stopped')}

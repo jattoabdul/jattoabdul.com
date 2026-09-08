@@ -6,10 +6,13 @@ on:
   pull_request:
     branches: [main]
 
-# Allow only one concurrent CI run per ref; cancel in-progress runs on a new push.
+# PR checks may be cancelled; main deployments finish before the next run.
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
 
 jobs:
   lint-and-build:
@@ -52,3 +55,36 @@ jobs:
           trap 'kill "$preview_pid"' EXIT
           node -e "let tries=0; const check=()=>fetch('http://127.0.0.1:3015').catch(()=>{if(++tries>30)process.exit(1);return new Promise(r=>setTimeout(r,1000)).then(check)});check()"
           npm run test:migration
+
+  deploy-production:
+    name: Deploy Cloudflare production
+    needs: lint-and-build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: https://jattoabdul.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Build indexable production bundle
+        run: npm run build:production
+        env:
+          NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN: ${{ vars.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN }}
+          NEXT_PUBLIC_POSTHOG_HOST: https://us.i.posthog.com
+      - name: Deploy verified bundle
+        run: npm run deploy:production
+        env:
+          NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN: ${{ vars.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Verify live routes and indexing
+        run: npm run test:migration
+        env:
+          EXPECT_INDEXABLE: 'true'
+          MIGRATION_URL: https://jattoabdul.com
