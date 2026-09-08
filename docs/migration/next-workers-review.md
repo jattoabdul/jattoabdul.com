@@ -1,3 +1,7 @@
+# Historical local migration review
+
+Provider and staging checks below describe the earlier local checkpoint. See [Cloudflare staging verification](cloudflare-staging-review.md) for the subsequent real-provider results and corrected subscription behavior.
+
 # Cinematic Next.js / Workers migration
 
 Reviewed 2026-09-07, 22:35 EDT (America/Toronto).

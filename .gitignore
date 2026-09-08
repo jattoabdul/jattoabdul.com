@@ -73,3 +73,5 @@ src/cinematic/content/published*.json
 .dev.vars*
 
 /output/
+
+.staging-check-token

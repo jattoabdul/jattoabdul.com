@@ -19,5 +19,24 @@
   ],
   "observability": {
     "enabled": true
+  },
+  "env": {
+    "staging": {
+      "name": "jattoabdul-staging",
+      "workers_dev": true,
+      "preview_urls": false,
+      "routes": [],
+      "services": [
+        {
+          "binding": "WORKER_SELF_REFERENCE",
+          "service": "jattoabdul-staging"
+        }
+      ],
+      "vars": {
+        "SITE_ENV": "staging",
+        "SEO_INDEXABLE": "false",
+        "NEXT_PUBLIC_POSTHOG_HOST": "https://us.i.posthog.com"
+      }
+    }
   }
 }

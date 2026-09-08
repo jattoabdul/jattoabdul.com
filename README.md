@@ -30,7 +30,7 @@ Review the writing and set `published: true` when ready. Build/dev startup gener
 
 ## Integrations
 
-PostHog instrumentation and `/ingest` proxy remain. Configure the existing `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and optional host at build time. Resend remains behind `/api/subscribe`, using `RESEND_API_KEY` and `RESEND_AUDIENCE_ID` at runtime. No credentials were copied into this worktree. No test subscribes an address or sends an analytics event.
+PostHog instrumentation and `/ingest` proxy remain. Configure the existing `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and optional host at build time. Resend remains behind `/api/subscribe`, using `RESEND_API_KEY` and `RESEND_SEGMENT_ID` at runtime (the existing `RESEND_AUDIENCE_ID` is a supported fallback). Missing configuration returns 503. Existing opt-outs are preserved. Unit tests mock provider calls; the separately approved staging verification exercises the real integrations and removes its temporary contact. Events include `site_environment` so staging can be excluded from production reports.
 
 ## Cloudflare
 
@@ -38,11 +38,24 @@ PostHog instrumentation and `/ingest` proxy remain. Configure the existing `NEXT
 
 Ordinary builds are **noindex**. `SEO_INDEXABLE=true` is reserved for an approved production build. Configure production secrets, domain, caching and deployment separately after final review.
 
+## Staging
+
+Create ignored `.env.staging.local` with the personal-site public `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and `NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com`. Keep existing Resend credentials in ignored `.env.local`.
+
+```sh
+npm run build:staging
+npm run deploy:staging
+npm run secrets:staging
+```
+
+These explicit deployment commands target only `jattoabdul-staging`, with no custom-domain routes. The build forces noindex, labels analytics as staging, and checks output for private credentials. Runtime secrets go through Wrangler stdin. Public subscriptions are disabled in staging; the approved test address additionally requires the bearer token in ignored `.staging-check-token`. Do not share that token. Staging uses the real mailing list; repeat tests require deliberate coordination.
+
 ## Validation
 
 ```sh
 npm run lint
 npm run type-check
+npm run test:subscribe
 npm run build:worker
 npm run test:migration
 MIGRATION_URL=http://localhost:3016 npm run test:migration

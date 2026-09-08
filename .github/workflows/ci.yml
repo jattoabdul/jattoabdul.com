@@ -36,6 +36,9 @@ jobs:
       - name: Type check
         run: npm run type-check
 
+      - name: Subscription behavior
+        run: npm run test:subscribe
+
       - name: Content and motion invariants
         run: npm run test:content
 

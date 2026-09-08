@@ -20,7 +20,11 @@
     "preview:worker": "opennextjs-cloudflare preview",
     "test:migration": "node --test tests/migration.test.mjs",
     "pretype-check": "node scripts/prepare-content.mjs",
-    "test:content": "node --test tests/timeline.test.mjs tests/personal-timeline.test.mjs tests/writing-content.test.mjs"
+    "test:content": "node --test tests/timeline.test.mjs tests/personal-timeline.test.mjs tests/writing-content.test.mjs",
+    "build:staging": "node scripts/staging.mjs build",
+    "deploy:staging": "node scripts/staging.mjs deploy",
+    "secrets:staging": "node scripts/staging.mjs secrets",
+    "test:subscribe": "node --test tests/subscribe.test.mjs"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^11.2.0",
