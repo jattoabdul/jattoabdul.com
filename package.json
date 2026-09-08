@@ -24,7 +24,10 @@
     "build:staging": "node scripts/staging.mjs build",
     "deploy:staging": "node scripts/staging.mjs deploy",
     "secrets:staging": "node scripts/staging.mjs secrets",
-    "test:subscribe": "node --test tests/subscribe.test.mjs"
+    "test:subscribe": "node --test tests/subscribe.test.mjs",
+    "build:production": "node scripts/production.mjs build",
+    "deploy:production": "node scripts/production.mjs deploy",
+    "secrets:production": "node scripts/production.mjs secrets"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^11.2.0",

@@ -62,3 +62,16 @@ MIGRATION_URL=http://localhost:3016 npm run test:migration
 ```
 
 HTTP checks require the corresponding local server. See `docs/migration/next-workers-review.md` for coverage and remaining launch checks.
+
+## Production
+
+The owner approved production cutover on September 8, 2026 (Toronto). Production uses the same personal-site PostHog ingestion project configured in ignored `.env.staging.local`, but the wrapper forces both runtime and browser environment labels to `production` and enables indexing. Resend runtime credentials come from ignored `.env.local` and are sent directly to Wrangler through stdin.
+
+```sh
+npm run build:production
+npm run deploy:production
+npm run secrets:production
+EXPECT_INDEXABLE=true MIGRATION_URL=https://jattoabdul.com npm run test:migration
+```
+
+Production routes are declared in `wrangler.jsonc`. The existing Cloudflare-proxied DNS records and Railway origin remain intact for rollback. Removing only the production Worker routes restores requests to that origin. Do not disable Railway until the rollback window is deliberately closed. See `docs/migration/production-cutover.md` for deployment evidence.
