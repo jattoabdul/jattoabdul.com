@@ -34,6 +34,7 @@ const journey = [
   {id:'learning-by-building',visual:{after:2,src:'/assets/personal/about-writing-desk.webp',alt:'An illustrative still life of a notebook, pen and cup on a writing desk',caption:'Making space to work things out.',kind:'Illustrative study'},label:'Learning by building',title:'The things I was learning became useful to others.',paragraphs:[
     'In my third year, I met Joseph Cobhams. He was already building websites and applications for clients. I was still working on my HP, and seeing him work on a Mac drew me in even further.',
     'I became closer to him and learned from what he was building. Joseph had created a PHP framework called Candor. I took it apart to understand its internals, which became my introduction to how web frameworks worked.',
+    'By my final year, learning from him had become working with him, in a more professional setting.',
     'Eventually, I started using it to build things for clients of my own. My first website job was for a farm, through a family connection. Another followed for a geologist’s company.',
     'In my fourth year, I won a hackathon Joseph organized with Intellix, an Ionic-based mobile app that interacted with connected devices in a home.',
     'During my geology-related internship at NAPIMS, I also met people who wanted to learn and build together. We entered an MTN hackathon with a gamified exam-preparation platform built around questions for exams such as WAEC and JAMB.',
