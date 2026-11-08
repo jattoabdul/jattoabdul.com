@@ -74,3 +74,10 @@ EXPECT_INDEXABLE=true MIGRATION_URL=https://jattoabdul.com npm run test:migratio
 ```
 
 Production routes are declared in `wrangler.jsonc`. The existing Cloudflare-proxied DNS records and Railway origin are unchanged; do not modify them as part of newsletter rollout. See `docs/migration/production-cutover.md` for the original site cutover and `docs/newsletter/welcome-revision-v2.md` for the current newsletter revision. Preserve D1 consent and suppression data during rollback. Roll back to revised off-mode code that retains the unsubscribe endpoint and retry job; older code can restore the legacy signup handler or break already-issued unsubscribe links.
+
+## Keeping the site current
+
+- **Freshness check.** `src/data/freshness.json` lists the claims that go stale (product statuses, mentoring calls, the 30-day series, press kit, roles). `npm run check:freshness` shows what is due. On the 1st of each month, the `Monthly freshness check` workflow opens or refreshes one GitHub issue with the same list. Confirm each item, update the page if needed, set its `verifiedAt`, and deploy.
+- **30-day series.** When a day publishes, add it to `src/cinematic/content/series.js` and update `verifiedAt`.
+- **Share images.** Each page, essay and note has a 1200×630 image in `public/og`. After publishing, run `npm run build:share-images -- --missing` (needs local Google Chrome) and commit the new files. `npm run test:content` fails if one is missing.
+- **Press kit.** The PDF source is `Media-Work/jatto-abdul/brand/press/<date>-v<version>/build.py` (ReportLab). Publish the new PDF to `public/downloads`, update the Press and Speaking links, and redirect the previous file name in `src/cinematic/seo.js`.

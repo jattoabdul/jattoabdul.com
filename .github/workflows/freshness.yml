@@ -1,0 +1,37 @@
+name: Monthly freshness check
+
+# On the 1st of each month, open (or refresh) one issue listing site claims due for a check.
+on:
+  schedule:
+    - cron: '0 13 1 * *' # 09:00 Toronto during daylight time, 08:00 in winter
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Build report
+        run: npm run --silent check:freshness -- --markdown > freshness.md
+      - name: Open or update the monthly issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Site freshness check: $(date -u +%B\ %Y)"
+          number=$(gh issue list --state open --label freshness --json number --jq '.[0].number')
+          if [ -n "$number" ]; then
+            gh issue edit "$number" --title "$title" --body-file freshness.md
+          else
+            gh label create freshness --color EFC9A3 --description "Monthly site freshness check" 2>/dev/null || true
+            gh issue create --title "$title" --label freshness --body-file freshness.md
+          fi
