@@ -3,3 +3,20 @@
 @media(prefers-reduced-motion:reduce){.s-poster img{transition:none}.s-topics-photo{position:static}}
 
 .s-page button.p-text-link{background:transparent;border:0;border-bottom:1px solid #efc9a355;color:inherit;padding:0 0 8px}.s-page button.p-text-link:hover{color:#efc9a3}
+/* 30-day learning series (2026-11-07). Solid fills, no rules. */
+.s-series{display:grid;grid-template-columns:1fr 1.05fr;gap:8%;align-items:start;padding-top:60px;padding-bottom:150px}
+.s-series-intro p{max-width:470px}
+.s-series-intro .s-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;margin-top:34px}
+.s-series-intro .p-text-link{background:none;border:0;cursor:pointer;font-family:inherit;font-size:16px;color:inherit;padding:0 0 6px}
+.s-series-count{margin:6px 0 14px;color:#bcb7b3;font-size:15px}
+.s-series-count strong{color:#efc9a3;font-size:34px;font-weight:400;margin-right:6px}
+.s-series-strip{display:grid;grid-template-columns:repeat(30,1fr);gap:4px;margin-bottom:34px}
+.s-series-strip span{height:10px;border-radius:2px;background:#f4eee61a}
+.s-series-strip span.is-out{background:#efc9a3}
+.s-series ol{list-style:none;margin:0 0 30px;padding:0;display:grid;gap:8px}
+.s-series li button{width:100%;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;text-align:left;padding:16px 20px;border:0;border-radius:8px;background:#f4eee60d;color:#f4eee6;font:inherit;font-size:17px;cursor:pointer;transition:background .25s,color .25s}
+.s-series li button:hover,.s-series li button:focus-visible{background:#792a3d}
+.s-series-day{color:#efc9a3;font-size:13px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.s-series li button:hover .s-series-day,.s-series li button:focus-visible .s-series-day{color:#f4eee6}
+.s-series-play{font-size:12px;opacity:.7}
+@media (max-width:900px){.s-series{grid-template-columns:1fr;gap:48px;padding-top:30px;padding-bottom:70px}.s-series-strip{gap:3px}.s-series li button{font-size:16px;gap:14px;padding:14px 16px}}

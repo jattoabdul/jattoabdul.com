@@ -1,0 +1,61 @@
+{
+  "about": "Claims on the site that go stale. When you confirm one, set verifiedAt to today (YYYY-MM-DD). `npm run check:freshness` lists anything older than maxAgeDays; a monthly GitHub issue repeats the list.",
+  "claims": [
+    {
+      "id": "building-statuses",
+      "claim": "Product statuses: TrustKarry closed beta, Pinnr private pilot, RuleNorth in development, Deendemy in development (coming soon).",
+      "where": "src/cinematic/BuildingPage.jsx, press kit",
+      "verifiedAt": "2026-11-07",
+      "maxAgeDays": 45
+    },
+    {
+      "id": "pinnr-thumbnail",
+      "claim": "Pinnr thumbnail is a corrected capture; replace it with a real standalone capture once pinnr.shop drops Shopify-only copy.",
+      "where": "public/assets/personal/building/pinnr-standalone.png",
+      "verifiedAt": "2026-11-07",
+      "maxAgeDays": 45
+    },
+    {
+      "id": "mentoring-calls",
+      "claim": "Mentoring offers free 30-minute calls through the Google Calendar booking page (Wed, Fri, Sat, Sun).",
+      "where": "src/cinematic/MentoringPage.jsx",
+      "verifiedAt": "2026-11-07",
+      "maxAgeDays": 45
+    },
+    {
+      "id": "marketing-series",
+      "claim": "Speaking lists every published day of 30 Days of Learning to Market What I Build.",
+      "where": "src/cinematic/content/series.js (its verifiedAt is used)",
+      "source": "series",
+      "maxAgeDays": 10
+    },
+    {
+      "id": "press-kit",
+      "claim": "Press kit v2.4: bios, host introduction, topics, selected work, current series.",
+      "where": "public/downloads/jatto-abdul-press-kit-v2.4.pdf (source: Media-Work jatto-abdul/brand/press/2026-11-07-v2.4/build.py)",
+      "verifiedAt": "2026-11-07",
+      "maxAgeDays": 90
+    },
+    {
+      "id": "about-roles",
+      "claim": "About and Building describe current work: JITS, most recent full-time role, availability for engineering work.",
+      "where": "src/cinematic/AboutPage.jsx, src/cinematic/BuildingPage.jsx",
+      "verifiedAt": "2026-11-07",
+      "maxAgeDays": 90
+    },
+    {
+      "id": "speaking-recordings",
+      "claim": "Speaking library includes recent long-form videos and talks.",
+      "where": "src/cinematic/SpeakingPage.jsx (videos array)",
+      "verifiedAt": "2026-11-07",
+      "maxAgeDays": 45
+    },
+    {
+      "id": "share-images",
+      "claim": "Every page, essay and note has a share image (run npm run build:share-images -- --missing after publishing).",
+      "where": "public/og",
+      "source": "share-images",
+      "maxAgeDays": 0
+    }
+  ]
+}
