@@ -1,0 +1,112 @@
+.newsletter-section {
+  background: #f2efe7;
+  color: #122440;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 6vw, 100px);
+  padding: clamp(40px, 6vw, 90px);
+  margin: 60px 0;
+  scroll-margin-top: 100px;
+  border-radius: 4px;
+}
+.newsletter-section h2 {
+  font-size: clamp(36px, 4.5vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  margin: 0 0 24px;
+}
+.newsletter-section em {
+  color: #742b44;
+  font-style: normal;
+}
+.w-page .newsletter-section p {
+  font-size: 19px;
+  line-height: 1.55;
+  max-width: 40ch;
+  color: #24364d;
+  text-shadow: none;
+}
+.newsletter-section form {
+  position: relative;
+  padding-top: 12px;
+}
+.newsletter-section label {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+.newsletter-input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.newsletter-input-row input {
+  background: #fff;
+  color: #122440;
+  border: 1px solid #69758a;
+  padding: 14px;
+  min-width: 150px;
+  min-height: 50px;
+  flex: 1;
+  font: inherit;
+  font-size: 17px;
+  border-radius: 4px;
+}
+.newsletter-input-row button {
+  background: #742b44;
+  color: #fff;
+  padding: 14px 22px;
+  font: inherit;
+  font-size: 17px;
+  border: 0;
+  border-radius: 4px;
+  min-height: 50px;
+  cursor: pointer;
+}
+.newsletter-input-row button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+.w-page .newsletter-section .newsletter-small {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 18px;
+  max-width: 60ch;
+}
+.w-page .newsletter-section a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: #742b44;
+}
+.newsletter-section :focus-visible {
+  outline: 3px solid #742b44;
+  outline-offset: 4px;
+}
+.newsletter-section h3 {
+  font-size: 32px;
+  margin: 8px 0 18px;
+}
+.w-page .newsletter-section [role='alert'] {
+  font-size: 16px;
+  color: #742b44;
+}
+.newsletter-honey {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+@media (max-width: 740px) {
+  .newsletter-section {
+    grid-template-columns: 1fr;
+    padding: 32px 22px;
+    margin: 40px -6px;
+  }
+  .newsletter-section p {
+    font-size: 17px;
+  }
+  .newsletter-input-row {
+    flex-direction: column;
+  }
+}

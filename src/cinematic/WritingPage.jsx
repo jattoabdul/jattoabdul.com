@@ -1,6 +1,7 @@
 'use client';
 import {lazy,Suspense,useEffect,useRef,useState} from 'react';
 import data from './content/writing';
+import {NewsletterForm} from '@/components/sections/NewsletterForm';
 const LazyWritingObject=lazy(()=>import('./WritingObject').then(module=>({default:module.WritingObject})));
 function WritingObject({kind='particles'}){return <Suspense fallback={<div className={'w-object w-object-'+kind} aria-hidden="true"/>}><LazyWritingObject kind={kind}/></Suspense>}
 import './writing.css';
@@ -28,6 +29,7 @@ export function WritingPage(){const root=useRef(null);useReveal(root);useEffect(
 <section id="notes" className="w-notes-feature"><h2 data-reveal>Still thinking<br/><em>it through.</em></h2><p>Short observations on what I’m building, learning, reading, and trying to understand.</p><div className="w-note-preview">{['skill-you-stop-practicing','shipping-and-distribution-are-different-jobs','last-handoff-still-counts'].map(slug=>{const p=note(slug);return <article key={slug} data-reveal><Meta item={p}/><h3><a href={'/notes/'+slug}>{p.title} ↗</a></h3></article>})}</div><a href="/notes" className="p-button">Explore the notes ↗</a></section>
 <BookFeature/>
 <section id="collection" className="w-collection"><h2>The writing,<br/><em>so far.</em></h2><p>Essays, poems, and earlier pages. Some live here; others open on Medium.</p><Archive/></section>
+<NewsletterForm/>
 <section className="w-close"><h2>Some ideas need<br/>a <em>conversation.</em></h2><p>The spoken side of what I share, through videos, talks, and conversations.</p><a className="p-text-link" href="/speaking">Explore speaking ↗</a></section>
 </div>}
 export function NotesPage(){useEffect(()=>{document.title='Notes | Jatto Abdul'},[]);return <div className="w-page w-notes-page"><a href="/writing#notes" className="p-text-link">← Writing</a><h1>Notes in<br/><em>progress.</em></h1><p className="w-intro">Short observations, reflections, and things I’m still working through. An ongoing record of work and life.</p><Archive notes/></div>}
