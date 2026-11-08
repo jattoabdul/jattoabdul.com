@@ -6,8 +6,8 @@ import './writing.css';
 import './mentoring.css';
 
 const recording={id:'pu-IHuL--hg',title:'Why the Best Engineers Get Overlooked (and How to Fix It)'};
-// Free mentoring calls (owner decision 2026-11-07). Set NEXT_PUBLIC_MENTORING_BOOKING_URL to the booking page; until then the button opens a pre-filled email.
-const booking=process.env.NEXT_PUBLIC_MENTORING_BOOKING_URL||'mailto:me@jattoabdul.com?subject=Booking%20a%20free%20call&body=Hello%20Jatto%2C%0A%0AI%20would%20like%20to%20book%20a%20free%20call.%0A%0AWhat%20I%20would%20like%20to%20talk%20about%3A%0A%0ATimes%20that%20usually%20work%20for%20me%20(with%20time%20zone)%3A%0A';
+// Free mentoring calls (owner decision 2026-11-07): Google Calendar appointment schedule "Free call with Jatto". NEXT_PUBLIC_MENTORING_BOOKING_URL can override it.
+const booking=process.env.NEXT_PUBLIC_MENTORING_BOOKING_URL||'https://calendar.google.com/calendar/appointments/schedules/AcZssZ26yK2M7QDVmxP1NceeFv6ZQsGeevtoOwRwfONgcW-dLlzwJPpCqZMIxNypR-C83i1U-lft5i2L';
 const invitation='mailto:me@jattoabdul.com?subject=A%20conversation%20about%20my%20next%20step&body=Hello%20Jatto%2C%0A%0AHere%20is%20where%20I%20am%20right%20now%3A%0A%0AWhat%20I%20am%20working%20toward%3A%0A%0AThe%20question%20I%20am%20sitting%20with%3A%0A';
 export function MentoringPage(){
  const root=useRef(null),trigger=useRef(null);const [watching,setWatching]=useState(false);
