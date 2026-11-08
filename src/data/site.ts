@@ -25,10 +25,10 @@ export const siteConfig = {
   shortName: 'Jatto',
   url: 'https://jattoabdul.com',
   positioning:
-    'An engineer and entrepreneur who mentors young people on career, character, and faith, so they can grow without losing themselves.',
+    'An engineer and entrepreneur who mentors people on career, character, and faith, so they can grow without losing themselves.',
   // SEO description. Front-door wording (owner ruling 2026-09-05).
   description:
-    'An engineer and entrepreneur writing, speaking, and making videos for young people carrying ambition and faith at the same time.',
+    'An engineer and entrepreneur writing, speaking, and making videos for people carrying ambition and faith at the same time.',
   // Combined with siteConfig.name in the layout as "Jatto Abdul · <suffix>".
   titleSuffix: 'Engineer. Entrepreneur. Mentor. Author.',
   copyrightYear: 2026,
@@ -41,7 +41,7 @@ export const arrival = {
   headlineLead: 'Grow without',
   headlineEmphasis: 'losing yourself.',
   supporting:
-    'An engineer and entrepreneur writing, speaking, and making videos for young people carrying ambition and faith at the same time.',
+    'An engineer and entrepreneur writing, speaking, and making videos for people carrying ambition and faith at the same time.',
   identity: 'Engineer × Entrepreneur × Mentor × Author',
   identityPlain: 'Engineer. Entrepreneur. Mentor. Author.',
   startLabel: 'Start here',

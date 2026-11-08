@@ -1,6 +1,6 @@
 'use client';
-export const pressBio = 'Jatto Abdul is an engineer and entrepreneur who builds software, shares ideas, and mentors young people navigating career, character, and faith. A Muslim mentor and lifelong learner, he writes, speaks, and makes videos to help people pursue their ambitions without leaving their foundations behind.';
-export const hostIntro = 'Jatto Abdul is an engineer, entrepreneur, mentor, and author. He builds software and shares what he learns through writing, speaking, and mentoring, helping young people grow in career, character, and faith without losing themselves.';
+export const pressBio = 'Jatto Abdul is an engineer and entrepreneur who builds software, shares ideas, and mentors people navigating career, character, and faith. A Muslim mentor and lifelong learner, he writes, speaks, and makes videos to help people pursue their ambitions without leaving their foundations behind.';
+export const hostIntro = 'Jatto Abdul is an engineer, entrepreneur, mentor, and author. He builds software and shares what he learns through writing, speaking, and mentoring, helping people grow in career, character, and faith without losing themselves.';
 
 export function PressPage(){
   return <article className="p-press-page">

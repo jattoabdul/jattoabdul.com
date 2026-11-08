@@ -1,1 +1,26 @@
 html,body{background:#000;color:#f2f0e9}body{margin:0}
+
+/* Scroll-aware header (owner-approved 2026-11-07): transparent at the top; once scrolled, blur with a soft dark tint that fades out at the bottom edge. */
+.p-header::before{content:"";position:absolute;inset:0 0 -36px;z-index:-1;pointer-events:none;opacity:0;background:linear-gradient(#000000c7 0%,#0000008f 55%,#00000000 100%);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent);transition:opacity .35s ease;}
+.p-header[data-scrolled]::before{opacity:1;}
+@media (prefers-reduced-motion:reduce){.p-header::before{transition:none;}}
+
+/* Contact: visible email fallback for visitors without a mail app. */
+.p-copy-email{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:18px 0 0;font-size:15px;color:#bdb5ad;}
+.p-copy-email a{color:var(--bone,#f2f0e9);text-decoration:underline;text-underline-offset:3px;text-decoration-color:#efc9a366;}
+.p-copy-email button{font:inherit;font-size:13px;letter-spacing:.02em;color:var(--bone,#f2f0e9);background:none;border:1px solid #f2f0e93d;border-radius:999px;padding:6px 14px;cursor:pointer;transition:border-color .25s,color .25s;}
+.p-copy-email button:hover,.p-copy-email button:focus-visible{border-color:var(--brand-lamplight,#efc9a3);color:var(--brand-lamplight,#efc9a3);}
+.p-copy-email-status{flex-basis:100%;min-height:1.2em;font-size:13px;color:#a69d94;}
+.p-contact-sibling{margin:22px 0 4px;color:#bdb5ad;font-size:15px;}
+.p-contact-sibling a{color:var(--bone,#f2f0e9);text-decoration:underline;text-underline-offset:3px;text-decoration-color:#efc9a366;}
+
+/* Building: three studio products; unreleased products get a quiet placeholder, never a fake screenshot. */
+@media (min-width:1001px){.b-studio-grid.b-studio-grid{grid-template-columns:repeat(3,1fr);gap:4.5%}}
+@media (min-width:761px) and (max-width:1000px){.b-studio-grid.b-studio-grid{grid-template-columns:1fr 1fr;gap:6%}}
+.b-studio-image.b-studio-soon{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;aspect-ratio:1.44;border:1px solid #efc9a326;background:radial-gradient(circle at 50% 42%,#efc9a314,transparent 62%),#0d0d0d;}
+.b-studio-image.b-studio-soon span{font-size:clamp(28px,3vw,44px);font-weight:300;letter-spacing:-.02em;color:var(--bone,#f4eee6);}
+.b-studio-image.b-studio-soon small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#efc9a3;}
+
+/* Mentoring: free-call invitation. */
+.m-invitation .m-actions{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:18px 28px;}
+.m-invitation>p+p{margin-top:-14px!important;}
