@@ -1,4 +1,7 @@
 export const siteOrigin='https://jattoabdul.com';
+// Per-page 1200×630 share image, built by scripts/build-share-images.mjs into public/og.
+export const shareImageKey=path=>path==='/'?'home':path.replace(/^\/|\/$/g,'').replace(/\//g,'--');
+export const shareImage=path=>'/og/'+shareImageKey(path)+'.jpg';
 export const pages={
  '/':['Jatto Abdul · Engineer, Entrepreneur, Mentor & Author','I build software, share ideas, and mentor people navigating career, character, and faith, so they can grow without losing themselves.'],
  '/about':['About · Jatto Abdul','From growing up in Ilorin to engineering, entrepreneurship and life in Canada. The people, lessons and foundations behind my work.'],
@@ -16,13 +19,14 @@ export const pages={
 };
 export const redirects={
  '/newsletter':'/writing#newsletter',
+ '/downloads/jatto-abdul-press-kit-v2.3.pdf':'/downloads/jatto-abdul-press-kit-v2.4.pdf',
  '/projects':'/building','/projects/discova':'/building/discova','/projects/trustkarry':'/building/trustkarry',
  '/projects/minerva':'/building#minerva','/projects/fera':'/building#fera','/projects/heroshe':'/building#heroshe','/projects/ai-experiments':'/building#experiments',
 };
 export function setMetadata(path,title,description,{article=false,date,missing=false}={}){
  document.title=title;
  const meta=(key,value,property=false)=>{const attr=property?'property':'name';let el=document.head.querySelector(`meta[${attr}="${key}"]`);if(!el){el=document.createElement('meta');el.setAttribute(attr,key);document.head.append(el)}el.content=value;};
- meta('description',description);meta('og:title',title,true);meta('og:description',description,true);meta('og:type',article?'article':'website',true);meta('og:url',siteOrigin+path,true);meta('og:image',siteOrigin+'/assets/personal/jatto-portrait.png',true);meta('twitter:card','summary');meta('twitter:title',title);meta('twitter:description',description);meta('twitter:image',siteOrigin+'/assets/personal/jatto-portrait.png');
+ meta('description',description);meta('og:title',title,true);meta('og:description',description,true);meta('og:type',article?'article':'website',true);meta('og:url',siteOrigin+path,true);meta('og:image',siteOrigin+shareImage(path),true);meta('twitter:card','summary_large_image');meta('twitter:title',title);meta('twitter:description',description);meta('twitter:image',siteOrigin+shareImage(path));
  if(article&&date)meta('article:published_time',date,true);
  let canonical=document.head.querySelector('link[rel="canonical"]');if(missing){canonical?.remove();meta('robots','noindex,nofollow');return;}
  if(!canonical){canonical=document.createElement('link');canonical.rel='canonical';document.head.append(canonical)}canonical.href=siteOrigin+path;
