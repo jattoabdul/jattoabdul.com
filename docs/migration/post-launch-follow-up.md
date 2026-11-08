@@ -27,3 +27,15 @@ One-time Codex heartbeat `retire-website-railway-fallback` is scheduled for Wedn
 Railway CLI authentication was expired at setup time and this checkout has no linked Railway project. The exact service must be identified after reauthentication before retirement. Existing Cloudflare routes remain the live serving path.
 
 The four historical duplicate examples were checked live: www homepage, two `/writing?tag=` variants, and www `/videos`. All return explicit apex canonical URLs; Google validation was requested for this issue on September 8.
+
+
+## Retirement completed — September 9, 2026, 09:03 EDT (America/Toronto)
+
+- Latest main CI/deployment run 34189019280 succeeded for commit 667289bf4a619f08f0e287d1a715b7f784579df0. Cloudflare production version 62d85681-7e8e-40b8-bd0b-0a2225b59aa5 receives 100% of traffic.
+- Both apex and www passed all four live migration test groups before retirement; both health endpoints returned OK. Cloudflare analytics for September 8 13:00 UTC through September 9 13:00 UTC reported 3,408 successful requests and two client disconnects, with zero Worker errors. No owner-reported regressions remained.
+- Verified Railway project jattoabdul-prod (8d7cdc3f-1eab-4867-b6d6-5cd720f035e1), production environment c9d71ba7-7f9e-4dc4-ac1d-265083ec9211, single service jattoabdul-com (375480d3-4329-4d55-b110-0bcc717d4ac3). Its source was jattoabdul/jattoabdul.com on main; its custom domains matched both live hostnames. No volumes existed in this environment.
+- Disconnected only that service's GitHub source using Railway CLI source disconnect, then ran railway down against the explicit service/environment. Verification shows repo/image null, no active deployments, and stopped=true. The Railway-only origin now returns HTTP 404. The latest Railway record is FAILED (cb597117-3bc0-4f40-8d59-cbd2b8b59431), not a live-site failure; the pre-retirement successful deployment was ee953aa6-1d59-4709-926b-274bfdf6b948.
+- After retirement, the apex passed all four migration test groups again and www health remained OK. Project/service configuration, domain assignments, DNS, mail records, and Cloudflare routes were preserved. No other Railway projects/services were changed.
+- Current Cloudflare route IDs are b3fba5d942c54ec7af3d27e9fc2894a3 (apex) and 96b6606c76ae4bf987c2554e4d0b6052 (www), both pointing to jattoabdul-production with fail-open disabled. IDs in the original cutover note are historical.
+- Rollback now means a Cloudflare version rollback. Removing Worker routes alone will NOT restore a running Railway origin. To restore Railway intentionally, reconnect the recorded GitHub repository/branch and deploy a suitable known-good version, verify it directly, then consider routing changes. Retained DNS/domain assignments are not evidence that Railway is still running.
+- The one-time retirement task is complete. CMC/VMC remains deferred by the owner. No new application build, push, or production deployment was needed for this retirement.

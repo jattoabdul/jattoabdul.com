@@ -22,5 +22,6 @@ test('sitemap, robots, RSS and integration validation',async()=>{
  const robots=await(await fetch(base+'/robots.txt')).text();if(indexable){assert.match(robots,/Allow: \/\s/);assert.doesNotMatch(robots,/Disallow: \/\s/)}else assert.match(robots,/Disallow: \/\s/);
  assert.match(await(await fetch(base+'/rss.xml')).text(),/recognising-myself-in-the-work/);
  assert.equal((await fetch(base+'/api/health')).status,200);
- assert.equal((await fetch(base+'/api/subscribe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email:'invalid'})})).status,400);
+ // The legacy unauthenticated endpoint must fail closed, even before validation.
+ assert.ok([401,403,503].includes((await fetch(base+'/api/subscribe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email:'invalid'})})).status));
 });

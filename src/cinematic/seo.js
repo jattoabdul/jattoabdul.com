@@ -1,6 +1,6 @@
 export const siteOrigin='https://jattoabdul.com';
 export const pages={
- '/':['Jatto Abdul · Engineer, Entrepreneur, Mentor & Author','I build software, share ideas, and mentor young people navigating career, character, and faith, so they can grow without losing themselves.'],
+ '/':['Jatto Abdul · Engineer, Entrepreneur, Mentor & Author','I build software, share ideas, and mentor people navigating career, character, and faith, so they can grow without losing themselves.'],
  '/about':['About · Jatto Abdul','From growing up in Ilorin to engineering, entrepreneurship and life in Canada. The people, lessons and foundations behind my work.'],
  '/writing':['Writing | Jatto Abdul','Essays, poetry, notes and a book in progress. Writing about work, faith, character, and the things I am learning along the way.'],
  '/notes':['Notes | Jatto Abdul','Short observations and weekly reflections on building software, making decisions, and growing without losing yourself.'],
@@ -15,6 +15,7 @@ export const pages={
  '/books/present-without-performing':['Present Without Performing | Jatto Abdul','A book in progress about finding your voice and sharing your work without losing yourself. Working title; coming soon.'],
 };
 export const redirects={
+ '/newsletter':'/writing#newsletter',
  '/projects':'/building','/projects/discova':'/building/discova','/projects/trustkarry':'/building/trustkarry',
  '/projects/minerva':'/building#minerva','/projects/fera':'/building#fera','/projects/heroshe':'/building#heroshe','/projects/ai-experiments':'/building#experiments',
 };

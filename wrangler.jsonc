@@ -18,13 +18,33 @@
     }
   ],
   "observability": {
-    "enabled": true
+    "enabled": true,
+    "logs": {"enabled": true, "invocation_logs": false}
   },
+  "d1_databases": [{
+    "binding": "NEWSLETTER_DB",
+    "database_name": "jattoabdul-newsletter-local",
+    "database_id": "00000000-0000-0000-0000-000000000025",
+    "migrations_dir": "migrations/newsletter"
+  }],
   "env": {
     "staging": {
       "name": "jattoabdul-staging",
+      "main": "staging-worker.mjs",
+      "assets": {
+        "directory": ".open-next/assets",
+        "binding": "ASSETS",
+        "run_worker_first": true
+      },
+      "d1_databases": [{
+        "binding": "NEWSLETTER_DB",
+        "database_name": "jattoabdul-newsletter-staging",
+        "database_id": "66f56375-735f-40fd-8429-760e735ba454",
+        "migrations_dir": "migrations/newsletter"
+      }],
       "workers_dev": true,
       "preview_urls": false,
+      "triggers": {"crons": ["*/5 * * * *"]},
       "routes": [],
       "services": [
         {
@@ -35,11 +55,24 @@
       "vars": {
         "SITE_ENV": "staging",
         "SEO_INDEXABLE": "false",
+        "NEWSLETTER_MODE": "test",
+        "NEWSLETTER_ORIGIN": "https://jattoabdul-staging.jatto-it-solutions-inc.workers.dev",
+        "NEWSLETTER_TOPIC_ID": "0ef338be-87f7-4904-a045-e4d704e1410f",
+        "NEWSLETTER_CONFIRMATION_TEMPLATE": "c3891066-5087-4a38-a201-51e23ed9c955",
+        "NEWSLETTER_WELCOME_TEMPLATE": "70b6d0ab-c836-46de-ba07-82197c025842",
         "NEXT_PUBLIC_POSTHOG_HOST": "https://us.i.posthog.com"
       }
     },
     "production": {
       "name": "jattoabdul-production",
+      "main": "newsletter-worker.mjs",
+      "triggers": {"crons": ["*/5 * * * *"]},
+      "d1_databases": [{
+        "binding": "NEWSLETTER_DB",
+        "database_name": "jattoabdul-newsletter-production",
+        "database_id": "ec2e0e20-45f4-4db9-92ac-86523278eb3f",
+        "migrations_dir": "migrations/newsletter"
+      }],
       "workers_dev": true,
       "preview_urls": false,
       "routes": [
@@ -61,6 +94,11 @@
       "vars": {
         "SITE_ENV": "production",
         "SEO_INDEXABLE": "true",
+        "NEWSLETTER_MODE": "live",
+        "NEWSLETTER_ORIGIN": "https://jattoabdul.com",
+        "NEWSLETTER_TOPIC_ID": "0ef338be-87f7-4904-a045-e4d704e1410f",
+        "NEWSLETTER_CONFIRMATION_TEMPLATE": "c3891066-5087-4a38-a201-51e23ed9c955",
+        "NEWSLETTER_WELCOME_TEMPLATE": "70b6d0ab-c836-46de-ba07-82197c025842",
         "NEXT_PUBLIC_POSTHOG_HOST": "https://us.i.posthog.com"
       }
     }

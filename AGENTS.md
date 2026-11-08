@@ -51,6 +51,16 @@ Applies only to `/jattoabdul.com`.
 
 Branch `migration/cinematic-next` carries prototype checkpoint d202ec6. `checkpoint/pre-cinematic-migration` preserves the earlier dirty open-door work; its original checkout remains untouched. Use Node 24.20.0 and npm 11.19.0. Run lint, type-check, Workers build, and HTTP migration checks when changing rendering/routing. Preserve approved typography, palette, animation timing, content, published URLs and privacy of the number of children. Homepage story and reading bodies render on the server; client animation components may prerender but must never access browser globals during rendering. Native document navigation is deliberate to preserve animation lifecycle. Keep previews noindex, and do not push or deploy without owner instruction.
 
-Confirmed current statuses: TrustKarry closed beta; Pinnr awaiting Shopify approval; RuleNorth in development; owner open to full-time engineering alongside occasional Fera consulting.
+Confirmed current statuses (owner, 2026-11-07): TrustKarry closed beta; Pinnr positioned as a standalone Pinterest studio in private pilot (do not mention Shopify review); RuleNorth in development; Deendemy in development, not deployed (coming soon). Audience copy is broadened beyond "young people" per the 2026-10-24 niche. Mentoring offers free calls. Owner open to full-time engineering alongside occasional Fera consulting (reconfirm).
 
 Owner confirmed physical iPhone Safari verification of the migrated build, with no issues. Continue migration work from the original jattoabdul.com checkout after switching it to migration/cinematic-next.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

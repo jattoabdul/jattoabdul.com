@@ -30,7 +30,7 @@ Review the writing and set `published: true` when ready. Build/dev startup gener
 
 ## Integrations
 
-PostHog instrumentation and `/ingest` proxy remain. Configure the existing `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and optional host at build time. Resend remains behind `/api/subscribe`, using `RESEND_API_KEY` and `RESEND_SEGMENT_ID` at runtime (the existing `RESEND_AUDIENCE_ID` is a supported fallback). Missing configuration returns 503. Existing opt-outs are preserved. Unit tests mock provider calls; the separately approved staging verification exercises the real integrations and removes its temporary contact. Events include `site_environment` so staging can be excluded from production reports.
+PostHog instrumentation and `/ingest` proxy remain. Configure the existing `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and optional host at build time. Newsletter signup is default-off behind `/api/subscribe`, with D1 consent receipts, Turnstile and explicit confirmation. The website owns welcome dispatch and signed, Notes-only unsubscribe; Resend remains the editable-template, subscriber and broadcast dashboard. The old welcome automation stays disabled. Current architecture and release evidence: `docs/newsletter/welcome-revision-v2.md`. Public activation follows restricted-inbox release checks. There is no legacy direct-to-segment fallback. Unit tests mock provider calls; approved real-inbox tests retain consent evidence and restore opt-outs afterward.
 
 ## Cloudflare
 
@@ -45,10 +45,9 @@ Create ignored `.env.staging.local` with the personal-site public `NEXT_PUBLIC_P
 ```sh
 npm run build:staging
 npm run deploy:staging
-npm run secrets:staging
 ```
 
-These explicit deployment commands target only `jattoabdul-staging`, with no custom-domain routes. The build forces noindex, labels analytics as staging, and checks output for private credentials. Runtime secrets go through Wrangler stdin. Public subscriptions are disabled in staging; the approved test address additionally requires the bearer token in ignored `.staging-check-token`. Do not share that token. Staging uses the real mailing list; repeat tests require deliberate coordination.
+These explicit deployment commands target only `jattoabdul-staging`, with no custom-domain routes. The build forces noindex and checks output for private credentials. Staging is private, with HTTP authentication before pages/assets and an exact-inbox signup gate. Provision secrets separately through the approved isolated Wrangler executable using stdin, never through package scripts. The old `secrets:*` commands deliberately fail closed. See `docs/newsletter/staging-test-report.md`; repeat tests against the real provider require deliberate coordination.
 
 ## Validation
 
@@ -56,6 +55,7 @@ These explicit deployment commands target only `jattoabdul-staging`, with no cus
 npm run lint
 npm run type-check
 npm run test:subscribe
+node --test tests/staging-gate.test.mjs tests/production-seed.test.mjs
 npm run build:worker
 npm run test:migration
 MIGRATION_URL=http://localhost:3016 npm run test:migration
@@ -65,13 +65,12 @@ HTTP checks require the corresponding local server. See `docs/migration/next-wor
 
 ## Production
 
-The owner approved production cutover on September 8, 2026 (Toronto). Production uses the same personal-site PostHog ingestion project configured in ignored `.env.staging.local`, but the wrapper forces both runtime and browser environment labels to `production` and enables indexing. Resend runtime credentials come from ignored `.env.local` and are sent directly to Wrangler through stdin.
+The owner approved production cutover on September 8, 2026 (Toronto), and newsletter production implementation on September 13. Production uses the same two public PostHog fields configured in ignored `.env.staging.local`; it does not import that file's other settings. The public Turnstile sitekey belongs in ignored `.env.production.local`. The guarded wrapper forces production labels and indexing, blanks private values during builds, verifies static-cache packaging and scans output before deploying through the approved isolated Wrangler executable. Runtime credentials are provisioned separately through that executable's stdin. Build/deploy mode must exactly match `env.production.vars.NEWSLETTER_MODE`. `off` closes signup; `test` keeps the public form hidden and protects `/newsletter/test` and signup with authentication plus an exact-inbox gate; `live` enables public signup after release checks. Unsubscribe and its retry job remain available in off mode.
 
 ```sh
-npm run build:production
-npm run deploy:production
-npm run secrets:production
+npm run build:production -- live
+npm run deploy:production -- live
 EXPECT_INDEXABLE=true MIGRATION_URL=https://jattoabdul.com npm run test:migration
 ```
 
-Production routes are declared in `wrangler.jsonc`. The existing Cloudflare-proxied DNS records and Railway origin remain intact for rollback. Removing only the production Worker routes restores requests to that origin. Do not disable Railway until the rollback window is deliberately closed. See `docs/migration/production-cutover.md` for deployment evidence.
+Production routes are declared in `wrangler.jsonc`. The existing Cloudflare-proxied DNS records and Railway origin are unchanged; do not modify them as part of newsletter rollout. See `docs/migration/production-cutover.md` for the original site cutover and `docs/newsletter/welcome-revision-v2.md` for the current newsletter revision. Preserve D1 consent and suppression data during rollback. Roll back to revised off-mode code that retains the unsubscribe endpoint and retry job; older code can restore the legacy signup handler or break already-issued unsubscribe links.
